@@ -2,134 +2,136 @@ import json, os, sys, urllib.request, urllib.parse, zipfile, io, re
 from datetime import datetime, date, timezone
 from openpyxl import load_workbook
 
-SHARE_URL = os.environ["ONEDRIVE_EXCEL_URL"]
+SHARE_URL = os.environ.get("ONEDRIVE_EXCEL_URL", "")
 OUT = os.environ.get("OUTPUT_JSON", "data.json")
+ONEDRIVE_USER_UPN = os.environ.get("ONEDRIVE_USER_UPN", "hse@databasehub.onmicrosoft.com")
+ONEDRIVE_FILE_NAME = os.environ.get("ONEDRIVE_FILE_NAME", "HSE Dashboard Rev 0(3).xlsx")
 
-def download_xlsx(url):
-    """Download the workbook using a real Chromium browser first.
+GRAPH_BASE = "https://graph.microsoft.com/v1.0"
+TOKEN_URL = "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
 
-    The OneDrive/SharePoint anonymous link opens correctly in a normal browser,
-    but GitHub's plain HTTP request is redirected to login.microsoftonline.com.
-    A headless browser follows the same anonymous sharing flow and can capture
-    the actual XLSX download. HTTP fallbacks are retained for other link types.
-    """
-    import urllib.request, urllib.parse, zipfile, io, re
-
-    def is_xlsx(blob):
-        if len(blob) < 1000 or blob[:2] != b"PK":
-            return False
-        try:
-            with zipfile.ZipFile(io.BytesIO(blob)) as z:
-                names = set(z.namelist())
-                return "[Content_Types].xml" in names and "xl/workbook.xml" in names
-        except Exception:
-            return False
-
-    browser_error = None
+def _graph_json(url, token):
+    req = urllib.request.Request(url, headers={
+        "Authorization": "Bearer " + token,
+        "Accept": "application/json",
+        "User-Agent": "HSE-Performance-Dashboard/Graph"
+    })
     try:
-        from playwright.sync_api import sync_playwright
-        with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
-            context = browser.new_context(accept_downloads=True)
-            page = context.new_page()
-            page.goto(url, wait_until="domcontentloaded", timeout=90000)
-            page.wait_for_timeout(7000)
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")[:2000]
+        raise RuntimeError(f"Microsoft Graph HTTP {e.code}: {body}") from e
 
-            # Anonymous OneDrive/Excel pages normally expose a Download button.
-            # Try several accessible-text variants because Microsoft changes the
-            # viewer UI labels between deployments.
-            download = None
-            selectors = [
-                'a:has-text("Download")',
-                'button:has-text("Download")',
-                '[role="button"]:has-text("Download")',
-                'text=Download',
-            ]
-            for sel in selectors:
-                try:
-                    loc = page.locator(sel).first
-                    if loc.count() and loc.is_visible(timeout=1500):
-                        with page.expect_download(timeout=30000) as dl_info:
-                            loc.click(timeout=5000)
-                        download = dl_info.value
-                        break
-                except Exception:
-                    pass
+def _get_graph_token():
+    tenant = os.environ.get("AZURE_TENANT_ID", "").strip()
+    client_id = os.environ.get("AZURE_CLIENT_ID", "").strip()
+    client_secret = os.environ.get("AZURE_CLIENT_SECRET", "").strip()
+    if not tenant or not client_id or not client_secret:
+        raise RuntimeError("Missing AZURE_TENANT_ID, AZURE_CLIENT_ID, or AZURE_CLIENT_SECRET GitHub secret.")
 
-            # Excel/Office viewers may put download under File.
-            if download is None:
-                for sel in ['button:has-text("File")', '[role="button"]:has-text("File")', 'text=File']:
-                    try:
-                        loc = page.locator(sel).first
-                        if loc.count() and loc.is_visible(timeout=1500):
-                            loc.click(timeout=5000)
-                            page.wait_for_timeout(1000)
-                            break
-                    except Exception:
-                        pass
-                for sel in [
-                    'text=Download a Copy',
-                    'text=Download',
-                    'button:has-text("Download a Copy")',
-                    '[role="menuitem"]:has-text("Download")',
-                ]:
-                    try:
-                        loc = page.locator(sel).first
-                        if loc.count() and loc.is_visible(timeout=2000):
-                            with page.expect_download(timeout=30000) as dl_info:
-                                loc.click(timeout=5000)
-                            download = dl_info.value
-                            break
-                    except Exception:
-                        pass
+    data = urllib.parse.urlencode({
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "scope": "https://graph.microsoft.com/.default",
+        "grant_type": "client_credentials",
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        TOKEN_URL.format(tenant=urllib.parse.quote(tenant, safe="")),
+        data=data,
+        headers={"Content-Type": "application/x-www-form-urlencoded", "Accept": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            result = json.loads(r.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")[:2000]
+        raise RuntimeError(f"Microsoft identity token request failed (HTTP {e.code}): {body}") from e
+    token = result.get("access_token")
+    if not token:
+        raise RuntimeError("Microsoft identity token response did not contain access_token.")
+    return token
 
-            if download is not None:
-                path = download.path()
-                if path:
-                    blob = open(path, "rb").read()
-                    if is_xlsx(blob):
-                        browser.close()
-                        return blob
-                    browser_error = f"browser download was not XLSX ({len(blob)} bytes)"
-                else:
-                    browser_error = "browser download had no local path"
-            else:
-                final_url = page.url
-                visible = page.locator("body").inner_text(timeout=10000)[:1200]
-                browser_error = f"browser could not trigger download; final={final_url}; page={visible!r}"
-            browser.close()
-    except Exception as e:
-        browser_error = f"browser method failed: {type(e).__name__}: {e}"
+def download_xlsx(_url=None):
+    """Download the dashboard workbook from the user's OneDrive using Microsoft Graph app-only authentication.
 
-    # Retain direct-download fallbacks for links that do not require browser UI.
-    parsed = urllib.parse.urlsplit(url)
-    base = urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, "", ""))
-    e = urllib.parse.parse_qs(parsed.query).get("e", [""])[0]
-    candidates = [
-        ("share-path download", base + "?download=1"),
-        ("share-path download with original e", base + "?download=1" + ("&e=" + e if e else "")),
-        ("original link", url),
-        ("original link + download", url + ("&" if "?" in url else "?") + "download=1"),
-    ]
-    tried = [f"browser: {browser_error}"]
+    The previous anonymous-sharing/browser approach is intentionally removed.
+    Graph searches the specified user's OneDrive for the workbook, then downloads
+    the DriveItem content using the Files.Read.All application permission.
+    """
+    token = _get_graph_token()
+    upn = ONEDRIVE_USER_UPN.strip()
+    filename = ONEDRIVE_FILE_NAME.strip()
+    if not upn or not filename:
+        raise RuntimeError("ONEDRIVE_USER_UPN and ONEDRIVE_FILE_NAME must be set.")
 
-    for label, u in candidates:
-        try:
-            req = urllib.request.Request(u, headers={
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36",
-                "Accept": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream,text/html;q=0.9,*/*;q=0.8",
-            })
-            with urllib.request.urlopen(req, timeout=60) as r:
-                blob = r.read()
-                ctype = (r.headers.get("Content-Type") or "").lower()
-                final_url = r.geturl()
-            if is_xlsx(blob):
-                return blob
-            tried.append(f"{label}: non-XLSX response ({ctype}, {len(blob)} bytes, final={final_url})")
-        except Exception as e2:
-            tried.append(f"{label}: {e2}")
+    # Microsoft Graph supports searching a user's OneDrive by filename with
+    # Files.Read.All application permission.
+    user_part = urllib.parse.quote(upn, safe="")
+    q_part = urllib.parse.quote("'" + filename + "'", safe="")
+    search_url = f"{GRAPH_BASE}/users/{user_part}/drive/root/search(q={q_part})"
+    result = _graph_json(search_url, token)
+    matches = result.get("value", [])
 
-    raise RuntimeError("Unable to retrieve the shared Excel file as XLSX.\n" + "\n".join(tried[-6:]))
+    # Exact filename match first. If Graph's search returns no exact match,
+    # retry with the filename stem so minor naming differences such as (3) do
+    # not break the dashboard.
+    exact = [m for m in matches if str(m.get("name", "")).lower() == filename.lower() and m.get("file")]
+    if not exact:
+        stem = filename.rsplit(".", 1)[0]
+        q2 = urllib.parse.quote("'" + stem + "'", safe="")
+        result2 = _graph_json(f"{GRAPH_BASE}/users/{user_part}/drive/root/search(q={q2})", token)
+        matches = result2.get("value", [])
+        exact = [m for m in matches if str(m.get("name", "")).lower() == filename.lower() and m.get("file")]
+
+    if not exact:
+        xlsx = [m for m in matches if m.get("file") and str(m.get("name", "")).lower().endswith((".xlsx", ".xlsm"))]
+        if len(xlsx) == 1:
+            exact = xlsx
+
+    if not exact:
+        names = [str(m.get("name", "")) for m in matches[:20]]
+        raise RuntimeError(
+            f"Microsoft Graph could not find the workbook '{filename}' in {upn}. "
+            f"Search returned: {names}"
+        )
+
+    item = exact[0]
+    item_id = item.get("id")
+    item_name = item.get("name", filename)
+    if not item_id:
+        raise RuntimeError("Microsoft Graph returned the workbook without a DriveItem ID.")
+
+    item_id_part = urllib.parse.quote(item_id, safe="")
+    content_url = f"{GRAPH_BASE}/users/{user_part}/drive/items/{item_id_part}/content"
+    req = urllib.request.Request(
+        content_url,
+        headers={
+            "Authorization": "Bearer " + token,
+            "Accept": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream",
+            "User-Agent": "HSE-Performance-Dashboard/Graph"
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=120) as r:
+            blob = r.read()
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")[:2000]
+        raise RuntimeError(f"Microsoft Graph workbook download failed (HTTP {e.code}): {body}") from e
+
+    if len(blob) < 1000 or blob[:2] != b"PK":
+        raise RuntimeError(f"Graph returned non-XLSX content for '{item_name}' ({len(blob)} bytes).")
+    try:
+        with zipfile.ZipFile(io.BytesIO(blob)) as z:
+            names = set(z.namelist())
+            if "[Content_Types].xml" not in names or "xl/workbook.xml" not in names:
+                raise RuntimeError(f"Downloaded '{item_name}' is not a valid XLSX workbook.")
+    except zipfile.BadZipFile as e:
+        raise RuntimeError(f"Downloaded '{item_name}' is not a valid XLSX ZIP file.") from e
+
+    print(f"Downloaded workbook via Microsoft Graph: {item_name} ({len(blob):,} bytes)")
+    return blob
 
 def norm(v):
     return re.sub(r"\s+", " ", str(v if v is not None else "").strip()).upper()
@@ -283,7 +285,7 @@ for r in lag_raw:
 
 payload={
     "generated_at":datetime.now(timezone.utc).isoformat(),
-    "source":"OneDrive shared Excel",
+    "source":"OneDrive via Microsoft Graph",
     "workbook":"HSE Dashboard Rev 0(3).xlsx",
     "manpower":manpower,
     "bsc":bsc,
