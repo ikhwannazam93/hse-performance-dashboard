@@ -97,6 +97,15 @@ def clean_sheet_name(s):
 
 wb = load_workbook(EXCEL_FILE, data_only=True, read_only=True)
 
+def get_sheet(*names):
+    """Find a worksheet by name, ignoring case, extra spaces and minor naming differences."""
+    targets = {norm(n).replace("_", " ") for n in names}
+    for ws in wb.worksheets:
+        actual = norm(ws.title).replace("_", " ")
+        if actual in targets:
+            return ws
+    return None
+
 excluded={"LAGGING","LEADING","BE SAFE CARD LOG","TRAINING"}
 manpower=[]
 for ws in wb.worksheets:
@@ -124,7 +133,8 @@ for ws in wb.worksheets:
     if rows:
         manpower.append({"sheet":clean_sheet_name(ws.title),"rows":rows})
 
-bsc_raw=rows_from_sheet(wb["Be Safe Card Log"]) if "Be Safe Card Log" in wb.sheetnames else []
+bsc_ws=get_sheet("Be Safe Card Log", "BE SAFE CARD LOG", "BESAFE CARD LOG")
+bsc_raw=rows_from_sheet(bsc_ws) if bsc_ws else []
 bsc=[]
 for i,r in enumerate(bsc_raw,1):
     bsc.append({
@@ -145,7 +155,8 @@ for i,r in enumerate(bsc_raw,1):
 bsc=[r for r in bsc if r["dateReported"] or r["dateObserved"]]
 
 tr_topics=["SIC","PTW NOVADE","EMERGENCY RESPONSE","FIRE WATCH","CHEMICAL HANDLING","WASTE MANAGEMENT","ELECTRICAL SAFETY","PPE AWARENESS","HAND TOOLS & POWER TOOLS SAFETY"]
-tr_raw=rows_from_sheet(wb["Training"]) if "Training" in wb.sheetnames else []
+tr_ws=get_sheet("Training")
+tr_raw=rows_from_sheet(tr_ws) if tr_ws else []
 training=[]
 for r in tr_raw:
     d=excel_date(val(r,"DATE"))
@@ -155,7 +166,8 @@ for r in tr_raw:
         training.append(o)
 
 lead_topics=["HSE INDUCTION","TOOLBOX MEETING","HSE COORDINATION MEETING","HSE COMMITTEE MEETING","EMERGENCY DRILL","WORKPLACE INSPECTION","HSE WALKABOUT","WEEKLY HOUSEKEEPING","BESAFE CARD","HSE CAMPAIGN","REWARDS & RECOGNITION","CONSEQUENCE MANAGEMENT"]
-lead_raw=rows_from_sheet(wb["Leading"]) if "Leading" in wb.sheetnames else []
+lead_ws=get_sheet("Leading")
+lead_raw=rows_from_sheet(lead_ws) if lead_ws else []
 leading=[]
 for r in lead_raw:
     d=excel_date(val(r,"DATE"))
@@ -165,7 +177,8 @@ for r in lead_raw:
         leading.append(o)
 
 lag_topics=["FATALITY","LTI","RWC","MTC","FAC","DANGEROUS OCCURANCE","PROPERTY DAMAGE","NEAR MISS","FIRE INCIDENT","REGULATORY NON COMPLIANCE","LoPC"]
-lag_raw=rows_from_sheet(wb["Lagging"]) if "Lagging" in wb.sheetnames else []
+lag_ws=get_sheet("Lagging")
+lag_raw=rows_from_sheet(lag_ws) if lag_ws else []
 lagging=[]
 for r in lag_raw:
     d=excel_date(val(r,"DATE"))
@@ -176,8 +189,8 @@ for r in lag_raw:
 
 payload={
     "generated_at":datetime.now(timezone.utc).isoformat(),
-    "source":"OneDrive via Microsoft Graph",
-    "workbook":"HSE Dashboard Rev 0(3).xlsx",
+    "source":"GitHub repository",
+    "workbook":os.path.basename(EXCEL_FILE),
     "manpower":manpower,
     "bsc":bsc,
     "training":training,
