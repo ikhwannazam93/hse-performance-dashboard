@@ -6,21 +6,110 @@ SHARE_URL = os.environ["ONEDRIVE_EXCEL_URL"]
 OUT = os.environ.get("OUTPUT_JSON", "data.json")
 
 def download_xlsx(url):
-    candidates = [url, url + ("&" if "?" in url else "?") + "download=1"]
-    last = None
-    for u in candidates:
-        req = urllib.request.Request(u, headers={"User-Agent":"Mozilla/5.0"})
+    """Download the shared workbook from a OneDrive/SharePoint sharing URL.
+
+    OneDrive for Business share URLs can return the Office viewer HTML page when
+    the original `?e=...` query is retained.  A common direct-download form is
+    the same share path with its query replaced by `?download=1`.  We try that
+    first, then the original link variants, and finally inspect an HTML response
+    for a downloadable URL exposed by the sharing page.
+    """
+    parsed = urllib.parse.urlsplit(url)
+    base = urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, "", ""))
+
+    candidates = []
+    # Most important for OneDrive for Business / SharePoint sharing links:
+    # remove the e= tracking query and use ?download=1.
+    candidates.append(("share-path download", base + "?download=1"))
+    candidates.append(("share-path download with original e", base + "?download=1" + ("&e=" + urllib.parse.parse_qs(parsed.query).get("e", [""])[0] if urllib.parse.parse_qs(parsed.query).get("e") else "")))
+    candidates.append(("original link", url))
+    candidates.append(("original link + download", url + ("&" if "?" in url else "?") + "download=1"))
+
+    tried = []
+    html_blobs = []
+
+    def fetch(u):
+        req = urllib.request.Request(
+            u,
+            headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36",
+                "Accept": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream,text/html;q=0.9,*/*;q=0.8",
+            },
+        )
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return r.read(), (r.headers.get("Content-Type") or "").lower(), r.geturl()
+
+    def is_xlsx(blob):
+        # XLSX is a ZIP container and normally starts with PK. Validate that it
+        # is actually an OOXML workbook rather than just another ZIP response.
+        if len(blob) < 1000 or blob[:2] != b"PK":
+            return False
         try:
-            with urllib.request.urlopen(req, timeout=60) as r:
-                blob = r.read()
-                ctype = (r.headers.get("Content-Type") or "").lower()
-                # XLSX is a ZIP container and starts with PK.
-                if blob[:2] == b"PK" and len(blob) > 1000:
-                    return blob
-                last = f"{u}: non-XLSX response ({ctype}, {len(blob)} bytes)"
+            with zipfile.ZipFile(io.BytesIO(blob)) as z:
+                names = set(z.namelist())
+                return "[Content_Types].xml" in names and "xl/workbook.xml" in names
+        except Exception:
+            return False
+
+    def extract_urls_from_html(text, page_url):
+        found = []
+        # Decode common JSON/HTML escaping first.
+        t = text.replace('\\u0026', '&').replace('\\/', '/').replace('\\"', '"').replace('&amp;', '&')
+        patterns = [
+            r'https?://[^"\'<>\\s]+',
+            r'(?:(?:https?:)?//)[^"\'<>\\s]+',
+        ]
+        for pat in patterns:
+            for m in re.findall(pat, t, flags=re.I):
+                u = m
+                if u.startswith('//'):
+                    u = parsed.scheme + ':' + u
+                u = u.rstrip('\\\\,;)]}')
+                low = u.lower()
+                if any(k in low for k in ("download", "download.aspx", "download=1", "_layouts/15/download", ".xlsx")):
+                    found.append(u)
+        # Meta refresh and href/src values can contain relative download routes.
+        for m in re.findall(r'(?:href|src|content)=["\']([^"\']+)["\']', t, flags=re.I):
+            u = urllib.parse.urljoin(page_url, m.replace('\\u0026','&'))
+            low = u.lower()
+            if any(k in low for k in ("download", ".xlsx")):
+                found.append(u)
+        # Preserve order and remove duplicates.
+        out=[]
+        seen=set()
+        for u in found:
+            if u not in seen:
+                seen.add(u); out.append(u)
+        return out
+
+    for label, u in candidates:
+        try:
+            blob, ctype, final_url = fetch(u)
+            if is_xlsx(blob):
+                return blob
+            tried.append(f"{label}: non-XLSX response ({ctype}, {len(blob)} bytes, final={final_url})")
+            if "text/html" in ctype or blob.lstrip().lower().startswith((b"<!doctype", b"<html", b"<head")):
+                try:
+                    html_blobs.append((blob.decode("utf-8", errors="ignore"), final_url))
+                except Exception:
+                    pass
         except Exception as e:
-            last = f"{u}: {e}"
-    raise RuntimeError("Unable to retrieve the shared Excel file. " + str(last))
+            tried.append(f"{label}: {e}")
+
+    # Some SharePoint/OneDrive viewer pages expose a short-lived download URL
+    # in their HTML/JSON. Try those URLs as a last server-side fallback.
+    for html, page_url in html_blobs:
+        for u in extract_urls_from_html(html, page_url):
+            try:
+                blob, ctype, final_url = fetch(u)
+                if is_xlsx(blob):
+                    return blob
+                tried.append(f"embedded download URL: non-XLSX response ({ctype}, {len(blob)} bytes, final={final_url})")
+            except Exception as e:
+                tried.append(f"embedded download URL: {e}")
+
+    detail = "\n".join(tried[-8:])
+    raise RuntimeError("Unable to retrieve the shared Excel file as XLSX. Tried OneDrive direct-download forms and viewer download URLs.\n" + detail)
 
 def norm(v):
     return re.sub(r"\s+", " ", str(v if v is not None else "").strip()).upper()
