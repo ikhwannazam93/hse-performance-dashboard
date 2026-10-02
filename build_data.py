@@ -1,136 +1,27 @@
-import json, os, sys, urllib.request, urllib.parse, zipfile, io, re
+import json, os, zipfile, io, re
 from datetime import datetime, date, timezone
 from openpyxl import load_workbook
 
-SHARE_URL = os.environ.get("ONEDRIVE_EXCEL_URL", "")
 OUT = os.environ.get("OUTPUT_JSON", "data.json")
-ONEDRIVE_USER_UPN = os.environ.get("ONEDRIVE_USER_UPN", "hse@databasehub.onmicrosoft.com")
-ONEDRIVE_FILE_NAME = os.environ.get("ONEDRIVE_FILE_NAME", "HSE Dashboard Rev 0(3).xlsx")
 
-GRAPH_BASE = "https://graph.microsoft.com/v1.0"
-TOKEN_URL = "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
-
-def _graph_json(url, token):
-    req = urllib.request.Request(url, headers={
-        "Authorization": "Bearer " + token,
-        "Accept": "application/json",
-        "User-Agent": "HSE-Performance-Dashboard/Graph"
-    })
-    try:
-        with urllib.request.urlopen(req, timeout=60) as r:
-            return json.loads(r.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", errors="replace")[:2000]
-        raise RuntimeError(f"Microsoft Graph HTTP {e.code}: {body}") from e
-
-def _get_graph_token():
-    tenant = os.environ.get("AZURE_TENANT_ID", "").strip()
-    client_id = os.environ.get("AZURE_CLIENT_ID", "").strip()
-    client_secret = os.environ.get("AZURE_CLIENT_SECRET", "").strip()
-    if not tenant or not client_id or not client_secret:
-        raise RuntimeError("Missing AZURE_TENANT_ID, AZURE_CLIENT_ID, or AZURE_CLIENT_SECRET GitHub secret.")
-
-    data = urllib.parse.urlencode({
-        "client_id": client_id,
-        "client_secret": client_secret,
-        "scope": "https://graph.microsoft.com/.default",
-        "grant_type": "client_credentials",
-    }).encode("utf-8")
-    req = urllib.request.Request(
-        TOKEN_URL.format(tenant=urllib.parse.quote(tenant, safe="")),
-        data=data,
-        headers={"Content-Type": "application/x-www-form-urlencoded", "Accept": "application/json"},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=60) as r:
-            result = json.loads(r.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", errors="replace")[:2000]
-        raise RuntimeError(f"Microsoft identity token request failed (HTTP {e.code}): {body}") from e
-    token = result.get("access_token")
-    if not token:
-        raise RuntimeError("Microsoft identity token response did not contain access_token.")
-    return token
+EXCEL_FILE = os.environ.get("EXCEL_FILE", "HSE Dashboard Rev 0(3).xlsx")
 
 def download_xlsx(_url=None):
-    """Download the dashboard workbook from the user's OneDrive using Microsoft Graph app-only authentication.
-
-    The previous anonymous-sharing/browser approach is intentionally removed.
-    Graph searches the specified user's OneDrive for the workbook, then downloads
-    the DriveItem content using the Files.Read.All application permission.
-    """
-    token = _get_graph_token()
-    upn = ONEDRIVE_USER_UPN.strip()
-    filename = ONEDRIVE_FILE_NAME.strip()
-    if not upn or not filename:
-        raise RuntimeError("ONEDRIVE_USER_UPN and ONEDRIVE_FILE_NAME must be set.")
-
-    # Microsoft Graph supports searching a user's OneDrive by filename with
-    # Files.Read.All application permission.
-    user_part = urllib.parse.quote(upn, safe="")
-    q_part = urllib.parse.quote("'" + filename + "'", safe="")
-    search_url = f"{GRAPH_BASE}/users/{user_part}/drive/root/search(q={q_part})"
-    result = _graph_json(search_url, token)
-    matches = result.get("value", [])
-
-    # Exact filename match first. If Graph's search returns no exact match,
-    # retry with the filename stem so minor naming differences such as (3) do
-    # not break the dashboard.
-    exact = [m for m in matches if str(m.get("name", "")).lower() == filename.lower() and m.get("file")]
-    if not exact:
-        stem = filename.rsplit(".", 1)[0]
-        q2 = urllib.parse.quote("'" + stem + "'", safe="")
-        result2 = _graph_json(f"{GRAPH_BASE}/users/{user_part}/drive/root/search(q={q2})", token)
-        matches = result2.get("value", [])
-        exact = [m for m in matches if str(m.get("name", "")).lower() == filename.lower() and m.get("file")]
-
-    if not exact:
-        xlsx = [m for m in matches if m.get("file") and str(m.get("name", "")).lower().endswith((".xlsx", ".xlsm"))]
-        if len(xlsx) == 1:
-            exact = xlsx
-
-    if not exact:
-        names = [str(m.get("name", "")) for m in matches[:20]]
-        raise RuntimeError(
-            f"Microsoft Graph could not find the workbook '{filename}' in {upn}. "
-            f"Search returned: {names}"
-        )
-
-    item = exact[0]
-    item_id = item.get("id")
-    item_name = item.get("name", filename)
-    if not item_id:
-        raise RuntimeError("Microsoft Graph returned the workbook without a DriveItem ID.")
-
-    item_id_part = urllib.parse.quote(item_id, safe="")
-    content_url = f"{GRAPH_BASE}/users/{user_part}/drive/items/{item_id_part}/content"
-    req = urllib.request.Request(
-        content_url,
-        headers={
-            "Authorization": "Bearer " + token,
-            "Accept": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream",
-            "User-Agent": "HSE-Performance-Dashboard/Graph"
-        },
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=120) as r:
-            blob = r.read()
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", errors="replace")[:2000]
-        raise RuntimeError(f"Microsoft Graph workbook download failed (HTTP {e.code}): {body}") from e
-
+    """Read the dashboard workbook directly from the GitHub repository."""
+    if not os.path.exists(EXCEL_FILE):
+        raise RuntimeError(f"Excel workbook not found: {EXCEL_FILE}")
+    with open(EXCEL_FILE, "rb") as f:
+        blob = f.read()
     if len(blob) < 1000 or blob[:2] != b"PK":
-        raise RuntimeError(f"Graph returned non-XLSX content for '{item_name}' ({len(blob)} bytes).")
+        raise RuntimeError(f"{EXCEL_FILE} is not a valid XLSX file ({len(blob)} bytes).")
     try:
         with zipfile.ZipFile(io.BytesIO(blob)) as z:
             names = set(z.namelist())
             if "[Content_Types].xml" not in names or "xl/workbook.xml" not in names:
-                raise RuntimeError(f"Downloaded '{item_name}' is not a valid XLSX workbook.")
+                raise RuntimeError(f"{EXCEL_FILE} is not a valid XLSX workbook.")
     except zipfile.BadZipFile as e:
-        raise RuntimeError(f"Downloaded '{item_name}' is not a valid XLSX ZIP file.") from e
-
-    print(f"Downloaded workbook via Microsoft Graph: {item_name} ({len(blob):,} bytes)")
+        raise RuntimeError(f"{EXCEL_FILE} is not a valid XLSX ZIP file.") from e
+    print(f"Loaded workbook from GitHub repository: {EXCEL_FILE} ({len(blob):,} bytes)")
     return blob
 
 def norm(v):
@@ -204,7 +95,7 @@ def val(row,names):
 def clean_sheet_name(s):
     return str(s)
 
-wb = load_workbook(io.BytesIO(download_xlsx(SHARE_URL)), data_only=True, read_only=True)
+wb = load_workbook(EXCEL_FILE, data_only=True, read_only=True)
 
 excluded={"LAGGING","LEADING","BE SAFE CARD LOG","TRAINING"}
 manpower=[]
