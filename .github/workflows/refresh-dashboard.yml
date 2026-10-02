@@ -6,23 +6,16 @@ on:
     - cron: "*/15 * * * *"
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
 jobs:
-  build-and-deploy:
+  refresh:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Checkout dashboard
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -30,22 +23,27 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Excel parser and browser
+      - name: Install Excel parser
         run: |
-          python -m pip install --upgrade pip openpyxl playwright
-          python -m playwright install --with-deps chromium
+          python -m pip install --upgrade pip openpyxl
 
-      - name: Download latest OneDrive Excel and generate JSON
+      - name: Download Excel from OneDrive via Microsoft Graph
         env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
           ONEDRIVE_EXCEL_URL: ${{ secrets.ONEDRIVE_EXCEL_URL }}
-          OUTPUT_JSON: data.json
-        run: python build_data.py
-
-      - name: Prepare Pages files
+          ONEDRIVE_USER_UPN: hse@databasehub.onmicrosoft.com
+          ONEDRIVE_FILE_NAME: HSE Dashboard Rev 0(3).xlsx
         run: |
-          test -s data.json
-          test -s index.html
-          touch .nojekyll
+          python build_data.py
+
+      - name: Prepare GitHub Pages files
+        run: |
+          mkdir -p pages
+          cp index.html pages/
+          cp data.json pages/
+          touch pages/.nojekyll
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -53,7 +51,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: pages
 
       - name: Deploy to GitHub Pages
         id: deployment
