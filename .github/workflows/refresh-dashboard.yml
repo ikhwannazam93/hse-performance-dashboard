@@ -2,11 +2,17 @@ name: Refresh HSE Dashboard
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "HSE Dashboard Rev 0(3).xlsx"
+      - "build_data.py"
+      - "index.html"
+      - ".github/workflows/refresh-dashboard.yml"
   schedule:
     - cron: "*/15 * * * *"
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -27,14 +33,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip openpyxl
 
-      - name: Download Excel from OneDrive via Microsoft Graph
-        env:
-          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          ONEDRIVE_EXCEL_URL: ${{ secrets.ONEDRIVE_EXCEL_URL }}
-          ONEDRIVE_USER_UPN: hse@databasehub.onmicrosoft.com
-          ONEDRIVE_FILE_NAME: HSE Dashboard Rev 0(3).xlsx
+      - name: Generate dashboard data
         run: |
           python build_data.py
 
