@@ -1,0 +1,58 @@
+name: Refresh HSE Dashboard
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout dashboard
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Excel parser
+        run: python -m pip install --upgrade pip openpyxl
+
+      - name: Download latest OneDrive Excel and generate JSON
+        env:
+          ONEDRIVE_EXCEL_URL: ${{ secrets.ONEDRIVE_EXCEL_URL }}
+          OUTPUT_JSON: data.json
+        run: python build_data.py
+
+      - name: Prepare Pages files
+        run: |
+          test -s data.json
+          test -s index.html
+          touch .nojekyll
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
