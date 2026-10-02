@@ -179,6 +179,28 @@ for r in lead_raw:
 lag_topics=["FATALITY","LTI","RWC","MTC","FAC","DANGEROUS OCCURANCE","PROPERTY DAMAGE","NEAR MISS","FIRE INCIDENT","REGULATORY NON COMPLIANCE","LoPC"]
 lag_ws=get_sheet("Lagging")
 lag_raw=rows_from_sheet(lag_ws) if lag_ws else []
+
+users_ws=get_sheet("Users")
+users=[]
+if users_ws:
+    user_rows=list(users_ws.iter_rows(values_only=True))
+    if user_rows:
+        user_headers=[norm(x) if norm(x) else f"__EMPTY_{i}" for i,x in enumerate(user_rows[0])]
+        user_index={h:i for i,h in enumerate(user_headers)}
+        for row in user_rows[1:]:
+            def user_val(name):
+                idx=user_index.get(norm(name))
+                return row[idx] if idx is not None and idx < len(row) else ""
+            username=str(user_val("USERNAME") or "").strip()
+            if username:
+                users.append({
+                    "username":username,
+                    "password":str(user_val("PASSWORD") or ""),
+                    "name":str(user_val("NAME") or ""),
+                    "role":str(user_val("ROLE") or ""),
+                    "status":str(user_val("STATUS") or "")
+                })
+
 lagging=[]
 for r in lag_raw:
     d=excel_date(val(r,"DATE"))
@@ -198,7 +220,8 @@ payload={
     "leading":leading,
     "leadingTopics":lead_topics,
     "lagging":lagging,
-    "laggingTopics":lag_topics
+    "laggingTopics":lag_topics,
+    "users":users
 }
 with open(OUT,"w",encoding="utf-8") as f:
     json.dump(payload,f,ensure_ascii=False,separators=(",",":"))
