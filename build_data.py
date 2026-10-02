@@ -6,42 +6,16 @@ SHARE_URL = os.environ["ONEDRIVE_EXCEL_URL"]
 OUT = os.environ.get("OUTPUT_JSON", "data.json")
 
 def download_xlsx(url):
-    """Download the shared workbook from a OneDrive/SharePoint sharing URL.
+    """Download the workbook using a real Chromium browser first.
 
-    OneDrive for Business share URLs can return the Office viewer HTML page when
-    the original `?e=...` query is retained.  A common direct-download form is
-    the same share path with its query replaced by `?download=1`.  We try that
-    first, then the original link variants, and finally inspect an HTML response
-    for a downloadable URL exposed by the sharing page.
+    The OneDrive/SharePoint anonymous link opens correctly in a normal browser,
+    but GitHub's plain HTTP request is redirected to login.microsoftonline.com.
+    A headless browser follows the same anonymous sharing flow and can capture
+    the actual XLSX download. HTTP fallbacks are retained for other link types.
     """
-    parsed = urllib.parse.urlsplit(url)
-    base = urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, "", ""))
-
-    candidates = []
-    # Most important for OneDrive for Business / SharePoint sharing links:
-    # remove the e= tracking query and use ?download=1.
-    candidates.append(("share-path download", base + "?download=1"))
-    candidates.append(("share-path download with original e", base + "?download=1" + ("&e=" + urllib.parse.parse_qs(parsed.query).get("e", [""])[0] if urllib.parse.parse_qs(parsed.query).get("e") else "")))
-    candidates.append(("original link", url))
-    candidates.append(("original link + download", url + ("&" if "?" in url else "?") + "download=1"))
-
-    tried = []
-    html_blobs = []
-
-    def fetch(u):
-        req = urllib.request.Request(
-            u,
-            headers={
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36",
-                "Accept": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream,text/html;q=0.9,*/*;q=0.8",
-            },
-        )
-        with urllib.request.urlopen(req, timeout=60) as r:
-            return r.read(), (r.headers.get("Content-Type") or "").lower(), r.geturl()
+    import urllib.request, urllib.parse, zipfile, io, re
 
     def is_xlsx(blob):
-        # XLSX is a ZIP container and normally starts with PK. Validate that it
-        # is actually an OOXML workbook rather than just another ZIP response.
         if len(blob) < 1000 or blob[:2] != b"PK":
             return False
         try:
@@ -51,65 +25,111 @@ def download_xlsx(url):
         except Exception:
             return False
 
-    def extract_urls_from_html(text, page_url):
-        found = []
-        # Decode common JSON/HTML escaping first.
-        t = text.replace('\\u0026', '&').replace('\\/', '/').replace('\\"', '"').replace('&amp;', '&')
-        patterns = [
-            r'https?://[^"\'<>\\s]+',
-            r'(?:(?:https?:)?//)[^"\'<>\\s]+',
-        ]
-        for pat in patterns:
-            for m in re.findall(pat, t, flags=re.I):
-                u = m
-                if u.startswith('//'):
-                    u = parsed.scheme + ':' + u
-                u = u.rstrip('\\\\,;)]}')
-                low = u.lower()
-                if any(k in low for k in ("download", "download.aspx", "download=1", "_layouts/15/download", ".xlsx")):
-                    found.append(u)
-        # Meta refresh and href/src values can contain relative download routes.
-        for m in re.findall(r'(?:href|src|content)=["\']([^"\']+)["\']', t, flags=re.I):
-            u = urllib.parse.urljoin(page_url, m.replace('\\u0026','&'))
-            low = u.lower()
-            if any(k in low for k in ("download", ".xlsx")):
-                found.append(u)
-        # Preserve order and remove duplicates.
-        out=[]
-        seen=set()
-        for u in found:
-            if u not in seen:
-                seen.add(u); out.append(u)
-        return out
+    browser_error = None
+    try:
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            context = browser.new_context(accept_downloads=True)
+            page = context.new_page()
+            page.goto(url, wait_until="domcontentloaded", timeout=90000)
+            page.wait_for_timeout(7000)
+
+            # Anonymous OneDrive/Excel pages normally expose a Download button.
+            # Try several accessible-text variants because Microsoft changes the
+            # viewer UI labels between deployments.
+            download = None
+            selectors = [
+                'a:has-text("Download")',
+                'button:has-text("Download")',
+                '[role="button"]:has-text("Download")',
+                'text=Download',
+            ]
+            for sel in selectors:
+                try:
+                    loc = page.locator(sel).first
+                    if loc.count() and loc.is_visible(timeout=1500):
+                        with page.expect_download(timeout=30000) as dl_info:
+                            loc.click(timeout=5000)
+                        download = dl_info.value
+                        break
+                except Exception:
+                    pass
+
+            # Excel/Office viewers may put download under File.
+            if download is None:
+                for sel in ['button:has-text("File")', '[role="button"]:has-text("File")', 'text=File']:
+                    try:
+                        loc = page.locator(sel).first
+                        if loc.count() and loc.is_visible(timeout=1500):
+                            loc.click(timeout=5000)
+                            page.wait_for_timeout(1000)
+                            break
+                    except Exception:
+                        pass
+                for sel in [
+                    'text=Download a Copy',
+                    'text=Download',
+                    'button:has-text("Download a Copy")',
+                    '[role="menuitem"]:has-text("Download")',
+                ]:
+                    try:
+                        loc = page.locator(sel).first
+                        if loc.count() and loc.is_visible(timeout=2000):
+                            with page.expect_download(timeout=30000) as dl_info:
+                                loc.click(timeout=5000)
+                            download = dl_info.value
+                            break
+                    except Exception:
+                        pass
+
+            if download is not None:
+                path = download.path()
+                if path:
+                    blob = open(path, "rb").read()
+                    if is_xlsx(blob):
+                        browser.close()
+                        return blob
+                    browser_error = f"browser download was not XLSX ({len(blob)} bytes)"
+                else:
+                    browser_error = "browser download had no local path"
+            else:
+                final_url = page.url
+                visible = page.locator("body").inner_text(timeout=10000)[:1200]
+                browser_error = f"browser could not trigger download; final={final_url}; page={visible!r}"
+            browser.close()
+    except Exception as e:
+        browser_error = f"browser method failed: {type(e).__name__}: {e}"
+
+    # Retain direct-download fallbacks for links that do not require browser UI.
+    parsed = urllib.parse.urlsplit(url)
+    base = urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, "", ""))
+    e = urllib.parse.parse_qs(parsed.query).get("e", [""])[0]
+    candidates = [
+        ("share-path download", base + "?download=1"),
+        ("share-path download with original e", base + "?download=1" + ("&e=" + e if e else "")),
+        ("original link", url),
+        ("original link + download", url + ("&" if "?" in url else "?") + "download=1"),
+    ]
+    tried = [f"browser: {browser_error}"]
 
     for label, u in candidates:
         try:
-            blob, ctype, final_url = fetch(u)
+            req = urllib.request.Request(u, headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153 Safari/537.36",
+                "Accept": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream,text/html;q=0.9,*/*;q=0.8",
+            })
+            with urllib.request.urlopen(req, timeout=60) as r:
+                blob = r.read()
+                ctype = (r.headers.get("Content-Type") or "").lower()
+                final_url = r.geturl()
             if is_xlsx(blob):
                 return blob
             tried.append(f"{label}: non-XLSX response ({ctype}, {len(blob)} bytes, final={final_url})")
-            if "text/html" in ctype or blob.lstrip().lower().startswith((b"<!doctype", b"<html", b"<head")):
-                try:
-                    html_blobs.append((blob.decode("utf-8", errors="ignore"), final_url))
-                except Exception:
-                    pass
-        except Exception as e:
-            tried.append(f"{label}: {e}")
+        except Exception as e2:
+            tried.append(f"{label}: {e2}")
 
-    # Some SharePoint/OneDrive viewer pages expose a short-lived download URL
-    # in their HTML/JSON. Try those URLs as a last server-side fallback.
-    for html, page_url in html_blobs:
-        for u in extract_urls_from_html(html, page_url):
-            try:
-                blob, ctype, final_url = fetch(u)
-                if is_xlsx(blob):
-                    return blob
-                tried.append(f"embedded download URL: non-XLSX response ({ctype}, {len(blob)} bytes, final={final_url})")
-            except Exception as e:
-                tried.append(f"embedded download URL: {e}")
-
-    detail = "\n".join(tried[-8:])
-    raise RuntimeError("Unable to retrieve the shared Excel file as XLSX. Tried OneDrive direct-download forms and viewer download URLs.\n" + detail)
+    raise RuntimeError("Unable to retrieve the shared Excel file as XLSX.\n" + "\n".join(tried[-6:]))
 
 def norm(v):
     return re.sub(r"\s+", " ", str(v if v is not None else "").strip()).upper()
