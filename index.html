@@ -819,43 +819,6 @@ select:focus,input:focus{outline:none !important;border-color:#00a4d6 !important
 .chart:has(svg.dynamic-horizontal){height:auto !important;min-height:320px !important;overflow:hidden !important;padding-bottom:6px;}
 .chart:has(svg.dynamic-horizontal) svg{display:block;width:100%;overflow:visible;}
 </style>
-
-
-<style id="github-live-dashboard-adjustments">
-/* GitHub Pages live-data layout */
-.main{
-  width:100% !important;
-  max-width:1500px !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-}
-.last-manhour-date{
-  display:inline-flex;
-  align-items:center;
-  min-height:42px;
-  padding:0 15px;
-  border:1px solid #cbddeb;
-  border-radius:11px;
-  background:rgba(255,255,255,.92);
-  color:#123b72;
-  font-size:12px;
-  font-weight:800;
-  box-shadow:0 4px 12px rgba(20,63,105,.07);
-  white-space:nowrap;
-}
-.last-manhour-date:before{
-  content:"";
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#15966a;
-  margin-right:8px;
-  box-shadow:0 0 0 3px rgba(21,150,106,.12);
-}
-@media(max-width:700px){
-  .last-manhour-date{font-size:11px;min-height:38px;padding:0 11px;}
-}
-</style>
 </head>
 <body>
 <div class="app">
@@ -881,7 +844,7 @@ select:focus,input:focus{outline:none !important;border-color:#00a4d6 !important
       <div id="pageSub" class="page-sub">Manhour performance by contractor and month</div>
     </div>
     <div class="top-actions">
-      <div id="lastManhourDate" class="last-manhour-date" aria-live="polite">Data as of: —</div>
+      <span id="liveStatus" class="upload-status" aria-live="polite">Loading live data…</span>
     </div>
   </div>
 
@@ -1313,49 +1276,51 @@ function buildUploadedData(wb){
 
   return {manpower,bsc,training,trainingTopics:trTopics,leading,leadingTopics,lagging,laggingTopics,workbook:""};
 }
-function applyUploadedWorkbook(file){
-  const reader=new FileReader();
-  reader.onload=function(e){
-    try{
-      const wb=XLSX.read(new Uint8Array(e.target.result),{type:"array",cellDates:true});
-      const next=buildUploadedData(wb);
-      if(!next.manpower.length) throw new Error("No manpower sheets were detected.");
-      if(!next.training.length) throw new Error("Training sheet was found but no dated records were detected.");
-      if(!next.leading.length) throw new Error("Leading sheet was found but no dated records were detected.");
-      if(!next.lagging.length) throw new Error("Lagging sheet was found but no dated records were detected.");
-      if(!next.bsc.length) throw new Error("Be Safe Card Log was found but no dated records were detected.");
-      DATA.manpower=next.manpower;
-      DATA.bsc=next.bsc;
-      DATA.training=next.training;
-      DATA.trainingTopics=next.trainingTopics;
-      DATA.leading=next.leading;
-      DATA.leadingTopics=next.leadingTopics;
-      DATA.lagging=next.lagging;
-      DATA.laggingTopics=next.laggingTopics;
-      DATA.workbook=file.name;
-      Object.keys(state).forEach(k=>state[k]={});
-      document.getElementById("uploadStatus").textContent=`Updated: ${file.name} • MH ${manpowerRows().length} rows • BSC ${DATA.bsc.length} • Training ${DATA.training.length} • Leading ${DATA.leading.length} • Lagging ${DATA.lagging.length}`;
-      // Rebuild the active page only after the new DATA object is fully installed.
-      requestAnimationFrame(()=>{
-        // Render every dashboard page after upload so the uploaded dataset
-        // is available immediately when the user switches pages.
-        ["manhour","manday","lagging","leading","observation","training"].forEach(p=>{
-          try { renderPage(p); } catch(err) { console.error("Render failed for "+p, err); }
-        });
-        // Restore the page the user was viewing.
-        document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
-        const active=document.getElementById("page-"+currentPage);
-        if(active) active.classList.add("active");
-        document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===currentPage));
-        window.scrollTo({top:0,behavior:"auto"});
-      });
-    }catch(err){
-      console.error(err);
-      document.getElementById("uploadStatus").textContent="Upload failed: "+(err.message||"Invalid Excel file");
-      alert("Unable to update the dashboard from this Excel file.\n\n"+(err.message||"Please check the workbook sheets and headers."));
-    }
-  };
-  reader.readAsArrayBuffer(file);
+async function loadLiveData(){
+  const status=document.getElementById("liveStatus");
+  try{
+    const response=await fetch("data.json?ts="+Date.now(),{cache:"no-store"});
+    if(!response.ok) throw new Error("data.json returned HTTP "+response.status);
+    const json=await response.json();
+
+    // Install every dataset produced by build_data.py.
+    DATA.manpower=Array.isArray(json.manpower)?json.manpower:[];
+    DATA.bsc=Array.isArray(json.bsc)?json.bsc:[];
+    DATA.training=Array.isArray(json.training)?json.training:[];
+    DATA.trainingTopics=Array.isArray(json.trainingTopics)?json.trainingTopics:[];
+    DATA.leading=Array.isArray(json.leading)?json.leading:[];
+    DATA.leadingTopics=Array.isArray(json.leadingTopics)?json.leadingTopics:[];
+    DATA.lagging=Array.isArray(json.lagging)?json.lagging:[];
+    DATA.laggingTopics=Array.isArray(json.laggingTopics)?json.laggingTopics:[];
+    DATA.workbook=json.workbook||"";
+
+    // Find the latest date from all Manhour/Manday source sheets.
+    const mhDates=manpowerRows().map(r=>String(r.date||"")).filter(Boolean).sort();
+    const latest=mhDates.length?mhDates[mhDates.length-1]:"";
+    const latestText=latest
+      ? new Date(latest+"T00:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"})
+      : "No date";
+
+    status.textContent=`● LIVE DATA  •  Last Manhour: ${latestText}`;
+    status.style.color="#087f5b";
+    status.title=`Workbook: ${DATA.workbook||"GitHub Excel"}\nGenerated: ${json.generated_at||""}`;
+
+    // Render every page after all datasets are installed.
+    ["manhour","manday","lagging","leading","observation","training"].forEach(p=>{
+      try{ renderPage(p); }
+      catch(err){ console.error("Render failed for "+p,err); }
+    });
+
+    // Keep the approved default page.
+    go("manhour");
+  }catch(err){
+    console.error("Live data load failed",err);
+    status.textContent="● LIVE DATA ERROR";
+    status.style.color="#b42318";
+    status.title=err.message||"Unable to load data.json";
+    // Still render the empty approved layout rather than breaking the page.
+    renderPage("manhour");
+  }
 }
 
 function manpowerRows(){
@@ -2305,73 +2270,6 @@ function go(page){
   renderPage(page);
 }
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.page));
-
-function formatDashboardDate(iso){
-  if(!iso) return "—";
-  const d=new Date(iso+"T00:00:00");
-  if(isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
-}
-
-function installLiveData(payload){
-  if(!payload || !Array.isArray(payload.manpower)){
-    throw new Error("data.json does not contain dashboard manpower data.");
-  }
-
-  DATA.manpower=Array.isArray(payload.manpower)?payload.manpower:[];
-  DATA.bsc=Array.isArray(payload.bsc)?payload.bsc:[];
-  DATA.training=Array.isArray(payload.training)?payload.training:[];
-  DATA.trainingTopics=Array.isArray(payload.trainingTopics)?payload.trainingTopics:[];
-  DATA.leading=Array.isArray(payload.leading)?payload.leading:[];
-  DATA.leadingTopics=Array.isArray(payload.leadingTopics)?payload.leadingTopics:[];
-  DATA.lagging=Array.isArray(payload.lagging)?payload.lagging:[];
-  DATA.laggingTopics=Array.isArray(payload.laggingTopics)?payload.laggingTopics:[];
-  DATA.workbook=payload.workbook||"";
-
-  const manhourSheets=DATA.manpower.filter(s=>normKey(s.sheet)==="MANHOUR");
-  const mhSourceRows=(manhourSheets.length
-    ? manhourSheets.flatMap(s=>Array.isArray(s.rows)?s.rows:[])
-    : manpowerRows());
-
-  const mhDates=mhSourceRows
-    .map(r=>String(r.date||""))
-    .filter(Boolean)
-    .sort();
-
-  const lastDate=mhDates.length?mhDates[mhDates.length-1]:"";
-  const dateEl=document.getElementById("lastManhourDate");
-  if(dateEl){
-    dateEl.textContent=lastDate
-      ? "Last Manhour Date: "+formatDashboardDate(lastDate)
-      : "Last Manhour Date: —";
-  }
-
-  Object.keys(state).forEach(k=>state[k]={});
-  renderPage("manhour");
-}
-
-async function loadLiveData(){
-  const dateEl=document.getElementById("lastManhourDate");
-  try{
-    const response=await fetch("./data.json?ts="+Date.now(),{
-      cache:"no-store",
-      headers:{"Accept":"application/json"}
-    });
-    if(!response.ok) throw new Error("data.json returned HTTP "+response.status);
-    const payload=await response.json();
-    installLiveData(payload);
-  }catch(err){
-    console.error("Live dashboard data failed:",err);
-    if(dateEl){
-      dateEl.textContent="Live Data Error";
-      dateEl.style.color="#c33b3b";
-      dateEl.style.borderColor="#efcaca";
-      dateEl.style.background="#fff7f7";
-    }
-    document.getElementById("pageSub").textContent="Unable to load live dashboard data";
-  }
-}
-
 loadLiveData();
 </script>
 </body>
