@@ -30,8 +30,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Excel parser
-        run: python -m pip install --upgrade pip openpyxl
+      - name: Install Excel parser and browser
+        run: |
+          python -m pip install --upgrade pip openpyxl playwright
+          python -m playwright install --with-deps chromium
 
       - name: Download latest OneDrive Excel and generate JSON
         env:
