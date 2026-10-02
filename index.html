@@ -1278,48 +1278,71 @@ function buildUploadedData(wb){
 }
 async function loadLiveData(){
   const status=document.getElementById("liveStatus");
+
+  // Only show LIVE DATA ERROR when data.json itself cannot be fetched or parsed.
+  let json;
   try{
     const response=await fetch("data.json?ts="+Date.now(),{cache:"no-store"});
     if(!response.ok) throw new Error("data.json returned HTTP "+response.status);
-    const json=await response.json();
-
-    // Install every dataset produced by build_data.py.
-    DATA.manpower=Array.isArray(json.manpower)?json.manpower:[];
-    DATA.bsc=Array.isArray(json.bsc)?json.bsc:[];
-    DATA.training=Array.isArray(json.training)?json.training:[];
-    DATA.trainingTopics=Array.isArray(json.trainingTopics)?json.trainingTopics:[];
-    DATA.leading=Array.isArray(json.leading)?json.leading:[];
-    DATA.leadingTopics=Array.isArray(json.leadingTopics)?json.leadingTopics:[];
-    DATA.lagging=Array.isArray(json.lagging)?json.lagging:[];
-    DATA.laggingTopics=Array.isArray(json.laggingTopics)?json.laggingTopics:[];
-    DATA.workbook=json.workbook||"";
-
-    // Find the latest date from all Manhour/Manday source sheets.
-    const mhDates=manpowerRows().map(r=>String(r.date||"")).filter(Boolean).sort();
-    const latest=mhDates.length?mhDates[mhDates.length-1]:"";
-    const latestText=latest
-      ? new Date(latest+"T00:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"})
-      : "No date";
-
-    status.textContent=`● LIVE DATA  •  Last Manhour: ${latestText}`;
-    status.style.color="#087f5b";
-    status.title=`Workbook: ${DATA.workbook||"GitHub Excel"}\nGenerated: ${json.generated_at||""}`;
-
-    // Render every page after all datasets are installed.
-    ["manhour","manday","lagging","leading","observation","training"].forEach(p=>{
-      try{ renderPage(p); }
-      catch(err){ console.error("Render failed for "+p,err); }
-    });
-
-    // Keep the approved default page.
-    go("manhour");
+    json=await response.json();
   }catch(err){
-    console.error("Live data load failed",err);
+    console.error("Live data fetch failed",err);
     status.textContent="● LIVE DATA ERROR";
     status.style.color="#b42318";
     status.title=err.message||"Unable to load data.json";
-    // Still render the empty approved layout rather than breaking the page.
     renderPage("manhour");
+    return;
+  }
+
+  // Install every dataset produced by build_data.py.
+  DATA.manpower=Array.isArray(json.manpower)?json.manpower:[];
+  DATA.bsc=Array.isArray(json.bsc)?json.bsc:[];
+  DATA.training=Array.isArray(json.training)?json.training:[];
+  DATA.trainingTopics=Array.isArray(json.trainingTopics)?json.trainingTopics:[];
+  DATA.leading=Array.isArray(json.leading)?json.leading:[];
+  DATA.leadingTopics=Array.isArray(json.leadingTopics)?json.leadingTopics:[];
+  DATA.lagging=Array.isArray(json.lagging)?json.lagging:[];
+  DATA.laggingTopics=Array.isArray(json.laggingTopics)?json.laggingTopics:[];
+  DATA.workbook=json.workbook||"";
+
+  // Determine the latest Manhour date safely. A rendering issue must not
+  // overwrite a successful live-data status.
+  let latestText="No date";
+  try{
+    const mhDates=DATA.manpower.flatMap(s=>Array.isArray(s.rows)?s.rows:[])
+      .map(r=>String(r.date||"")).filter(Boolean).sort();
+    const latest=mhDates.length?mhDates[mhDates.length-1]:"";
+    if(latest){
+      const d=new Date(latest+"T00:00:00");
+      if(!Number.isNaN(d.getTime())){
+        latestText=d.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+      }
+    }
+  }catch(err){
+    console.warn("Unable to determine latest Manhour date",err);
+  }
+
+  // Data.json loaded successfully, so keep the status green even if a
+  // dashboard page has a separate rendering problem.
+  status.textContent=`● LIVE DATA  •  Last Manhour: ${latestText}`;
+  status.style.color="#087f5b";
+  status.title=`Workbook: ${DATA.workbook||"GitHub Excel"}\nGenerated: ${json.generated_at||""}`;
+
+  // Render every page after all datasets are installed.
+  ["manhour","manday","lagging","leading","observation","training"].forEach(p=>{
+    try{
+      renderPage(p);
+    }catch(err){
+      console.error("Render failed for "+p,err);
+    }
+  });
+
+  // Keep the approved default page. Do not change the live-data status if
+  // navigation/rendering has a separate issue.
+  try{
+    go("manhour");
+  }catch(err){
+    console.error("Unable to open Manhour page",err);
   }
 }
 
