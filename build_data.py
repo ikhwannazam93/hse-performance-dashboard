@@ -53,6 +53,32 @@ def excel_date(v):
             return f"{y}-{month:02d}-{day:02d}"
     return s[:10]
 
+def week_label(d):
+    """Match the workbook WEEK formula: weeks start 11/04/2026 (W01)."""
+    if not d:
+        return ""
+    try:
+        base=date(2026,4,11)
+        cur=date.fromisoformat(str(d)[:10])
+        if cur < base:
+            return "0"
+        w=((cur-base).days//7)+1
+        start=base.fromordinal(base.toordinal()+(w-1)*7)
+        end=start.fromordinal(start.toordinal()+6)
+        return f"W{w:02d} ({start.day}/{start.month} - {end.day}/{end.month})"
+    except Exception:
+        return ""
+
+def hazard_label(raw, bsc_type):
+    """Match the workbook Hazard Type formula."""
+    raw=str(raw or "").strip()
+    bsc_type=str(bsc_type or "").strip()
+    if raw.upper()=="NA" or not raw:
+        return bsc_type
+    if raw.lower()=="others":
+        return f"Others - {bsc_type}" if bsc_type else "Others"
+    return raw
+
 def num(v):
     if isinstance(v,(int,float)) and not isinstance(v,bool):
         return float(v)
@@ -124,7 +150,7 @@ for ws in wb.worksheets:
             continue
         rows.append({
             "date":d,
-            "week":str(val(r,"WEEK") or ""),
+            "week":str(val(r,"WEEK") or "") or week_label(d),
             "company":str(val(r,"COMPANY") or ""),
             "category":str(val(r,"CATEGORY") or ""),
             "manday":num(val(r,"MANDAY")),
@@ -142,9 +168,9 @@ for i,r in enumerate(bsc_raw,1):
         "bscNo":str(val(r,["BSC NO","BSC NO."]) or ""),
         "type":str(val(r,["BSC TYPE","TYPE"]) or ""),
         "hazardRaw":str(val(r,"HAZARD TYPE RAW") or ""),
-        "hazard":str(val(r,"HAZARD TYPE") or ""),
+        "hazard":hazard_label(val(r,"HAZARD TYPE RAW"), val(r,["BSC TYPE","TYPE"])),
         "dateReported":excel_date(val(r,"DATE REPORTED")),
-        "week":str(val(r,"WEEK") or ""),
+        "week":str(val(r,"WEEK") or "") or week_label(excel_date(val(r,"DATE REPORTED"))),
         "dateObserved":excel_date(val(r,"DATE OBSERVED")),
         "observer":str(val(r,["OBSERVED BY","OBSERVER"]) or ""),
         "company":str(val(r,"COMPANY") or ""),
@@ -161,7 +187,7 @@ training=[]
 for r in tr_raw:
     d=excel_date(val(r,"DATE"))
     if d:
-        o={"date":d,"week":str(val(r,"WEEK") or "")}
+        o={"date":d,"week":str(val(r,"WEEK") or "") or week_label(d)}
         for t in tr_topics: o[t]=num(val(r,t))
         training.append(o)
 
@@ -172,7 +198,7 @@ leading=[]
 for r in lead_raw:
     d=excel_date(val(r,"DATE"))
     if d:
-        o={"date":d,"week":str(val(r,"WEEK") or "")}
+        o={"date":d,"week":str(val(r,"WEEK") or "") or week_label(d)}
         for t in lead_topics: o[t]=num(val(r,t))
         leading.append(o)
 
@@ -205,7 +231,7 @@ lagging=[]
 for r in lag_raw:
     d=excel_date(val(r,"DATE"))
     if d:
-        o={"date":d,"week":str(val(r,"WEEK") or "")}
+        o={"date":d,"week":str(val(r,"WEEK") or "") or week_label(d)}
         for t in lag_topics: o[t]=num(val(r,t))
         lagging.append(o)
 
