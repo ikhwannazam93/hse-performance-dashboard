@@ -431,6 +431,7 @@ button:hover{
 
 
 .wp-edit-btn{border:1px solid #c9dbe8;background:#fff;color:#0067a5;border-radius:7px;padding:6px 10px;font-size:11px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px}.wp-edit-btn:hover{background:#eef8fc}.wp-edit-btn svg{width:13px;height:13px;display:block}
+.wp-row-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:126px}.wp-delete-btn{border:1px solid #f1c8c7;background:#fff;color:#b42318;border-radius:7px;padding:6px 10px;font-size:11px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px}.wp-delete-btn:hover{background:#fff1f0}.wp-delete-btn:disabled{opacity:.55;cursor:wait}.wp-delete-btn svg{width:13px;height:13px;display:block}
 </style>
 
 <style>
@@ -1022,10 +1023,17 @@ select:focus,input:focus{outline:none !important;border-color:#00a4d6 !important
 .wp-chart-card h3,.wp-table-card h3{margin:0 0 4px;color:#123b72;font-size:15px}
 .wp-card-sub{font-size:10px;color:#8093a1;margin-bottom:12px}
 .wp-month-chart{min-height:270px}
-.wp-table-scroll{overflow:auto;border:1px solid #e2ebf0;border-radius:12px}
-.wp-table{width:100%;border-collapse:collapse;min-width:900px;font-size:11px}
-.wp-table th{background:#f3f8fb;color:#526b7a;padding:10px 9px;text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:.35px;position:sticky;top:0;z-index:2}
-.wp-table td{padding:10px 9px;border-top:1px solid #edf2f5;color:#314e60;vertical-align:top}
+.wp-table-scroll{overflow:auto;width:100%;max-width:100%;border:1px solid #e2ebf0;border-radius:12px}
+.wp-table{width:100%;min-width:0;border-collapse:collapse;table-layout:auto;font-size:11px}
+.wp-table th{background:#f3f8fb;color:#526b7a;padding:10px 9px;text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:.35px;position:sticky;top:0;z-index:2;white-space:normal;overflow-wrap:anywhere}
+.wp-table td{padding:10px 9px;border-top:1px solid #edf2f5;color:#314e60;vertical-align:top;overflow-wrap:anywhere}
+.wp-table td:last-child,.wp-table th:last-child{white-space:nowrap}
+.wp-photo-picker{display:grid;gap:7px}
+.wp-photo-picker-actions{display:flex;gap:7px;flex-wrap:wrap}
+.wp-photo-picker-btn{border:1px solid #cbdce8;background:#fff;color:#0d467c;border-radius:8px;padding:8px 10px;font-size:10px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.wp-photo-picker-btn:active{background:#eef7fb}
+.wp-photo-picker-btn.camera{border-color:#0b72d1;background:#eef7ff;color:#075a9d}
+.wp-photo-selected{font-size:10px;color:#31704d;overflow-wrap:anywhere}
 .wp-status{display:inline-flex;padding:4px 8px;border-radius:999px;font-size:9px;font-weight:800;background:#fff5dc;color:#876619}.wp-status.pending{background:#fff5dc;color:#876619}.wp-status.acknowledged{background:#e9f8ef;color:#19753a}
 .wp-form-page{display:none}
 .wp-form-page.open{display:block}
@@ -1050,6 +1058,10 @@ select:focus,input:focus{outline:none !important;border-color:#00a4d6 !important
 .wp-inspection-table th{background:#f3f8fb;color:#526b7a;padding:10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.4px;position:sticky;top:0;z-index:2}
 .wp-inspection-table td{padding:9px 10px;border-top:1px solid #edf2f5;vertical-align:top}
 .wp-inspection-table .item-no{width:55px;text-align:center;font-weight:800;color:#6d8290}
+.wp-checklist-en{display:block;color:#18384a;line-height:1.35}
+.wp-checklist-ms{display:block;margin-top:4px;font-style:italic;color:#647b8a;font-size:11px;line-height:1.35}
+.wp-pdf-checklist-en{display:block;line-height:1.25}
+.wp-pdf-checklist-ms{display:block;margin-top:1mm;font-size:6.45pt;line-height:1.2;color:#536d7c;font-style:italic}
 .wp-response-group{display:flex;gap:6px;flex-wrap:wrap}
 .wp-response-btn{border:1px solid #d5e1e8;background:#fff;color:#526b7a;border-radius:8px;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer}
 .wp-response-btn.selected-compliant{background:#e8f7ef;border-color:#91d6b1;color:#087f5b}
@@ -1087,6 +1099,7 @@ select:focus,input:focus{outline:none !important;border-color:#00a4d6 !important
 .wp-view-mode .wp-response-btn:not(.selected-compliant):not(.selected-noncompliant):not(.selected-na){opacity:.45}
 .wp-view-mode .wp-add-finding,.wp-view-mode .wp-remove-finding{display:none}
 .wp-view-mode input[type="file"]{display:none}
+.wp-view-mode .wp-photo-picker-actions{display:none}
 .wp-view-mode .wp-submit-btn,.wp-view-mode .wp-reset-btn{display:none}
 .wp-existing-photo{display:inline-flex;align-items:center;gap:5px;margin-top:6px}
 .wp-existing-photo a{color:#0067a5;font-weight:800;text-decoration:none}
@@ -1102,18 +1115,26 @@ select:focus,input:focus{outline:none !important;border-color:#00a4d6 !important
 .wp-pdf-head p{margin:4px 0 0;color:#647d8c;font-size:9px}
 .wp-pdf-response-value{display:inline-block;padding:4px 7px;border-radius:5px;background:#eef6fb;color:#0d467c;font-size:8px;font-weight:800}
 .wp-pdf-export .wp-photo-note{font-size:8px;color:#687e8c}
-@page{size:A4 portrait;margin:8mm}
+@page{size:A4 portrait;margin:0}
+
+
+/* Finding photo previews */
+.wp-photo-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;min-width:0}
+.wp-photo-preview:empty{display:none}
+.wp-photo-preview img,.wp-existing-photo-img{display:block;max-width:min(100%,340px);max-height:220px;width:auto;height:auto;object-fit:contain;border:1px solid #cad9e3;border-radius:8px;background:#fff;padding:3px}
+.wp-existing-photo{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin-top:8px}
+.wp-existing-photo .wp-photo-actions-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 
 /* A4 Workplace Inspection PDF report - approved portrait design */
-.wp-pdf-report{width:190mm;box-sizing:border-box;background:#fff;color:#182b39;font-family:Arial,Helvetica,sans-serif;font-size:8.6pt;line-height:1.28}
-.wp-pdf-page{width:190mm;height:280mm;box-sizing:border-box;position:relative;background:#fff;padding:0 0 7mm;break-after:page;page-break-after:always;overflow:hidden}
+.wp-pdf-report{width:178mm;max-width:178mm;box-sizing:border-box;background:#fff;color:#182b39;font-family:Arial,Helvetica,sans-serif;font-size:8.6pt;line-height:1.28;margin:0 auto}
+.wp-pdf-page{width:178mm;height:276mm;min-height:276mm;box-sizing:border-box;position:relative;background:#fff;padding:0 0 14mm;break-after:page;page-break-after:always;overflow:hidden;margin:0 auto}
 .wp-pdf-page:last-child{break-after:auto;page-break-after:auto}
-.wp-pdf-header{display:grid;grid-template-columns:56mm 1fr 31mm;gap:3mm;align-items:center;border-bottom:2.2px solid #0a66a9;padding-bottom:2.5mm;margin-bottom:3mm}
-.wp-pdf-logo{width:54mm;height:21mm;object-fit:contain;object-position:left center;background:#fff}
+.wp-pdf-header{display:grid;grid-template-columns:47mm minmax(0,1fr) 34mm;gap:2mm;align-items:center;border-bottom:2.2px solid #0a66a9;padding-bottom:2.5mm;margin-bottom:3mm;min-width:0}
+.wp-pdf-logo{width:45mm;height:19mm;max-width:100%;object-fit:contain;object-position:left center;background:#fff}
 .wp-pdf-project{font-size:6.9pt;font-weight:800;line-height:1.18;text-align:center;color:#152b3a;text-transform:uppercase}
-.wp-pdf-docbox{border:1px solid #b8cfe0;text-align:center;align-self:stretch;display:flex;flex-direction:column;justify-content:center;background:#f4f8fb}
+.wp-pdf-docbox{min-width:0;max-width:34mm;overflow:visible;border:1px solid #b8cfe0;text-align:center;align-self:stretch;display:flex;flex-direction:column;justify-content:center;background:#f4f8fb;padding:1mm;box-sizing:border-box}
 .wp-pdf-docbox .k{font-size:6.6pt;font-weight:800;color:#5d7384;text-transform:uppercase}
-.wp-pdf-docbox .v{font-size:9pt;font-weight:900;color:#092d47;margin-top:1mm}
+.wp-pdf-docbox .v{font-size:6.2pt;font-weight:900;color:#092d47;margin-top:1mm;line-height:1.12;overflow-wrap:anywhere;word-break:break-word;white-space:normal;max-width:100%}
 .wp-pdf-title-row{display:grid;grid-template-columns:1fr 31mm;gap:4mm;align-items:stretch;margin-bottom:3.2mm}
 .wp-pdf-title{background:#075a9e;color:#fff;font-size:15pt;font-weight:900;letter-spacing:.1px;padding:2.1mm 3mm;text-align:center}
 .wp-pdf-no{border:1px solid #abc7d9;background:#eff6fb;display:flex;align-items:center;justify-content:center;flex-direction:column}
@@ -1129,18 +1150,19 @@ select:focus,input:focus{outline:none !important;border-color:#00a4d6 !important
 .wp-pdf-donut{width:23mm;height:23mm;border-radius:50%;background:conic-gradient(#21a854 var(--pct),#e3e8ec var(--pct));position:relative;flex:none}.wp-pdf-donut::after{content:"";position:absolute;inset:4.2mm;background:#fff;border-radius:50%}.wp-pdf-donut span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11pt;font-weight:900;color:#154765;z-index:1}
 .wp-pdf-legend{display:grid;gap:1.4mm;font-size:7.6pt}.wp-pdf-legend div{display:flex;align-items:center;gap:1.5mm}.wp-pdf-swatch{width:3.4mm;height:3.4mm;border-radius:1mm;display:inline-block}.sw-c{background:#21a854}.sw-nc{background:#e23b43}.sw-na{background:#8f9aa3}
 .wp-pdf-findings-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:2mm}.wp-pdf-mini{border:1px solid #b8cfe0;padding:1.6mm 2mm;text-align:center}.wp-pdf-mini .n{font-size:13pt;font-weight:900;color:#16435c}.wp-pdf-mini .l{font-size:7pt;font-weight:800;color:#5c7180;text-transform:uppercase;margin-top:.7mm}.wp-pdf-mini.open .n{color:#c23a35}.wp-pdf-mini.closed .n{color:#218a45}
-.wp-pdf-checklist{width:100%;border-collapse:collapse;table-layout:fixed}.wp-pdf-checklist th{border:1px solid #9eb9cb;background:#dcebf6;padding:1.25mm 1mm;font-size:7.1pt}.wp-pdf-checklist td{border:1px solid #b8cfe0;padding:1.15mm 1.1mm;vertical-align:middle;font-size:7.05pt}.wp-pdf-checklist .n{width:7%;text-align:center}.wp-pdf-checklist .item{width:51%}.wp-pdf-checklist .result{width:17%;text-align:center}.wp-pdf-checklist .remarks{width:25%}
-.wp-pdf-result-grid{display:flex;align-items:center;justify-content:center;gap:3.2mm;white-space:nowrap}.wp-pdf-rbox{display:inline-flex;align-items:center;gap:.9mm;border:0;background:transparent!important;padding:0;text-align:center;font-size:6.6pt;font-weight:900}.wp-pdf-rbox.y{color:#16863c}.wp-pdf-rbox.n{color:#c7272f}.wp-pdf-rbox.a{color:#66737d}.wp-pdf-check{display:inline-flex;width:3.5mm;height:3.5mm;justify-content:center;align-items:center;border:1px solid #aebdca;background:#fff;font-size:6.5pt;line-height:1;font-weight:900;box-sizing:border-box}.wp-pdf-check.on-c{background:#20a54d;color:#fff;border-color:#20a54d}.wp-pdf-check.on-n{background:#e33d45;color:#fff;border-color:#e33d45}.wp-pdf-check.on-a{background:#8d979e;color:#fff;border-color:#8d979e}
+.wp-pdf-checklist{width:100%;border-collapse:collapse;table-layout:fixed}.wp-pdf-checklist th{border:1px solid #9eb9cb;background:#dcebf6;padding:1.25mm 1mm;font-size:7.1pt}.wp-pdf-checklist td{border:1px solid #b8cfe0;padding:1.15mm 1.1mm;vertical-align:middle;font-size:7.05pt}.wp-pdf-checklist .n{width:5%;text-align:center}.wp-pdf-checklist .item{width:44%}.wp-pdf-checklist .result{width:28%;text-align:center;white-space:nowrap;padding-left:.5mm;padding-right:.5mm}.wp-pdf-checklist .remarks{width:23%}
+.wp-pdf-result-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;justify-items:center;gap:.7mm;white-space:nowrap;min-width:0}.wp-pdf-rbox{display:inline-flex;min-width:0;align-items:center;justify-content:center;gap:.55mm;border:0;background:transparent!important;padding:0;text-align:center;font-size:6pt;line-height:1;font-weight:900}.wp-pdf-rbox.y{color:#16863c}.wp-pdf-rbox.n{color:#c7272f}.wp-pdf-rbox.a{color:#66737d}.wp-pdf-check{display:inline-flex;flex:0 0 2.6mm;width:2.6mm;height:2.6mm;justify-content:center;align-items:center;border:1px solid #aebdca;background:#fff;font-size:5.5pt;line-height:1;font-weight:900;box-sizing:border-box}.wp-pdf-check.on-c{background:#20a54d;color:#fff;border-color:#20a54d}.wp-pdf-check.on-n{background:#e33d45;color:#fff;border-color:#e33d45}.wp-pdf-check.on-a{background:#8d979e;color:#fff;border-color:#8d979e}
 .wp-pdf-finding{border:1px solid #aec7d8;margin-bottom:2.5mm;break-inside:avoid;page-break-inside:avoid}.wp-pdf-finding-head{display:flex;justify-content:space-between;gap:3mm;align-items:center;background:#eaf3fa;border-bottom:1px solid #aec7d8;padding:1.4mm 1.7mm;font-weight:900}.wp-pdf-status{padding:1mm 2.4mm;border:1px solid #d5dde3;background:#fff;font-size:7pt;font-weight:900}.wp-pdf-status.open{color:#c3262f;background:#fff0f0;border-color:#efb7ba}.wp-pdf-status.closed{color:#19753a;background:#eaf8ef;border-color:#b8dfc6}.wp-pdf-status.pending{color:#856300;background:#fff8df;border-color:#e3d29a}
-.wp-pdf-finding-body{padding:1.5mm}.wp-pdf-finding-table{width:100%;border-collapse:collapse;table-layout:fixed;margin-bottom:2mm}.wp-pdf-finding-table td{border:1px solid #c2d2dc;padding:1.05mm 1.25mm;vertical-align:top}.wp-pdf-finding-table .k{width:19%;background:#edf4f8;font-weight:800}.wp-pdf-finding-table .v{width:31%}.wp-pdf-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:2mm}.wp-pdf-photo-card{border:1px solid #b7cad7;background:#fff}.wp-pdf-photo-card .cap{background:#153d56;color:#fff;font-size:6.8pt;font-weight:800;padding:1.1mm 1.4mm}.wp-pdf-photo-card .photo{width:100%;height:43mm;object-fit:cover;display:block;background:#eef3f7}.wp-pdf-photo-placeholder{height:43mm;display:flex;align-items:center;justify-content:center;color:#758694;font-size:7pt;background:#f4f6f8}
+.wp-pdf-finding-body{padding:1.5mm}.wp-pdf-finding-table{width:100%;border-collapse:collapse;table-layout:fixed;margin-bottom:2mm}.wp-pdf-finding-table td{border:1px solid #c2d2dc;padding:1.05mm 1.25mm;vertical-align:top}.wp-pdf-finding-table .k{width:20%;background:#edf4f8;font-weight:800}.wp-pdf-finding-table .v{width:30%;overflow-wrap:anywhere}.wp-pdf-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:2mm}.wp-pdf-photo-card{border:1px solid #b7cad7;background:#fff}.wp-pdf-photo-card .cap{background:#153d56;color:#fff;font-size:6.8pt;font-weight:800;padding:1.1mm 1.4mm}.wp-pdf-photo-card .photo{width:100%;height:43mm;object-fit:cover;display:block;background:#eef3f7}.wp-pdf-photo-placeholder{height:43mm;display:flex;align-items:center;justify-content:center;color:#758694;font-size:7pt;background:#f4f6f8}
 .wp-pdf-remarks{border:1px solid #b8cfe0;min-height:18mm;padding:2mm;font-size:7.8pt;white-space:pre-wrap}
-.wp-pdf-sign-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #aec7d8}.wp-pdf-sign{min-height:34mm;border-right:1px solid #aec7d8}.wp-pdf-sign:last-child{border-right:none}.wp-pdf-sign .head{background:#dcebf6;border-bottom:1px solid #aec7d8;text-align:center;font-weight:900;padding:1.5mm}.wp-pdf-sign .body{padding:5.5mm 3.5mm 2.5mm}.wp-pdf-sign-line{border-top:1px solid #73818b;margin-top:7mm;padding-top:1.2mm;font-size:7pt}.wp-pdf-footer{position:absolute;left:0;right:0;bottom:0}.wp-pdf-footer-line{height:1.2mm;background:#0b67aa}.wp-pdf-footer-text{display:flex;justify-content:space-between;font-size:6.4pt;color:#5c6e79;padding-top:1mm}
+.wp-pdf-sign-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid #aec7d8}.wp-pdf-sign{min-height:34mm;min-width:0;border-right:1px solid #aec7d8}.wp-pdf-sign:last-child{border-right:none}.wp-pdf-sign .head{background:#dcebf6;border-bottom:1px solid #aec7d8;text-align:center;font-weight:900;padding:1.5mm}.wp-pdf-sign .body{padding:2mm 3mm 2.5mm}.wp-pdf-signature-area{height:12mm;display:flex;align-items:center;justify-content:center;overflow:hidden}.wp-pdf-signature-image{display:block;max-width:46mm;max-height:11.5mm;width:auto;height:auto;object-fit:contain}.wp-pdf-signature-empty{width:100%;height:100%}.wp-pdf-sign-line{border-top:1px solid #73818b;margin-top:1mm;padding-top:1.2mm;font-size:7pt;overflow-wrap:anywhere}.wp-pdf-sign-meta{margin-top:1.2mm;font-size:7pt}/* PDF footer is drawn directly onto each jsPDF page to prevent it splitting across pages. */
+.wp-pdf-footer{display:none!important}
 .wp-pdf-note{font-size:6.6pt;color:#657784;margin-top:1mm}
 .wp-pdf-avoid{break-inside:avoid;page-break-inside:avoid}
 
-@media print{body{background:#fff!important}.wp-pdf-export{width:190mm!important;padding:0!important}.no-print{display:none!important}}
+@media print{body{background:#fff!important}.wp-pdf-report{width:178mm!important;max-width:178mm!important;margin:0 auto!important}.wp-pdf-page{width:178mm!important;height:276mm!important;min-height:276mm!important;margin:0 auto!important}.wp-pdf-footer{display:none!important}.no-print{display:none!important}}
 @media(max-width:1000px){.wp-inspection-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wp-finding-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:650px){.wp-inspection-grid,.wp-finding-grid{grid-template-columns:1fr}.wp-response-remarks{width:100%;min-width:0}.wp-inspection-card{padding:15px}.wp-inspection-table{min-width:700px}.wp-view-actions{gap:6px}.wp-icon-action{width:42px;min-width:42px;padding:9px 10px}.wp-icon-action span{display:none}}
+@media(max-width:650px){.wp-inspection-grid,.wp-finding-grid{grid-template-columns:1fr}.wp-response-remarks{width:100%;min-width:0}.wp-inspection-card{padding:15px}.wp-inspection-table{min-width:700px}.wp-view-actions{gap:6px}.wp-icon-action{width:42px;min-width:42px;padding:9px 10px}.wp-icon-action span{display:none}.wp-table{min-width:0;width:100%;font-size:10px}.wp-table th,.wp-table td{padding:7px 5px}.wp-table th{font-size:8px;letter-spacing:0}.wp-table-scroll{max-width:100%;-webkit-overflow-scrolling:touch}.wp-photo-picker-actions{gap:6px}.wp-photo-picker-btn{flex:1;justify-content:center;min-height:38px}}
 </style>
 
 <style id="wp-signature-loading-styles">
@@ -1266,7 +1288,7 @@ select:focus,input:focus{outline:none !important;border-color:#00a4d6 !important
       if (!result.success || !result.user) throw new Error(result.error || result.message || "Invalid username or password.");
       const user = result.user;
       window.currentUserProfile = user;
-      sessionStorage.setItem("hseDashboardUser", JSON.stringify({username:user.username,name:user.name,role:user.role}));
+      sessionStorage.setItem("hseDashboardUser", JSON.stringify({username:user.username,name:user.name,role:user.role,token:user.token||""}));
       const gate = $("loginGate");
       if (gate) gate.classList.add("hidden");
       const logged = $("loggedUser");
@@ -1588,7 +1610,7 @@ select:focus,input:focus{outline:none !important;border-color:#00a4d6 !important
       <div class="wp-table-card">
         <h3>Workplace Inspection Submission Log</h3>
         <div class="wp-card-sub">Latest inspection submissions</div>
-        <div id="wpInspectionTable" class="wp-table-scroll"></div>
+        <div id="wpInspectionTable" class="wp-table-scroll table-wrap"></div>
       </div>
       <div class="wp-dashboard-head" style="justify-content:flex-end">
         <button type="button" class="wp-new-inspection-btn" id="wpOpenNewInspection">＋ NEW WORKPLACE INSPECTION</button>
@@ -1724,6 +1746,8 @@ let wpFindingsCount = 0;
 let wpEditInspectionNo = "";
 let wpInspectionMode = "new"; // new | view | edit
 let wpCurrentInspectionStatus = "";
+let wpCanEditCurrentInspection = false;
+let wpCurrentSignatures = {inspectorUrl:"",inspectorDataUrl:"",inspectorSignedAt:"",reviewerUrl:"",reviewerDataUrl:"",acknowledgedBy:"",acknowledgedAt:""};
 
 let wpSignatureContext = null;
 let wpSignatureMode = "draw";
@@ -2728,8 +2752,9 @@ function renderWorkplaceInspectionDashboard(){
 
   const sorted=[...rows].sort((a,b)=>String(b.date||"").localeCompare(String(a.date||""))||String(b.submittedAt||"").localeCompare(String(a.submittedAt||""))).slice(0,100);
   const table=document.getElementById("wpInspectionTable");
-  if(table) table.innerHTML=sorted.length?`<table class="wp-table"><thead><tr><th>Date</th><th>Inspection No.</th><th>Inspection Title</th><th>Location</th><th>Company</th><th>Inspector</th><th>Reviewer</th><th>Status</th><th>Action</th></tr></thead><tbody>${sorted.map(r=>`<tr><td>${esc(r.date)}</td><td>${esc(r.inspectionNo)}</td><td>${esc(r.inspectionTitle)}</td><td>${esc(r.location)}</td><td>${esc(r.company)}</td><td>${esc(r.inspector)}</td><td>${esc(r.reviewer)}</td><td><span class="wp-status ${String(r.status||"Pending Review").toLowerCase()==="acknowledged"?"acknowledged":"pending"}">${esc(r.status||"Pending Review")}</span></td><td><button type="button" class="wp-edit-btn" data-inspection-no="${wpEsc(r.inspectionNo)}" title="View submitted inspection" aria-label="View submitted inspection"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.5"/></svg><span>View</span></button></td></tr>`).join("")}</tbody></table>`:'<div class="empty">No workplace inspection submissions for current filters</div>';
+  if(table) table.innerHTML=sorted.length?`<table class="wp-table"><thead><tr><th>Date</th><th>Inspection No.</th><th>Inspection Title</th><th>Location</th><th>Company</th><th>Inspector</th><th>Reviewer</th><th>Status</th><th>Action</th></tr></thead><tbody>${sorted.map(r=>{const canManage=currentUserCanManageInspectionRecord(r);return `<tr><td>${esc(r.date)}</td><td>${esc(r.inspectionNo)}</td><td>${esc(r.inspectionTitle)}</td><td>${esc(r.location)}</td><td>${esc(r.company)}</td><td>${esc(r.inspector)}</td><td>${esc(r.reviewer)}</td><td><span class="wp-status ${String(r.status||"Pending Review").toLowerCase()==="acknowledged"?"acknowledged":"pending"}">${esc(r.status||"Pending Review")}</span></td><td><div class="wp-row-actions"><button type="button" class="wp-edit-btn" data-inspection-no="${wpEsc(r.inspectionNo)}" title="View submitted inspection" aria-label="View submitted inspection"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.5"/></svg><span>View</span></button>${canManage?`<button type="button" class="wp-delete-btn" data-inspection-no="${wpEsc(r.inspectionNo)}" title="Delete submission" aria-label="Delete submission"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="m19 6-1 14H6L5 6"/><path d="M10 11v5M14 11v5"/></svg><span>Delete</span></button>`:""}</div></td></tr>`}).join("")}</tbody></table>`:'<div class="empty">No workplace inspection submissions for current filters</div>';
   table?.querySelectorAll(".wp-edit-btn").forEach(btn=>btn.addEventListener("click",()=>viewWPInspection(btn.dataset.inspectionNo)));
+  table?.querySelectorAll(".wp-delete-btn").forEach(btn=>btn.addEventListener("click",()=>deleteWPInspection(btn.dataset.inspectionNo,btn)));
 }
 
 function renderTraining(){
@@ -3016,10 +3041,25 @@ function wpNowTime(){
   return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
 }
 
+function getCurrentPortalUser(){
+  try{return window.currentUserProfile||JSON.parse(sessionStorage.getItem("hseDashboardUser")||"{}");}
+  catch(_){return {};}
+}
 function isCurrentUserAdmin(){
-  const u=window.currentUserProfile||JSON.parse(sessionStorage.getItem("hseDashboardUser")||"{}");
+  const u=getCurrentPortalUser();
   const r=String(u.role||"").trim().toLowerCase();
   return ["admin","administrator","hse admin","hse administrator"].includes(r);
+}
+function currentUserCanManageInspectionRecord(record){
+  if(isCurrentUserAdmin())return true;
+  const u=getCurrentPortalUser();
+  const username=String(u.username||"").trim().toLowerCase();
+  const name=String(u.name||"").trim().toLowerCase();
+  const owner=String(record?.submittedBy||record?.submittedByUsername||"").trim().toLowerCase();
+  const inspector=String(record?.inspector||"").trim().toLowerCase();
+  if(owner)return owner===username || (!!name&&owner===name);
+  // Backward compatibility for older submissions without Submitted By set.
+  return !!(name&&inspector===name);
 }
 function setWPReviewerFromAdmin(){
   const reviewer=document.getElementById("wpInspectionReviewer");
@@ -3127,9 +3167,14 @@ async function wpGet(params={}){
 }
 async function wpPost(payload){
   const label=String(payload?.action||"").toLowerCase();
-  const msg=label==="submitinspection"?"Submitting workplace inspection…":label==="updateinspection"?"Updating workplace inspection…":label==="acknowledgeinspection"?"Acknowledging inspection…":label==="login"?"Signing in…":"Saving data…";
+  const msg=label==="submitinspection"?"Submitting workplace inspection…":label==="updateinspection"?"Updating workplace inspection…":label==="deleteinspection"?"Deleting workplace inspection…":label==="acknowledgeinspection"?"Acknowledging inspection…":label==="login"?"Signing in…":"Saving data…";
   try{
-    const r=await fetch(WP_API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+    let outgoing=payload;
+    if(label!=="login"){
+      const user=getCurrentPortalUser();
+      outgoing={...payload,authToken:payload.authToken||user.token||user.authToken||""};
+    }
+    const r=await fetch(WP_API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(outgoing)});
     if(!r.ok)throw new Error("API returned HTTP "+r.status);
     const data=await r.json();
     if(data.success===false)throw new Error(data.message||data.error||"API request failed");
@@ -3171,7 +3216,8 @@ async function loadWPChecklist(inspectionId){
       wpChecklist.map((r,i)=>{
         const no=r.itemNo||i+1;
         const item=r.checklistItem||"";
-        return `<tr data-item-no="${wpEsc(no)}"><td class="item-no">${wpEsc(no)}</td><td>${wpEsc(item)}</td><td><div class="wp-response-group">`+
+        const itemMalay=r.checklistItemMalay||"Sila kemas kini terjemahan Bahasa Melayu dalam Google Sheets.";
+        return `<tr data-item-no="${wpEsc(no)}"><td class="item-no">${wpEsc(no)}</td><td><div class="wp-checklist-en">${wpEsc(item)}</div><div class="wp-checklist-ms" lang="ms">${wpEsc(itemMalay)}</div></td><td><div class="wp-response-group">`+
           `<button type="button" class="wp-response-btn" data-response="Comply">Comply</button>`+
           `<button type="button" class="wp-response-btn" data-response="Non-Comply">Non-Comply</button>`+
           `<button type="button" class="wp-response-btn" data-response="N/A">N/A</button>`+
@@ -3199,11 +3245,11 @@ function addWPFinding(){
   div.innerHTML=`<div class="wp-finding-head"><div class="wp-finding-title">Finding ${n}</div><button type="button" class="wp-reset-btn wp-remove-finding">Remove</button></div>
     <div class="wp-finding-grid">
       <div class="wp-inspection-field wide"><label>Finding / Observation</label><textarea class="wp-finding-observation" placeholder="Describe the finding"></textarea></div>
-      <div class="wp-inspection-field"><label>Photo</label><input class="wp-finding-photo" type="file" accept="image/*"><div class="wp-photo-note">Photo will be compressed and saved to Google Drive.</div></div>
+      <div class="wp-inspection-field"><label>Photo</label><div class="wp-photo-picker"><input class="wp-finding-photo" type="file" accept="image/*" style="display:none" aria-label="Choose finding photo"><input class="wp-finding-photo-camera" type="file" accept="image/*" capture="environment" style="display:none" aria-label="Take finding photo"><div class="wp-photo-picker-actions"><button type="button" class="wp-photo-picker-btn wp-photo-choose-btn" data-photo-kind="finding">Choose Photo</button><button type="button" class="wp-photo-picker-btn camera wp-photo-camera-btn" data-photo-kind="finding">Take Photo</button></div><div class="wp-photo-selected" aria-live="polite"></div><div class="wp-photo-preview" aria-live="polite"></div></div><div class="wp-photo-note">Choose a photo from your phone or take a new photo.</div></div>
       <div class="wp-inspection-field"><label>Responsible Person</label><input class="wp-finding-responsible" placeholder="Name"></div>
       <div class="wp-inspection-field"><label>Target Date</label><input class="wp-finding-target" type="date"></div>
       <div class="wp-inspection-field wide"><label>Corrective Action</label><textarea class="wp-finding-action" placeholder="Required corrective action"></textarea></div>
-      <div class="wp-inspection-field"><label>Closure Photo</label><input class="wp-finding-closure-photo" type="file" accept="image/*"><div class="wp-photo-note">Closure photo will be compressed and saved to Google Drive.</div></div>
+      <div class="wp-inspection-field"><label>Closure Photo</label><div class="wp-photo-picker"><input class="wp-finding-closure-photo" type="file" accept="image/*" style="display:none" aria-label="Choose closure photo"><input class="wp-finding-closure-photo-camera" type="file" accept="image/*" capture="environment" style="display:none" aria-label="Take closure photo"><div class="wp-photo-picker-actions"><button type="button" class="wp-photo-picker-btn wp-photo-choose-btn" data-photo-kind="closure">Choose Photo</button><button type="button" class="wp-photo-picker-btn camera wp-photo-camera-btn" data-photo-kind="closure">Take Photo</button></div><div class="wp-photo-selected" aria-live="polite"></div><div class="wp-photo-preview" aria-live="polite"></div></div><div class="wp-photo-note">Choose a photo from your phone or take a new photo.</div></div>
       <div class="wp-inspection-field"><label>Status</label><select class="wp-finding-status"><option>Open</option><option>Closed</option><option>Pending</option></select></div>
       <div class="wp-inspection-field"><label>Closure Date</label><input class="wp-finding-closure-date" type="date"></div>
       <div class="wp-inspection-field wide"><label>Remarks</label><textarea class="wp-finding-remarks" placeholder="Additional remarks"></textarea></div>
@@ -3228,13 +3274,14 @@ function collectWPResponses(){
     const selected=tr.querySelector(".wp-response-btn.selected-compliant,.wp-response-btn.selected-noncompliant,.wp-response-btn.selected-na");
     return {
       itemNo:tr.dataset.itemNo||i+1,
-      checklistItem:tr.children[1]?.textContent.trim()||"",
+      checklistItem:tr.querySelector(".wp-checklist-en")?.textContent.trim()||"",
+      checklistItemMalay:tr.querySelector(".wp-checklist-ms")?.textContent.trim()||"",
       response:selected?.dataset.response||"",
       remarks:tr.querySelector(".wp-response-remarks")?.value.trim()||""
     };
   });
 }
-function fileToCompressedBase64(file,maxSize=900,maxBytes=750000){
+function fileToCompressedBase64(file,maxSize=900,maxBytes=450000){
   return new Promise((resolve,reject)=>{
     if(!file){resolve(null);return;}
     const reader=new FileReader();
@@ -3243,26 +3290,39 @@ function fileToCompressedBase64(file,maxSize=900,maxBytes=750000){
       const img=new Image();
       img.onerror=()=>reject(new Error("Selected file is not a valid image."));
       img.onload=()=>{
-        let w=img.naturalWidth,h=img.naturalHeight;
-        const scale=Math.min(1,maxSize/Math.max(w,h));
-        w=Math.max(1,Math.round(w*scale));
-        h=Math.max(1,Math.round(h*scale));
+        const originalWidth=img.naturalWidth||img.width;
+        const originalHeight=img.naturalHeight||img.height;
+        const initialScale=Math.min(1,maxSize/Math.max(originalWidth,originalHeight));
+        let w=Math.max(1,Math.round(originalWidth*initialScale));
+        let h=Math.max(1,Math.round(originalHeight*initialScale));
         const canvas=document.createElement("canvas");
-        canvas.width=w;canvas.height=h;
         const ctx=canvas.getContext("2d");
-        ctx.drawImage(img,0,0,w,h);
-        let quality=.78;
-        let dataUrl=canvas.toDataURL("image/jpeg",quality);
-        while(dataUrl.length*0.75>maxBytes && quality>.45){
-          quality-=.06;
+        if(!ctx){reject(new Error("Unable to prepare this photo for upload."));return;}
+        let dataUrl="";
+        // Keep good visual quality first; resize gradually if the photo still exceeds the WhatsApp-style size target.
+        for(let attempt=0;attempt<7;attempt++){
+          canvas.width=w;canvas.height=h;
+          ctx.fillStyle="#ffffff";ctx.fillRect(0,0,w,h);
+          ctx.drawImage(img,0,0,w,h);
+          let quality=.74;
           dataUrl=canvas.toDataURL("image/jpeg",quality);
+          while(dataUrl.length*0.75>maxBytes && quality>.60){
+            quality=Math.max(.60,quality-.06);
+            dataUrl=canvas.toDataURL("image/jpeg",quality);
+          }
+          if(dataUrl.length*0.75<=maxBytes)break;
+          const longest=Math.max(w,h);
+          if(longest<=720)break;
+          const shrink=Math.max(720/longest,.88);
+          w=Math.max(1,Math.round(w*shrink));
+          h=Math.max(1,Math.round(h*shrink));
         }
         const base64=dataUrl.split(",")[1]||"";
         if(base64.length*0.75>maxBytes){
-          reject(new Error(file.name+" is too large after compression. Please select a smaller photo."));
+          reject(new Error(file.name+" could not be compressed to the upload limit. Please choose another photo."));
           return;
         }
-        resolve({name:(file.name||"photo").replace(/\.[^.]+$/i,"")+".jpg",mimeType:"image/jpeg",base64:base64});
+        resolve({name:(file.name||"photo").replace(/\.[^.]+$/i,"")+".jpg",mimeType:"image/jpeg",base64:base64,dataUrl:dataUrl,width:w,height:h,sizeBytes:Math.round(base64.length*.75)});
       };
       img.src=reader.result;
     };
@@ -3274,8 +3334,8 @@ async function collectWPFindings(){
   const out=[];
   for(let i=0;i<cards.length;i++){
     const card=cards[i];
-    const photo=card.querySelector(".wp-finding-photo")?.files?.[0]||null;
-    const closurePhoto=card.querySelector(".wp-finding-closure-photo")?.files?.[0]||null;
+    const photo=card.querySelector(".wp-finding-photo-camera")?.files?.[0]||card.querySelector(".wp-finding-photo")?.files?.[0]||null;
+    const closurePhoto=card.querySelector(".wp-finding-closure-photo-camera")?.files?.[0]||card.querySelector(".wp-finding-closure-photo")?.files?.[0]||null;
     const photoData=photo?await fileToCompressedBase64(photo):null;
     const closureData=closurePhoto?await fileToCompressedBase64(closurePhoto):null;
     out.push({
@@ -3368,7 +3428,7 @@ function setWPInspectionMode(mode){
   page.classList.toggle("wp-view-mode",mode==="view");
   if(title)title.textContent=mode==="view"?"View Workplace Inspection":mode==="edit"?"Edit Workplace Inspection":"New Workplace Inspection";
   if(actions)actions.style.display=(mode!=="new"&&!!wpEditInspectionNo)?"flex":"none";
-  if(editBtn)editBtn.style.display=mode==="view"?"inline-flex":"none";
+  if(editBtn)editBtn.style.display=(mode==="view"&&wpCanEditCurrentInspection)?"inline-flex":"none";
   if(saveBtn)saveBtn.style.display=mode==="view"?"inline-flex":"none";
   if(updateBtn)updateBtn.style.display=mode==="edit"?"inline-flex":"none";
   if(submitBtn)submitBtn.style.display=mode==="new"?"inline-block":"none";
@@ -3405,6 +3465,7 @@ function setWPInspectionMode(mode){
 function resetWPInspection(){
   wpInspectionMode="new";
   wpEditInspectionNo="";
+  wpCanEditCurrentInspection=false;
   const page=document.getElementById("page-inspection-form");
   if(page)page.classList.remove("wp-view-mode");
   const title=document.getElementById("wpInspectionFormTitle");
@@ -3447,6 +3508,85 @@ async function refreshInspectionDashboardData(){
   }catch(e){ console.warn("Inspection refresh failed",e); }
 }
 
+const wpDriveImageDataCache = window.wpDriveImageDataCache || (window.wpDriveImageDataCache = new Map());
+function wpDriveFileId(value){
+  const raw=String(value||'').trim();
+  const match=raw.match(/[?&]id=([a-zA-Z0-9_-]+)/)||raw.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if(match&&match[1])return match[1];
+  return /^[a-zA-Z0-9_-]{20,}$/.test(raw)?raw:"";
+}
+function wpDrivePreviewUrl(value){
+  const id=wpDriveFileId(value);
+  return id?`https://drive.google.com/uc?export=view&id=${encodeURIComponent(id)}`:String(value||"");
+}
+async function loadWPDriveImageData(value){
+  const id=wpDriveFileId(value);
+  if(!id)return "";
+  if(wpDriveImageDataCache.has(id))return await wpDriveImageDataCache.get(id);
+  const request=wpGet({action:"imagedata",fileId:id}).then(result=>String(result.dataUrl||"")).catch(err=>{
+    console.warn("Unable to load saved Drive image",id,err);
+    wpDriveImageDataCache.delete(id);
+    return "";
+  });
+  wpDriveImageDataCache.set(id,request);
+  return await request;
+}
+async function hydrateWPExistingPhoto(card,type,url,note){
+  const isClosure=type==="closure";
+  const dataKey=isClosure?"closurePhotoDataUrl":"photoDataUrl";
+  let data=String(card.dataset[dataKey]||"");
+  if(!data.startsWith("data:image/"))data=await loadWPDriveImageData(url);
+  if(data.startsWith("data:image/")){
+    card.dataset[dataKey]=data;
+    const img=note?.querySelector(".wp-existing-photo-img");
+    if(img){img.src=data;img.style.display="block";}
+  }
+  return data;
+}
+async function ensureWPInspectionImagesLoaded(){
+  const jobs=[];
+  document.querySelectorAll("#wpFindings .wp-finding").forEach(card=>{
+    const photoUrl=String(card.dataset.photoUrl||"");
+    const closureUrl=String(card.dataset.closurePhotoUrl||"");
+    const photoData=String(card.dataset.photoDataUrl||"");
+    const closureData=String(card.dataset.closurePhotoDataUrl||"");
+    const photoNote=card.querySelector('.wp-existing-photo[data-photo-kind="finding"]');
+    const closureNote=card.querySelector('.wp-existing-photo[data-photo-kind="closure"]');
+    if(photoUrl&&!photoData.startsWith("data:image/"))jobs.push(()=>hydrateWPExistingPhoto(card,"photo",photoUrl,photoNote));
+    if(closureUrl&&!closureData.startsWith("data:image/"))jobs.push(()=>hydrateWPExistingPhoto(card,"closure",closureUrl,closureNote));
+  });
+  if(wpCurrentSignatures.inspectorUrl&&!String(wpCurrentSignatures.inspectorDataUrl||"").startsWith("data:image/")){
+    jobs.push(async()=>{wpCurrentSignatures.inspectorDataUrl=await loadWPDriveImageData(wpCurrentSignatures.inspectorUrl);});
+  }
+  if(wpCurrentSignatures.reviewerUrl&&!String(wpCurrentSignatures.reviewerDataUrl||"").startsWith("data:image/")){
+    jobs.push(async()=>{wpCurrentSignatures.reviewerDataUrl=await loadWPDriveImageData(wpCurrentSignatures.reviewerUrl);});
+  }
+  // Limit concurrent Apps Script/Drive requests to avoid overwhelming the web app.
+  let next=0;
+  const worker=async()=>{while(next<jobs.length){const job=jobs[next++];try{await job();}catch(e){console.warn(e);}}};
+  await Promise.all(Array.from({length:Math.min(3,jobs.length)},worker));
+}
+
+function addWPExistingPhotoPreview(card,type,url,dataUrl){
+  if(!url && !dataUrl)return null;
+  const isClosure=type==="closure";
+  const input=card.querySelector(isClosure?".wp-finding-closure-photo":".wp-finding-photo");
+  const picker=input?.closest(".wp-photo-picker");
+  if(!picker)return null;
+  const note=document.createElement("div");note.className="wp-photo-note wp-existing-photo";note.dataset.photoKind=isClosure?"closure":"finding";
+  const img=document.createElement("img");img.className="wp-existing-photo-img";img.alt=isClosure?"Existing closure photo":"Existing finding photo";
+  const data=String(dataUrl||"");
+  img.src=data.startsWith("data:image/")?data:wpDrivePreviewUrl(url);
+  img.onerror=()=>{ if(!img.src.startsWith("data:image/")) img.style.display="none"; };
+  note.appendChild(img);
+  const actions=document.createElement("div");actions.className="wp-photo-actions-row";
+  const label=document.createElement("span");label.textContent=isClosure?"Existing closure photo":"Existing finding photo";actions.appendChild(label);
+  if(url){const link=document.createElement("a");link.href=url;link.target="_blank";link.rel="noopener";link.textContent="Open original";actions.appendChild(link);}
+  const del=document.createElement("button");del.type="button";del.className="wp-photo-delete-btn";del.dataset.photoType=type;del.textContent="Delete";del.addEventListener("click",()=>markWPPhotoForDelete(card,type,note));actions.appendChild(del);
+  note.appendChild(actions);picker.insertAdjacentElement("afterend",note);
+  return note;
+}
+
 async function loadWPInspectionRecord(inspectionNo,mode="view"){
   try{
     wpEditInspectionNo=String(inspectionNo||"");
@@ -3456,7 +3596,18 @@ async function loadWPInspectionRecord(inspectionNo,mode="view"){
     const result=await wpGet({action:"getInspection",inspectionNo:wpEditInspectionNo});
     if(!result.success)throw new Error(result.error||"Unable to load inspection");
     const s=result.submission||{};
+    const sig=result.signatures||{};
+    wpCurrentSignatures={
+      inspectorUrl:s.inspectorSignatureUrl||sig.inspectorUrl||"",
+      inspectorDataUrl:s.inspectorSignatureDataUrl||sig.inspectorDataUrl||"",
+      inspectorSignedAt:s.inspectorSignedAt||sig.inspectorSignedAt||s.submittedAt||"",
+      reviewerUrl:s.reviewerSignatureUrl||sig.reviewerUrl||"",
+      reviewerDataUrl:s.reviewerSignatureDataUrl||sig.reviewerDataUrl||"",
+      acknowledgedBy:s.acknowledgedBy||sig.acknowledgedBy||"",
+      acknowledgedAt:s.acknowledgedAt||sig.acknowledgedAt||""
+    };
     wpCurrentInspectionStatus=String(s.status||"Pending Review");
+    wpCanEditCurrentInspection=currentUserCanManageInspectionRecord(s);
     document.getElementById("wpInspectionTitle").value=s.inspectionId||"";
     await loadWPChecklist(s.inspectionId||"");
     document.getElementById("wpInspectionDate").value=s.date||"";
@@ -3478,24 +3629,18 @@ async function loadWPInspectionRecord(inspectionNo,mode="view"){
       addWPFinding();
       const card=[...document.querySelectorAll("#wpFindings .wp-finding")].at(-1);
       if(!card)continue;
-      card.dataset.photoUrl=f.photoUrl||"";card.dataset.closurePhotoUrl=f.closurePhotoUrl||"";card.dataset.removePhoto="0";card.dataset.removeClosurePhoto="0";
+      card.dataset.photoUrl=f.photoUrl||"";card.dataset.closurePhotoUrl=f.closurePhotoUrl||"";card.dataset.photoDataUrl=f.photoDataUrl||"";card.dataset.closurePhotoDataUrl=f.closurePhotoDataUrl||"";card.dataset.removePhoto="0";card.dataset.removeClosurePhoto="0";
       const fields={".wp-finding-observation":f.observation,".wp-finding-responsible":f.responsiblePerson,".wp-finding-target":f.targetDate,".wp-finding-action":f.correctiveAction,".wp-finding-closure-date":f.closureDate,".wp-finding-status":f.status||"Open",".wp-finding-remarks":f.remarks};
       Object.entries(fields).forEach(([sel,val])=>{const el=card.querySelector(sel);if(el)el.value=val||"";});
-      if(f.photoUrl){
-        const n=document.createElement("div");n.className="wp-photo-note wp-existing-photo";
-        n.innerHTML=`Existing photo: <a href="${esc(f.photoUrl)}" target="_blank" rel="noopener">View</a> <button type="button" class="wp-photo-delete-btn" data-photo-type="photo">Delete</button>`;
-        card.querySelector(".wp-finding-photo").insertAdjacentElement("afterend",n);
-        n.querySelector(".wp-photo-delete-btn").addEventListener("click",()=>markWPPhotoForDelete(card,"photo",n));
-      }
-      if(f.closurePhotoUrl){
-        const n=document.createElement("div");n.className="wp-photo-note wp-existing-photo";
-        n.innerHTML=`Existing closure photo: <a href="${esc(f.closurePhotoUrl)}" target="_blank" rel="noopener">View</a> <button type="button" class="wp-photo-delete-btn" data-photo-type="closure">Delete</button>`;
-        card.querySelector(".wp-finding-closure-photo").insertAdjacentElement("afterend",n);
-        n.querySelector(".wp-photo-delete-btn").addEventListener("click",()=>markWPPhotoForDelete(card,"closure",n));
-      }
+      addWPExistingPhotoPreview(card,"photo",f.photoUrl||"",f.photoDataUrl||"");
+      addWPExistingPhotoPreview(card,"closure",f.closurePhotoUrl||"",f.closurePhotoDataUrl||"");
     }
     setWPInspectionMode(mode);
     document.getElementById("wpApiStatus").textContent=mode==="view"?"Submitted inspection loaded.":"Editing "+wpEditInspectionNo+".";
+    // Load photo/signature image data separately, after the record is usable.
+    // This keeps the form responsive and prevents oversized getInspection responses.
+    window.wpInspectionImageLoadPromise=ensureWPInspectionImagesLoaded();
+    window.wpInspectionImageLoadPromise.catch(err=>console.warn("Inspection images are still loading",err));
   }catch(err){console.error(err);wpShowResult("Unable to load inspection: "+err.message,false);}
 }
 function markWPPhotoForDelete(card,type,note){
@@ -3503,28 +3648,83 @@ function markWPPhotoForDelete(card,type,note){
   if(!confirm(type==="photo"?"Delete the submitted finding photo?":"Delete the submitted closure photo?"))return;
   if(type==="photo"){
     card.dataset.removePhoto="1";
-    card.dataset.photoUrl="";
-    const input=card.querySelector(".wp-finding-photo");if(input)input.value="";
+    card.dataset.photoDataUrl="";
+    [".wp-finding-photo", ".wp-finding-photo-camera"].forEach(sel=>{const input=card.querySelector(sel);if(input)input.value="";});
+    const selected=card.querySelector(".wp-finding-photo")?.closest(".wp-photo-picker")?.querySelector(".wp-photo-selected");if(selected)selected.textContent="";const preview=card.querySelector(".wp-finding-photo")?.closest(".wp-photo-picker")?.querySelector(".wp-photo-preview");if(preview)preview.innerHTML="";
   }else{
     card.dataset.removeClosurePhoto="1";
-    card.dataset.closurePhotoUrl="";
-    const input=card.querySelector(".wp-finding-closure-photo");if(input)input.value="";
+    card.dataset.closurePhotoDataUrl="";
+    [".wp-finding-closure-photo", ".wp-finding-closure-photo-camera"].forEach(sel=>{const input=card.querySelector(sel);if(input)input.value="";});
+    const selected=card.querySelector(".wp-finding-closure-photo")?.closest(".wp-photo-picker")?.querySelector(".wp-photo-selected");if(selected)selected.textContent="";const preview=card.querySelector(".wp-finding-closure-photo")?.closest(".wp-photo-picker")?.querySelector(".wp-photo-preview");if(preview)preview.innerHTML="";
   }
   if(note)note.innerHTML=type==="photo"?"Photo marked for deletion.":"Closure photo marked for deletion.";
   if(note)note.style.color="#b42318";
 }
 function wireWPPhotoReplacement(card){
-  const input=card.querySelector(".wp-finding-photo");
-  const closure=card.querySelector(".wp-finding-closure-photo");
-  if(input)input.addEventListener("change",()=>{if(input.files?.length)card.dataset.removePhoto="0";});
-  if(closure)closure.addEventListener("change",()=>{if(closure.files?.length)card.dataset.removeClosurePhoto="0";});
+  const slots=[
+    {kind:"finding",gallery:".wp-finding-photo",camera:".wp-finding-photo-camera",remove:"removePhoto",dataKey:"photoDataUrl"},
+    {kind:"closure",gallery:".wp-finding-closure-photo",camera:".wp-finding-closure-photo-camera",remove:"removeClosurePhoto",dataKey:"closurePhotoDataUrl"}
+  ];
+  slots.forEach(slot=>{
+    const gallery=card.querySelector(slot.gallery);
+    const camera=card.querySelector(slot.camera);
+    const chooseBtn=card.querySelector(`.wp-photo-choose-btn[data-photo-kind="${slot.kind}"]`);
+    const cameraBtn=card.querySelector(`.wp-photo-camera-btn[data-photo-kind="${slot.kind}"]`);
+    const picker=(chooseBtn?.closest(".wp-photo-picker")||cameraBtn?.closest(".wp-photo-picker"));
+    const nameBox=picker?.querySelector(".wp-photo-selected");
+    const preview=picker?.querySelector(".wp-photo-preview");
+    if(chooseBtn&&gallery)chooseBtn.addEventListener("click",()=>gallery.click());
+    if(cameraBtn&&camera)cameraBtn.addEventListener("click",()=>camera.click());
+    const handleChange=async(source,other)=>{
+      if(!source?.files?.length)return;
+      if(other)other.value="";
+      card.dataset[slot.remove]="0";
+      if(nameBox)nameBox.textContent="Preparing photo preview…";
+      if(preview)preview.innerHTML="";
+      try{
+        const compressed=await fileToCompressedBase64(source.files[0]);
+        const dataUrl=compressed.dataUrl||`data:${compressed.mimeType};base64,${compressed.base64}`;
+        card.dataset[slot.dataKey]=dataUrl;
+        if(nameBox)nameBox.textContent="Selected: "+source.files[0].name;
+        if(preview){const img=document.createElement("img");img.src=dataUrl;img.alt=slot.kind==="finding"?"Finding photo preview":"Closure photo preview";preview.appendChild(img);}
+      }catch(err){
+        if(nameBox)nameBox.textContent=err.message||"Unable to load photo preview.";
+      }
+    };
+    if(gallery)gallery.addEventListener("change",()=>handleChange(gallery,camera));
+    if(camera)camera.addEventListener("change",()=>handleChange(camera,gallery));
+  });
 }
+
 function viewWPInspection(inspectionNo){return loadWPInspectionRecord(inspectionNo,"view");}
+
+async function deleteWPInspection(inspectionNo,button){
+  const no=String(inspectionNo||"").trim();
+  if(!no)return;
+  const record=(DATA.inspections||[]).find(r=>String(r.inspectionNo)===no);
+  if(!currentUserCanManageInspectionRecord(record||{})){
+    alert("You can only delete inspections that you submitted. Admin users can delete any inspection.");
+    return;
+  }
+  if(!confirm(`Delete workplace inspection ${no}? This will permanently remove its submission, checklist responses, findings, photos and signatures.`))return;
+  try{
+    if(button){button.disabled=true;button.dataset.originalText=button.innerText;button.innerText="Deleting…";}
+    const result=await wpPost({action:"deleteInspection",inspectionNo:no});
+    if(!result.success)throw new Error(result.error||"Unable to delete inspection.");
+    DATA.inspections=(DATA.inspections||[]).filter(r=>String(r.inspectionNo)!==no);
+    renderWorkplaceInspectionDashboard();
+    alert(`Inspection ${no} deleted successfully.`);
+  }catch(err){
+    console.error("Delete workplace inspection failed",err);
+    alert(err.message||"Unable to delete inspection.");
+    if(button){button.disabled=false;button.innerText=button.dataset.originalText||"Delete";}
+  }
+}
 
 function editWPInspection(){
   if(!wpEditInspectionNo)return;
+  if(!wpCanEditCurrentInspection){wpShowResult("You can view this inspection but only the owner or an Admin can edit it.",false);return;}
   setWPInspectionMode("edit");
-  setWPInspectorFromLogin();
   setWPReviewerFromAdmin();
   const status=document.getElementById("wpApiStatus");
   if(status)status.textContent="Edit mode. Make your changes, then click UPDATE.";
@@ -3532,6 +3732,7 @@ function editWPInspection(){
 
 async function updateWPInspection(){
   if(!wpEditInspectionNo)return;
+  if(!wpCanEditCurrentInspection){wpShowResult("You can only edit inspections that you submitted. Admin users can edit any inspection.",false);return;}
   const updateBtn=document.getElementById("wpUpdateInspectionAction");
   const apiStatus=document.getElementById("wpApiStatus");
   if(updateBtn)updateBtn.disabled=true;
@@ -3556,6 +3757,9 @@ async function updateWPInspection(){
       },responses,findings
     });
     wpCurrentInspectionStatus=String(result.status||"Pending Review");
+    // Reload the saved record so previews show the final stored Drive images,
+    // and remove the previous-image preview after a successful replacement/deletion.
+    await loadWPInspectionRecord(wpEditInspectionNo,"view");
     setWPInspectionMode("view");
     if(Array.isArray(DATA.inspections)) {
       const rec=DATA.inspections.find(r=>String(r.inspectionNo)===String(wpEditInspectionNo));
@@ -3584,6 +3788,11 @@ async function completeAcknowledgeWPInspection(signature){
     const user=window.currentUserProfile||JSON.parse(sessionStorage.getItem("hseDashboardUser")||"{}");
     const result=await wpPost({action:"acknowledgeInspection",inspectionNo:wpEditInspectionNo,username:user.username||"",signature});
     wpCurrentInspectionStatus=String(result.status||"Acknowledged");
+    wpCurrentSignatures.reviewerUrl=result.reviewerSignatureUrl||wpCurrentSignatures.reviewerUrl||"";
+    wpCurrentSignatures.reviewerDataUrl=result.reviewerSignatureDataUrl||wpCurrentSignatures.reviewerDataUrl||"";
+    if(!wpCurrentSignatures.reviewerDataUrl)window.wpInspectionImageLoadPromise=loadWPDriveImageData(wpCurrentSignatures.reviewerUrl).then(data=>{wpCurrentSignatures.reviewerDataUrl=data;return data;});
+    wpCurrentSignatures.acknowledgedBy=result.acknowledgedBy||wpCurrentSignatures.acknowledgedBy||"";
+    wpCurrentSignatures.acknowledgedAt=result.acknowledgedAt||wpCurrentSignatures.acknowledgedAt||"";
     setWPInspectionMode("view");
     if(Array.isArray(DATA.inspections)) {
       const rec=DATA.inspections.find(r=>String(r.inspectionNo)===String(wpEditInspectionNo));
@@ -3612,9 +3821,31 @@ async function saveWPInspectionPdf(){
   }finally{if(saveBtn)saveBtn.disabled=false;}
 }
 
+async function normalizeSignatureImageForPdf(dataUrl){
+  const src=String(dataUrl||"");
+  if(!src.startsWith("data:image/"))return "";
+  try{
+    const image=await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=reject;img.src=src;});
+    const w=Math.max(1,image.naturalWidth||image.width),h=Math.max(1,image.naturalHeight||image.height);
+    const canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;
+    const ctx=canvas.getContext("2d",{willReadFrequently:true});
+    ctx.fillStyle="#ffffff";ctx.fillRect(0,0,w,h);ctx.drawImage(image,0,0,w,h);
+    const imageData=ctx.getImageData(0,0,w,h),d=imageData.data;
+    const cornerPoints=[[0,0],[w-1,0],[0,h-1],[w-1,h-1]];let cornerTotal=0;
+    cornerPoints.forEach(([x,y])=>{for(let dy=0;dy<Math.min(6,h);dy++)for(let dx=0;dx<Math.min(6,w);dx++){const i=((Math.min(h-1,Math.max(0,y===h-1?y-dy: y+dy))*w)+Math.min(w-1,Math.max(0,x===w-1?x-dx:x+dx)))*4;cornerTotal+=(d[i]*.299+d[i+1]*.587+d[i+2]*.114);}});
+    const cornerAvg=cornerTotal/(cornerPoints.length*Math.min(6,w)*Math.min(6,h));
+    if(cornerAvg<65){
+      for(let i=0;i<d.length;i+=4){const lum=d[i]*.299+d[i+1]*.587+d[i+2]*.114;if(lum<7){d[i]=255;d[i+1]=255;d[i+2]=255;}else if(lum<165){d[i]=15;d[i+1]=48;d[i+2]=68;}else{d[i]=255;d[i+1]=255;d[i+2]=255;}d[i+3]=255;}
+      ctx.putImageData(imageData,0,0);
+    }
+    return canvas.toDataURL("image/png");
+  }catch(err){console.warn("Signature normalization failed",err);return src;}
+}
+
 async function downloadWPInspectionPdf(){
   if(typeof html2pdf!=="function")throw new Error("PDF library is not available. Please refresh the page and try again.");
   if(!wpEditInspectionNo || wpInspectionMode!=="view")throw new Error("Open a submitted inspection in View mode before saving the PDF.");
+  await ensureWPInspectionImagesLoaded();
 
   const no=String(wpEditInspectionNo||"Workplace-Inspection");
   const title=document.getElementById("wpInspectionTitle")?.selectedOptions?.[0]?.textContent||"Workplace Inspection";
@@ -3643,17 +3874,35 @@ async function downloadWPInspectionPdf(){
     return id?`https://drive.google.com/uc?export=view&id=${encodeURIComponent(id)}`:u;
   };
   const photoHtml=(url,caption)=>{
-    const src=imgUrl(url);
-    return `<div class="wp-pdf-photo-card"><div class="cap">${escHtml(caption)}</div>${src?`<img class="photo" crossorigin="anonymous" src="${escHtml(src)}" alt="${escHtml(caption)}">`:`<div class="wp-pdf-photo-placeholder">No photo</div>`}</div>`;
+    const raw=String(url||"").trim();
+    const isData=raw.startsWith("data:image/");
+    const src=isData?raw:imgUrl(raw);
+    const cross=isData?"":" crossorigin=\"anonymous\"";
+    return `<div class="wp-pdf-photo-card"><div class="cap">${escHtml(caption)}</div>${src?`<img class="photo"${cross} src="${escHtml(src)}" alt="${escHtml(caption)}">`:`<div class="wp-pdf-photo-placeholder">No photo</div>`}</div>`;
   };
+  const signatureImageHtml=(dataUrl,alt)=>{
+    const src=String(dataUrl||"").startsWith("data:image/")?dataUrl:"";
+    return src?`<img class="wp-pdf-signature-image" src="${escHtml(src)}" alt="${escHtml(alt)}">`:`<div class="wp-pdf-signature-empty" aria-hidden="true"></div>`;
+  };
+  const datePart=(value,fallback)=>{
+    const raw=String(value||"");
+    const match=raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    return match?prettyDate(`${match[1]}-${match[2]}-${match[3]}`):prettyDate(fallback||"");
+  };
+  const normalizedInspectorSignature=await normalizeSignatureImageForPdf(wpCurrentSignatures.inspectorDataUrl);
+  const normalizedReviewerSignature=await normalizeSignatureImageForPdf(wpCurrentSignatures.reviewerDataUrl);
+  const inspectorSignature=signatureImageHtml(normalizedInspectorSignature,"Inspector signature");
+  const reviewerSignature=signatureImageHtml(normalizedReviewerSignature,"Reviewer acknowledgement signature");
+  const inspectorSignatureDate=datePart(wpCurrentSignatures.inspectorSignedAt,date);
+  const reviewerSignatureDate=datePart(wpCurrentSignatures.acknowledgedAt,"");
   const findingData=findingCards.map((card,i)=>({
     no:i+1,
     observation:card.querySelector(".wp-finding-observation")?.value||"",
-    photo:card.dataset.photoUrl||"",
+    photo:card.dataset.photoDataUrl||card.dataset.photoUrl||"",
     corrective:card.querySelector(".wp-finding-action")?.value||"",
     responsible:card.querySelector(".wp-finding-responsible")?.value||"",
     target:card.querySelector(".wp-finding-target")?.value||"",
-    closurePhoto:card.dataset.closurePhotoUrl||"",
+    closurePhoto:card.dataset.closurePhotoDataUrl||card.dataset.closurePhotoUrl||"",
     closureDate:card.querySelector(".wp-finding-closure-date")?.value||"",
     status:card.querySelector(".wp-finding-status")?.value||"Open",
     remarks:card.querySelector(".wp-finding-remarks")?.value||""
@@ -3669,12 +3918,12 @@ async function downloadWPInspectionPdf(){
   };
   const findingHtml=(f)=>{
     const statusClass=String(f.status).toLowerCase()==="closed"?"closed":String(f.status).toLowerCase()==="pending"?"pending":"open";
-    return `<div class="wp-pdf-finding"><div class="wp-pdf-finding-head"><div>Finding ${f.no}</div><div class="wp-pdf-status ${statusClass}">Status: ${escHtml(f.status||"Open")}</div></div><div class="wp-pdf-finding-body"><table class="wp-pdf-finding-table"><tr><td class="k">Finding / Observation</td><td class="v" colspan="3">${escHtml(f.observation)}</td></tr><tr><td class="k">Corrective Action</td><td class="v">${escHtml(f.corrective)}</td><td class="k">Responsible Person</td><td class="v">${escHtml(f.responsible)}</td></tr><tr><td class="k">Target Date</td><td class="v">${escHtml(prettyDate(f.target))}</td><td class="k">Closure Date</td><td class="v">${escHtml(prettyDate(f.closureDate))}</td></tr><tr><td class="k">Remarks</td><td class="v" colspan="3">${escHtml(f.remarks)}</td></tr></table><div class="wp-pdf-photo-grid">${photoHtml(f.photo,"Photo - Finding")}${photoHtml(f.closurePhoto,"Photo - Closure")}</div></div></div>`;
+    return `<div class="wp-pdf-finding"><div class="wp-pdf-finding-head"><div>Finding ${f.no}</div><div class="wp-pdf-status ${statusClass}">Status: ${escHtml(f.status||"Open")}</div></div><div class="wp-pdf-finding-body"><table class="wp-pdf-finding-table"><tr><td class="k">Finding / Observation</td><td class="v">${escHtml(f.observation)}</td><td class="k">Corrective Action</td><td class="v">${escHtml(f.corrective)}</td></tr><tr><td class="k">Responsible Person</td><td class="v">${escHtml(f.responsible)}</td><td class="k">Target Date</td><td class="v">${escHtml(prettyDate(f.target))}</td></tr><tr><td class="k">Closure Date</td><td class="v">${escHtml(prettyDate(f.closureDate))}</td><td class="k">Status</td><td class="v">${escHtml(f.status||"Open")}</td></tr><tr><td class="k">Remarks</td><td class="v" colspan="3">${escHtml(f.remarks)}</td></tr></table><div class="wp-pdf-photo-grid">${photoHtml(f.photo,"Photo - Finding")}${photoHtml(f.closurePhoto,"Photo - Closure")}</div></div></div>`;
   };
 
   const contents=[];
   contents.push(`<div class="wp-pdf-title-row"><div class="wp-pdf-title">WORKPLACE INSPECTION REPORT</div><div class="wp-pdf-no"><div class="k">Generated</div><div class="v">${escHtml(prettyDate(date))}</div></div></div>
-    <div class="wp-pdf-section"><div class="wp-pdf-section-title">1. Inspection Information</div><table class="wp-pdf-info"><tr><td class="k">Inspection Title</td><td class="v" colspan="3">${escHtml(title)}</td><td class="k">Time</td><td class="v">${escHtml(prettyTime(time))}</td></tr><tr><td class="k">Date</td><td class="v">${escHtml(prettyDate(date))}</td><td class="k">Location</td><td class="v" colspan="3">${escHtml(location)}</td></tr><tr><td class="k">Company</td><td class="v">${escHtml(company)}</td><td class="k">Inspector</td><td class="v">${escHtml(inspector)}</td><td class="k">Reviewer</td><td class="v">${escHtml(reviewer)}</td></tr></table></div>
+    <div class="wp-pdf-section"><div class="wp-pdf-section-title">1. Inspection Information</div><table class="wp-pdf-info"><tr><td class="k">Inspection No.</td><td class="v">${escHtml(no)}</td><td class="k">Inspection Title</td><td class="v">${escHtml(title)}</td></tr><tr><td class="k">Date</td><td class="v">${escHtml(prettyDate(date))}</td><td class="k">Time</td><td class="v">${escHtml(prettyTime(time))}</td></tr><tr><td class="k">Location</td><td class="v">${escHtml(location)}</td><td class="k">Company</td><td class="v">${escHtml(company)}</td></tr><tr><td class="k">Inspector</td><td class="v">${escHtml(inspector)}</td><td class="k">Reviewer</td><td class="v">${escHtml(reviewer)}</td></tr></table></div>
     <div class="wp-pdf-section wp-pdf-avoid"><div class="wp-pdf-section-title">2. Inspection Summary</div><div class="wp-pdf-summary-grid"><table class="wp-pdf-summary-table"><tr><td>Total Checklist Items</td><td>${responses.length}</td></tr><tr><td>Comply</td><td style="color:#1d7c42">${comply}</td></tr><tr><td>Non-Comply</td><td style="color:#c62c34">${noncomply}</td></tr><tr><td>N/A</td><td>${na}</td></tr><tr><td>Compliance Rate</td><td>${complianceRate}%</td></tr></table><div class="wp-pdf-donut-wrap"><div class="wp-pdf-donut" style="--pct:${complianceRate}%"><span>${complianceRate}%</span></div><div class="wp-pdf-legend"><div><span class="wp-pdf-swatch sw-c"></span> Comply (${comply})</div><div><span class="wp-pdf-swatch sw-nc"></span> Non-Comply (${noncomply})</div><div><span class="wp-pdf-swatch sw-na"></span> N/A (${na})</div></div></div></div></div>
     <div class="wp-pdf-section wp-pdf-avoid"><div class="wp-pdf-section-title">3. Findings Summary</div><div class="wp-pdf-findings-summary"><div class="wp-pdf-mini"><div class="n">${findingData.length}</div><div class="l">Total Findings</div></div><div class="wp-pdf-mini open"><div class="n">${openFindings}</div><div class="l">Open</div></div><div class="wp-pdf-mini closed"><div class="n">${closedFindings + pendingFindings}</div><div class="l">Closed / Pending</div></div></div></div>
     <div class="wp-pdf-note">This report is generated from the Workplace Inspection record stored in the HSE Portal master database.</div>`);
@@ -3684,7 +3933,7 @@ async function downloadWPInspectionPdf(){
     contents.push(`<div class="wp-pdf-section"><div class="wp-pdf-section-title">4. Checklist Details</div><div class="wp-pdf-note">No checklist responses recorded.</div></div>`);
   }else{
     for(let i=0;i<responses.length;i+=rowsPerChecklistPage){
-      const chunk=responses.slice(i,i+rowsPerChecklistPage).map(r=>`<tr><td class="n">${escHtml(r.itemNo)}</td><td class="item">${escHtml(r.checklistItem)}</td><td class="result">${resultCell(r.response)}</td><td class="remarks">${escHtml(r.remarks||"")}</td></tr>`).join("");
+      const chunk=responses.slice(i,i+rowsPerChecklistPage).map(r=>`<tr><td class="n">${escHtml(r.itemNo)}</td><td class="item"><div class="wp-pdf-checklist-en">${escHtml(r.checklistItem)}</div>${r.checklistItemMalay?`<div class="wp-pdf-checklist-ms" lang="ms">${escHtml(r.checklistItemMalay)}</div>`:""}</td><td class="result">${resultCell(r.response)}</td><td class="remarks">${escHtml(r.remarks||"")}</td></tr>`).join("");
       contents.push(`<div class="wp-pdf-section"><div class="wp-pdf-section-title">4. Checklist Details</div><table class="wp-pdf-checklist"><thead><tr><th class="n">No.</th><th class="item">Inspection Item / Requirement</th><th class="result">Result</th><th class="remarks">Remarks</th></tr></thead><tbody>${chunk}</tbody></table><div class="wp-pdf-note"><b>C</b> = Comply &nbsp;&nbsp; <span style="color:#d82e37"><b>NC</b></span> = Non-Comply &nbsp;&nbsp; <b>N/A</b> = Not Applicable</div></div>`);
     }
   }
@@ -3698,18 +3947,43 @@ async function downloadWPInspectionPdf(){
     }
   }
 
-  contents.push(`<div class="wp-pdf-section"><div class="wp-pdf-section-title">6. Overall Remarks</div><div class="wp-pdf-remarks">${escHtml(overall||"No overall remarks recorded.")}</div></div><div class="wp-pdf-section"><div class="wp-pdf-section-title">7. Signature / Acknowledgement</div><div class="wp-pdf-sign-grid"><div class="wp-pdf-sign"><div class="head">Inspector</div><div class="body"><div class="wp-pdf-sign-line">${escHtml(inspector)}</div><div style="margin-top:1.5mm">Date: ${escHtml(prettyDate(date))}</div></div></div><div class="wp-pdf-sign"><div class="head">Reviewer</div><div class="body"><div class="wp-pdf-sign-line">${escHtml(reviewer)}</div><div style="margin-top:1.5mm">Date: ${escHtml(prettyDate(date))}</div></div></div><div class="wp-pdf-sign"><div class="head">Approver (if required)</div><div class="body"><div class="wp-pdf-sign-line">Name:</div><div style="margin-top:1.5mm">Designation:</div><div style="margin-top:1.5mm">Date:</div></div></div></div></div><div class="wp-pdf-section"><div class="wp-pdf-section-title">8. Report Record</div><table class="wp-pdf-info"><tr><td class="k">Inspection No.</td><td class="v">${escHtml(no)}</td><td class="k">Inspection Title</td><td class="v">${escHtml(title)}</td></tr><tr><td class="k">Company</td><td class="v">${escHtml(company)}</td><td class="k">Location</td><td class="v">${escHtml(location)}</td></tr></table></div>`);
+  contents.push(`<div class="wp-pdf-section"><div class="wp-pdf-section-title">6. Overall Remarks</div><div class="wp-pdf-remarks">${escHtml(overall||"No overall remarks recorded.")}</div></div><div class="wp-pdf-section"><div class="wp-pdf-section-title">7. Signature / Acknowledgement</div><div class="wp-pdf-sign-grid"><div class="wp-pdf-sign"><div class="head">Inspector</div><div class="body"><div class="wp-pdf-signature-area">${inspectorSignature}</div><div class="wp-pdf-sign-line">${escHtml(inspector)}</div><div class="wp-pdf-sign-meta">Date: ${escHtml(inspectorSignatureDate||prettyDate(date))}</div></div></div><div class="wp-pdf-sign"><div class="head">Reviewer</div><div class="body"><div class="wp-pdf-signature-area">${reviewerSignature}</div><div class="wp-pdf-sign-line">${escHtml(wpCurrentSignatures.acknowledgedBy||reviewer)}</div><div class="wp-pdf-sign-meta">${reviewerSignatureDate?`Date: ${escHtml(reviewerSignatureDate)}`:`Pending acknowledgement`}</div></div></div><div class="wp-pdf-sign"><div class="head">Approver (if required)</div><div class="body"><div class="wp-pdf-signature-area"><div class="wp-pdf-signature-empty"></div></div><div class="wp-pdf-sign-line">Name:</div><div class="wp-pdf-sign-meta">Designation:</div><div class="wp-pdf-sign-meta">Date:</div></div></div></div></div>`);
 
   const totalPages=contents.length;
   const shell=document.createElement("div");
   shell.className="wp-pdf-report";
-  shell.innerHTML=contents.map((content,i)=>`<section class="wp-pdf-page">${headerHtml}${content}<div class="wp-pdf-footer"><div class="wp-pdf-footer-line"></div><div class="wp-pdf-footer-text"><span>HSE-WP-01 &nbsp;|&nbsp; Rev. 0</span><span>Page ${i+1} of ${totalPages}</span></div></div></section>`).join("");
+  // Keep the export shell in normal document flow. Fixed-position capture caused
+  // html2canvas to return a blank canvas in some browsers.
+  shell.innerHTML=contents.map((content)=>`<section class="wp-pdf-page">${headerHtml}${content}</section>`).join("");
 
   document.body.appendChild(shell);
   try{
+    await Promise.all([...shell.querySelectorAll("img")].map(img=>{
+      if(img.complete&&img.naturalWidth>0)return Promise.resolve();
+      return new Promise(resolve=>{const done=()=>resolve();img.addEventListener("load",done,{once:true});img.addEventListener("error",done,{once:true});setTimeout(done,7000);});
+    }));
     const filename=no.replace(/[^a-zA-Z0-9_-]/g,"_")+"_Workplace_Inspection.pdf";
-    const opt={margin:4,filename,image:{type:"jpeg",quality:.96},html2canvas:{scale:2,useCORS:true,allowTaint:false,backgroundColor:"#ffffff",logging:false},jsPDF:{unit:"mm",format:"a4",orientation:"portrait",compress:true},pagebreak:{mode:["css"]}};
-    await html2pdf().set(opt).from(shell).save();
+    const opt={margin:[4,15,8,15],filename,image:{type:"jpeg",quality:.96},html2canvas:{scale:2,useCORS:true,allowTaint:false,backgroundColor:"#ffffff",logging:false,scrollX:0,scrollY:0},jsPDF:{unit:"mm",format:"a4",orientation:"portrait",compress:true},pagebreak:{mode:["css"]}};
+    const worker=html2pdf().set(opt).from(shell).toPdf();
+    const pdf=await worker.get("pdf");
+    // Add footer in PDF coordinates rather than HTML flow. This guarantees that
+    // both the blue rule and page numbering stay on the same physical page.
+    const actualPages=pdf.internal.getNumberOfPages();
+    const pageWidth=pdf.internal.pageSize.getWidth();
+    const pageHeight=pdf.internal.pageSize.getHeight();
+    for(let page=1;page<=actualPages;page++){
+      pdf.setPage(page);
+      pdf.setDrawColor(11,103,170);
+      pdf.setLineWidth(0.65);
+      pdf.line(15,pageHeight-11.5,pageWidth-15,pageHeight-11.5);
+      pdf.setFont("helvetica","normal");
+      pdf.setFontSize(6.2);
+      pdf.setTextColor(92,110,121);
+      pdf.text("HSE-WP-01 | Rev. 0",15,pageHeight-6.5);
+      pdf.text(`Page ${page} of ${actualPages}`,pageWidth-15,pageHeight-6.5,{align:"right"});
+    }
+    // Save the same jsPDF object that received the page footer stamps.
+    pdf.save(filename);
   }finally{shell.remove();}
 }
 
@@ -3719,7 +3993,7 @@ function initWPInspection(){
   if(date&&!date.value)date.value=wpToday();
   if(time&&!time.value)time.value=wpNowTime();
   loadWPInspectionTitles();
-  if(wpFindingsCount===0)addWPFinding();
+  // Do not create a blank finding automatically. Users add one only when they have a finding to record.
 }
 
 const pageMeta = {
@@ -3817,7 +4091,7 @@ function setLoginEnabled(enabled){
 function loginSuccess(user){
   loginReady=true;
   window.currentUserProfile=user;
-  sessionStorage.setItem("hseDashboardUser",JSON.stringify({username:user.username,name:user.name,role:user.role}));
+  sessionStorage.setItem("hseDashboardUser",JSON.stringify({username:user.username,name:user.name,role:user.role,token:user.token||""}));
   document.getElementById("loginGate").classList.add("hidden");
   const logged=document.getElementById("loggedUser");
   if(logged){logged.textContent=`Signed in: ${user.name||user.username}`;logged.style.display="block";}
