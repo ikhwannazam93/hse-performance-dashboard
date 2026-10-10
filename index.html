@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Penta-Ocean HSE Dashboard — Rev 0</title>
+<title>Penta-Ocean HSE Portal — Rev 25.1 Reliability Hotfix</title>
 <style>
 
 :root{
@@ -444,6 +444,48 @@ button:hover{
   visibility: visible !important;
 }
 button[aria-busy="true"] { cursor: progress !important; }
+
+
+/* Rev 25.2: these fields must remain editable on a new inspection. */
+#page-inspection-form:not(.wp-view-mode) #wpInspectionDate,
+#page-inspection-form:not(.wp-view-mode) #wpInspectionTime,
+#page-inspection-form:not(.wp-view-mode) #wpInspectionLocation,
+#page-inspection-form:not(.wp-view-mode) #wpInspectionCompany{
+  pointer-events:auto !important;
+  opacity:1 !important;
+  cursor:auto;
+}
+
+
+/* Rev 25.3: keep Add Finding clickable after page updates. */
+#wpAddFinding { pointer-events:auto !important; position:relative; z-index:2; }
+\n
+/* Rev 25.4: observation horizontal chart cards must expand to the SVG's full height. */
+#page-observation .gridEqual:has(#chart-bsc-unsafe-act),
+#page-observation .gridEqual:has(#chart-bsc-unsafe-condition) {
+  align-items: start !important;
+  grid-auto-rows: auto !important;
+}
+#page-observation .gridEqual:has(#chart-bsc-unsafe-act) > .card,
+#page-observation .gridEqual:has(#chart-bsc-unsafe-condition) > .card {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  align-self: start !important;
+}
+#page-observation .chart:has(svg.dynamic-horizontal) {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+#page-observation .chart:has(svg.dynamic-horizontal) svg.dynamic-horizontal {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: none !important;
+}
 
 </style>
 
@@ -3299,6 +3341,19 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
           </div>
         </div>
       </div>
+      <div class="wp-inspection-card" id="wpAcknowledgementPanel">
+        <h3>Signature / Acknowledgement</h3>
+        <div class="wp-ack-grid">
+          <div class="wp-ack-box"><div class="wp-ack-box-title">Inspector</div><div class="wp-ack-box-body">
+            <div class="wp-ack-signature-area"><img id="wpAckInspectorSignature" alt="Inspector signature" style="display:none"></div>
+            <div class="wp-ack-name" id="wpAckInspectorName"></div><div class="wp-ack-date" id="wpAckInspectorDate"></div>
+          </div></div>
+          <div class="wp-ack-box"><div class="wp-ack-box-title">Reviewer</div><div class="wp-ack-box-body">
+            <div class="wp-ack-signature-area"><img id="wpAckReviewerSignature" alt="Reviewer acknowledgement signature" style="display:none"></div>
+            <div class="wp-ack-name" id="wpAckReviewerName"></div><div class="wp-ack-date" id="wpAckReviewerDate"></div><div class="wp-ack-state" id="wpAckReviewerState"></div>
+          </div></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -5176,6 +5231,7 @@ function setWPInspectionMode(mode){
   }
   if(statusText) statusText.textContent=mode==="new"?"":("Status: "+(wpCurrentInspectionStatus||"Pending Review"));
   if(statusMeta) statusMeta.textContent=isCurrentUserAdmin()?"Admin review":"Submitted inspection";
+  renderWPAcknowledgementPanel();
   document.querySelectorAll("#page-inspection-form input,#page-inspection-form select,#page-inspection-form textarea").forEach(el=>{
     el.disabled=mode==="view";
   });
@@ -5191,7 +5247,24 @@ function setWPInspectionMode(mode){
   const pageSub=document.getElementById("pageSub");if(pageSub)pageSub.textContent=subtitle;
 }
 
+
+/* Rev 25.2: restore editability of user-entered fields on a new inspection. */
+function restoreNewWPInspectionFieldEditability(){
+  const ids=["wpInspectionDate","wpInspectionTime","wpInspectionLocation","wpInspectionCompany"];
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.disabled=false;
+    el.readOnly=false;
+    el.removeAttribute("disabled");
+    el.removeAttribute("readonly");
+    el.style.pointerEvents="auto";
+    el.style.userSelect="auto";
+  });
+}
+
 function resetWPInspection(){
+  restoreNewWPInspectionFieldEditability();
   wpInspectionMode="new";
   wpEditInspectionNo="";
   wpCanEditCurrentInspection=false;
@@ -5205,7 +5278,8 @@ function resetWPInspection(){
   if(submitBtn){submitBtn.style.display="inline-block";submitBtn.textContent="SUBMIT INSPECTION";}
   const resetBtn=document.getElementById("wpResetInspection");
   if(resetBtn)resetBtn.style.display="inline-block";
-  document.getElementById("wpInspectionTitle").value="";
+  const resetTitleSelect=document.getElementById("wpInspectionTitle");
+  if(resetTitleSelect){resetTitleSelect.value="";if(resetTitleSelect.options.length>1)resetTitleSelect.disabled=false;}
   document.getElementById("wpInspectionDate").value=wpToday();
   document.getElementById("wpInspectionTime").value=wpNowTime();
   ["wpInspectionLocation","wpInspectionCompany","wpInspectionRemarks"].forEach(id=>document.getElementById(id).value="");
@@ -5317,6 +5391,22 @@ function addWPExistingPhotoPreview(card,type,url,dataUrl){
   return note;
 }
 
+
+function renderWPAcknowledgementPanel(){
+ const panel=document.getElementById("wpAcknowledgementPanel");if(!panel)return;
+ const visible=wpInspectionMode==="view"&&!!wpEditInspectionNo;panel.classList.toggle("show",visible);if(!visible)return;
+ const isAck=String(wpCurrentInspectionStatus||"").trim().toLowerCase()==="acknowledged";
+ const inspectorName=document.getElementById("wpInspectionInspector")?.value||"";
+ const reviewerName=wpCurrentSignatures.acknowledgedBy||document.getElementById("wpInspectionReviewer")?.value||DATA.adminReviewer||"";
+ const fmt=value=>{const raw=String(value||"").trim();if(!raw)return"";const m=raw.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m){const mo=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];return `${m[3]} ${mo[+m[2]-1]||""} ${m[1]}`;}const d=new Date(raw);return Number.isNaN(d.getTime())?"":d.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});};
+ const sig=(id,data,url)=>{const img=document.getElementById(id);if(!img)return;const src=String(data||"").startsWith("data:image/")?data:(url?wpDrivePreviewUrl(url):"");img.src=src;img.style.display=src?"block":"none";img.onerror=()=>{img.style.display="none";};};
+ sig("wpAckInspectorSignature",wpCurrentSignatures.inspectorDataUrl,wpCurrentSignatures.inspectorUrl);
+ sig("wpAckReviewerSignature",isAck?wpCurrentSignatures.reviewerDataUrl:"",isAck?wpCurrentSignatures.reviewerUrl:"");
+ const txt=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+ txt("wpAckInspectorName",inspectorName);const idate=fmt(wpCurrentSignatures.inspectorSignedAt);txt("wpAckInspectorDate",idate?`Date: ${idate}`:"Date: —");
+ txt("wpAckReviewerName",reviewerName);const rdate=isAck?fmt(wpCurrentSignatures.acknowledgedAt):"";txt("wpAckReviewerDate",rdate?`Date: ${rdate}`:"Date: —");txt("wpAckReviewerState",isAck?"":"Pending acknowledgement");
+}
+
 async function loadWPInspectionRecord(inspectionNo,mode="view"){
   try{
     wpEditInspectionNo=String(inspectionNo||"");
@@ -5343,10 +5433,9 @@ async function loadWPInspectionRecord(inspectionNo,mode="view"){
     const hasAcknowledgementEvidence=!!(s.acknowledgedBy||s.acknowledgedAt||s.reviewerSignatureUrl||sig.acknowledgedBy||sig.acknowledgedAt||sig.reviewerUrl);
     // Guard against false acknowledged labels from an older/inconsistent API
     // response: acknowledgement requires audit evidence from the reviewer.
-    if(detailStatus==="Acknowledged" && !hasAcknowledgementEvidence && cachedLogStatus!=="Acknowledged"){
-      detailStatus=cachedLogStatus||"Pending Review";
-      s.status=detailStatus;
-    }else if(!String(s.status||"").trim()){
+    // The backend record status is authoritative. A retained reviewer signature/date
+    // from an earlier revision is audit history, not proof that the current version is acknowledged.
+    if(!String(s.status||"").trim()){
       detailStatus=cachedLogStatus||"Pending Review";
       s.status=detailStatus;
     }
@@ -5400,7 +5489,8 @@ async function loadWPInspectionRecord(inspectionNo,mode="view"){
     document.getElementById("wpApiStatus").textContent=mode==="view"?"Submitted inspection loaded.":"Editing "+wpEditInspectionNo+".";
     // Load photo/signature image data separately, after the record is usable.
     // This keeps the form responsive and prevents oversized getInspection responses.
-    window.wpInspectionImageLoadPromise=ensureWPInspectionImagesLoaded();
+    renderWPAcknowledgementPanel();
+    window.wpInspectionImageLoadPromise=ensureWPInspectionImagesLoaded().then(()=>{renderWPAcknowledgementPanel();});
     window.wpInspectionImageLoadPromise.catch(err=>console.warn("Inspection images are still loading",err));
   }catch(err){console.error(err);wpShowResult("Unable to load inspection: "+err.message,false);}
   finally{hidePortalLoading();}
@@ -5493,11 +5583,13 @@ function editWPInspection(){
 }
 
 async function updateWPInspection(){
-  if(!wpEditInspectionNo)return;
-  const busyOverlay=showPortalBusyImmediately("Updating inspection…");
+  if(!wpEditInspectionNo){wpShowResult("No submitted inspection is selected. Please return to the inspection log and open the record again.",false);return;}
+  // Validate permission before showing the overlay; an early return must never strand the UI.
   if(!wpCanEditCurrentInspection){wpShowResult("You can only edit inspections that you submitted. Admin users can edit any inspection.",false);return;}
-  const wasPreviouslyAcknowledged=String(wpCurrentInspectionStatus||"").trim().toLowerCase()==="acknowledged";
   const updateBtn=document.getElementById("wpUpdateInspectionAction");
+  if(updateBtn?.disabled)return;
+  const busyOverlay=showPortalBusyImmediately("Updating inspection…");
+  const wasPreviouslyAcknowledged=String(wpCurrentInspectionStatus||"").trim().toLowerCase()==="acknowledged";
   const apiStatus=document.getElementById("wpApiStatus");
   if(updateBtn)updateBtn.disabled=true;
   try{
@@ -5525,6 +5617,7 @@ async function updateWPInspection(){
     // and remove the previous-image preview after a successful replacement/deletion.
     await loadWPInspectionRecord(wpEditInspectionNo,"view");
     setWPInspectionMode("view");
+    renderWPAcknowledgementPanel();
     if(Array.isArray(DATA.inspections)) {
       const rec=DATA.inspections.find(r=>String(r.inspectionNo)===String(wpEditInspectionNo));
       if(rec){ rec.status=wpCurrentInspectionStatus; rec.date=document.getElementById("wpInspectionDate").value; rec.time=document.getElementById("wpInspectionTime").value; rec.location=document.getElementById("wpInspectionLocation").value; rec.company=document.getElementById("wpInspectionCompany").value; rec.inspector=document.getElementById("wpInspectionInspector").value; rec.reviewer=document.getElementById("wpInspectionReviewer").value; rec.overallRemarks=document.getElementById("wpInspectionRemarks").value; }
@@ -5558,15 +5651,26 @@ async function completeAcknowledgeWPInspection(signature){
     const user=window.currentUserProfile||JSON.parse(sessionStorage.getItem("hseDashboardUser")||"{}");
     const result=await wpPost({action:"acknowledgeInspection",inspectionNo:wpEditInspectionNo,username:user.username||"",signature});
     wpCurrentInspectionStatus=String(result.status||"Acknowledged");
-    wpCurrentSignatures.reviewerUrl=result.reviewerSignatureUrl||wpCurrentSignatures.reviewerUrl||"";
-    wpCurrentSignatures.reviewerDataUrl=result.reviewerSignatureDataUrl||wpCurrentSignatures.reviewerDataUrl||"";
-    if(!wpCurrentSignatures.reviewerDataUrl)window.wpInspectionImageLoadPromise=loadWPDriveImageData(wpCurrentSignatures.reviewerUrl).then(data=>{wpCurrentSignatures.reviewerDataUrl=data;return data;});
+    // Rev 25.7: the signature just drawn for this acknowledgement is authoritative.
+    // Never fall back to the prior reviewer signature after an edited submission.
+    wpCurrentSignatures.reviewerUrl=result.reviewerSignatureUrl||"";
+    wpCurrentSignatures.reviewerDataUrl=(typeof signature==="string" && signature.startsWith("data:image/"))
+      ? signature
+      : (result.reviewerSignatureDataUrl||"");
+    if(!wpCurrentSignatures.reviewerDataUrl && wpCurrentSignatures.reviewerUrl){
+      window.wpInspectionImageLoadPromise=loadWPDriveImageData(wpCurrentSignatures.reviewerUrl).then(data=>{
+        wpCurrentSignatures.reviewerDataUrl=data;
+        renderWPAcknowledgementPanel();
+        return data;
+      });
+    }
     wpCurrentSignatures.acknowledgedBy=result.acknowledgedBy||result.reviewerName||wpCurrentSignatures.acknowledgedBy||"";
     wpCurrentSignatures.acknowledgedAt=wpGetAcknowledgementTimestamp(result,result.submission,result.record)||wpCurrentSignatures.acknowledgedAt||new Date().toISOString();
     setWPInspectionMode("view");
+    renderWPAcknowledgementPanel();
     if(Array.isArray(DATA.inspections)) {
       const rec=DATA.inspections.find(r=>String(r.inspectionNo)===String(wpEditInspectionNo));
-      if(rec){ rec.status=wpCurrentInspectionStatus; rec.reviewer=result.acknowledgedBy||result.reviewerName||rec.reviewer; rec.acknowledgedBy=wpCurrentSignatures.acknowledgedBy||rec.acknowledgedBy||""; rec.acknowledgedAt=wpCurrentSignatures.acknowledgedAt||rec.acknowledgedAt||""; rec.reviewerSignatureUrl=result.reviewerSignatureUrl||rec.reviewerSignatureUrl||""; }
+      if(rec){ rec.status=wpCurrentInspectionStatus; rec.reviewer=result.acknowledgedBy||result.reviewerName||rec.reviewer; rec.acknowledgedBy=wpCurrentSignatures.acknowledgedBy||rec.acknowledgedBy||""; rec.acknowledgedAt=wpCurrentSignatures.acknowledgedAt||rec.acknowledgedAt||""; rec.reviewerSignatureUrl=result.reviewerSignatureUrl||""; rec.reviewerSignatureDataUrl=wpCurrentSignatures.reviewerDataUrl||""; }
     }
     wpShowResult("Inspection acknowledged successfully.",true);
     document.getElementById("wpApiStatus").textContent="Inspection acknowledged and recorded.";
@@ -5676,7 +5780,8 @@ async function downloadWPInspectionPdf(){
     return match?prettyDate(`${match[1]}-${match[2]}-${match[3]}`):prettyDate(fallback||"");
   };
   const normalizedInspectorSignature=await normalizeSignatureImageForPdf(wpCurrentSignatures.inspectorDataUrl);
-  const normalizedReviewerSignature=await normalizeSignatureImageForPdf(wpCurrentSignatures.reviewerDataUrl);
+  const isCurrentlyAcknowledged=String(wpCurrentInspectionStatus||"").trim().toLowerCase()==="acknowledged";
+  const normalizedReviewerSignature=await normalizeSignatureImageForPdf(isCurrentlyAcknowledged?wpCurrentSignatures.reviewerDataUrl:"");
   const inspectorSignature=signatureImageHtml(normalizedInspectorSignature,"Inspector signature");
   const reviewerSignature=signatureImageHtml(normalizedReviewerSignature,"Reviewer acknowledgement signature");
   const inspectorSignatureDate=datePart(wpCurrentSignatures.inspectorSignedAt,date);
@@ -5739,7 +5844,7 @@ async function downloadWPInspectionPdf(){
     }
   }
 
-  contents.push(`<div class="wp-pdf-section"><div class="wp-pdf-section-title">6. Overall Remarks</div><div class="wp-pdf-remarks">${escHtml(overall||"No overall remarks recorded.")}</div></div><div class="wp-pdf-section"><div class="wp-pdf-section-title">7. Signature / Acknowledgement</div><div class="wp-pdf-sign-grid"><div class="wp-pdf-sign"><div class="head">Inspector</div><div class="body"><div class="wp-pdf-signature-area">${inspectorSignature}</div><div class="wp-pdf-sign-line">${escHtml(inspector)}</div><div class="wp-pdf-sign-meta">Date: ${escHtml(inspectorSignatureDate||prettyDate(date))}</div></div></div><div class="wp-pdf-sign"><div class="head">Reviewer</div><div class="body"><div class="wp-pdf-signature-area">${reviewerSignature}</div><div class="wp-pdf-sign-line">${escHtml(wpCurrentSignatures.acknowledgedBy||reviewer)}</div><div class="wp-pdf-sign-meta">${reviewerSignatureDate?(String(wpCurrentInspectionStatus||"").trim().toLowerCase()==="acknowledged"?`Date: ${escHtml(reviewerSignatureDate)}`:`Previous acknowledgement date: ${escHtml(reviewerSignatureDate)}<br><b style="color:#946200">Re-review required after edit</b>`):((wpCurrentSignatures.reviewerDataUrl||wpCurrentSignatures.reviewerUrl||wpCurrentSignatures.acknowledgedBy)?(String(wpCurrentInspectionStatus||"").trim().toLowerCase()==="acknowledged"?"Acknowledged":"Reviewer signature recorded; date unavailable"):`Pending acknowledgement`)}</div></div></div><div class="wp-pdf-sign"><div class="head">Approver (if required)</div><div class="body"><div class="wp-pdf-signature-area"><div class="wp-pdf-signature-empty"></div></div><div class="wp-pdf-sign-line">Name:</div><div class="wp-pdf-sign-meta">Designation:</div><div class="wp-pdf-sign-meta">Date:</div></div></div></div></div>`);
+  contents.push(`<div class="wp-pdf-section"><div class="wp-pdf-section-title">6. Overall Remarks</div><div class="wp-pdf-remarks">${escHtml(overall||"No overall remarks recorded.")}</div></div><div class="wp-pdf-section"><div class="wp-pdf-section-title">7. Signature / Acknowledgement</div><div class="wp-pdf-sign-grid"><div class="wp-pdf-sign"><div class="head">Inspector</div><div class="body"><div class="wp-pdf-signature-area">${inspectorSignature}</div><div class="wp-pdf-sign-line">${escHtml(inspector)}</div><div class="wp-pdf-sign-meta">Date: ${escHtml(inspectorSignatureDate||prettyDate(date))}</div></div></div><div class="wp-pdf-sign"><div class="head">Reviewer</div><div class="body"><div class="wp-pdf-signature-area">${reviewerSignature}</div><div class="wp-pdf-sign-line">${escHtml(wpCurrentSignatures.acknowledgedBy||reviewer)}</div><div class="wp-pdf-sign-meta">${reviewerSignatureDate?(String(wpCurrentInspectionStatus||"").trim().toLowerCase()==="acknowledged"?`Date: ${escHtml(reviewerSignatureDate)}`:`Previous acknowledgement date: ${escHtml(reviewerSignatureDate)}<br><b style="color:#946200">Re-review required after edit</b>`):((wpCurrentSignatures.reviewerDataUrl||wpCurrentSignatures.reviewerUrl||wpCurrentSignatures.acknowledgedBy)?(String(wpCurrentInspectionStatus||"").trim().toLowerCase()==="acknowledged"?"Acknowledgement date unavailable":"Previous reviewer sign-off; re-review required"):`Pending acknowledgement`)}</div></div></div><div class="wp-pdf-sign"><div class="head">Approver (if required)</div><div class="body"><div class="wp-pdf-signature-area"><div class="wp-pdf-signature-empty"></div></div><div class="wp-pdf-sign-line">Name:</div><div class="wp-pdf-sign-meta">Designation:</div><div class="wp-pdf-sign-meta">Date:</div></div></div></div></div>`);
 
   const totalPages=contents.length;
   const shell=document.createElement("div");
@@ -5911,21 +6016,38 @@ async function refreshWPInspectionLog(){
 
 const wpRefreshInspectionBtn=document.getElementById("wpRefreshInspection");
 if(wpRefreshInspectionBtn)wpRefreshInspectionBtn.addEventListener("click",refreshWPInspectionLog);
+let wpNewFormOpenSequence=0;
 async function openNewWPInspectionForm(){
+  const sequence=++wpNewFormOpenSequence;
   showPortalLoading("Preparing a new workplace inspection…");
+  const titleSelect=document.getElementById("wpInspectionTitle");
+  const openBtn=document.getElementById("wpOpenNewInspection");
+  if(openBtn)openBtn.disabled=true;
   try{
-    // Clear stale submitted values before changing pages so they cannot flash on screen.
+    // Reset stale form data before navigation, but keep the title control disabled until options are ready.
     resetWPInspection();
+    if(titleSelect){titleSelect.disabled=true;titleSelect.innerHTML='<option value="">Loading inspection titles…</option>';}
     go("inspection-form");
-    await Promise.all([loadWPInspectionTitles(),loadWPAdminReviewer()]);
-    // Clear once again after async options/reviewer data have loaded.
-    resetWPInspection();
+    document.getElementById("wpChecklistStatus").textContent="Loading inspection titles from Google Sheets…";
+    // Force a fresh, awaited read. The prior cached early-return could leave an empty select after a partial render.
+    await Promise.all([loadWPInspectionTitles(true),loadWPAdminReviewer()]);
+    if(sequence!==wpNewFormOpenSequence)return;
+    // Do not call resetWPInspection after title loading: it can race with selection state on slow connections.
+    const inspector=document.getElementById("wpInspectionInspector");
+    if(inspector)inspector.value=String((window.currentUserProfile||JSON.parse(sessionStorage.getItem("hseDashboardUser")||"{}" )).name||window.currentUserProfile?.username||"");
+    setWPReviewerFromAdmin();
     document.getElementById("wpInspectionDate").value=wpToday();
     document.getElementById("wpInspectionTime").value=wpNowTime();
+    restoreNewWPInspectionFieldEditability();
+    if(titleSelect){titleSelect.disabled=false;titleSelect.focus({preventScroll:true});}
+    document.getElementById("wpApiStatus").textContent="Ready. Select an inspection title to begin.";
   }catch(err){
     console.error("Unable to prepare a new workplace inspection",err);
     wpShowResult("Unable to prepare a new inspection form: "+(err.message||String(err)),false);
-  }finally{hidePortalLoading();}
+    if(titleSelect)titleSelect.disabled=false;
+  }finally{
+    if(sequence===wpNewFormOpenSequence){hidePortalLoading();if(openBtn)openBtn.disabled=false;}
+  }
 }
 const wpOpenNewInspection=document.getElementById("wpOpenNewInspection");
 if(wpOpenNewInspection)wpOpenNewInspection.addEventListener("click",openNewWPInspectionForm);
@@ -5961,9 +6083,22 @@ if(wpSignatureFile)wpSignatureFile.addEventListener("change",()=>{
 const wpSignatureModal=document.getElementById("wpSignatureModal");
 if(wpSignatureModal)wpSignatureModal.addEventListener("click",e=>{if(e.target===wpSignatureModal)closeWPSignatureModal();});
 const wpTitleSelect=document.getElementById("wpInspectionTitle");
-if(wpTitleSelect)wpTitleSelect.addEventListener("change",e=>loadWPChecklist(e.target.value));
-const wpAddFindingBtn=document.getElementById("wpAddFinding");
-if(wpAddFindingBtn)wpAddFindingBtn.addEventListener("click",addWPFinding);
+if(wpTitleSelect){
+  wpTitleSelect.addEventListener("change",async e=>{
+    const selectedId=String(e.target.value||"");
+    await loadWPChecklist(selectedId);
+  });
+}
+/* Rev 25.3: delegated Add Finding handler survives form/page rerenders. */
+document.removeEventListener("click", window.__wpAddFindingDelegatedHandler || (()=>{}));
+window.__wpAddFindingDelegatedHandler = function(event){
+  const btn = event.target && event.target.closest ? event.target.closest("#wpAddFinding") : null;
+  if(!btn) return;
+  event.preventDefault();
+  if(btn.disabled) return;
+  addWPFinding();
+};
+document.addEventListener("click", window.__wpAddFindingDelegatedHandler);
 const wpSubmitBtn=document.getElementById("wpSubmitInspection");
 if(wpSubmitBtn)wpSubmitBtn.addEventListener("click",submitWPInspection);
 const wpResetBtn=document.getElementById("wpResetInspection");
@@ -6124,5 +6259,67 @@ function hidePortalBusyImmediately(overlay) {
 })();
 </script>
 
+
+<style id="rev25-5-observation-chart-overflow-fix">
+/* Rev 25.5: only the two hazard charts on Observation; let the card grow to fit every SVG row. */
+#page-observation .gridEqual:has(> .card > #chart-bsc-unsafe-act),
+#page-observation .gridEqual:has(> .card > #chart-bsc-unsafe-condition) {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  align-items: stretch !important;
+  grid-auto-rows: max-content !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+#page-observation .gridEqual:has(> .card > #chart-bsc-unsafe-act) > .card,
+#page-observation .gridEqual:has(> .card > #chart-bsc-unsafe-condition) > .card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-self: stretch !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+#page-observation #chart-bsc-unsafe-act,
+#page-observation #chart-bsc-unsafe-condition {
+  display: block !important;
+  flex: 0 0 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding-bottom: 6px !important;
+}
+#page-observation #chart-bsc-unsafe-act svg.dynamic-horizontal,
+#page-observation #chart-bsc-unsafe-condition svg.dynamic-horizontal {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  flex: 0 0 auto !important;
+}
+@media (max-width: 760px) {
+  #page-observation .gridEqual:has(> .card > #chart-bsc-unsafe-act),
+  #page-observation .gridEqual:has(> .card > #chart-bsc-unsafe-condition) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+</style>
+
+<style id="rev25-6-reviewer-field-and-acknowledgement-ui">
+.wp-inspection-field:has(> label[for="wpInspectionReviewer"]){display:none!important}
+#wpAcknowledgementPanel{display:none} #wpAcknowledgementPanel.show{display:block}
+.wp-ack-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--line,#cbdced);border-radius:12px;overflow:hidden}
+.wp-ack-box{min-width:0;background:#fff}.wp-ack-box+.wp-ack-box{border-left:1px solid var(--line,#cbdced)}
+.wp-ack-box-title{background:#e5f0f8;color:#173a5e;font-weight:800;text-align:center;padding:10px 12px;border-bottom:1px solid var(--line,#cbdced)}
+.wp-ack-box-body{padding:14px;min-height:145px}.wp-ack-signature-area{height:64px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #9aa8b5;margin-bottom:8px}
+.wp-ack-signature-area img{max-width:100%;max-height:60px;object-fit:contain}.wp-ack-name{font-size:13px;color:#263746;margin-bottom:5px;overflow-wrap:anywhere}
+.wp-ack-date{font-size:12px;color:#263746;min-height:18px}.wp-ack-state{font-size:12px;color:#946200;margin-top:3px}
+@media(max-width:600px){.wp-ack-grid{grid-template-columns:minmax(0,1fr)}.wp-ack-box+.wp-ack-box{border-left:0;border-top:1px solid var(--line,#cbdced)}}
+</style>
 </body>
 </html>
