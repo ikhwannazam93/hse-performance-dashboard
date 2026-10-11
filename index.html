@@ -2722,6 +2722,236 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
 }
 
 </style>
+<style id="dss-workplace-style-parity">
+#page-daily-surveillance .wp-dashboard-head .wp-new-inspection-btn{background:linear-gradient(110deg,#29357f 0%,#176fb1 65%,#09a8df 100%)!important;border:0!important;border-radius:9px!important;padding:12px 18px!important;font-size:12px!important;font-weight:800!important;box-shadow:0 5px 14px rgba(11,114,209,.18)!important;color:#fff!important}
+#page-daily-surveillance .wp-refresh-inspection-btn{font-family:inherit}
+#page-daily-surveillance .wp-remove-finding{border:1px solid #f0caca!important;background:#fff4f4!important;color:#b43838!important;border-radius:9px!important;padding:9px 13px!important;font-size:11px!important;font-weight:800!important;cursor:pointer}
+#page-daily-surveillance .wp-finding-card{border:1px solid #dbe7ef;border-radius:11px;padding:13px;background:#fff;margin-bottom:12px}
+#page-daily-surveillance .wp-photo-picker{display:grid;gap:7px}
+#page-daily-surveillance .wp-photo-picker-actions{display:flex;gap:7px;flex-wrap:wrap}
+#page-daily-surveillance .wp-photo-picker-btn{border:1px solid #cbdce8;background:#fff;color:#0d467c;border-radius:8px;padding:8px 10px;font-size:10px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+#page-daily-surveillance .wp-photo-picker-btn.camera{border-color:#0b72d1;background:#eef7ff;color:#075a9d}
+#page-daily-surveillance .wp-photo-selected{font-size:10px;color:#31704d;overflow-wrap:anywhere}
+#page-daily-surveillance .wp-photo-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+#page-daily-surveillance .wp-photo-preview:empty{display:none}
+#page-daily-surveillance .wp-photo-preview img{display:block;max-width:min(100%,340px);max-height:220px;width:auto;height:auto;object-fit:contain;border:1px solid #cad9e3;border-radius:8px;background:#fff;padding:3px}
+#page-daily-surveillance .wp-photo-delete-btn{border:1px solid #f0caca;background:#fff4f4;color:#b43838;border-radius:8px;padding:6px 10px;font-size:10px;font-weight:800;cursor:pointer}
+#page-daily-surveillance-form.wp-view-mode input:not([type="file"]),#page-daily-surveillance-form.wp-view-mode textarea,#page-daily-surveillance-form.wp-view-mode select{pointer-events:none;background:#f7fafc}
+#page-daily-surveillance-form.wp-view-mode .dss-editable-actions{display:none!important}
+#page-daily-surveillance-form.wp-view-mode input[type="file"]{display:none!important}
+#page-daily-surveillance .wp-view-mode .dss-editable-actions{display:none!important}
+#page-daily-surveillance .wp-inspection-field{min-width:0}
+#page-daily-surveillance-form .wp-inspection-card:has(#dssRemarks) > .wp-inspection-field{padding:13px 16px 0!important}
+#page-daily-surveillance-form .wp-inspection-card:has(#dssRemarks) > .wp-result{margin:12px 16px 0!important}
+#page-daily-surveillance-form .wp-inspection-card:has(#dssRemarks) > .wp-inspection-actions{margin:14px 16px 16px!important}
+.dss-signature-summary{display:grid;grid-template-columns:1fr 1fr;border:1px solid #dbe7ef;border-radius:9px;overflow:hidden}
+.dss-signature-summary>div{padding:12px;border-right:1px solid #dbe7ef;font-size:11px}
+.dss-signature-summary>div:last-child{border-right:0}
+.dss-signature-summary strong{display:block;background:#e5f0f7;padding:9px;margin:-12px -12px 10px;text-align:center;color:#123f63}
+.dss-signature-image{max-width:180px;max-height:55px;object-fit:contain;display:block;margin:6px auto;border-bottom:1px solid #9bb0bf}
+@media(max-width:650px){.dss-signature-summary{grid-template-columns:1fr}.dss-signature-summary>div{border-right:0;border-bottom:1px solid #dbe7ef}}
+</style>
+<style id="dss-v7-dashboard-polish">
+#page-daily-surveillance .wp-table-card-head{align-items:center}
+#page-daily-surveillance .wp-refresh-actions{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+#page-daily-surveillance .wp-refresh-status{font-size:10px!important;color:#168044!important;font-weight:700;white-space:nowrap}
+#page-daily-surveillance #dssRefresh{width:auto!important;min-width:0!important;padding:7px 10px!important;font-size:10px!important;line-height:1.2;border-radius:8px!important}
+#page-daily-surveillance #dssRefresh .refresh-glyph{font-size:12px}
+#page-daily-surveillance #dssKpis .wp-title-kpi{position:relative;overflow:hidden;border:0;color:#fff}
+#page-daily-surveillance #dssKpis .wp-title-kpi:nth-child(1){background:linear-gradient(135deg,#1265a8,#0a8ab8)}
+#page-daily-surveillance #dssKpis .wp-title-kpi:nth-child(2){background:linear-gradient(135deg,#6c48b7,#9474dd)}
+#page-daily-surveillance #dssKpis .wp-title-kpi:nth-child(3){background:linear-gradient(135deg,#d78a1d,#f0b33f)}
+#page-daily-surveillance #dssKpis .wp-title-kpi:nth-child(4){background:linear-gradient(135deg,#17804c,#35a96d)}
+#page-daily-surveillance #dssKpis .wp-title-kpi .kpi-title,
+#page-daily-surveillance #dssKpis .wp-title-kpi .kpi-value,
+#page-daily-surveillance #dssKpis .wp-title-kpi .kpi-cum,
+#page-daily-surveillance #dssKpis .wp-title-kpi .kpi-cum strong{color:#fff!important}
+#page-daily-surveillance #dssKpis .wp-title-kpi .kpi-cum{opacity:.9}
+#page-daily-surveillance #dssTable .wp-row-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+#page-daily-surveillance #dssTable .dss-view-only-btn{border:1px solid #cbdce8;background:#fff;color:#0067a5;border-radius:8px;padding:7px 11px;font-size:10px;font-weight:800;cursor:pointer}
+#page-daily-surveillance #dssTable .dss-view-only-btn:hover{background:#eef7ff;border-color:#8bbfe4}
+@media(max-width:760px){
+ #page-daily-surveillance .wp-table-card-head{align-items:flex-start}
+ #page-daily-surveillance .wp-refresh-actions{width:100%;justify-content:flex-end}
+ #page-daily-surveillance #dssKpis .wp-title-kpi{min-height:90px}
+}
+</style>
+
+<style id="dss-v8-signature-name">
+#page-daily-surveillance-form .dss-signature-name{font-size:12px;font-weight:600;color:#173d5e;margin:5px 0 2px;min-height:14px}
+</style>
+
+<style id="dss-v9-responsive-layout">
+/* Daily Site Surveillance only: mirror Workplace Inspection responsive behaviour. */
+#page-daily-surveillance,
+#page-daily-surveillance-form{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+#page-daily-surveillance *,
+#page-daily-surveillance-form *{box-sizing:border-box}
+#page-daily-surveillance .section-title,
+#page-daily-surveillance .wp-dashboard-wrap,
+#page-daily-surveillance .wp-dashboard-head,
+#page-daily-surveillance .wp-table-card,
+#page-daily-surveillance .wp-chart-card{min-width:0;max-width:100%}
+#page-daily-surveillance #dssFilters{width:100%;min-width:0;display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px}
+#page-daily-surveillance #dssFilters .filter-group{flex:1 1 155px;min-width:0;max-width:100%}
+#page-daily-surveillance #dssFilters .filter-group label{display:block}
+#page-daily-surveillance #dssFilters .filter-group input,
+#page-daily-surveillance #dssFilters .filter-group select{width:100%;max-width:100%;min-width:0}
+#page-daily-surveillance #dssKpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;width:100%;min-width:0}
+#page-daily-surveillance #dssKpis>.wp-title-kpi{min-width:0;overflow-wrap:anywhere}
+#page-daily-surveillance .wp-chart-card{min-width:0}
+#page-daily-surveillance #dssMonthlyChart{width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden}
+#page-daily-surveillance .wp-table-card{width:100%;min-width:0;max-width:100%;overflow:hidden}
+#page-daily-surveillance .wp-table-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;min-width:0}
+#page-daily-surveillance .wp-table-card-head-copy{min-width:0;flex:1 1 180px}
+#page-daily-surveillance .wp-refresh-actions{min-width:0;max-width:100%;flex-wrap:wrap}
+#page-daily-surveillance #dssTable{display:block;width:100%;max-width:100%;min-width:0;overflow:auto;max-height:360px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;border-radius:10px}
+#page-daily-surveillance #dssTable table{width:max-content;min-width:1050px;max-width:none;border-collapse:separate;border-spacing:0}
+#page-daily-surveillance #dssTable th,
+#page-daily-surveillance #dssTable td{white-space:nowrap}
+#page-daily-surveillance #dssTable td:nth-child(3),
+#page-daily-surveillance #dssTable td:nth-child(4){white-space:normal;min-width:130px;max-width:240px;overflow-wrap:anywhere}
+#page-daily-surveillance #dssTable th:last-child,
+#page-daily-surveillance #dssTable td:last-child{position:sticky;right:0;background:#fff;z-index:2;box-shadow:-4px 0 7px rgba(20,63,105,.05)}
+#page-daily-surveillance #dssTable th:last-child{z-index:4;background:#f3f7f9}
+#page-daily-surveillance .dss-mobile-filter-toggle{display:none}
+@media(max-width:1100px){
+ #page-daily-surveillance #dssKpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ #page-daily-surveillance .dss-mobile-filter-toggle{display:flex}
+ #page-daily-surveillance #dssKpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ #page-daily-surveillance #dssFilters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:12px}
+ #page-daily-surveillance #dssFilters .filter-group{width:100%;min-width:0;flex:auto}
+ #page-daily-surveillance .wp-chart-card,
+ #page-daily-surveillance .wp-table-card{padding:14px}
+ #page-daily-surveillance .wp-table-card-head{align-items:flex-start}
+ #page-daily-surveillance .wp-refresh-actions{width:100%;justify-content:flex-end}
+ #page-daily-surveillance #dssTable{max-height:360px}
+}
+@media(max-width:520px){
+ #page-daily-surveillance #dssKpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ #page-daily-surveillance #dssKpis .wp-title-kpi{padding:11px;min-height:95px}
+ #page-daily-surveillance #dssKpis .wp-title-kpi .kpi-title{font-size:9px}
+ #page-daily-surveillance #dssKpis .wp-title-kpi .kpi-value{font-size:22px;margin:6px 0 2px}
+ #page-daily-surveillance #dssKpis .wp-title-kpi .kpi-cum{font-size:8px;line-height:1.35}
+ #page-daily-surveillance #dssFilters{grid-template-columns:minmax(0,1fr)}
+ #page-daily-surveillance .wp-dashboard-head{min-width:0}
+ #page-daily-surveillance #dssNewBtn{width:100%;max-width:100%}
+ #page-daily-surveillance .wp-table-card-head-copy h3{font-size:14px}
+ #page-daily-surveillance #dssTable table{min-width:1000px}
+}
+@media(max-width:360px){
+ #page-daily-surveillance #dssKpis{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+
+
+<style id="dss-v10-mobile-form-layout">
+/* Daily Site Surveillance form only: improve mobile finding layout and action order. */
+#page-daily-surveillance-form #dssFindings .wp-finding-card{min-width:0;overflow:hidden}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid{min-width:0}
+#page-daily-surveillance-form #dssFindings .wp-inspection-field{min-width:0}
+#page-daily-surveillance-form #dssFindings .wp-inspection-field input,
+#page-daily-surveillance-form #dssFindings .wp-inspection-field select,
+#page-daily-surveillance-form #dssFindings .wp-inspection-field textarea{min-width:0;max-width:100%}
+#page-daily-surveillance-form #dssFindings .wp-photo-picker,
+#page-daily-surveillance-form #dssFindings .wp-photo-preview,
+#page-daily-surveillance-form #dssFindings .wp-existing-photo{max-width:100%;min-width:0}
+#page-daily-surveillance-form #dssFindings .wp-existing-photo img,
+#page-daily-surveillance-form #dssFindings .wp-photo-preview img{display:block;max-width:100%;height:auto;max-height:220px;object-fit:contain}
+@media(max-width:650px){
+  #page-daily-surveillance-form #dssFindings .wp-finding-card{padding:12px;border-radius:12px}
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:12px 10px!important;
+    width:100%;
+  }
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field{
+    grid-column:span 2!important;
+    width:100%;
+    min-width:0;
+  }
+  /* Keep the date and status controls in a balanced two-column row. */
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(4),
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(5),
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(8){
+    grid-column:span 1!important;
+  }
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(1) textarea,
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(2) textarea{
+    min-height:76px;
+  }
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(3),
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(6),
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(7),
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(9){
+    grid-column:span 2!important;
+  }
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid label{
+    line-height:1.35;
+    min-height:0;
+    overflow-wrap:anywhere;
+  }
+  #page-daily-surveillance-form #dssFindings .wp-photo-picker-actions{display:flex;flex-wrap:wrap;gap:7px}
+  #page-daily-surveillance-form #dssFindings .wp-photo-picker-btn{flex:1 1 110px;min-width:0}
+  #page-daily-surveillance-form #dssFindings .wp-photo-note{line-height:1.4}
+  #page-daily-surveillance-form > .section-title{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:10px!important;
+  }
+  #page-daily-surveillance-form > .section-title>div{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+    width:100%!important;
+  }
+  #page-daily-surveillance-form > .section-title>div>#dssEditBtn,
+  #page-daily-surveillance-form > .section-title>div>#dssPdfBtn,
+  #page-daily-surveillance-form > .section-title>div>#dssAckBtn{
+    width:100%!important;
+    min-width:0!important;
+    justify-content:center!important;
+    margin:0!important;
+  }
+  #page-daily-surveillance-form > .section-title>div>#dssBack{
+    grid-column:1/-1!important;
+    width:100%!important;
+    min-width:0!important;
+    justify-content:center!important;
+    white-space:normal!important;
+    text-align:center;
+  }
+  #page-daily-surveillance-form .wp-inspection-actions{
+    align-items:stretch!important;
+    flex-direction:column!important;
+  }
+  #page-daily-surveillance-form .wp-inspection-actions>div{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+    width:100%!important;
+  }
+  #page-daily-surveillance-form .wp-inspection-actions button{
+    width:100%!important;
+    min-width:0!important;
+  }
+}
+@media(max-width:380px){
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid{grid-template-columns:minmax(0,1fr)!important}
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(4),
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(5),
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(8){
+    grid-column:span 2!important;
+  }
+  #page-daily-surveillance-form > .section-title>div{grid-template-columns:minmax(0,1fr)!important}
+  #page-daily-surveillance-form > .section-title>div>#dssBack{grid-column:1!important}
+}
+</style>
+
 </head>
 <body>
 <div id="portalLoadingOverlay" class="portal-loading-overlay" role="status" aria-live="polite" aria-hidden="true">
@@ -3001,8 +3231,38 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
   </section>
 
   <!-- Future modules are navigable placeholders; existing data and forms are untouched. -->
-  <section id="page-daily-surveillance" class="page portal-menu-page">
-    <div class="portal-module-placeholder"><div class="big-icon">◉</div><h2>Daily Site Surveillance</h2><p>This page is reserved for the Daily Site Surveillance module. The current dashboard reports and Workplace Inspection workflow remain available from the Main Menu.</p></div>
+  <section id="page-daily-surveillance" class="page">
+    <div class="section-title" style="margin-top:4px"><h2>Daily Site Surveillance</h2></div>
+    <div class="filters" id="dssFilters">
+      <div class="filter-group"><label for="dssFilterYear">Year</label><select id="dssFilterYear"><option value="">All years</option></select></div>
+      <div class="filter-group"><label for="dssFilterStart">Start date</label><input type="date" id="dssFilterStart"></div>
+      <div class="filter-group"><label for="dssFilterEnd">End date</label><input type="date" id="dssFilterEnd"></div>
+      <div class="filter-group"><label for="dssFilterCompany">Company</label><select id="dssFilterCompany"><option value="">All companies</option></select></div>
+      <div class="filter-group"><label for="dssFilterStatus">Status</label><select id="dssFilterStatus"><option value="">All statuses</option><option>Open</option><option>In Progress</option><option>Pending Review</option><option>Acknowledged</option><option>Closed</option></select></div>
+      <div class="filter-group" style="align-self:end"><button type="button" class="btn" id="dssResetFilters">Reset filters</button></div>
+    </div>
+    <div class="wp-dashboard-wrap">
+      <div class="wp-dashboard-head"><div><h2>Daily Site Surveillance Overview</h2><p>Surveillance inspections, findings and closure status.</p></div></div>
+      <div id="dssKpis" class="wp-kpi-grid"></div>
+      <div class="wp-chart-card"><h3>Surveillance Submissions by Month</h3><div class="wp-card-sub">Monthly submission trend based on selected filters</div><div id="dssMonthlyChart" class="wp-month-chart"></div></div>
+      <div class="wp-table-card"><div class="wp-table-card-head"><div class="wp-table-card-head-copy"><h3>Daily Site Surveillance Log</h3><div class="wp-card-sub">Latest surveillance inspections</div></div><div class="wp-refresh-actions"><span id="dssRefreshStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" class="wp-refresh-inspection-btn" id="dssRefresh" title="Reload latest daily site surveillance submissions"><span class="refresh-glyph" aria-hidden="true">↻</span><span>Refresh</span></button></div></div><div id="dssTable" class="table-wrap"></div></div>
+      <div class="wp-dashboard-head" style="justify-content:flex-end"><button type="button" class="wp-new-inspection-btn" id="dssNewBtn">＋ NEW SITE SURVEILLANCE</button></div>
+    </div>
+  </section>
+  <section id="page-daily-surveillance-form" class="page wp-form-page">
+    <div class="section-title" style="margin-top:4px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap"><h2 id="dssFormTitle">New Daily Site Surveillance</h2><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="wp-icon-action wp-edit-action" id="dssEditBtn" style="display:none">✎ Edit</button><button type="button" class="wp-icon-action wp-save-action" id="dssPdfBtn" style="display:none">↓ Save</button><button type="button" class="wp-icon-action wp-ack-action" id="dssAckBtn" style="display:none">✓ Acknowledge</button><button type="button" class="wp-back-btn" id="dssBack">← Back to Surveillance Dashboard</button></div></div>
+    <div class="wp-inspection-wrap">
+      <div class="wp-inspection-card"><h3>Surveillance Information</h3><div class="wp-inspection-grid">
+        <div class="wp-inspection-field"><label for="dssDate">Date</label><input id="dssDate" type="date"></div>
+        <div class="wp-inspection-field"><label for="dssTime">Time</label><input id="dssTime" type="time"></div>
+        <div class="wp-inspection-field"><label for="dssLocation">Location / Work Area</label><input id="dssLocation" placeholder="Enter location"></div>
+        <div class="wp-inspection-field"><label for="dssCompany">Company</label><input id="dssCompany" placeholder="Enter company / subcontractor"></div>
+        <div class="wp-inspection-field"><label for="dssInspector">Inspector</label><input id="dssInspector" readonly></div>
+        <div class="wp-inspection-field"><label for="dssActivity">Activity Observed</label><input id="dssActivity" placeholder="Describe work activity"></div>
+      </div></div>
+      <div class="wp-inspection-card"><div class="wp-finding-head"><h3 style="margin:0">Findings &amp; Corrective Actions</h3><button type="button" class="wp-add-finding" id="dssAddFinding">+ Add Finding</button></div><div class="wp-photo-note">One surveillance inspection can contain multiple findings. Each finding requires a before photo; closure photo is added when corrective action is completed.</div><div id="dssFindings" class="wp-findings" style="margin-top:12px"></div></div>
+      <div class="wp-inspection-card" id="dssSignatureCard" style="display:none"><h3>Signature / Acknowledgement</h3><div class="dss-signature-summary"><div><strong>Inspector</strong><div id="dssInspectorSignature"></div><div id="dssInspectorName" class="dss-signature-name"></div><div id="dssInspectorSignedDate">Date: —</div></div><div><strong>Reviewer</strong><div id="dssReviewerSignature"></div><div id="dssReviewerName" class="dss-signature-name"></div><div id="dssReviewerSignedDate">Date: —</div><div id="dssReviewerPreviousDate"></div><div id="dssReviewerState"></div></div></div></div><div class="wp-inspection-card"><h3>Submission</h3><div class="wp-inspection-field"><label for="dssRemarks">Overall Remarks</label><textarea id="dssRemarks" placeholder="Enter overall remarks"></textarea></div><div id="dssResult" class="wp-result" style="margin-top:12px"></div><div class="wp-inspection-actions no-print" style="margin-top:14px"><span id="dssStatus" class="wp-api-status">Ready.</span><div style="display:flex;gap:8px"><button type="button" class="wp-reset-btn" id="dssReset">Reset</button><button type="button" class="wp-submit-btn" id="dssSubmit">SUBMIT SURVEILLANCE</button></div></div></div>
+    </div>
   </section>
   <section id="page-equipment-inspection" class="page portal-menu-page">
     <div class="portal-module-placeholder"><div class="big-icon">⚙</div><h2>Machinery &amp; Equipment Inspection</h2><p>This page is reserved for the machinery and equipment inspection module. It will be connected to the existing Google Sheets master database in the next stage.</p></div>
@@ -3677,10 +3937,17 @@ async function loadLiveData(){
   // Do not gate dashboard loading behind a separate health request.
   // This keeps the data flow identical to the stable version used before.
   try{
-    const response=await fetch(GOOGLE_API_URL+"?action=dashboard&ts="+Date.now(),{cache:"no-store"});
+    const [response,dssResponse] = await Promise.all([
+      fetch(GOOGLE_API_URL+"?action=dashboard&ts="+Date.now(),{cache:"no-store"}),
+      fetch(GOOGLE_API_URL+"?action=dsslist&ts="+Date.now(),{cache:"no-store"}).catch(err=>{console.warn("Daily Site Surveillance preload failed",err);return null;})
+    ]);
     if(!response.ok) throw new Error("Google Sheets API returned HTTP "+response.status);
     const json=await response.json();
     if(json.success===false) throw new Error(json.error||"Google Sheets API request failed");
+    if(dssResponse && dssResponse.ok){
+      try{const dssJson=await dssResponse.json();if(dssJson.success){dssRecords=Array.isArray(dssJson.records)?dssJson.records:[];window.dssPreloaded=true;}}
+      catch(dssErr){console.warn("Daily Site Surveillance preload response invalid",dssErr);}
+    }
 
     DATA.manpower=Array.isArray(json.manpower)?json.manpower:[];
     DATA.bsc=Array.isArray(json.bsc)?json.bsc:[];
@@ -3727,6 +3994,7 @@ async function loadLiveData(){
     ["manhour","manday","lagging","leading","observation","training","inspection"].forEach(p=>{
       try{ renderPage(p); }catch(err){ console.error("Render failed for "+p,err); }
     });
+    try{ dssPopulateFiltersAndRender(); }catch(err){ console.warn("Daily Site Surveillance initial render failed",err); }
   }catch(err){
     console.error("Google Sheets dashboard data fetch failed",err);
     status.textContent="● DASHBOARD DATA ERROR — click to retry";
@@ -5908,7 +6176,7 @@ async function downloadWPInspectionPdf(){
       return new Promise(resolve=>{const done=()=>resolve();img.addEventListener("load",done,{once:true});img.addEventListener("error",done,{once:true});setTimeout(done,2500);});
     }));
     const filename=no.replace(/[^a-zA-Z0-9_-]/g,"_")+"_Workplace_Inspection.pdf";
-    const opt={margin:[4,15,8,15],filename,image:{type:"jpeg",quality:.96},html2canvas:{scale:2,useCORS:true,allowTaint:false,backgroundColor:"#ffffff",logging:false,scrollX:0,scrollY:0},jsPDF:{unit:"mm",format:"a4",orientation:"portrait",compress:true},pagebreak:{mode:["css"]}};
+    const opt={margin:[4,10,8,10],filename,image:{type:"jpeg",quality:.96},html2canvas:{scale:2,useCORS:true,allowTaint:false,backgroundColor:"#ffffff",logging:false,scrollX:0,scrollY:0},jsPDF:{unit:"mm",format:"a4",orientation:"portrait",compress:true},pagebreak:{mode:["css"]}};
     const worker=html2pdf().set(opt).from(shell).toPdf();
     const pdf=await worker.get("pdf");
     // Add footer in PDF coordinates rather than HTML flow. This guarantees that
@@ -5924,7 +6192,7 @@ async function downloadWPInspectionPdf(){
       pdf.setFont("helvetica","normal");
       pdf.setFontSize(6.2);
       pdf.setTextColor(92,110,121);
-      pdf.text("HSE-WP-01 | Rev. 0",15,pageHeight-6.5);
+      pdf.text("Daily Site Surveillance",15,pageHeight-6.5);
       pdf.text(`Page ${page} of ${actualPages}`,pageWidth-15,pageHeight-6.5,{align:"right"});
     }
     // Save the same jsPDF object that received the page footer stamps.
@@ -5999,6 +6267,7 @@ function renderPage(page){
   if(page==="lagging")renderLagging();
   if(page==="inspection")renderWorkplaceInspectionDashboard();
   if(page==="inspection-form")renderWorkplaceInspection();
+  if(page==="daily-surveillance"){if(dssRecords.length||window.dssPreloaded) dssPopulateFiltersAndRender(); else dssLoad();}
 }
 function go(page){
   const target=document.getElementById("page-"+page);
@@ -6319,6 +6588,332 @@ function hidePortalBusyImmediately(overlay) {
   const observer=new MutationObserver(hideWPLogColumns);
   observer.observe(document.body,{childList:true,subtree:true});
 })();
+
+/* ===== Daily Site Surveillance module (isolated from Workplace Inspection) ===== */
+let dssRecords = [], dssFindingsCount = 0, dssCurrentNo = "", dssCurrentRecord=null, dssFormMode="new";
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",dssInit);else dssInit();
+function dssEsc(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function dssToday(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;}
+function dssDriveImageUrl(url){
+  const raw=String(url||"").trim();
+  if(!raw)return "";
+  const id=(raw.match(/[?&]id=([a-zA-Z0-9_-]+)/)||raw.match(/\/d\/([a-zA-Z0-9_-]+)/)||[])[1];
+  return id?`https://drive.google.com/uc?export=view&id=${encodeURIComponent(id)}`:raw;
+}
+const dssImageDataCache = window.dssImageDataCache || (window.dssImageDataCache = new Map());
+function dssDriveFileId(value){
+  const raw=String(value||"").trim();
+  const m=raw.match(/[?&]id=([a-zA-Z0-9_-]+)/)||raw.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if(m&&m[1])return m[1];
+  return /^[a-zA-Z0-9_-]{20,}$/.test(raw)?raw:"";
+}
+async function dssLoadDriveImageData(value){
+  const id=dssDriveFileId(value); if(!id)return "";
+  if(dssImageDataCache.has(id))return await dssImageDataCache.get(id);
+  const req=wpGet({action:"imagedata",fileId:id}).then(x=>String(x.dataUrl||"")).catch(err=>{
+    console.warn("Unable to load Daily Site Surveillance image",err);dssImageDataCache.delete(id);return "";
+  });
+  dssImageDataCache.set(id,req);return await req;
+}
+async function dssHydrateRecordImages(record){
+  const findings=Array.isArray(record?.findings)?record.findings:[];
+  await Promise.all(findings.map(async f=>{
+    if(f.beforePhotoUrl&&!String(f.beforePhotoDataUrl||"").startsWith("data:image/"))f.beforePhotoDataUrl=await dssLoadDriveImageData(f.beforePhotoUrl);
+    if(f.closurePhotoUrl&&!String(f.closurePhotoDataUrl||"").startsWith("data:image/"))f.closurePhotoDataUrl=await dssLoadDriveImageData(f.closurePhotoUrl);
+  }));
+  const [inspector,reviewer]=await Promise.all([
+    record?.inspectorSignatureUrl?dssLoadDriveImageData(record.inspectorSignatureUrl):"",
+    record?.reviewerSignatureUrl?dssLoadDriveImageData(record.reviewerSignatureUrl):""
+  ]);
+  if(inspector)record.inspectorSignatureDataUrl=inspector;
+  if(reviewer)record.reviewerSignatureDataUrl=reviewer;
+  return record;
+}
+
+function dssFileBase64(file){return new Promise((resolve,reject)=>{if(!file){resolve("");return;}const r=new FileReader();r.onload=()=>resolve(String(r.result||""));r.onerror=reject;r.readAsDataURL(file);});}
+function dssAddFinding(f={}){
+  const box=document.getElementById("dssFindings"); if(!box)return;
+  const n=++dssFindingsCount, div=document.createElement("div"); div.className="wp-finding-card"; div.dataset.findingNo=String(n);
+  div.dataset.beforePhotoUrl=f.beforePhotoUrl||"";div.dataset.closurePhotoUrl=f.closurePhotoUrl||"";
+  div.dataset.beforePhotoDataUrl="";div.dataset.closurePhotoDataUrl="";div.dataset.removeBeforePhoto="0";div.dataset.removeClosurePhoto="0";
+  div.innerHTML=`<div class="wp-finding-head"><h4 class="wp-finding-title" style="margin:0">Finding ${n}</h4><button type="button" class="wp-reset-btn wp-remove-finding dss-editable-actions">Remove</button></div>
+    <div class="wp-inspection-grid">
+    <div class="wp-inspection-field" style="grid-column:span 2"><label>Finding / Observation</label><textarea data-k="finding" placeholder="Describe unsafe act, unsafe condition or good practice">${dssEsc(f.finding||"")}</textarea></div>
+    <div class="wp-inspection-field"><label>Corrective Action Required</label><textarea data-k="action" placeholder="Required remedial action">${dssEsc(f.action||"")}</textarea></div>
+    <div class="wp-inspection-field"><label>Responsible Person / Company</label><input data-k="responsible" value="${dssEsc(f.responsible||"")}" placeholder="Responsible person"></div>
+    <div class="wp-inspection-field"><label>Target Closure Date</label><input data-k="targetDate" type="date" value="${dssEsc(f.targetDate||"")}"></div>
+    <div class="wp-inspection-field"><label>Status</label><select data-k="status"><option ${(!f.status||f.status==="Open")?"selected":""}>Open</option><option ${f.status==="In Progress"?"selected":""}>In Progress</option><option ${f.status==="Closed"?"selected":""}>Closed</option></select></div>
+    <div class="wp-inspection-field"><label>Before Photo</label><div class="wp-photo-picker"><input data-k="beforePhoto" type="file" accept="image/*" style="display:none" aria-label="Choose before photo"><input data-k="beforeCamera" type="file" accept="image/*" capture="environment" style="display:none" aria-label="Take before photo"><div class="wp-photo-picker-actions dss-editable-actions"><button type="button" class="wp-photo-picker-btn" data-pick="before">Choose Photo</button><button type="button" class="wp-photo-picker-btn camera" data-pick="beforeCamera">Take Photo</button></div><div class="wp-photo-selected" data-name="before"></div><div class="wp-photo-preview" data-preview="before">${f.beforePhotoUrl?`<div class="wp-existing-photo"><a href="${dssEsc(dssDriveImageUrl(f.beforePhotoUrl))}" target="_blank" rel="noopener"><img class="dss-saved-before-img" src="${dssEsc(f.beforePhotoDataUrl||dssDriveImageUrl(f.beforePhotoUrl))}" alt="Saved before photo"></a><button type="button" class="wp-photo-delete-btn dss-editable-actions" data-delete="before">Delete Photo</button></div>`:""}</div></div><div class="wp-photo-note">Required for a new finding.</div></div>
+    <div class="wp-inspection-field"><label>Closure Photo / Evidence</label><div class="wp-photo-picker"><input data-k="closurePhoto" type="file" accept="image/*" style="display:none" aria-label="Choose closure photo"><input data-k="closureCamera" type="file" accept="image/*" capture="environment" style="display:none" aria-label="Take closure photo"><div class="wp-photo-picker-actions dss-editable-actions"><button type="button" class="wp-photo-picker-btn" data-pick="closure">Choose Photo</button><button type="button" class="wp-photo-picker-btn camera" data-pick="closureCamera">Take Photo</button></div><div class="wp-photo-selected" data-name="closure"></div><div class="wp-photo-preview" data-preview="closure">${f.closurePhotoUrl?`<div class="wp-existing-photo"><a href="${dssEsc(dssDriveImageUrl(f.closurePhotoUrl))}" target="_blank" rel="noopener"><img class="dss-saved-closure-img" src="${dssEsc(f.closurePhotoDataUrl||dssDriveImageUrl(f.closurePhotoUrl))}" alt="Saved closure photo"></a><button type="button" class="wp-photo-delete-btn dss-editable-actions" data-delete="closure">Delete Photo</button></div>`:""}</div></div><div class="wp-photo-note">Upload when closing the finding.</div></div>
+    <div class="wp-inspection-field"><label>Closure Date</label><input data-k="closureDate" type="date" value="${dssEsc(f.closureDate||"")}"></div>
+    <div class="wp-inspection-field"><label>Remarks</label><textarea data-k="remarks" placeholder="Follow-up / closure remarks">${dssEsc(f.remarks||"")}</textarea></div>
+    </div>`;
+  box.appendChild(div);
+  const removeFindingBtn = div.querySelector(".wp-remove-finding");
+  if (removeFindingBtn) removeFindingBtn.addEventListener("click",()=>{div.remove();dssRenumberFindings();});
+  const slots=[
+    {kind:"before",file:"beforePhoto",camera:"beforeCamera",url:"beforePhotoUrl",data:"beforePhotoDataUrl"},
+    {kind:"closure",file:"closurePhoto",camera:"closureCamera",url:"closurePhotoUrl",data:"closurePhotoDataUrl"}
+  ];
+  slots.forEach(s=>{
+    const file=div.querySelector(`[data-k="${s.file}"]`),camera=div.querySelector(`[data-k="${s.camera}"]`);
+    div.querySelector(`[data-pick="${s.kind}"]`)?.addEventListener("click",()=>file.click());
+    div.querySelector(`[data-pick="${s.camera}"]`)?.addEventListener("click",()=>camera.click());
+    const change=async(source,other)=>{
+      if(!source.files?.length)return;
+      if(other)other.value="";
+      const preview=div.querySelector(`[data-preview="${s.kind}"]`),name=div.querySelector(`[data-name="${s.kind}"]`);
+      try{
+        const packed=await fileToCompressedBase64(source.files[0]);const dataUrl=packed.dataUrl||`data:${packed.mimeType};base64,${packed.base64}`;
+        div.dataset[s.data]=dataUrl;div.dataset[s.url]="";div.dataset[s.kind==="before"?"removeBeforePhoto":"removeClosurePhoto"]="0";name.textContent="Selected: "+source.files[0].name;
+        preview.innerHTML="";const img=document.createElement("img");img.src=dataUrl;img.alt=s.kind+" photo preview";preview.appendChild(img);
+        const del=document.createElement("button");del.type="button";del.className="wp-photo-delete-btn";del.textContent="Delete Photo";del.addEventListener("click",()=>{file.value="";camera.value="";div.dataset[s.data]="";div.dataset[s.url]="";div.dataset[s.kind==="before"?"removeBeforePhoto":"removeClosurePhoto"]="1";name.textContent="";preview.innerHTML="";});preview.appendChild(del);
+      }catch(err){name.textContent=err.message||"Unable to load photo preview.";}
+    };
+    file.addEventListener("change",()=>change(file,camera));camera.addEventListener("change",()=>change(camera,file));
+    div.querySelector(`[data-delete="${s.kind}"]`)?.addEventListener("click",()=>{div.dataset[s.url]="";div.dataset[s.data]="";div.dataset[s.kind==="before"?"removeBeforePhoto":"removeClosurePhoto"]="1";file.value="";camera.value="";div.querySelector(`[data-preview="${s.kind}"]`).innerHTML="";div.querySelector(`[data-name="${s.kind}"]`).textContent="";});
+  });
+}
+function dssRenumberFindings(){document.querySelectorAll("#dssFindings .wp-finding-card h4").forEach((h,i)=>h.textContent=`Finding ${i+1}`);}
+function dssCollectFindings(){
+  return [...document.querySelectorAll("#dssFindings .wp-finding-card")].map(el=>({
+    finding:el.querySelector('[data-k="finding"]').value.trim(),action:el.querySelector('[data-k="action"]').value.trim(),
+    responsible:el.querySelector('[data-k="responsible"]').value.trim(),targetDate:el.querySelector('[data-k="targetDate"]').value,
+    status:el.querySelector('[data-k="status"]').value,closureDate:el.querySelector('[data-k="closureDate"]').value,
+    remarks:el.querySelector('[data-k="remarks"]').value.trim(),
+    beforeFile:el.querySelector('[data-k="beforePhoto"]').files[0]||el.querySelector('[data-k="beforeCamera"]').files[0]||null,
+    closureFile:el.querySelector('[data-k="closurePhoto"]').files[0]||el.querySelector('[data-k="closureCamera"]').files[0]||null,
+    beforePhotoUrl:el.dataset.beforePhotoUrl||"",closurePhotoUrl:el.dataset.closurePhotoUrl||"",
+    removeBeforePhoto:el.dataset.removeBeforePhoto==="1",removeClosurePhoto:el.dataset.removeClosurePhoto==="1",
+    beforePhotoDataUrl:el.dataset.beforePhotoDataUrl||"",closurePhotoDataUrl:el.dataset.closurePhotoDataUrl||""
+  }));
+}
+function dssCanDelete(record){
+  const u=getCurrentPortalUser(),role=String(u.role||"").trim().toLowerCase();
+  if(["admin","administrator","hse admin","hse administrator"].includes(role))return true;
+  const username=String(u.username||"").trim().toLowerCase();
+  return !!username && String(record.submittedBy||record.submittedByUsername||"").trim().toLowerCase()===username;
+}
+function dssRender(){
+  const year=document.getElementById("dssFilterYear").value,start=document.getElementById("dssFilterStart").value,end=document.getElementById("dssFilterEnd").value,company=document.getElementById("dssFilterCompany").value,status=document.getElementById("dssFilterStatus").value;
+  const rows=dssRecords.filter(r=>(!year||String(r.date||"").slice(0,4)===year)&&(!start||r.date>=start)&&(!end||r.date<=end)&&(!company||r.company===company)&&(!status||r.status===status));
+  const totalFindings=rows.reduce((n,r)=>n+(Number(r.findingCount)||0),0),open=rows.reduce((n,r)=>n+(Number(r.openCount)||0),0),closed=rows.reduce((n,r)=>n+(Number(r.closedCount)||0),0);
+  const allFindings=dssRecords.reduce((n,r)=>n+(Number(r.findingCount)||0),0);
+  const allOpen=dssRecords.reduce((n,r)=>n+(Number(r.openCount)||0),0);
+  const allClosed=dssRecords.reduce((n,r)=>n+(Number(r.closedCount)||0),0);
+  const kpis=[
+    ["Total Surveillance",rows.length,dssRecords.length],
+    ["Total Findings",totalFindings,allFindings],
+    ["Open / In Progress",open,allOpen],
+    ["Closed Findings",closed,allClosed]
+  ];
+  document.getElementById("dssKpis").innerHTML=kpis.map(([t,v,c])=>`<div class="wp-title-kpi"><div class="kpi-title">${t}</div><div class="kpi-value">${fmt(v)}</div><div class="kpi-cum">Filtered: <strong>${fmt(v)}</strong> &nbsp;|&nbsp; Cumulative: <strong>${fmt(c)}</strong></div></div>`).join("");
+  const monthly={}; rows.forEach(r=>{if(/^\d{4}-\d{2}/.test(r.date||""))monthly[r.date.slice(0,7)]=(monthly[r.date.slice(0,7)]||0)+1;});
+  const vals=Object.keys(monthly).sort().map(k=>{const [y,m]=k.split("-").map(Number);return {k:new Date(y,m-1,1).toLocaleDateString("en-US",{month:"short",year:"numeric"}),v:monthly[k]};});
+  document.getElementById("dssMonthlyChart").innerHTML=vals.length?svgBar(vals,{color:"#0067a5"}):'<div class="empty">No submissions for current filters</div>';
+  const sorted=[...rows].sort((a,b)=>String(b.date||"").localeCompare(String(a.date||""))).slice(0,100);
+  document.getElementById("dssTable").innerHTML=sorted.length?`<table><thead><tr><th>Date</th><th>Surveillance No.</th><th>Location</th><th>Activity</th><th>Company</th><th>Inspector</th><th>Findings</th><th>Open</th><th>Closed</th><th>Status</th><th>Action</th></tr></thead><tbody>${sorted.map(r=>`<tr><td>${dssEsc(r.date)}</td><td>${dssEsc(r.surveillanceNo)}</td><td>${dssEsc(r.location)}</td><td>${dssEsc(r.activity)}</td><td>${dssEsc(r.company)}</td><td>${dssEsc(r.inspector)}</td><td>${r.findingCount||0}</td><td>${r.openCount||0}</td><td>${r.closedCount||0}</td><td>${dssEsc(r.status||"Open")}</td><td><div class="wp-row-actions"><button type="button" class="dss-view-only-btn" data-dss-view="${dssEsc(r.surveillanceNo)}">View</button>${dssCanDelete(r)?`<button type="button" class="wp-delete-btn" data-dss-delete="${dssEsc(r.surveillanceNo)}" title="Delete surveillance record">Delete</button>`:""}</div></td></tr>`).join("")}</tbody></table>`:'<div class="empty">No surveillance records for current filters</div>';
+  document.querySelectorAll("[data-dss-view]").forEach(b=>b.addEventListener("click",()=>dssView(b.dataset.dssView,"view")));
+  document.querySelectorAll("[data-dss-delete]").forEach(b=>b.addEventListener("click",()=>dssDelete(b.dataset.dssDelete,b)));
+}
+async function dssDelete(no,button){
+  const record=dssRecords.find(r=>String(r.surveillanceNo)===String(no));
+  if(!record||!dssCanDelete(record)){alert("You do not have permission to delete this surveillance record.");return;}
+  if(!confirm("Delete Daily Site Surveillance "+no+"? This will remove the record and its stored finding data. This action cannot be undone."))return;
+  const u=getCurrentPortalUser();button.disabled=true;
+  try{
+    const res=await fetch(GOOGLE_API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"dssdelete",authToken:u.token||u.authToken||"",surveillanceNo:no})});
+    const out=await res.json();if(!out.success)throw new Error(out.error||"Delete failed.");
+    await dssLoad();
+  }catch(e){alert("Unable to delete surveillance: "+e.message);button.disabled=false;}
+}
+function dssPopulateFiltersAndRender(){
+  const yearEl=document.getElementById("dssFilterYear"),companyEl=document.getElementById("dssFilterCompany");
+  if(!yearEl||!companyEl)return;
+  const oldYear=yearEl.value,oldCompany=companyEl.value;
+  const years=[...new Set(dssRecords.map(r=>String(r.date||"").slice(0,4)).filter(Boolean))].sort().reverse();
+  const companies=[...new Set(dssRecords.map(r=>r.company).filter(Boolean))].sort();
+  yearEl.innerHTML='<option value="">All years</option>'+years.map(y=>`<option value="${dssEsc(y)}">${dssEsc(y)}</option>`).join("");
+  companyEl.innerHTML='<option value="">All companies</option>'+companies.map(c=>`<option value="${dssEsc(c)}">${dssEsc(c)}</option>`).join("");
+  if(years.includes(oldYear))yearEl.value=oldYear;if(companies.includes(oldCompany))companyEl.value=oldCompany;
+  dssRender();
+}
+async function dssLoad(){
+  const status=document.getElementById("dssRefreshStatus"),refreshBtn=document.getElementById("dssRefresh");
+  if(status)status.textContent="Refreshing…";
+  if(refreshBtn){refreshBtn.disabled=true;refreshBtn.classList.add("is-refreshing");}
+  try{const res=await fetch(GOOGLE_API_URL+"?action=dsslist&ts="+Date.now(),{cache:"no-store"});const data=await res.json();if(!data.success)throw new Error(data.error||"Unable to load surveillance records");
+    dssRecords=data.records||[];
+    dssPopulateFiltersAndRender();if(status)status.textContent=`Updated ${new Date().toLocaleTimeString()}`;
+  }catch(e){if(status)status.textContent="Could not load: "+e.message;document.getElementById("dssTable").innerHTML='<div class="empty">Could not load Daily Site Surveillance records. Check Apps Script deployment.</div>';console.error(e);}
+  finally{if(refreshBtn){refreshBtn.disabled=false;refreshBtn.classList.remove("is-refreshing");}}
+}
+function dssOpenNew(){
+  dssCurrentNo="";document.getElementById("dssFormTitle").textContent="New Daily Site Surveillance";dssCurrentRecord=null;dssFormMode="new";document.getElementById("page-daily-surveillance-form").classList.remove("wp-view-mode");document.getElementById("dssSignatureCard").style.display="none";["dssEditBtn","dssPdfBtn","dssAckBtn"].forEach(id=>document.getElementById(id).style.display="none");document.getElementById("dssSubmit").style.display="inline-block";document.getElementById("dssReset").style.display="inline-block";document.getElementById("dssAddFinding").style.display="inline-block";
+  ["dssLocation","dssCompany","dssActivity","dssRemarks"].forEach(id=>document.getElementById(id).value="");
+  document.getElementById("dssDate").value=dssToday();document.getElementById("dssTime").value=new Date().toTimeString().slice(0,5);
+  document.getElementById("dssInspector").value=window.currentUserProfile?.name||window.currentUserProfile?.username||"";
+  document.getElementById("dssFindings").innerHTML="";dssFindingsCount=0;dssAddFinding();
+  document.getElementById("dssSubmit").textContent="SUBMIT SURVEILLANCE";document.getElementById("dssSubmit").disabled=false;
+  document.getElementById("dssResult").textContent="";go("daily-surveillance-form");
+}
+async function dssView(no,mode="edit"){
+  const busy=showPortalBusyImmediately(mode==="view"?"Loading surveillance record…":"Loading surveillance for editing…");
+  try{
+    const r=await fetch(GOOGLE_API_URL+"?action=dssget&surveillanceNo="+encodeURIComponent(no)+"&ts="+Date.now(),{cache:"no-store"});
+    const d=await r.json();if(!d.success)throw new Error(d.error||"Record not found");
+    const x=await dssHydrateRecordImages(d.record);
+    dssCurrentNo=no;dssCurrentRecord=x;dssFormMode=mode;
+    document.getElementById("dssFormTitle").textContent=mode==="view"?"View Daily Site Surveillance":"Update Daily Site Surveillance";
+    document.getElementById("dssDate").value=String(x.date||"").slice(0,10);document.getElementById("dssTime").value=dssTimeInputValue(x.time);document.getElementById("dssLocation").value=x.location||"";document.getElementById("dssCompany").value=x.company||"";document.getElementById("dssActivity").value=x.activity||"";document.getElementById("dssInspector").value=x.inspector||"";document.getElementById("dssRemarks").value=x.remarks||"";
+    const box=document.getElementById("dssFindings");box.innerHTML="";dssFindingsCount=0;
+    (x.findings||[]).forEach(f=>dssAddFinding(f));
+    if(!x.findings?.length)dssAddFinding();
+    const page=document.getElementById("page-daily-surveillance-form");page.classList.toggle("wp-view-mode",mode==="view");
+    document.getElementById("dssSubmit").textContent="UPDATE SURVEILLANCE / CLOSURE";document.getElementById("dssSubmit").style.display=mode==="view"?"none":"inline-block";
+    document.getElementById("dssReset").style.display=mode==="view"?"none":"inline-block";
+    document.getElementById("dssAddFinding").style.display=mode==="view"?"none":"inline-block";
+    document.getElementById("dssEditBtn").style.display=mode==="view"?"inline-flex":"none";document.getElementById("dssPdfBtn").style.display=mode==="view"?"inline-flex":"none";
+    const admin=isCurrentUserAdmin();document.getElementById("dssAckBtn").style.display=mode==="view"&&admin&&String(x.status||"").toLowerCase()!=="acknowledged"?"inline-flex":"none";
+    document.getElementById("dssSignatureCard").style.display="block";
+    document.getElementById("dssInspectorSignature").innerHTML=x.inspectorSignatureDataUrl?`<img class="dss-signature-image" src="${dssEsc(x.inspectorSignatureDataUrl)}" alt="Inspector signature">`:"";
+    document.getElementById("dssInspectorName").textContent=x.inspector||x.submittedBy||"";
+    document.getElementById("dssInspectorSignedDate").textContent="Date: "+(x.inspectorSignedAt?dssPrettyDate(x.inspectorSignedAt):"—");
+    document.getElementById("dssReviewerSignature").innerHTML=x.reviewerSignatureDataUrl?`<img class="dss-signature-image" src="${dssEsc(x.reviewerSignatureDataUrl)}" alt="Reviewer signature">`:"";
+    document.getElementById("dssReviewerName").textContent=x.acknowledgedBy||x.reviewer||"";
+    document.getElementById("dssReviewerSignedDate").textContent="Date: "+(x.acknowledgedAt?dssPrettyDate(x.acknowledgedAt):"—");
+    document.getElementById("dssReviewerPreviousDate").textContent=(String(x.status||"").toLowerCase()!=="acknowledged"&&x.previousAcknowledgementDate)?"Previous acknowledgement date: "+dssPrettyDate(x.previousAcknowledgementDate):"";
+    document.getElementById("dssReviewerState").textContent=String(x.status||"").toLowerCase()==="acknowledged"?"":"Pending acknowledgement";
+    document.getElementById("dssResult").textContent=mode==="view"?"Submitted surveillance record.":"Update finding status and add closure photo evidence before closing findings.";
+    go("daily-surveillance-form");
+  }catch(e){alert("Unable to open surveillance: "+e.message);}
+  finally{hidePortalBusyImmediately(busy);}
+}
+async function dssSubmit(){
+  const findings=dssCollectFindings();if(!findings.length){document.getElementById("dssStatus").textContent="Add at least one finding.";return;}
+  for(let i=0;i<findings.length;i++){if(!findings[i].finding){document.getElementById("dssStatus").textContent=`Enter the observation for Finding ${i+1}.`;return;}if(!dssCurrentNo&&!findings[i].beforeFile&&!findings[i].beforePhotoUrl&&!findings[i].beforePhotoDataUrl){document.getElementById("dssStatus").textContent=`Before photo is required for Finding ${i+1}.`;return;}if(findings[i].status==="Closed"&&!findings[i].closureFile&&!findings[i].closurePhotoUrl&&!findings[i].closurePhotoDataUrl){document.getElementById("dssStatus").textContent=`Closure photo is required before closing Finding ${i+1}.`;return;}}
+  if(dssCurrentNo){dssCompleteSubmit(null);return;}
+  openWPSignatureModal({title:"Inspector Signature Required",subtitle:"Sign the surveillance before submitting it for admin review.",confirmLabel:"Submit with Signature",onConfirm:dssCompleteSubmit});
+}
+async function dssCompleteSubmit(signature){
+  const btn=document.getElementById("dssSubmit"),msg=document.getElementById("dssStatus");
+  const busy=showPortalBusyImmediately(dssCurrentNo?"Updating surveillance and photos…":"Submitting surveillance and photos…");
+  btn.disabled=true;msg.textContent="Saving surveillance and photos…";
+  try{
+    const findings=dssCollectFindings();
+    const payloadFindings=[];
+    for(const f of findings){payloadFindings.push({...f,beforePhotoBase64:f.beforeFile?(await fileToCompressedBase64(f.beforeFile)).base64:(f.beforePhotoDataUrl.split(",")[1]||""),beforePhotoName:f.beforeFile?.name||"before-photo.jpg",beforePhotoMime:f.beforeFile?.type||"image/jpeg",beforePhotoUrl:f.beforePhotoUrl||"",closurePhotoBase64:f.closureFile?(await fileToCompressedBase64(f.closureFile)).base64:(f.closurePhotoDataUrl.split(",")[1]||""),closurePhotoName:f.closureFile?.name||"closure-photo.jpg",closurePhotoMime:f.closureFile?.type||"image/jpeg",closurePhotoUrl:f.closurePhotoUrl||""});delete payloadFindings[payloadFindings.length-1].beforeFile;delete payloadFindings[payloadFindings.length-1].closureFile;}
+    const portalUser=getCurrentPortalUser();const payload={action:dssCurrentNo?"dssupdate":"dsssubmit",authToken:portalUser.token||portalUser.authToken||"",surveillanceNo:dssCurrentNo,submission:{date:document.getElementById("dssDate").value,time:document.getElementById("dssTime").value,location:document.getElementById("dssLocation").value.trim(),company:document.getElementById("dssCompany").value.trim(),activity:document.getElementById("dssActivity").value.trim(),inspector:document.getElementById("dssInspector").value,remarks:document.getElementById("dssRemarks").value.trim()},findings, findingsPayload:payloadFindings, signature, user:portalUser};
+    const res=await fetch(GOOGLE_API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});const out=await res.json();if(!out.success)throw new Error(out.error||"Save failed");
+    document.getElementById("dssResult").textContent=`Daily Site Surveillance ${out.surveillanceNo||dssCurrentNo} saved successfully.`;msg.textContent="Saved successfully.";dssCurrentNo=out.surveillanceNo||dssCurrentNo;await dssLoad();await dssView(dssCurrentNo,"view");
+  }catch(e){msg.textContent=e.message;document.getElementById("dssResult").textContent=e.message;}finally{btn.disabled=false;hidePortalBusyImmediately(busy);}
+}
+
+
+function dssTimeInputValue(value){
+  const s=String(value??"").trim();
+  if(!s)return "";
+  let m=s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)?$/i);
+  if(!m){
+    // Some Sheets responses serialize a time-only cell as a date-time string.
+    m=s.match(/(?:T|\s)(\d{1,2}):(\d{2})(?::\d{2})?/);
+    if(m){const h=Number(m[1]),min=Number(m[2]);return h<=23&&min<=59?String(h).padStart(2,"0")+":"+String(min).padStart(2,"0"):"";}
+    return "";
+  }
+  let h=Number(m[1]),min=Number(m[2]),ampm=(m[3]||"").toUpperCase();
+  if(ampm){if(h<1||h>12||min>59)return "";if(ampm==="AM"&&h===12)h=0;else if(ampm==="PM"&&h<12)h+=12;}
+  if(h>23||min>59)return "";
+  return String(h).padStart(2,"0")+":"+String(min).padStart(2,"0");
+}
+function dssPrettyDate(v){const s=String(v||"");const m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m)return `${Number(m[3])} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][Number(m[2])-1]} ${m[1]}`;const d=new Date(s);return Number.isNaN(d.getTime())?s:d.toLocaleDateString("en-GB",{timeZone:"Asia/Kuala_Lumpur",day:"2-digit",month:"short",year:"numeric"});}
+function dssEditCurrent(){if(!dssCurrentNo)return;dssView(dssCurrentNo,"edit");}
+async function dssAcknowledge(){
+  if(!dssCurrentNo||!isCurrentUserAdmin())return;
+  openWPSignatureModal({title:"Reviewer Acknowledgement Signature",subtitle:"Sign to acknowledge this daily site surveillance record.",confirmLabel:"Acknowledge with Signature",onConfirm:async signature=>{
+    const btn=document.getElementById("dssAckBtn"),busy=showPortalBusyImmediately("Saving reviewer acknowledgement…");btn.disabled=true;
+    try{const u=getCurrentPortalUser();const res=await fetch(GOOGLE_API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"dssacknowledge",authToken:u.token||u.authToken||"",surveillanceNo:dssCurrentNo,signature})});const out=await res.json();if(!out.success)throw new Error(out.error||"Acknowledgement failed.");await dssLoad();await dssView(dssCurrentNo,"view");document.getElementById("dssResult").textContent="Surveillance acknowledged successfully.";}
+    catch(e){document.getElementById("dssStatus").textContent=e.message;}finally{btn.disabled=false;hidePortalBusyImmediately(busy);}
+  }});
+}
+async function dssSavePdf(){
+  if(typeof html2pdf!=="function"){alert("PDF library is not available. Refresh the page and try again.");return;}
+  if(!dssCurrentRecord)return;
+  const busy=showPortalBusyImmediately("Preparing surveillance PDF…");
+  try{
+  const r=await dssHydrateRecordImages({...dssCurrentRecord,findings:(dssCurrentRecord.findings||[]).map(f=>({...f}))});dssCurrentRecord=r;
+  const findings=r.findings||[];
+  const esc=dssEsc;
+  const photo=(url,dataUrl,alt)=>{const src=String(dataUrl||"").startsWith("data:image/")?dataUrl:dssDriveImageUrl(url);return src?`<img src="${esc(src)}" alt="${esc(alt)}" style="max-width:70mm;max-height:45mm;object-fit:contain;border:1px solid #cbdce8;padding:1mm">`:'<span>Not provided</span>';};
+  const findingHtml=findings.map((f,i)=>`<div style="border:1px solid #b8cfe0;margin:0 0 3mm;padding:3mm;break-inside:avoid"><div style="background:#075a9e;color:#fff;font-weight:800;padding:2mm;margin:-3mm -3mm 2mm">FINDING ${i+1}</div><table style="width:100%;border-collapse:collapse;font-size:8pt"><tr><td style="width:25%;font-weight:bold;padding:1.5mm;border:1px solid #d3e0e8">Observation</td><td style="padding:1.5mm;border:1px solid #d3e0e8">${esc(f.finding)}</td></tr><tr><td style="font-weight:bold;padding:1.5mm;border:1px solid #d3e0e8">Corrective Action</td><td style="padding:1.5mm;border:1px solid #d3e0e8">${esc(f.action)}</td></tr><tr><td style="font-weight:bold;padding:1.5mm;border:1px solid #d3e0e8">Responsible</td><td style="padding:1.5mm;border:1px solid #d3e0e8">${esc(f.responsible)}</td></tr><tr><td style="font-weight:bold;padding:1.5mm;border:1px solid #d3e0e8">Target / Closure Date</td><td style="padding:1.5mm;border:1px solid #d3e0e8">${esc(f.targetDate)} / ${esc(f.closureDate)}</td></tr><tr><td style="font-weight:bold;padding:1.5mm;border:1px solid #d3e0e8">Status</td><td style="padding:1.5mm;border:1px solid #d3e0e8">${esc(f.status)}</td></tr><tr><td style="font-weight:bold;padding:1.5mm;border:1px solid #d3e0e8">Remarks</td><td style="padding:1.5mm;border:1px solid #d3e0e8">${esc(f.remarks)}</td></tr><tr><td style="font-weight:bold;padding:1.5mm;border:1px solid #d3e0e8">Before Photo</td><td style="padding:1.5mm;border:1px solid #d3e0e8">${photo(f.beforePhotoUrl,f.beforePhotoDataUrl,"Before photo")}</td></tr><tr><td style="font-weight:bold;padding:1.5mm;border:1px solid #d3e0e8">Closure Photo</td><td style="padding:1.5mm;border:1px solid #d3e0e8">${photo(f.closurePhotoUrl,f.closurePhotoDataUrl,"Closure photo")}</td></tr></table></div>`).join("");
+  const shell=document.createElement("div");shell.className="wp-pdf-report";shell.style.width="178mm";shell.style.maxWidth="178mm";shell.style.padding="0";shell.innerHTML=`<style>
+.wp-pdf-report table{max-width:100%;table-layout:fixed}
+.wp-pdf-report td,.wp-pdf-report th{overflow-wrap:anywhere;word-break:break-word}
+.wp-pdf-report img{max-width:100%;height:auto;max-height:35mm;object-fit:contain}
+.wp-pdf-report .dss-pdf-signatures-title{break-before:page!important;page-break-before:always!important;break-after:avoid!important;page-break-after:avoid!important}
+.wp-pdf-report .dss-pdf-signature-table{width:100%!important;max-width:100%!important;table-layout:fixed!important;break-inside:avoid!important;page-break-inside:avoid!important}
+.wp-pdf-report .dss-pdf-signature-table th,.wp-pdf-report .dss-pdf-signature-table td{width:33.333%!important;max-width:33.333%!important;padding:1.5mm!important;vertical-align:top!important;overflow-wrap:anywhere!important;word-break:break-word!important}
+.wp-pdf-report .dss-pdf-signature-table img{display:block!important;width:auto!important;max-width:36mm!important;max-height:16mm!important;height:auto!important;object-fit:contain!important;margin:0 auto 1.5mm!important}
+</style><div class="wp-pdf-page" style="height:auto;min-height:276mm;overflow:visible"><div class="wp-pdf-header"><img class="wp-pdf-logo" src="${typeof WP_PDF_LOGO!=="undefined"?WP_PDF_LOGO:""}"><div class="wp-pdf-project">ENGINEERING, PROCUREMENT AND CONSTRUCTION (EPC)<br>OF JETTY 3 EXPANSION &amp; ASSOCIATED DREDGING (PHASE 1)</div><div class="wp-pdf-docbox"><div class="k">Document</div><div class="v">DAILY SITE SURVEILLANCE</div></div></div><div class="wp-pdf-title-row"><div class="wp-pdf-title">DAILY SITE SURVEILLANCE REPORT</div><div class="wp-pdf-no"><b>Surveillance No.</b><br>${esc(r.surveillanceNo)}</div></div><div class="wp-pdf-section"><h2>1. SURVEILLANCE INFORMATION</h2><table style="width:100%;border-collapse:collapse;font-size:8pt"><tr><td style="padding:2mm;border:1px solid #d3e0e8"><b>Date</b><br>${esc(dssPrettyDate(r.date))}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Time</b><br>${esc(r.time)}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Location</b><br>${esc(r.location)}</td></tr><tr><td style="padding:2mm;border:1px solid #d3e0e8"><b>Company</b><br>${esc(r.company)}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Inspector</b><br>${esc(r.inspector)}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Activity</b><br>${esc(r.activity)}</td></tr></table><h2>2. FINDINGS &amp; CORRECTIVE ACTIONS</h2>${findingHtml}<h2>3. OVERALL REMARKS</h2><div style="border:1px solid #d3e0e8;padding:3mm;min-height:12mm">${esc(r.remarks||"—")}</div><h2 class="dss-pdf-signatures-title">4. SIGNATURE / ACKNOWLEDGEMENT</h2><table class="dss-pdf-signature-table" style="width:100%;max-width:100%;table-layout:fixed;border-collapse:collapse;font-size:7pt;overflow-wrap:anywhere"><tr><th style="width:33.333%;background:#e5f0f7;padding:1.5mm;border:1px solid #cbdce8;overflow-wrap:anywhere">Inspector</th><th style="width:33.333%;background:#e5f0f7;padding:1.5mm;border:1px solid #cbdce8;overflow-wrap:anywhere">Reviewer</th><th style="width:33.333%;background:#e5f0f7;padding:1.5mm;border:1px solid #cbdce8;overflow-wrap:anywhere">Approver (if required)</th></tr><tr><td style="padding:2mm;border:1px solid #cbdce8;height:24mm">${photo(r.inspectorSignatureUrl,r.inspectorSignatureDataUrl,"Inspector signature")}<hr>${esc(r.inspector)}<br>Date: ${esc(dssPrettyDate(r.inspectorSignedAt))}</td><td style="padding:2mm;border:1px solid #cbdce8">${photo(r.reviewerSignatureUrl,r.reviewerSignatureDataUrl,"Reviewer signature")}<hr>${esc(r.acknowledgedBy||"")}<br>Date: ${esc(r.acknowledgedAt?dssPrettyDate(r.acknowledgedAt):"—")}${String(r.status).toLowerCase()!=="acknowledged"?(r.previousAcknowledgementDate?`<br>Previous acknowledgement date: ${esc(dssPrettyDate(r.previousAcknowledgementDate))}`:"")+"<br><b>Pending acknowledgement</b>":""}</td><td style="padding:2mm;border:1px solid #cbdce8">Name:<br>Designation:<br>Date:</td></tr></table></div>`;
+  shell.style.width="178mm";shell.style.maxWidth="178mm";shell.style.margin="0 auto";shell.style.position="relative";shell.style.left="auto";shell.style.top="auto";shell.style.background="#fff";document.body.appendChild(shell);
+  try{await Promise.all([...shell.querySelectorAll("img")].map(img=>img.complete&&img.naturalWidth>0?Promise.resolve():new Promise(res=>{const done=()=>res();img.addEventListener("load",done,{once:true});img.addEventListener("error",done,{once:true});setTimeout(done,3500);})));const opt={margin:[4,15,8,15],filename:`${r.surveillanceNo||"Daily-Site-Surveillance"}.pdf`,image:{type:"jpeg",quality:0.96},html2canvas:{scale:2,useCORS:true,allowTaint:false,backgroundColor:"#ffffff",scrollY:0},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},pagebreak:{mode:["css"],avoid:[".wp-pdf-header",".wp-pdf-title-row",".dss-pdf-signatures-title",".dss-pdf-signature-table","table tr","img"]}};const worker=html2pdf().set(opt).from(shell).toPdf();const pdf=await worker.get("pdf");const pages=pdf.internal.getNumberOfPages();for(let i=1;i<=pages;i++){pdf.setPage(i);pdf.setDrawColor(11,103,170);pdf.setLineWidth(.65);pdf.line(15,pdf.internal.pageSize.getHeight()-11.5,pdf.internal.pageSize.getWidth()-15,pdf.internal.pageSize.getHeight()-11.5);pdf.setFont("helvetica","normal");pdf.setFontSize(6.2);pdf.setTextColor(92,110,121);pdf.text("Daily Site Surveillance",15,pdf.internal.pageSize.getHeight()-6.5);pdf.text(`Page ${i} of ${pages}`,pdf.internal.pageSize.getWidth()-15,pdf.internal.pageSize.getHeight()-6.5,{align:"right"});}await worker.save();}
+  finally{shell.remove();}
+  } finally { hidePortalBusyImmediately(busy); }
+}
+
+function dssSetupMobileFilterToggle(){
+  const box=document.getElementById("dssFilters");
+  if(!box||box.dataset.dssMobileToggleReady==="1")return;
+  const toggle=document.createElement("button");
+  toggle.type="button";
+  toggle.className="mobile-filter-toggle dss-mobile-filter-toggle";
+  toggle.id="dssMobileFilterToggle";
+  toggle.setAttribute("aria-controls","dssFilters");
+  toggle.innerHTML='☷ &nbsp; Filters <span class="filter-chevron">＋</span>';
+  box.parentNode.insertBefore(toggle,box);
+  const setCollapsed=(collapsed)=>{
+    box.classList.toggle("mobile-filter-collapsed",collapsed);
+    toggle.setAttribute("aria-expanded",String(!collapsed));
+    const chevron=toggle.querySelector(".filter-chevron");
+    if(chevron)chevron.textContent=collapsed?"＋":"−";
+  };
+  toggle.addEventListener("click",()=>setCollapsed(!box.classList.contains("mobile-filter-collapsed")));
+  const applyViewport=()=>{
+    if(window.matchMedia("(max-width: 650px)").matches){
+      if(!toggle.dataset.userToggled)setCollapsed(true);
+    }else{
+      setCollapsed(false);
+      toggle.dataset.userToggled="";
+    }
+  };
+  toggle.addEventListener("click",()=>{toggle.dataset.userToggled="1";});
+  applyViewport();
+  if(window.matchMedia){
+    window.addEventListener("resize",()=>{
+      if(!window.matchMedia("(max-width: 650px)").matches)setCollapsed(false);
+    },{passive:true});
+  }
+  box.dataset.dssMobileToggleReady="1";
+}
+
+function dssInit(){
+  dssSetupMobileFilterToggle();
+  // Delegated handler ensures the New button works even if portal sections are re-rendered.
+  document.addEventListener("click",function(e){
+    const newBtn=e.target.closest("#dssNewBtn");
+    if(newBtn){e.preventDefault();try{dssOpenNew();}catch(err){console.error("DSS new form failed",err);alert("Unable to open the surveillance form: "+(err.message||err));}return;}
+  });
+  document.getElementById("dssRefresh")?.addEventListener("click",dssLoad);
+  document.getElementById("dssAddFinding")?.addEventListener("click",()=>dssAddFinding());
+  document.getElementById("dssSubmit")?.addEventListener("click",dssSubmit);
+  document.getElementById("dssBack")?.addEventListener("click",()=>go("daily-surveillance"));
+  document.getElementById("dssReset")?.addEventListener("click",dssOpenNew);
+  document.getElementById("dssEditBtn")?.addEventListener("click",dssEditCurrent);
+  document.getElementById("dssAckBtn")?.addEventListener("click",dssAcknowledge);
+  document.getElementById("dssPdfBtn")?.addEventListener("click",dssSavePdf);
+  ["dssFilterYear","dssFilterStart","dssFilterEnd","dssFilterCompany","dssFilterStatus"].forEach(id=>document.getElementById(id)?.addEventListener("change",dssRender));
+  document.getElementById("dssResetFilters")?.addEventListener("click",()=>{["dssFilterYear","dssFilterStart","dssFilterEnd","dssFilterCompany","dssFilterStatus"].forEach(id=>document.getElementById(id).value="");dssRender();});
+}
+
 </script>
 
 
@@ -6442,3 +7037,18 @@ function hidePortalBusyImmediately(overlay) {
 </style>
 </body>
 </html>
+
+<style id="dss-v3-control-parity">
+#page-daily-surveillance .wp-refresh-inspection-btn{
+ display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:37px;padding:8px 13px;
+ border:1px solid #bfd8ec;border-radius:9px;background:#f7fbff;color:#164c80;font:700 12px Arial,Helvetica,sans-serif;
+ box-shadow:0 3px 8px rgba(23,111,177,.07);cursor:pointer;white-space:nowrap;transition:background .15s ease,border-color .15s ease,transform .15s ease;
+}
+#page-daily-surveillance .wp-refresh-inspection-btn:hover{background:#eaf5ff;border-color:#8bbfe1;transform:translateY(-1px)}
+#page-daily-surveillance .wp-refresh-inspection-btn:disabled{opacity:.62;cursor:wait;transform:none}
+#page-daily-surveillance .wp-refresh-inspection-btn .refresh-glyph{display:inline-block;font-size:16px;line-height:1}
+#page-daily-surveillance .wp-refresh-inspection-btn.is-refreshing .refresh-glyph{animation:portalLoadingSpin .8s linear infinite}
+#page-daily-surveillance #dssResetFilters.btn{border:1px solid #bfd8ec;border-radius:9px;background:#f7fbff;color:#164c80;padding:8px 13px;min-height:37px;font:700 12px Arial,Helvetica,sans-serif;box-shadow:0 3px 8px rgba(23,111,177,.07);cursor:pointer}
+#page-daily-surveillance #dssResetFilters.btn:hover{background:#eaf5ff;border-color:#8bbfe1}
+#page-daily-surveillance .wp-row-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:126px}
+</style>
