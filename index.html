@@ -5264,6 +5264,10 @@ function restoreNewWPInspectionFieldEditability(){
 }
 
 function resetWPInspection(){
+  // Rev 25.8: clear view-only/signature UI left over from the previous submission.
+  closeWPSignatureModal();
+  const ackPanel=document.getElementById("wpAcknowledgementPanel");
+  if(ackPanel)ackPanel.classList.remove("show");
   restoreNewWPInspectionFieldEditability();
   wpInspectionMode="new";
   wpEditInspectionNo="";
@@ -5292,7 +5296,12 @@ function resetWPInspection(){
   document.getElementById("wpChecklist").innerHTML="";
   document.getElementById("wpChecklistStatus").textContent=wpTitleLoadSource==="fallback"?"The title list could not be read from Google Sheets. Built-in titles are available temporarily; check the API/sheet connection.":"Select an inspection title to load the checklist.";
   document.getElementById("wpFindings").innerHTML="";
+  const remarksField=document.getElementById("wpInspectionRemarks");
+  if(remarksField){remarksField.disabled=false;remarksField.readOnly=false;remarksField.removeAttribute("disabled");remarksField.removeAttribute("readonly");remarksField.value="";}
+  wpCurrentOverallRemarks="";
   wpFindingsCount=0;
+  const addFindingBtn=document.getElementById("wpAddFinding");
+  if(addFindingBtn)addFindingBtn.disabled=false;
   wpChecklist=[];
   document.getElementById("wpApiStatus").textContent="Ready.";
   const statusBanner=document.getElementById("wpInspectionStatusBanner");if(statusBanner)statusBanner.classList.remove("show","acknowledged","pending");
@@ -5398,7 +5407,24 @@ function renderWPAcknowledgementPanel(){
  const isAck=String(wpCurrentInspectionStatus||"").trim().toLowerCase()==="acknowledged";
  const inspectorName=document.getElementById("wpInspectionInspector")?.value||"";
  const reviewerName=wpCurrentSignatures.acknowledgedBy||document.getElementById("wpInspectionReviewer")?.value||DATA.adminReviewer||"";
- const fmt=value=>{const raw=String(value||"").trim();if(!raw)return"";const m=raw.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m){const mo=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];return `${m[3]} ${mo[+m[2]-1]||""} ${m[1]}`;}const d=new Date(raw);return Number.isNaN(d.getTime())?"":d.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});};
+ const fmt=value=>{
+  const raw=String(value||"").trim();if(!raw)return"";
+  const mo=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  // Backend audit timestamps without a zone are explicitly Malaysia-local text.
+  // Do not pass them through Date(), which can reinterpret them using the browser timezone.
+  const local=raw.match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T]\d{2}:\d{2}(?::\d{2})?)?$/);
+  if(local)return `${local[3]} ${mo[+local[2]-1]||""} ${local[1]}`;
+  // Only timestamps with an explicit timezone suffix are converted to Malaysia time.
+  if(/[zZ]$|[+-]\d{2}:?\d{2}$/.test(raw)){
+    const d=new Date(raw);if(Number.isNaN(d.getTime()))return"";
+    const parts=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Kuala_Lumpur",day:"2-digit",month:"short",year:"numeric"}).formatToParts(d);
+    const val=type=>parts.find(p=>p.type===type)?.value||"";
+    return `${val("day")} ${val("month")} ${val("year")}`;
+  }
+  const m=raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(m)return `${m[3]} ${mo[+m[2]-1]||""} ${m[1]}`;
+  return "";
+ };
  const sig=(id,data,url)=>{const img=document.getElementById(id);if(!img)return;const src=String(data||"").startsWith("data:image/")?data:(url?wpDrivePreviewUrl(url):"");img.src=src;img.style.display=src?"block":"none";img.onerror=()=>{img.style.display="none";};};
  sig("wpAckInspectorSignature",wpCurrentSignatures.inspectorDataUrl,wpCurrentSignatures.inspectorUrl);
  sig("wpAckReviewerSignature",isAck?wpCurrentSignatures.reviewerDataUrl:"",isAck?wpCurrentSignatures.reviewerUrl:"");
@@ -5449,7 +5475,7 @@ async function loadWPInspectionRecord(inspectionNo,mode="view"){
     wpCurrentSignatures={
       inspectorUrl:s.inspectorSignatureUrl||sig.inspectorUrl||"",
       inspectorDataUrl:s.inspectorSignatureDataUrl||sig.inspectorDataUrl||"",
-      inspectorSignedAt:s.inspectorSignedAt||sig.inspectorSignedAt||s.submittedAt||"",
+      inspectorSignedAt:s.submittedAt||s.inspectorSignedAt||sig.inspectorSignedAt||"",
       reviewerUrl:s.reviewerSignatureUrl||sig.reviewerUrl||"",
       reviewerDataUrl:s.reviewerSignatureDataUrl||sig.reviewerDataUrl||"",
       acknowledgedBy:s.acknowledgedBy||s.reviewerName||sig.acknowledgedBy||matchingLogRecord?.acknowledgedBy||"",
@@ -5775,9 +5801,31 @@ async function downloadWPInspectionPdf(){
     return src?`<img class="wp-pdf-signature-image" src="${escHtml(src)}" alt="${escHtml(alt)}">`:`<div class="wp-pdf-signature-empty" aria-hidden="true"></div>`;
   };
   const datePart=(value,fallback)=>{
-    const raw=String(value||"");
-    const match=raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
-    return match?prettyDate(`${match[1]}-${match[2]}-${match[3]}`):prettyDate(fallback||"");
+    const raw=String(value||"").trim();
+    if(raw){
+      // Date-only values are calendar dates; do not shift them across time zones.
+      const dateOnly=raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if(dateOnly)return prettyDate(`${dateOnly[1]}-${dateOnly[2]}-${dateOnly[3]}`);
+      // Audit timestamps from Apps Script are returned as Malaysia-local text
+      // (yyyy-MM-dd HH:mm:ss). Preserve that calendar date. Only timestamps with
+      // an explicit ISO timezone suffix should be converted through a Date object.
+      if(/[T ]\d{2}:\d{2}/.test(raw)){
+        const localDate=raw.match(/^(\d{4})-(\d{2})-(\d{2})[ T]\d{2}:\d{2}/);
+        const hasZone=/[zZ]$|[+-]\d{2}:?\d{2}$/.test(raw);
+        if(localDate && !hasZone)return prettyDate(`${localDate[1]}-${localDate[2]}-${localDate[3]}`);
+        if(hasZone){
+          const parsed=new Date(raw);
+          if(!Number.isNaN(parsed.getTime())){
+            const parts=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Kuala_Lumpur",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(parsed);
+            const val=type=>parts.find(p=>p.type===type)?.value||"";
+            return prettyDate(`${val("year")}-${val("month")}-${val("day")}`);
+          }
+        }
+      }
+      const match=raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+      if(match)return prettyDate(`${match[1]}-${match[2]}-${match[3]}`);
+    }
+    return prettyDate(fallback||"");
   };
   const normalizedInspectorSignature=await normalizeSignatureImageForPdf(wpCurrentSignatures.inspectorDataUrl);
   const isCurrentlyAcknowledged=String(wpCurrentInspectionStatus||"").trim().toLowerCase()==="acknowledged";
@@ -6026,6 +6074,9 @@ async function openNewWPInspectionForm(){
   try{
     // Reset stale form data before navigation, but keep the title control disabled until options are ready.
     resetWPInspection();
+    // Rev 25.9: keep the button enabled; one delegated click handler prevents duplicate findings.
+    const addFindingBtn=document.getElementById("wpAddFinding");
+    if(addFindingBtn)addFindingBtn.disabled=false;
     if(titleSelect){titleSelect.disabled=true;titleSelect.innerHTML='<option value="">Loading inspection titles…</option>';}
     go("inspection-form");
     document.getElementById("wpChecklistStatus").textContent="Loading inspection titles from Google Sheets…";
@@ -6099,6 +6150,17 @@ window.__wpAddFindingDelegatedHandler = function(event){
   addWPFinding();
 };
 document.addEventListener("click", window.__wpAddFindingDelegatedHandler);
+
+/* Keep Overall Remarks state synchronized as the user types. */
+const wpOverallRemarksInput=document.getElementById("wpInspectionRemarks");
+if(wpOverallRemarksInput){
+  wpOverallRemarksInput.disabled=false;
+  wpOverallRemarksInput.readOnly=false;
+  wpOverallRemarksInput.addEventListener("input",()=>{
+    wpCurrentOverallRemarks=wpOverallRemarksInput.value||"";
+  });
+}
+
 const wpSubmitBtn=document.getElementById("wpSubmitInspection");
 if(wpSubmitBtn)wpSubmitBtn.addEventListener("click",submitWPInspection);
 const wpResetBtn=document.getElementById("wpResetInspection");
@@ -6320,6 +6382,63 @@ function hidePortalBusyImmediately(overlay) {
 .wp-ack-signature-area img{max-width:100%;max-height:60px;object-fit:contain}.wp-ack-name{font-size:13px;color:#263746;margin-bottom:5px;overflow-wrap:anywhere}
 .wp-ack-date{font-size:12px;color:#263746;min-height:18px}.wp-ack-state{font-size:12px;color:#946200;margin-top:3px}
 @media(max-width:600px){.wp-ack-grid{grid-template-columns:minmax(0,1fr)}.wp-ack-box+.wp-ack-box{border-left:0;border-top:1px solid var(--line,#cbdced)}}
+</style>
+
+<style id="rev25-9-overall-remarks-interaction">
+/* Rev 25.9: preserve normal typing and pointer interaction in Overall Remarks. */
+#wpInspectionRemarks {
+  pointer-events:auto !important;
+  user-select:text !important;
+  opacity:1 !important;
+  position:relative;
+  z-index:1;
+}
+</style>
+
+
+<style id="rev26-remarks-editability">
+/* Rev 26.0: narrowly restore interaction for Overall Remarks only. */
+#page-inspection-form #wpInspectionRemarks {
+  display:block !important;
+  position:relative !important;
+  z-index:5 !important;
+  pointer-events:auto !important;
+  user-select:text !important;
+  opacity:1 !important;
+  cursor:text !important;
+  touch-action:auto !important;
+}
+#page-inspection-form .wp-inspection-field:has(#wpInspectionRemarks) {
+  position:relative !important;
+  z-index:4 !important;
+  pointer-events:auto !important;
+}
+</style>
+
+
+<style id="rev26-1-submission-content-spacing">
+/* Targeted spacing fix: keep Submission content away from the card edges. */
+#page-inspection-form .wp-inspection-card:has(#wpInspectionRemarks) > .wp-inspection-field {
+  margin: 0 !important;
+  padding: 0 16px !important;
+}
+#page-inspection-form .wp-inspection-card:has(#wpInspectionRemarks) > .wp-result {
+  margin: 12px 16px 0 !important;
+}
+#page-inspection-form .wp-inspection-card:has(#wpInspectionRemarks) > .wp-inspection-actions {
+  margin: 14px 16px 16px !important;
+}
+@media (max-width: 650px) {
+  #page-inspection-form .wp-inspection-card:has(#wpInspectionRemarks) > .wp-inspection-field {
+    padding: 0 13px !important;
+  }
+  #page-inspection-form .wp-inspection-card:has(#wpInspectionRemarks) > .wp-result {
+    margin: 12px 13px 0 !important;
+  }
+  #page-inspection-form .wp-inspection-card:has(#wpInspectionRemarks) > .wp-inspection-actions {
+    margin: 12px 13px 13px !important;
+  }
+}
 </style>
 </body>
 </html>
