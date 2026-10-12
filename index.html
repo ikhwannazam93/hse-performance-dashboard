@@ -3050,6 +3050,7 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
     const btn = $("loginButton");
     if (!username || !pass) { setMsg("Please enter username and password.", true); return; }
     if (btn) { btn.disabled = true; btn.textContent = "SIGNING IN…"; }
+    if (typeof window.showPortalLoading === "function") window.showPortalLoading("Signing in securely…");
     setMsg("", false);
     const loading = $("loginLoading");
     if (loading) loading.textContent = "Checking account…";
@@ -3065,25 +3066,15 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
       const user = result.user;
       window.currentUserProfile = user;
       sessionStorage.setItem("hseDashboardUser", JSON.stringify({username:user.username,name:user.name,role:user.role,token:user.token||""}));
-      if (typeof window.showPortalLoading === "function") window.showPortalLoading("Loading your HSE Portal…");
       const gate = $("loginGate");
       if (gate) gate.classList.add("hidden");
       if (typeof window.applyHeaderUser === "function") window.applyHeaderUser(user);
       const logout = $("logoutButton");
       if (logout) logout.style.display = "inline-block";
-      // Show the Main Menu immediately after authentication; dashboard data loads in the background.
-      // Do not automatically redirect users to Manhour when loading finishes.
+      // Performance: authenticate, then show the Home/Main Menu without requesting dashboard data.
+      // Dashboard datasets are fetched only when a dashboard report is opened.
       if (typeof window.go === "function") window.go("main-menu");
-      if (loading) loading.textContent = "Loading dashboard data…";
-      try {
-        if (typeof window.loadLiveData === "function") {
-          await window.loadLiveData();
-        }
-      } catch (loadErr) {
-        console.error("Dashboard load after login failed:", loadErr);
-      } finally {
-        if (typeof window.hidePortalLoading === "function") window.hidePortalLoading();
-      }
+      if (typeof window.hidePortalLoading === "function") window.hidePortalLoading();
       if (loading) loading.textContent = "Signed in.";
     } catch (err) {
       console.error("Login failed:", err);
@@ -3091,6 +3082,8 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
       if (password) { password.value = ""; password.focus(); }
       if (loading) loading.textContent = "Ready to sign in.";
     } finally {
+      // Always remove the overlay after success or failure so the login page cannot remain blocked.
+      if (typeof window.hidePortalLoading === "function") window.hidePortalLoading();
       if (btn) { btn.disabled = false; btn.textContent = "LOGIN"; }
     }
   };
@@ -3273,8 +3266,9 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
 
   <!-- MANHOUR -->
   <section id="page-manhour" class="page">
-<div class="section-title" style="margin-top:4px">
+<div class="section-title report-section-title" style="margin-top:4px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
   <h2>Manhour Performance Overview</h2>
+  <div class="wp-refresh-actions"><span id="refreshManhourStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" id="refreshManhourButton" class="wp-refresh-inspection-btn report-refresh-btn" title="Reload latest Man Hour data" onclick="refreshDashboardModule('manhour')"><span class="refresh-glyph" aria-hidden="true">↻</span><span>Refresh</span></button></div>
 </div>
 
     <div id="filters-manhour" class="filters"></div>
@@ -3310,9 +3304,10 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
 
   <!-- MANDAY -->
   <section id="page-manday" class="page">
-    <div class="section-title" style="margin-top:4px">
-      <h2>Manday Performance Overview</h2>
-    </div>
+    <div class="section-title report-section-title" style="margin-top:4px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+  <h2>Manday Performance Overview</h2>
+  <div class="wp-refresh-actions"><span id="refreshMandayStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" id="refreshMandayButton" class="wp-refresh-inspection-btn report-refresh-btn" title="Reload latest Man Day data" onclick="refreshDashboardModule('manday')"><span class="refresh-glyph" aria-hidden="true">↻</span><span>Refresh</span></button></div>
+</div>
 
     <div id="filters-manday" class="filters"></div>
 
@@ -3352,9 +3347,10 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
 
   <!-- OBSERVATION -->
   <section id="page-observation" class="page">
-    <div class="section-title" style="margin-top:4px">
-      <h2>Be Safe Card Observation Overview</h2>
-    </div>
+    <div class="section-title report-section-title" style="margin-top:4px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+  <h2>Be Safe Card Observation Overview</h2>
+  <div class="wp-refresh-actions"><span id="refreshObservationStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" id="refreshObservationButton" class="wp-refresh-inspection-btn report-refresh-btn" title="Reload latest observation data" onclick="refreshDashboardModule('observation')"><span class="refresh-glyph" aria-hidden="true">↻</span><span>Refresh</span></button></div>
+</div>
 
     <div id="filters-observation" class="filters"></div>
 
@@ -3418,9 +3414,10 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
 
   <!-- TRAINING -->
   <section id="page-training" class="page">
-    <div class="section-title" style="margin-top:4px">
-      <h2>HSE Training Overview</h2>
-    </div>
+    <div class="section-title report-section-title" style="margin-top:4px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+  <h2>HSE Training Overview</h2>
+  <div class="wp-refresh-actions"><span id="refreshTrainingStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" id="refreshTrainingButton" class="wp-refresh-inspection-btn report-refresh-btn" title="Reload latest training data" onclick="refreshDashboardModule('training')"><span class="refresh-glyph" aria-hidden="true">↻</span><span>Refresh</span></button></div>
+</div>
 
     <div id="filters-training" class="filters"></div>
 
@@ -3450,9 +3447,10 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
 
   <!-- LEADING INDICATOR -->
   <section id="page-leading" class="page">
-    <div class="section-title" style="margin-top:4px">
-      <h2>Leading Indicator Overview</h2>
-    </div>
+    <div class="section-title report-section-title" style="margin-top:4px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+  <h2>Leading Indicator Overview</h2>
+  <div class="wp-refresh-actions"><span id="refreshLeadingStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" id="refreshLeadingButton" class="wp-refresh-inspection-btn report-refresh-btn" title="Reload latest leading indicator data" onclick="refreshDashboardModule('leading')"><span class="refresh-glyph" aria-hidden="true">↻</span><span>Refresh</span></button></div>
+</div>
     <div id="filters-leading" class="filters"></div>
     <div class="kpis leading-kpis" id="kpis-leading"></div>
 
@@ -3463,9 +3461,10 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
   </section>
   <!-- LAGGING INDICATOR -->
   <section id="page-lagging" class="page">
-    <div class="section-title" style="margin-top:4px">
-      <h2>Lagging Indicator Overview</h2>
-    </div>
+    <div class="section-title report-section-title" style="margin-top:4px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+  <h2>Lagging Indicator Overview</h2>
+  <div class="wp-refresh-actions"><span id="refreshLaggingStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" id="refreshLaggingButton" class="wp-refresh-inspection-btn report-refresh-btn" title="Reload latest lagging indicator data" onclick="refreshDashboardModule('lagging')"><span class="refresh-glyph" aria-hidden="true">↻</span><span>Refresh</span></button></div>
+</div>
     <div id="filters-lagging" class="filters"></div>
     <div class="kpis leading-kpis" id="kpis-lagging"></div>
 
@@ -3923,6 +3922,49 @@ function hidePortalLoading(){
   if(overlay){overlay.classList.remove("is-visible");overlay.setAttribute("aria-hidden","true");}
 }
 
+// Per-module data loading: fetch only the dataset required by the selected report.
+const moduleLoadPromises = {};
+const moduleLoaded = {manpower:false,observation:false,training:false,leading:false,lagging:false,inspections:false};
+async function loadModuleData(page, force=false){
+  const moduleMap = {
+    manhour:{action:'manpower',key:'manpower'},
+    manday:{action:'manpower',key:'manpower'},
+    observation:{action:'observation',key:'bsc'},
+    training:{action:'training',key:'training'},
+    leading:{action:'leading',key:'leading'},
+    lagging:{action:'lagging',key:'lagging'},
+    inspection:{action:'inspections',key:'inspections'}
+  };
+  const cfg=moduleMap[page];
+  if(!cfg) return true;
+  const cacheKey=cfg.key;
+  if(!force && moduleLoaded[cacheKey]) return true;
+  if(!force && moduleLoadPromises[cacheKey]) return moduleLoadPromises[cacheKey];
+  if(!GOOGLE_API_URL || GOOGLE_API_URL.indexOf('PASTE_YOUR_')===0) throw new Error('Google Sheets URL is not configured.');
+  const status=document.getElementById('liveStatus');
+  if(status){status.textContent='Loading '+({manhour:'Man Hour',manday:'Man Day',observation:'Observation',training:'Training',leading:'Leading Indicator',lagging:'Lagging Indicator',inspection:'Workplace Inspection'}[page]||'report')+' data…';status.style.color='#567b96';}
+  const request=(async()=>{
+    const response=await fetch(GOOGLE_API_URL+'?action='+encodeURIComponent(cfg.action)+'&ts='+Date.now(),{cache:'no-store'});
+    if(!response.ok) throw new Error('Google Sheets API returned HTTP '+response.status);
+    const json=await response.json();
+    if(json.success===false) throw new Error(json.error||'Google Sheets API request failed');
+    if(cacheKey==='manpower') DATA.manpower=Array.isArray(json.manpower)?json.manpower:[];
+    if(cacheKey==='bsc') DATA.bsc=Array.isArray(json.bsc)?json.bsc:[];
+    if(cacheKey==='training'){DATA.training=Array.isArray(json.training)?json.training:[];DATA.trainingTopics=Array.isArray(json.trainingTopics)?json.trainingTopics:[];}
+    if(cacheKey==='leading'){DATA.leading=Array.isArray(json.leading)?json.leading:[];DATA.leadingTopics=Array.isArray(json.leadingTopics)?json.leadingTopics:[];}
+    if(cacheKey==='lagging'){DATA.lagging=Array.isArray(json.lagging)?json.lagging:[];DATA.laggingTopics=Array.isArray(json.laggingTopics)?json.laggingTopics:[];}
+    if(cacheKey==='inspections'){DATA.inspections=Array.isArray(json.inspections)?json.inspections:[];DATA.adminReviewer=String(json.adminReviewer||DATA.adminReviewer||'');}
+    DATA.workbook=json.workbook||DATA.workbook||'Google Sheets Master Database';
+    enrichLiveData();
+    moduleLoaded[cacheKey]=true;
+    window.dashboardDataLoaded = Object.values(moduleLoaded).every(Boolean);
+    if(status){status.textContent='Live data loaded';status.style.color='#16875b';}
+    return true;
+  })();
+  moduleLoadPromises[cacheKey]=request;
+  try{return await request;}catch(err){delete moduleLoadPromises[cacheKey];if(status){status.textContent='Data load failed — reopen the report to retry';status.style.color='#b42318';}throw err;}finally{if(moduleLoadPromises[cacheKey]===request) delete moduleLoadPromises[cacheKey];}
+}
+
 async function loadLiveData(){
   const status=document.getElementById("liveStatus");
   if(!GOOGLE_API_URL || GOOGLE_API_URL.indexOf("PASTE_YOUR_")===0){
@@ -3937,18 +3979,10 @@ async function loadLiveData(){
   // Do not gate dashboard loading behind a separate health request.
   // This keeps the data flow identical to the stable version used before.
   try{
-    const [response,dssResponse] = await Promise.all([
-      fetch(GOOGLE_API_URL+"?action=dashboard&ts="+Date.now(),{cache:"no-store"}),
-      fetch(GOOGLE_API_URL+"?action=dsslist&ts="+Date.now(),{cache:"no-store"}).catch(err=>{console.warn("Daily Site Surveillance preload failed",err);return null;})
-    ]);
+    const response = await fetch(GOOGLE_API_URL+"?action=dashboard&ts="+Date.now(),{cache:"no-store"});
     if(!response.ok) throw new Error("Google Sheets API returned HTTP "+response.status);
     const json=await response.json();
     if(json.success===false) throw new Error(json.error||"Google Sheets API request failed");
-    if(dssResponse && dssResponse.ok){
-      try{const dssJson=await dssResponse.json();if(dssJson.success){dssRecords=Array.isArray(dssJson.records)?dssJson.records:[];window.dssPreloaded=true;}}
-      catch(dssErr){console.warn("Daily Site Surveillance preload response invalid",dssErr);}
-    }
-
     DATA.manpower=Array.isArray(json.manpower)?json.manpower:[];
     DATA.bsc=Array.isArray(json.bsc)?json.bsc:[];
     DATA.training=Array.isArray(json.training)?json.training:[];
@@ -3995,12 +4029,14 @@ async function loadLiveData(){
       try{ renderPage(p); }catch(err){ console.error("Render failed for "+p,err); }
     });
     try{ dssPopulateFiltersAndRender(); }catch(err){ console.warn("Daily Site Surveillance initial render failed",err); }
+    window.dashboardDataLoaded=true;
   }catch(err){
     console.error("Google Sheets dashboard data fetch failed",err);
     status.textContent="● DASHBOARD DATA ERROR — click to retry";
     status.style.color="#b42318";
     status.title=(err.message||"Unable to load Google Sheets dashboard data")+". Click to retry.";
     status.style.cursor="pointer";
+    window.dashboardDataLoaded=false;
     status.onclick=()=>reloadDashboardData();
   }
 }
@@ -6267,7 +6303,13 @@ function renderPage(page){
   if(page==="lagging")renderLagging();
   if(page==="inspection")renderWorkplaceInspectionDashboard();
   if(page==="inspection-form")renderWorkplaceInspection();
-  if(page==="daily-surveillance"){if(dssRecords.length||window.dssPreloaded) dssPopulateFiltersAndRender(); else dssLoad();}
+  if(page==="daily-surveillance"){
+    if(dssRecords.length||window.dssPreloaded||window.dssLoaded) dssPopulateFiltersAndRender();
+    else if(!window.dssLoading && typeof window.dssLoad==="function"){
+      window.dssLoading=true;
+      window.dssLoad().finally(()=>{window.dssLoading=false;window.dssLoaded=true;});
+    }
+  }
 }
 function go(page){
   const target=document.getElementById("page-"+page);
@@ -6287,6 +6329,43 @@ function go(page){
   if(dashBtn)dashBtn.style.display=["manhour","manday","lagging","leading","observation","training","dashboard-menu"].includes(page)?"inline-flex":"none";
   const mainBtn=document.querySelector(".portal-top-menu-btn");
   if(mainBtn)mainBtn.style.display=page==="main-menu"?"none":"inline-flex";
+
+  // Load only the data required by the selected report. Man Hour and Man Day share one cached manpower request.
+  const reportPages=["manhour","manday","lagging","leading","observation","training","inspection"];
+  if(reportPages.includes(page)){
+    // Only show the blocking overlay when this page actually needs a network request.
+    // Man Hour and Man Day share the cached manpower dataset; Lagging also needs manpower.
+    const needsLoad = page==="lagging"
+      ? (!moduleLoaded.manpower || !moduleLoaded.lagging)
+      : page==="manhour" || page==="manday"
+        ? !moduleLoaded.manpower
+        : page==="observation" ? !moduleLoaded.observation
+        : page==="training" ? !moduleLoaded.training
+        : page==="leading" ? !moduleLoaded.leading
+        : page==="inspection" ? !moduleLoaded.inspections
+        : false;
+    if(needsLoad) showPortalLoading(({manhour:"Loading Man Hour report…",manday:"Loading Man Day report…",lagging:"Loading Lagging Indicator report…",leading:"Loading Leading Indicator report…",observation:"Loading Observation report…",training:"Loading Training report…",inspection:"Loading Workplace Inspection data…"})[page]||"Loading report data…");
+    // Lagging rates need both incident records and manpower hours. Load both datasets
+    // in parallel, while keeping their independent caches.
+    const reportLoad = page==="lagging"
+      ? Promise.all([loadModuleData("manhour"), loadModuleData("lagging")])
+      : loadModuleData(page);
+    reportLoad.then(()=>{
+      // Do not repaint a different page if the user navigated away while the request was running.
+      if(currentPage===page) renderPage(page);
+    }).catch(err=>{
+      console.error("Module data load failed for "+page,err);
+      const target=document.getElementById("page-"+page);
+      if(target){let note=target.querySelector(".module-load-error");if(!note){note=document.createElement("div");note.className="module-load-error";note.style.cssText="margin:12px 0;padding:12px;border-radius:8px;background:#fff1f0;color:#b42318";target.prepend(note);}note.textContent="Unable to load this report: "+String(err&&err.message||err)+". Please return to the menu and try again.";}
+    }).finally(()=>{
+      // Critical safety net: errors and successful requests both release the overlay.
+      if(needsLoad) hidePortalLoading();
+    });
+  }
+  if(page==="daily-surveillance" && !window.dssLoading && !window.dssLoaded && typeof window.dssLoad==="function"){
+    window.dssLoading=true;
+    window.dssLoad().finally(()=>{window.dssLoading=false;window.dssLoaded=true;});
+  }
   renderPage(page);
   window.scrollTo({top:0,behavior:"auto"});
 }
@@ -6304,6 +6383,33 @@ if (portalHomeButton) {
   });
 }
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.page));
+async function refreshDashboardModule(page){
+  const buttonIds={manhour:'refreshManhourButton',manday:'refreshMandayButton',observation:'refreshObservationButton',training:'refreshTrainingButton',leading:'refreshLeadingButton',lagging:'refreshLaggingButton'};
+  const statusIds={manhour:'refreshManhourStatus',manday:'refreshMandayStatus',observation:'refreshObservationStatus',training:'refreshTrainingStatus',leading:'refreshLeadingStatus',lagging:'refreshLaggingStatus'};
+  const button=document.getElementById(buttonIds[page]);
+  const status=document.getElementById(statusIds[page]);
+  if(!button || button.disabled) return;
+  const oldLabel=button.innerHTML;
+  button.disabled=true;button.classList.add('is-refreshing');
+  button.innerHTML='<span class="refresh-glyph" aria-hidden="true">↻</span><span>Refreshing…</span>';
+  if(status){status.textContent='Loading latest data…';status.style.color='#567b96';}
+  showPortalLoading('Refreshing '+({manhour:'Man Hour',manday:'Man Day',observation:'Observation',training:'Training',leading:'Leading Indicator',lagging:'Lagging Indicator'}[page]||'report')+' data…');
+  try{
+    if(page==='lagging') await Promise.all([loadModuleData('manhour',true),loadModuleData('lagging',true)]);
+    else await loadModuleData(page,true);
+    if(currentPage===page) renderPage(page);
+    if(status){status.textContent='Updated at '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});status.style.color='#218047';}
+  }catch(err){
+    console.error('Dashboard report refresh failed for '+page,err);
+    if(status){status.textContent='Refresh failed — please try again';status.style.color='#b42318';}
+    const target=document.getElementById('page-'+page);
+    if(target){let note=target.querySelector('.module-load-error');if(!note){note=document.createElement('div');note.className='module-load-error';note.style.cssText='margin:12px 0;padding:12px;border-radius:8px;background:#fff1f0;color:#b42318';target.prepend(note);}note.textContent='Unable to refresh this report: '+String(err&&err.message||err)+'. Please try again.';}
+  }finally{
+    button.disabled=false;button.classList.remove('is-refreshing');button.innerHTML=oldLabel;
+    hidePortalLoading();
+  }
+}
+
 async function refreshWPInspectionLog(){
   const btn=document.getElementById("wpRefreshInspection");
   const status=document.getElementById("wpInspectionRefreshStatus");
@@ -6742,11 +6848,12 @@ async function dssLoad(){
   const status=document.getElementById("dssRefreshStatus"),refreshBtn=document.getElementById("dssRefresh");
   if(status)status.textContent="Refreshing…";
   if(refreshBtn){refreshBtn.disabled=true;refreshBtn.classList.add("is-refreshing");}
-  try{const res=await fetch(GOOGLE_API_URL+"?action=dsslist&ts="+Date.now(),{cache:"no-store"});const data=await res.json();if(!data.success)throw new Error(data.error||"Unable to load surveillance records");
-    dssRecords=data.records||[];
+  showPortalLoading("Loading Daily Site Surveillance data…");
+  try{const res=await fetch(GOOGLE_API_URL+"?action=dsslist&ts="+Date.now(),{cache:"no-store"});if(!res.ok)throw new Error("Google Sheets API returned HTTP "+res.status);const data=await res.json();if(!data.success)throw new Error(data.error||"Unable to load surveillance records");
+    dssRecords=data.records||[];window.dssLoaded=true;
     dssPopulateFiltersAndRender();if(status)status.textContent=`Updated ${new Date().toLocaleTimeString()}`;
-  }catch(e){if(status)status.textContent="Could not load: "+e.message;document.getElementById("dssTable").innerHTML='<div class="empty">Could not load Daily Site Surveillance records. Check Apps Script deployment.</div>';console.error(e);}
-  finally{if(refreshBtn){refreshBtn.disabled=false;refreshBtn.classList.remove("is-refreshing");}}
+  }catch(e){if(status)status.textContent="Could not load: "+e.message;const table=document.getElementById("dssTable");if(table)table.innerHTML='<div class="empty">Could not load Daily Site Surveillance records. Check Apps Script deployment.</div>';console.error(e);}
+  finally{if(refreshBtn){refreshBtn.disabled=false;refreshBtn.classList.remove("is-refreshing");}hidePortalLoading();}
 }
 function dssOpenNew(){
   dssCurrentNo="";document.getElementById("dssFormTitle").textContent="New Daily Site Surveillance";dssCurrentRecord=null;dssFormMode="new";document.getElementById("page-daily-surveillance-form").classList.remove("wp-view-mode");document.getElementById("dssSignatureCard").style.display="none";["dssEditBtn","dssPdfBtn","dssAckBtn"].forEach(id=>document.getElementById(id).style.display="none");document.getElementById("dssSubmit").style.display="inline-block";document.getElementById("dssReset").style.display="inline-block";document.getElementById("dssAddFinding").style.display="inline-block";
@@ -7035,6 +7142,22 @@ function dssInit(){
   }
 }
 </style>
+
+<style id="report-refresh-button-parity">
+.report-section-title .wp-refresh-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.report-section-title .wp-refresh-inspection-btn{
+ display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:37px;padding:8px 13px;
+ border:1px solid #bfd8ec;border-radius:9px;background:#f7fbff;color:#164c80;font:700 12px Arial,Helvetica,sans-serif;
+ box-shadow:0 3px 8px rgba(23,111,177,.07);cursor:pointer;white-space:nowrap;transition:background .15s ease,border-color .15s ease,transform .15s ease;
+}
+.report-section-title .wp-refresh-inspection-btn:hover{background:#eaf5ff;border-color:#8bbfe1;transform:translateY(-1px)}
+.report-section-title .wp-refresh-inspection-btn:disabled{opacity:.62;cursor:wait;transform:none}
+.report-section-title .wp-refresh-inspection-btn .refresh-glyph{display:inline-block;font-size:16px;line-height:1}
+.report-section-title .wp-refresh-inspection-btn.is-refreshing .refresh-glyph{animation:portalLoadingSpin .8s linear infinite}
+@media(max-width:650px){.report-section-title .wp-refresh-actions{width:100%;justify-content:flex-end}.report-section-title .wp-refresh-status{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.report-section-title .wp-refresh-inspection-btn.is-refreshing .refresh-glyph{animation:none!important}}
+</style>
+
 </body>
 </html>
 
