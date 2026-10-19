@@ -2952,6 +2952,141 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
 }
 </style>
 
+
+<style id="dss-status-and-table-appearance-fix">
+/* Daily Site Surveillance: status capsules match Workplace Inspection and Action scrolls with the table. */
+#page-daily-surveillance #dssTable th:last-child,
+#page-daily-surveillance #dssTable td:last-child {
+  position:static !important;
+  right:auto !important;
+  box-shadow:none !important;
+}
+#page-daily-surveillance #dssTable th:last-child { z-index:1 !important; background:#f3f8fb !important; }
+#page-daily-surveillance #dssTable .wp-status { display:inline-flex; align-items:center; white-space:nowrap; padding:5px 9px; border-radius:999px; font-size:9px; line-height:1.2; font-weight:800; }
+#page-daily-surveillance #dssTable .wp-status.open { background:#fff0e6; color:#a94d0b; }
+#page-daily-surveillance #dssTable .wp-status.in-progress { background:#e8f3ff; color:#075a9d; }
+#page-daily-surveillance #dssTable .wp-status.pending { background:#fff5dc; color:#876619; }
+#page-daily-surveillance #dssTable .wp-status.acknowledged { background:#e9f8ef; color:#19753a; }
+#page-daily-surveillance #dssTable .wp-status.closed { background:#edf0f3; color:#52616d; }
+</style>
+
+<style id="dss-finding-workplace-layout-parity">
+/* Appearance-only update: align Daily Site Surveillance finding cards with Workplace Inspection.
+   DOM, input names/data attributes, event handlers and submission logic are unchanged. */
+#page-daily-surveillance-form #dssFindings .wp-finding-card{
+  box-sizing:border-box!important;
+  border:1px solid #dfe9ef!important;
+  border-radius:14px!important;
+  padding:15px!important;
+  background:#fbfdfe!important;
+  margin:12px 0 14px!important;
+  box-shadow:0 3px 12px rgba(20,70,110,.035)!important;
+}
+#page-daily-surveillance-form #dssFindings .wp-finding-head{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:12px!important;margin:0 0 13px!important;padding:0 0 10px!important;
+  border-bottom:1px solid #e4edf4!important;
+}
+#page-daily-surveillance-form #dssFindings .wp-finding-title{
+  color:#123b72!important;font-size:14px!important;font-weight:850!important;line-height:1.35!important;
+}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)!important;
+  grid-template-areas:
+    "finding finding finding"
+    "before responsible target"
+    "action action action"
+    "closure status closuredate"
+    "remarks remarks remarks"!important;
+  gap:14px 12px!important;padding:0!important;width:100%!important;
+  align-items:start!important;
+}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field{min-width:0!important;grid-column:auto!important;width:auto!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(1){grid-area:finding!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(2){grid-area:action!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(3){grid-area:responsible!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(4){grid-area:target!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(5){grid-area:status!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(6){grid-area:before!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(7){grid-area:closure!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(8){grid-area:closuredate!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-grid>.wp-inspection-field:nth-child(9){grid-area:remarks!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-field label{
+  display:block!important;margin:0 0 6px!important;color:#526b82!important;
+  font-size:11px!important;font-weight:800!important;letter-spacing:.15px!important;line-height:1.35!important;
+}
+#page-daily-surveillance-form #dssFindings .wp-inspection-field input:not([type="file"]),
+#page-daily-surveillance-form #dssFindings .wp-inspection-field select,
+#page-daily-surveillance-form #dssFindings .wp-inspection-field textarea{
+  box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0!important;
+  border:1px solid #cfdde8!important;border-radius:9px!important;background:#fff!important;
+  color:#18325f!important;font-family:Arial,Helvetica,sans-serif!important;font-size:13px!important;
+  padding:10px 11px!important;box-shadow:none!important;
+}
+#page-daily-surveillance-form #dssFindings .wp-inspection-field input:not([type="file"]),
+#page-daily-surveillance-form #dssFindings .wp-inspection-field select{height:39px!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-field textarea{min-height:76px!important;line-height:1.45!important}
+#page-daily-surveillance-form #dssFindings .wp-inspection-field input:focus,
+#page-daily-surveillance-form #dssFindings .wp-inspection-field select:focus,
+#page-daily-surveillance-form #dssFindings .wp-inspection-field textarea:focus{
+  border-color:#09a8df!important;box-shadow:0 0 0 3px rgba(9,168,223,.12)!important;outline:none!important;
+}
+#page-daily-surveillance-form #dssFindings .wp-photo-picker{min-width:0!important;gap:7px!important}
+#page-daily-surveillance-form #dssFindings .wp-photo-picker-actions{display:flex!important;flex-wrap:wrap!important;gap:7px!important}
+#page-daily-surveillance-form #dssFindings .wp-photo-picker-btn{min-height:36px!important;border-radius:8px!important;padding:8px 11px!important;font-size:10px!important}
+#page-daily-surveillance-form #dssFindings .wp-photo-note{font-size:10px!important;color:#7a8c98!important;line-height:1.45!important;margin-top:6px!important}
+@media(max-width:900px){
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-template-areas:
+      "finding finding"
+      "before responsible"
+      "target target"
+      "action action"
+      "closure status"
+      "closuredate closuredate"
+      "remarks remarks"!important;
+  }
+}
+@media(max-width:650px){
+  #page-daily-surveillance-form #dssFindings .wp-finding-card{padding:12px!important;border-radius:12px!important}
+  #page-daily-surveillance-form #dssFindings .wp-inspection-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-areas:
+      "finding"
+      "before"
+      "responsible"
+      "target"
+      "action"
+      "closure"
+      "status"
+      "closuredate"
+      "remarks"!important;
+    gap:12px!important;
+  }
+  #page-daily-surveillance-form #dssFindings .wp-photo-picker-actions{justify-content:flex-start!important}
+  #page-daily-surveillance-form #dssFindings .wp-photo-picker-btn{flex:0 1 auto!important}
+}
+</style>
+
+
+<style id="dss-action-header-sticky-fix">
+/* Appearance-only fix: keep the Action column header sticky vertically, while its cells scroll horizontally with the table. */
+#page-daily-surveillance #dssTable th:last-child {
+  position: sticky !important;
+  top: 0 !important;
+  right: auto !important;
+  z-index: 5 !important;
+  background: #f3f8fb !important;
+  box-shadow: none !important;
+}
+#page-daily-surveillance #dssTable td:last-child {
+  position: static !important;
+  right: auto !important;
+  box-shadow: none !important;
+}
+</style>
 </head>
 <body>
 <div id="portalLoadingOverlay" class="portal-loading-overlay" role="status" aria-live="polite" aria-hidden="true">
@@ -3227,11 +3362,11 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
   <section id="page-daily-surveillance" class="page">
     <div class="section-title" style="margin-top:4px"><h2>Daily Site Surveillance</h2></div>
     <div class="filters" id="dssFilters">
-      <div class="filter-group"><label for="dssFilterYear">Year</label><select id="dssFilterYear"><option value="">All years</option></select></div>
+      <div class="filter-group"><label for="dssFilterYear">Year</label><div id="dssFilterYear" class="multi-select dss-filter-multi" aria-label="Year filter"></div></div>
       <div class="filter-group"><label for="dssFilterStart">Start date</label><input type="date" id="dssFilterStart"></div>
       <div class="filter-group"><label for="dssFilterEnd">End date</label><input type="date" id="dssFilterEnd"></div>
-      <div class="filter-group"><label for="dssFilterCompany">Company</label><select id="dssFilterCompany"><option value="">All companies</option></select></div>
-      <div class="filter-group"><label for="dssFilterStatus">Status</label><select id="dssFilterStatus"><option value="">All statuses</option><option>Open</option><option>In Progress</option><option>Pending Review</option><option>Acknowledged</option><option>Closed</option></select></div>
+      <div class="filter-group"><label for="dssFilterCompany">Company</label><div id="dssFilterCompany" class="multi-select dss-filter-multi" aria-label="Company filter"></div></div>
+      <div class="filter-group"><label for="dssFilterStatus">Status</label><div id="dssFilterStatus" class="multi-select dss-status-multi" aria-label="Status filter"></div></div>
       <div class="filter-group" style="align-self:end"><button type="button" class="btn" id="dssResetFilters">Reset filters</button></div>
     </div>
     <div class="wp-dashboard-wrap">
@@ -3866,7 +4001,7 @@ function buildUploadedData(wb){
   const trRaw=rowsFromSheet(wb,"Training");
   const training=trRaw.map(r=>{const o={date:excelDate(valueByHeader(r,"DATE")),week:String(valueByHeader(r,"WEEK")||"")};trTopics.forEach(t=>o[t]=num(valueByHeader(r,t)));return o;}).filter(r=>r.date);
 
-  const leadingTopics=["HSE INDUCTION","TOOLBOX MEETING","HSE COORDINATION MEETING","HSE COMMITTEE MEETING","EMERGENCY DRILL","WORKPLACE INSPECTION","HSE WALKABOUT","WEEKLY HOUSEKEEPING","BESAFE CARD","HSE CAMPAIGN","REWARDS & RECOGNITION","CONSEQUENCE MANAGEMENT"];
+  const leadingTopics=["HSE INDUCTION","TOOLBOX MEETING","MASS TOOLBOX MEETING","HSE COORDINATION MEETING","HSE COMMITTEE MEETING","EMERGENCY DRILL","WORKPLACE INSPECTION","HSE WALKABOUT","WEEKLY HOUSEKEEPING","BESAFE CARD","HSE CAMPAIGN","REWARDS & RECOGNITION","CONSEQUENCE MANAGEMENT"];
   const leadRaw=rowsFromSheet(wb,"Leading");
   const leading=leadRaw.map(r=>{const o={date:excelDate(valueByHeader(r,"DATE")),week:String(valueByHeader(r,"WEEK")||"")};leadingTopics.forEach(t=>o[t]=num(valueByHeader(r,t)));return o;}).filter(r=>r.date);
 
@@ -6696,7 +6831,7 @@ function hidePortalBusyImmediately(overlay) {
 })();
 
 /* ===== Daily Site Surveillance module (isolated from Workplace Inspection) ===== */
-let dssRecords = [], dssFindingsCount = 0, dssCurrentNo = "", dssCurrentRecord=null, dssFormMode="new";
+let dssRecords = [], dssFindingsCount = 0, dssCurrentNo = "", dssCurrentRecord=null, dssFormMode="new", dssSelectedStatuses=[], dssSelectedYears=[], dssSelectedCompanies=[];
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",dssInit);else dssInit();
 function dssEsc(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function dssToday(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;}
@@ -6800,9 +6935,88 @@ function dssCanDelete(record){
   const username=String(u.username||"").trim().toLowerCase();
   return !!username && String(record.submittedBy||record.submittedByUsername||"").trim().toLowerCase()===username;
 }
+function dssBuildFilterMultiSelect(id, values, allLabel, selectedKey){
+  const wrap=document.getElementById(id);if(!wrap)return;
+  let selected=selectedKey==="year"?dssSelectedYears:dssSelectedCompanies;
+  selected=selected.filter(v=>values.includes(v));
+  if(selectedKey==="year")dssSelectedYears=selected;else dssSelectedCompanies=selected;
+  wrap.innerHTML="";wrap.dataset.ready="1";
+  const trigger=document.createElement("button");trigger.type="button";trigger.className="multi-select-trigger";trigger.setAttribute("aria-haspopup","listbox");trigger.setAttribute("aria-expanded","false");
+  const updateTrigger=()=>{const vals=selectedKey==="year"?dssSelectedYears:dssSelectedCompanies;trigger.textContent=vals.length?(vals.length===1?vals[0]:vals.length+" selected"):allLabel;trigger.setAttribute("aria-expanded",wrap.classList.contains("open")?"true":"false");};
+  const menu=document.createElement("div");menu.className="multi-select-menu";
+  const search=document.createElement("input");search.type="text";search.className="multi-search";search.placeholder="Search...";search.setAttribute("aria-label","Search "+allLabel.toLowerCase());menu.appendChild(search);
+  const list=document.createElement("div");list.className="multi-options";list.setAttribute("role","group");
+  const allRow=document.createElement("label");allRow.className="multi-option multi-all";
+  const allCb=document.createElement("input");allCb.type="checkbox";allCb.checked=selected.length===0;
+  const allText=document.createElement("span");allText.textContent=allLabel;allRow.append(allCb,allText);list.appendChild(allRow);
+  const cbs=[];
+  values.forEach(value=>{const row=document.createElement("label");row.className="multi-option";const cb=document.createElement("input");cb.type="checkbox";cb.value=value;cb.checked=selected.includes(value);const text=document.createElement("span");text.textContent=value;row.append(cb,text);list.appendChild(row);cbs.push(cb);});
+  menu.appendChild(list);
+  const actions=document.createElement("div");actions.className="multi-actions";const clear=document.createElement("button");clear.type="button";clear.className="multi-clear";clear.textContent="Clear";const apply=document.createElement("button");apply.type="button";apply.className="multi-apply";apply.textContent="Apply";actions.append(clear,apply);menu.appendChild(actions);
+  const updateChecks=()=>{allCb.checked=!cbs.some(cb=>cb.checked);};
+  allCb.addEventListener("change",()=>{if(allCb.checked)cbs.forEach(cb=>cb.checked=false);});cbs.forEach(cb=>cb.addEventListener("change",updateChecks));
+  search.addEventListener("input",()=>{const q=search.value.toLowerCase();cbs.forEach(cb=>{cb.parentElement.style.display=cb.value.toLowerCase().includes(q)?"flex":"none";});allRow.style.display=allLabel.toLowerCase().includes(q)?"flex":"none";});
+  clear.addEventListener("click",()=>{cbs.forEach(cb=>cb.checked=false);allCb.checked=true;});
+  apply.addEventListener("click",()=>{const vals=cbs.filter(cb=>cb.checked).map(cb=>cb.value);if(selectedKey==="year")dssSelectedYears=vals;else dssSelectedCompanies=vals;updateTrigger();wrap.classList.remove("open");dssRender();});
+  trigger.addEventListener("click",e=>{e.stopPropagation();document.querySelectorAll(".multi-select.open").forEach(x=>{if(x!==wrap)x.classList.remove("open")});wrap.classList.toggle("open");updateTrigger();});menu.addEventListener("click",e=>e.stopPropagation());
+  wrap.append(trigger,menu);wrap._updateTrigger=updateTrigger;updateTrigger();
+}
+function dssDisplayStatus(r){
+  const raw=String(r.status||"").trim().toLowerCase();
+  if(raw==="acknowledged")return "Acknowledged";
+  const open=Number(r.openCount)||0;
+  const closed=Number(r.closedCount)||0;
+  const findings=Number(r.findingCount)||0;
+  if(open>0)return "In Progress";
+  if(closed>0 || findings===0)return "Pending Review";
+  return "Pending Review";
+}
+function dssStatusClass(status){
+  const key=String(status||"").trim().toLowerCase().replace(/\s+/g,"-");
+  return ({"open":"open","in-progress":"in-progress","pending-review":"pending","acknowledged":"acknowledged","closed":"closed"})[key]||"pending";
+}
+function dssBuildStatusMultiSelect(){
+  const wrap=document.getElementById("dssFilterStatus");
+  if(!wrap||wrap.dataset.ready==="1")return;
+  wrap.dataset.ready="1";
+  const statuses=["In Progress","Pending Review","Acknowledged"];
+  const trigger=document.createElement("button");
+  trigger.type="button";trigger.className="multi-select-trigger";trigger.setAttribute("aria-haspopup","listbox");trigger.setAttribute("aria-expanded","false");
+  const updateTrigger=()=>{
+    const vals=dssSelectedStatuses;
+    trigger.textContent=vals.length?(vals.length===1?vals[0]:vals.length+" selected"):"All statuses";
+    trigger.setAttribute("aria-expanded",wrap.classList.contains("open")?"true":"false");
+  };
+  const menu=document.createElement("div");menu.className="multi-select-menu";
+  const search=document.createElement("input");search.type="text";search.className="multi-search";search.placeholder="Search...";search.setAttribute("aria-label","Search statuses");menu.appendChild(search);
+  const list=document.createElement("div");list.className="multi-options";list.setAttribute("role","group");
+  const allRow=document.createElement("label");allRow.className="multi-option multi-all";
+  const allCb=document.createElement("input");allCb.type="checkbox";allCb.checked=true;
+  const allText=document.createElement("span");allText.textContent="All statuses";allRow.append(allCb,allText);list.appendChild(allRow);
+  const cbs=[];
+  statuses.forEach(status=>{
+    const row=document.createElement("label");row.className="multi-option";
+    const cb=document.createElement("input");cb.type="checkbox";cb.value=status;cb.checked=dssSelectedStatuses.includes(status);
+    const text=document.createElement("span");text.textContent=status;row.append(cb,text);list.appendChild(row);cbs.push(cb);
+  });
+  menu.appendChild(list);
+  const actions=document.createElement("div");actions.className="multi-actions";
+  const clear=document.createElement("button");clear.type="button";clear.className="multi-clear";clear.textContent="Clear";
+  const apply=document.createElement("button");apply.type="button";apply.className="multi-apply";apply.textContent="Apply";
+  actions.append(clear,apply);menu.appendChild(actions);
+  const updateChecks=()=>{allCb.checked=!cbs.some(cb=>cb.checked);};
+  allCb.addEventListener("change",()=>{if(allCb.checked)cbs.forEach(cb=>cb.checked=false);});
+  cbs.forEach(cb=>cb.addEventListener("change",updateChecks));
+  search.addEventListener("input",()=>{const q=search.value.toLowerCase();cbs.forEach(cb=>{cb.parentElement.style.display=cb.value.toLowerCase().includes(q)?"flex":"none";});allRow.style.display="all statuses".includes(q)?"flex":"none";});
+  clear.addEventListener("click",()=>{cbs.forEach(cb=>cb.checked=false);allCb.checked=true;});
+  apply.addEventListener("click",()=>{dssSelectedStatuses=cbs.filter(cb=>cb.checked).map(cb=>cb.value);updateTrigger();wrap.classList.remove("open");dssRender();});
+  trigger.addEventListener("click",e=>{e.stopPropagation();document.querySelectorAll(".multi-select.open").forEach(x=>{if(x!==wrap)x.classList.remove("open")});wrap.classList.toggle("open");updateTrigger();});
+  menu.addEventListener("click",e=>e.stopPropagation());
+  wrap.append(trigger,menu);updateTrigger();
+}
 function dssRender(){
-  const year=document.getElementById("dssFilterYear").value,start=document.getElementById("dssFilterStart").value,end=document.getElementById("dssFilterEnd").value,company=document.getElementById("dssFilterCompany").value,status=document.getElementById("dssFilterStatus").value;
-  const rows=dssRecords.filter(r=>(!year||String(r.date||"").slice(0,4)===year)&&(!start||r.date>=start)&&(!end||r.date<=end)&&(!company||r.company===company)&&(!status||r.status===status));
+  const start=document.getElementById("dssFilterStart").value,end=document.getElementById("dssFilterEnd").value;
+  const rows=dssRecords.filter(r=>(!dssSelectedYears.length||dssSelectedYears.includes(String(r.date||"").slice(0,4)))&&(!start||r.date>=start)&&(!end||r.date<=end)&&(!dssSelectedCompanies.length||dssSelectedCompanies.includes(String(r.company||"")))&&(!dssSelectedStatuses.length||dssSelectedStatuses.includes(dssDisplayStatus(r))));
   const totalFindings=rows.reduce((n,r)=>n+(Number(r.findingCount)||0),0),open=rows.reduce((n,r)=>n+(Number(r.openCount)||0),0),closed=rows.reduce((n,r)=>n+(Number(r.closedCount)||0),0);
   const allFindings=dssRecords.reduce((n,r)=>n+(Number(r.findingCount)||0),0);
   const allOpen=dssRecords.reduce((n,r)=>n+(Number(r.openCount)||0),0);
@@ -6818,7 +7032,7 @@ function dssRender(){
   const vals=Object.keys(monthly).sort().map(k=>{const [y,m]=k.split("-").map(Number);return {k:new Date(y,m-1,1).toLocaleDateString("en-US",{month:"short",year:"numeric"}),v:monthly[k]};});
   document.getElementById("dssMonthlyChart").innerHTML=vals.length?svgBar(vals,{color:"#0067a5"}):'<div class="empty">No submissions for current filters</div>';
   const sorted=[...rows].sort((a,b)=>String(b.date||"").localeCompare(String(a.date||""))).slice(0,100);
-  document.getElementById("dssTable").innerHTML=sorted.length?`<table><thead><tr><th>Date</th><th>Surveillance No.</th><th>Location</th><th>Activity</th><th>Company</th><th>Inspector</th><th>Findings</th><th>Open</th><th>Closed</th><th>Status</th><th>Action</th></tr></thead><tbody>${sorted.map(r=>`<tr><td>${dssEsc(r.date)}</td><td>${dssEsc(r.surveillanceNo)}</td><td>${dssEsc(r.location)}</td><td>${dssEsc(r.activity)}</td><td>${dssEsc(r.company)}</td><td>${dssEsc(r.inspector)}</td><td>${r.findingCount||0}</td><td>${r.openCount||0}</td><td>${r.closedCount||0}</td><td>${dssEsc(r.status||"Open")}</td><td><div class="wp-row-actions"><button type="button" class="dss-view-only-btn" data-dss-view="${dssEsc(r.surveillanceNo)}">View</button>${dssCanDelete(r)?`<button type="button" class="wp-delete-btn" data-dss-delete="${dssEsc(r.surveillanceNo)}" title="Delete surveillance record">Delete</button>`:""}</div></td></tr>`).join("")}</tbody></table>`:'<div class="empty">No surveillance records for current filters</div>';
+  document.getElementById("dssTable").innerHTML=sorted.length?`<table><thead><tr><th>Date</th><th>Surveillance No.</th><th>Location</th><th>Activity</th><th>Company</th><th>Inspector</th><th>Findings</th><th>Open</th><th>Closed</th><th>Status</th><th>Action</th></tr></thead><tbody>${sorted.map(r=>`<tr><td>${dssEsc(r.date)}</td><td>${dssEsc(r.surveillanceNo)}</td><td>${dssEsc(r.location)}</td><td>${dssEsc(r.activity)}</td><td>${dssEsc(r.company)}</td><td>${dssEsc(r.inspector)}</td><td>${r.findingCount||0}</td><td>${r.openCount||0}</td><td>${r.closedCount||0}</td><td><span class="wp-status ${dssStatusClass(dssDisplayStatus(r))}">${dssEsc(dssDisplayStatus(r).toUpperCase())}</span></td><td><div class="wp-row-actions"><button type="button" class="dss-view-only-btn" data-dss-view="${dssEsc(r.surveillanceNo)}">View</button>${dssCanDelete(r)?`<button type="button" class="wp-delete-btn" data-dss-delete="${dssEsc(r.surveillanceNo)}" title="Delete surveillance record">Delete</button>`:""}</div></td></tr>`).join("")}</tbody></table>`:'<div class="empty">No surveillance records for current filters</div>';
   document.querySelectorAll("[data-dss-view]").forEach(b=>b.addEventListener("click",()=>dssView(b.dataset.dssView,"view")));
   document.querySelectorAll("[data-dss-delete]").forEach(b=>b.addEventListener("click",()=>dssDelete(b.dataset.dssDelete,b)));
 }
@@ -6834,14 +7048,10 @@ async function dssDelete(no,button){
   }catch(e){alert("Unable to delete surveillance: "+e.message);button.disabled=false;}
 }
 function dssPopulateFiltersAndRender(){
-  const yearEl=document.getElementById("dssFilterYear"),companyEl=document.getElementById("dssFilterCompany");
-  if(!yearEl||!companyEl)return;
-  const oldYear=yearEl.value,oldCompany=companyEl.value;
   const years=[...new Set(dssRecords.map(r=>String(r.date||"").slice(0,4)).filter(Boolean))].sort().reverse();
-  const companies=[...new Set(dssRecords.map(r=>r.company).filter(Boolean))].sort();
-  yearEl.innerHTML='<option value="">All years</option>'+years.map(y=>`<option value="${dssEsc(y)}">${dssEsc(y)}</option>`).join("");
-  companyEl.innerHTML='<option value="">All companies</option>'+companies.map(c=>`<option value="${dssEsc(c)}">${dssEsc(c)}</option>`).join("");
-  if(years.includes(oldYear))yearEl.value=oldYear;if(companies.includes(oldCompany))companyEl.value=oldCompany;
+  const companies=[...new Set(dssRecords.map(r=>String(r.company||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+  dssBuildFilterMultiSelect("dssFilterYear",years,"All years","year");
+  dssBuildFilterMultiSelect("dssFilterCompany",companies,"All companies","company");
   dssRender();
 }
 async function dssLoad(){
@@ -7004,6 +7214,8 @@ function dssSetupMobileFilterToggle(){
 
 function dssInit(){
   dssSetupMobileFilterToggle();
+  dssBuildStatusMultiSelect();
+  document.addEventListener("click",e=>{if(!e.target.closest(".multi-select"))document.querySelectorAll(".multi-select.open").forEach(x=>x.classList.remove("open"));});
   // Delegated handler ensures the New button works even if portal sections are re-rendered.
   document.addEventListener("click",function(e){
     const newBtn=e.target.closest("#dssNewBtn");
@@ -7017,8 +7229,8 @@ function dssInit(){
   document.getElementById("dssEditBtn")?.addEventListener("click",dssEditCurrent);
   document.getElementById("dssAckBtn")?.addEventListener("click",dssAcknowledge);
   document.getElementById("dssPdfBtn")?.addEventListener("click",dssSavePdf);
-  ["dssFilterYear","dssFilterStart","dssFilterEnd","dssFilterCompany","dssFilterStatus"].forEach(id=>document.getElementById(id)?.addEventListener("change",dssRender));
-  document.getElementById("dssResetFilters")?.addEventListener("click",()=>{["dssFilterYear","dssFilterStart","dssFilterEnd","dssFilterCompany","dssFilterStatus"].forEach(id=>document.getElementById(id).value="");dssRender();});
+  ["dssFilterStart","dssFilterEnd"].forEach(id=>document.getElementById(id)?.addEventListener("change",dssRender));
+  document.getElementById("dssResetFilters")?.addEventListener("click",()=>{document.getElementById("dssFilterStart").value="";document.getElementById("dssFilterEnd").value="";dssSelectedYears=[];dssSelectedCompanies=[];dssSelectedStatuses=[];["dssFilterYear","dssFilterCompany","dssFilterStatus"].forEach(id=>{const wrap=document.getElementById(id);if(wrap){wrap.classList.remove("open");wrap.querySelectorAll('.multi-option input[type="checkbox"]').forEach(cb=>cb.checked=false);const all=wrap.querySelector('.multi-all input[type="checkbox"]');if(all)all.checked=true;if(wrap._updateTrigger)wrap._updateTrigger();else{const trigger=wrap.querySelector(".multi-select-trigger");if(trigger)trigger.textContent=id==="dssFilterStatus"?"All statuses":trigger.textContent;}}});dssRender();});
 }
 
 </script>
@@ -7174,4 +7386,99 @@ function dssInit(){
 #page-daily-surveillance #dssResetFilters.btn{border:1px solid #bfd8ec;border-radius:9px;background:#f7fbff;color:#164c80;padding:8px 13px;min-height:37px;font:700 12px Arial,Helvetica,sans-serif;box-shadow:0 3px 8px rgba(23,111,177,.07);cursor:pointer}
 #page-daily-surveillance #dssResetFilters.btn:hover{background:#eaf5ff;border-color:#8bbfe1}
 #page-daily-surveillance .wp-row-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:126px}
+</style>
+
+
+<style id="rev26-appearance-filter-consistency">
+/* Consistent compact filter controls across portal dashboards and Daily Site Surveillance. */
+.filters .field > input,
+.filters .field > select,
+.filters .field .multi-select-trigger,
+#dssFilters .filter-group > input,
+#dssFilters .filter-group > select,
+#dssFilters .filter-group .multi-select-trigger {
+  height:34px !important;
+  min-height:34px !important;
+  padding:0 10px !important;
+  border:1px solid #d3e1eb !important;
+  border-radius:8px !important;
+  background:#f7fafc !important;
+  color:#18384a !important;
+  box-shadow:none !important;
+  font-size:13px !important;
+  box-sizing:border-box !important;
+}
+.filters .field .multi-select-trigger,
+#dssFilters .filter-group .multi-select-trigger {
+  display:block;
+  width:100%;
+  text-align:left;
+  padding-right:30px !important;
+  line-height:32px;
+}
+.filters .field .multi-select.open .multi-select-trigger,
+#dssFilters .filter-group .multi-select.open .multi-select-trigger {
+  border-color:#70b6df !important;
+  box-shadow:0 0 0 2px rgba(0,103,165,.10) !important;
+}
+.filters > .btn,
+#dssFilters #dssResetFilters.btn {
+  height:34px !important;
+  min-height:34px !important;
+  padding:0 13px !important;
+  border:1px solid #bfd8ec !important;
+  border-radius:8px !important;
+  background:#edf6ff !important;
+  color:#164c80 !important;
+  font-size:12px !important;
+  font-weight:700 !important;
+  box-shadow:0 2px 6px rgba(23,111,177,.06) !important;
+}
+.filters > .btn:hover,
+#dssFilters #dssResetFilters.btn:hover {
+  background:#e0efff !important;
+  border-color:#91bfdf !important;
+}
+.multi-option {
+  display:flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  min-height:30px;
+  line-height:1.25;
+}
+.multi-option input[type="checkbox"] {
+  display:inline-block !important;
+  appearance:auto !important;
+  -webkit-appearance:checkbox !important;
+  width:17px !important;
+  min-width:17px !important;
+  max-width:17px !important;
+  height:17px !important;
+  min-height:17px !important;
+  margin:0 !important;
+  padding:0 !important;
+  flex:0 0 17px !important;
+  accent-color:#0067a5;
+  vertical-align:middle;
+}
+.multi-option span {display:inline-block;flex:1;min-width:0;}
+#dssFilters .filter-group .multi-select {width:100%;}
+#dssFilters .filter-group .multi-select-menu {width:280px;max-width:min(320px,80vw);}
+@media(max-width:650px){
+  .filters .field > input,.filters .field > select,.filters .field .multi-select-trigger,
+  #dssFilters .filter-group > input,#dssFilters .filter-group > select,#dssFilters .filter-group .multi-select-trigger {height:34px !important;min-height:34px !important;}
+}
+</style>
+
+<style id="dss-v16-year-company-multiselect-fix">
+#dssFilters .dss-filter-multi{width:100%;min-width:0}
+#dssFilters .dss-filter-multi .multi-select-trigger,#dssFilters .dss-status-multi .multi-select-trigger{height:34px!important;min-height:34px!important;padding:6px 30px 6px 11px!important;border:1px solid #d2e2ec!important;border-radius:10px!important;background:#f6fafc!important;color:#24475b!important;font-size:13px!important;line-height:20px!important;box-shadow:none}
+#dssFilters .dss-filter-multi.open .multi-select-trigger,#dssFilters .dss-status-multi.open .multi-select-trigger{border-color:#00a4d6!important;box-shadow:0 0 0 2px rgba(0,164,214,.10)!important}
+#dssFilters .dss-filter-multi .multi-select-menu{width:280px;max-width:min(320px,80vw)}
+#dssFilters .multi-option{display:flex;align-items:center;gap:8px;padding:6px 6px;font-size:12px}
+#dssFilters .multi-option input[type=checkbox]{width:16px!important;height:16px!important;min-width:16px!important;max-width:16px!important;margin:0 2px 0 0!important;flex:0 0 16px}
+#dssFilters .multi-option span{flex:1;min-width:0;overflow-wrap:anywhere}
+#dssFilters .filter-group>input[type=date]{height:34px!important;min-height:34px!important;background:#f6fafc!important;border:1px solid #d2e2ec!important;border-radius:10px!important;color:#24475b!important}
+#dssFilters #dssResetFilters{height:34px!important;min-height:34px!important;background:#eaf4fb!important;border:1px solid #bdd8eb!important;color:#075b8e!important;border-radius:9px!important;font-weight:700}
+#dssFilters #dssResetFilters:hover{background:#d9ecf9!important}
 </style>
