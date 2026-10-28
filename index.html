@@ -487,6 +487,48 @@ button[aria-busy="true"] { cursor: progress !important; }
   flex: none !important;
 }
 
+
+/* Emergency Headcount page */
+#page-headcount-system .hc-description{color:var(--muted,#667085);margin:0 0 18px;font-size:14px}
+#page-headcount-system .hc-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
+#page-headcount-system .hc-kpi-card{background:#fff;border:1px solid #e2e8f0;border-radius:13px;padding:17px;box-shadow:0 2px 8px rgba(15,23,42,.04);display:flex;flex-direction:column;gap:8px;min-width:0}
+#page-headcount-system .hc-kpi-card span{font-size:12px;color:#526173;font-weight:700}
+#page-headcount-system .hc-kpi-card strong{font-size:30px;line-height:1.15;color:#0b3158}
+#page-headcount-system .hc-kpi-card small{font-size:11px;color:#738094}
+#page-headcount-system .hc-kpi-highlight{border-color:#91bce4;background:#f4f9ff}
+#page-headcount-system .hc-panel{background:#fff;border:1px solid #e2e8f0;border-radius:13px;padding:18px;margin-bottom:18px;box-shadow:0 2px 8px rgba(15,23,42,.035)}
+#page-headcount-system .hc-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+#page-headcount-system .hc-panel-heading h3{font-size:17px;margin:0;color:#183b5b}
+#page-headcount-system .hc-updated,#page-headcount-system .hc-admin-note{font-size:11px;color:#697586}
+#page-headcount-system .hc-filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:15px}
+#page-headcount-system .hc-filters label,#page-headcount-system .hc-location-tools label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;color:#475467;min-width:0}
+#page-headcount-system .hc-filters input,#page-headcount-system .hc-filters select,#page-headcount-system .hc-location-tools input,#page-headcount-system .hc-location-tools select{width:100%;min-width:0;border:1px solid #cfd8e3;border-radius:8px;padding:10px 11px;background:#fff;color:#182230;font:inherit;font-size:13px;box-sizing:border-box}
+#page-headcount-system .hc-table-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0;font-size:12px;color:#64748b}
+#page-headcount-system .hc-secondary-btn,#page-headcount-system .hc-primary-btn,#page-headcount-system .hc-danger-btn{border:0;border-radius:8px;padding:10px 14px;font-size:12px;font-weight:700;cursor:pointer;min-height:38px}
+#page-headcount-system .hc-secondary-btn{background:#eaf2fb;color:#174b7a;border:1px solid #c6d9ed}
+#page-headcount-system .hc-primary-btn{background:#145b91;color:white;white-space:nowrap}
+#page-headcount-system .hc-danger-btn{background:#fff0f0;color:#a52626;border:1px solid #f0c5c5;white-space:nowrap}
+#page-headcount-system .hc-table-wrap{overflow:auto;max-width:100%;border:1px solid #e5eaf0;border-radius:9px}
+#page-headcount-system .hc-table{border-collapse:separate;border-spacing:0;width:100%;min-width:930px;font-size:12px}
+#page-headcount-system .hc-table th{background:#edf4fb;color:#234b70;text-align:left;font-weight:800;white-space:nowrap;position:sticky;top:0;z-index:1}
+#page-headcount-system .hc-table th,#page-headcount-system .hc-table td{padding:11px 10px;border-bottom:1px solid #e9eef4;vertical-align:top}
+#page-headcount-system .hc-table tbody tr:last-child td{border-bottom:0}
+#page-headcount-system .hc-table tbody tr:nth-child(even){background:#fafcff}
+#page-headcount-system .hc-empty{text-align:center;color:#7b8794;padding:24px!important}
+#page-headcount-system .hc-pill{display:inline-block;border-radius:999px;padding:4px 7px;font-size:10px;font-weight:800;white-space:nowrap;background:#eef2f6;color:#344054}
+#page-headcount-system .hc-pill.marine{background:#e5f3ff;color:#075985}
+#page-headcount-system .hc-pill.visitor{background:#f1eaff;color:#6941c6}
+#page-headcount-system .hc-pill.inactive{background:#fff0f0;color:#a52626}
+#page-headcount-system .hc-note{font-size:11px;line-height:1.5;color:#667085;margin:12px 0 0}
+#page-headcount-system .hc-location-copy{font-size:12px;color:#667085;margin:0 0 14px}
+#page-headcount-system .hc-location-tools{display:flex;align-items:flex-end;gap:12px;margin:12px 0}
+#page-headcount-system .hc-location-tools label{flex:1}
+#page-headcount-system .hc-message{font-size:12px;margin:8px 0 0;color:#175c36}
+#page-headcount-system .hc-message.error{color:#b42318}
+@media(max-width:900px){#page-headcount-system .hc-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#page-headcount-system .hc-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){#page-headcount-system .hc-panel{padding:12px}#page-headcount-system .hc-kpi-grid{gap:8px}#page-headcount-system .hc-kpi-card{padding:12px}#page-headcount-system .hc-kpi-card strong{font-size:25px}#page-headcount-system .hc-filters{grid-template-columns:1fr}#page-headcount-system .hc-location-tools{flex-direction:column;align-items:stretch}#page-headcount-system .hc-panel-heading{align-items:flex-start;flex-direction:column}#page-headcount-system .hc-table-tools{align-items:flex-start;flex-direction:column}}
+@media print{body *{visibility:hidden!important}#page-headcount-system,#page-headcount-system *{visibility:visible!important}#page-headcount-system{display:block!important;position:absolute!important;left:0!important;top:0!important;width:100%!important;padding:0!important;margin:0!important;background:#fff!important}#page-headcount-system .section-title,#page-headcount-system .hc-description,#page-headcount-system .hc-kpi-grid,#page-headcount-system .hc-panel,#page-headcount-system .hc-table-wrap{break-inside:avoid}#page-headcount-system .hc-location-panel,#page-headcount-system .portal-menu-back,#page-headcount-system .wp-refresh-actions,#page-headcount-system .hc-filters,#page-headcount-system .hc-table-tools,#page-headcount-system .hc-note{display:none!important}#page-headcount-system .hc-table{min-width:0!important;font-size:8pt!important}#page-headcount-system .hc-table th,#page-headcount-system .hc-table td{padding:5px!important}#page-headcount-system .hc-table-wrap{overflow:visible!important;border:0!important}#page-headcount-system .hc-kpi-grid{grid-template-columns:repeat(4,1fr)!important}#page-headcount-system .hc-panel{padding:0!important;border:0!important;box-shadow:none!important}#page-headcount-system .hc-panel-heading h3{font-size:14pt!important}#page-headcount-system .hc-updated{font-size:8pt!important}}
+
 </style>
 
 <style>
@@ -3087,6 +3129,61 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
   box-shadow: none !important;
 }
 </style>
+<style id="hc-user-adjustments">
+#page-headcount-system .hc-page-title{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px;width:100%}
+#page-headcount-system .wp-refresh-actions{gap:8px;flex-wrap:wrap}
+#page-headcount-system .wp-refresh-status{font-size:10px!important;color:#168044!important;font-weight:700;white-space:nowrap}
+#page-headcount-system .wp-refresh-inspection-btn{width:auto!important;min-width:0!important;padding:7px 10px!important;font-size:10px!important;line-height:1.2;border-radius:8px!important}
+#page-headcount-system .wp-refresh-inspection-btn .refresh-glyph{font-size:12px}
+#page-headcount-system .wp-refresh-inspection-btn.is-refreshing .refresh-glyph{animation:portalLoadingSpin .8s linear infinite}
+#page-headcount-system .hc-filters{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media(max-width:1000px){#page-headcount-system .hc-filters{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){#page-headcount-system .hc-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+#page-headcount-system .hc-page-title .wp-refresh-actions{margin-left:auto!important;display:flex;align-items:center;justify-content:flex-end;flex-shrink:0}
+#page-headcount-system .hc-kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 18px}
+#page-headcount-system .hc-kpi-card{border:0!important;border-radius:13px;padding:18px!important;min-height:112px;box-shadow:0 5px 14px rgba(15,23,42,.10);display:flex;flex-direction:column;gap:8px}
+#page-headcount-system .hc-kpi-card span,#page-headcount-system .hc-kpi-card strong,#page-headcount-system .hc-kpi-card small{color:#fff!important}
+#page-headcount-system .hc-kpi-card span{font-size:12px;font-weight:700;opacity:.96}
+#page-headcount-system .hc-kpi-card strong{font-size:30px;line-height:1.15;font-weight:800}
+#page-headcount-system .hc-kpi-card small{font-size:11px;opacity:.88}
+#page-headcount-system .hc-kpi-blue{background:linear-gradient(135deg,#1769aa,#2389d4)!important}
+#page-headcount-system .hc-kpi-purple{background:linear-gradient(135deg,#6941c6,#8b5cf6)!important}
+#page-headcount-system .hc-kpi-teal{background:linear-gradient(135deg,#087f8c,#12a7a0)!important}
+#page-headcount-system .hc-kpi-orange{background:linear-gradient(135deg,#c45a12,#f28c28)!important}
+#page-headcount-system .hc-kpi-green{background:linear-gradient(135deg,#21834b,#36ad68)!important}
+#page-headcount-system .hc-kpi-navy{background:linear-gradient(135deg,#243b70,#3564b4)!important}
+#page-headcount-system .hc-kpi-highlight{border:0!important}
+#page-headcount-system .hc-location-panel .hc-panel-heading{align-items:center}
+#page-headcount-system .hc-location-tools[hidden],#page-headcount-system .hc-pagination[hidden]{display:none!important}
+#page-headcount-system .hc-location-table{min-width:600px}
+#page-headcount-system .hc-location-action-heading{text-align:right}
+#page-headcount-system .hc-location-table td:last-child{text-align:right;white-space:nowrap}
+#page-headcount-system .hc-location-delete-btn{background:#fff0f0;color:#a52626;border:1px solid #f0c5c5;border-radius:7px;padding:7px 11px;font-weight:700;font-size:11px;cursor:pointer}
+#page-headcount-system .hc-location-tools{display:flex;align-items:flex-end;gap:12px;margin:12px 0}
+#page-headcount-system .hc-location-tools label{flex:1}
+#page-headcount-system .hc-pagination{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;color:#64748b;font-size:12px}
+#page-headcount-system .hc-pagination>div{display:flex;gap:8px}
+#page-headcount-system .hc-pagination button:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:900px){#page-headcount-system .hc-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){#page-headcount-system .hc-page-title{align-items:flex-start!important;flex-direction:row!important}#page-headcount-system .hc-page-title .wp-refresh-actions{margin-left:auto!important}#page-headcount-system .hc-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}#page-headcount-system .hc-kpi-card{padding:12px!important;min-height:100px}#page-headcount-system .hc-kpi-card strong{font-size:24px}#page-headcount-system .hc-location-tools{flex-direction:column;align-items:stretch}#page-headcount-system .hc-pagination{align-items:flex-start;flex-direction:column}}
+@media(max-width:400px){#page-headcount-system .hc-kpi-grid{grid-template-columns:1fr}}
+@media print{#page-headcount-system .hc-location-panel,#page-headcount-system .hc-page-title .wp-refresh-actions,#page-headcount-system .hc-filters,#page-headcount-system .hc-table-tools,#page-headcount-system .hc-pagination,#page-headcount-system .portal-menu-back{display:none!important}}
+</style>
+
+<style id="headcount-refresh-button-match">
+/* Match the Headcount refresh control to the reference used on other portal pages. */
+#page-headcount-system .hc-page-title{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#page-headcount-system .hc-page-title .wp-refresh-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-left:auto;flex-wrap:wrap}
+#page-headcount-system .hc-page-title .wp-refresh-status{font-size:11px;font-weight:700;color:#218047;white-space:nowrap}
+#page-headcount-system .hc-page-title .wp-refresh-inspection-btn{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:37px;padding:8px 13px;border:1px solid #bfd8ec;border-radius:9px;background:#f7fbff;color:#164c80;font:700 12px Arial,Helvetica,sans-serif;box-shadow:0 3px 8px rgba(23,111,177,.07);cursor:pointer;white-space:nowrap;line-height:1.2;transition:background .15s ease,border-color .15s ease,transform .15s ease}
+#page-headcount-system .hc-page-title .wp-refresh-inspection-btn:hover{background:#eaf5ff;border-color:#8bbfe1;transform:translateY(-1px)}
+#page-headcount-system .hc-page-title .wp-refresh-inspection-btn:focus-visible{outline:2px solid #168bd2;outline-offset:2px}
+#page-headcount-system .hc-page-title .wp-refresh-inspection-btn:disabled{opacity:.62;cursor:wait;transform:none}
+#page-headcount-system .hc-page-title .wp-refresh-inspection-btn .refresh-glyph{display:inline-block;font-size:16px;line-height:1}
+#page-headcount-system .hc-page-title .wp-refresh-inspection-btn.is-refreshing .refresh-glyph{animation:portalLoadingSpin .8s linear infinite}
+@media(max-width:650px){#page-headcount-system .hc-page-title .wp-refresh-actions{width:100%;justify-content:flex-end}#page-headcount-system .hc-page-title .wp-refresh-status{font-size:11px}}
+@media(prefers-reduced-motion:reduce){#page-headcount-system .hc-page-title .wp-refresh-inspection-btn.is-refreshing .refresh-glyph{animation:none!important}}
+</style>
 </head>
 <body>
 <div id="portalLoadingOverlay" class="portal-loading-overlay" role="status" aria-live="polite" aria-hidden="true">
@@ -3317,6 +3414,10 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
             <span class="portal-home-icon">♙</span><h3>Security Control</h3>
             <p>Review visitor requests, manage individual passes and view site movements.</p><span class="portal-home-arrow">›</span>
           </button>
+          <button type="button" class="portal-home-module cyan" onclick="go('headcount-system')">
+            <span class="portal-home-icon">♟</span><h3>Headcount System</h3>
+            <p>Open the project headcount management module.</p><span class="portal-home-arrow">›</span>
+          </button>
         </div>
       </div>
 
@@ -3348,6 +3449,70 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
       </div>
       <footer class="portal-home-footer"><span><strong>PENTA-OCEAN CONSTRUCTION</strong> • HSE Portal</span><span>Building Better Tomorrows</span></footer>
     </div>
+  </section>
+
+  <!-- HEADCOUNT SYSTEM: emergency headcount and marine-location administration -->
+  <section id="page-headcount-system" class="page">
+    <div class="section-title hc-page-title">
+      <h2>Headcount System</h2>
+      <div class="wp-refresh-actions">
+        <span id="hcRefreshStatus" class="wp-refresh-status" aria-live="polite"></span>
+        <button type="button" class="wp-refresh-inspection-btn" onclick="hcLoad(true)" title="Refresh headcount records"><span class="refresh-glyph" aria-hidden="true">↻</span><span>Refresh</span></button>
+      </div>
+    </div>
+    <p class="hc-description">Workers and registered visitors · Filter the list for emergency roll-call and export the current results as a PDF.</p>
+
+    <div class="hc-kpi-grid" id="hcKpiGrid">
+      <div class="hc-kpi-card hc-kpi-blue"><span>Registered Workers</span><strong id="hcKpiWorkers">—</strong><small>Registered in Workers_DB</small></div>
+      <div class="hc-kpi-card hc-kpi-purple"><span>Active Registered Visitors</span><strong id="hcKpiVisitors">—</strong><small>Valid visitor passes</small></div>
+      <div class="hc-kpi-card hc-kpi-teal"><span>Land Side Workers</span><strong id="hcKpiLandWorkers">—</strong><small>No open marine trip</small></div>
+      <div class="hc-kpi-card hc-kpi-orange"><span>Marine Resident Workers</span><strong id="hcKpiMarineWorkers">—</strong><small>Currently recorded on marine side</small></div>
+      <div class="hc-kpi-card hc-kpi-green"><span>Active Land Workers at Marine Area</span><strong id="hcKpiLocations">—</strong><small>Workers currently recorded on marine side</small></div>
+      <div class="hc-kpi-card hc-kpi-navy"><span>People in Filtered List</span><strong id="hcKpiFiltered">0</strong><small>Based on selected filters</small></div>
+    </div>
+
+    <div class="hc-panel hc-location-panel">
+      <div class="hc-panel-heading">
+        <h3>Marine Location Management</h3>
+        <button type="button" class="hc-primary-btn" id="hcShowAddLocation" onclick="hcToggleAddLocation(true)">＋ Add New Location</button>
+      </div>
+      <p class="hc-location-copy">Manage active marine locations. Deactivated locations are retained in historical movement records.</p>
+      <div id="hcAddLocationForm" class="hc-location-tools" hidden>
+        <label>Location Name<input id="hcNewLocationName" type="text" maxlength="100" placeholder="e.g. Bunker Berth"></label>
+        <label>Location Type<select id="hcNewLocationType"><option value="Marine">Marine</option><option value="Barge">Barge</option><option value="Jetty">Jetty</option><option value="Vessel">Vessel</option><option value="Other">Other</option></select></label>
+        <button type="button" class="hc-primary-btn" onclick="hcAddLocation()">Save Location</button>
+        <button type="button" class="hc-secondary-btn" onclick="hcToggleAddLocation(false)">Cancel</button>
+      </div>
+      <div class="hc-table-wrap hc-location-table-wrap">
+        <table class="hc-table hc-location-table"><thead><tr><th>No.</th><th>Location Name</th><th>Location Type</th><th>Status</th><th class="hc-location-action-heading">Action</th></tr></thead>
+          <tbody id="hcLocationTableBody"><tr><td colspan="5" class="hc-empty">Loading marine locations…</td></tr></tbody>
+        </table>
+      </div>
+      <p id="hcLocationMessage" class="hc-message" aria-live="polite"></p>
+    </div>
+
+    <div class="hc-panel">
+      <div class="hc-panel-heading"><h3>Emergency Headcount List</h3><span id="hcGeneratedAt" class="hc-updated">Not loaded</span></div>
+      <div class="hc-filters">
+        <label>List Mode<select id="hcFilterMode" onchange="hcModeChanged()"><option value="EMERGENCY">Emergency Roll-Call</option><option value="HISTORY">Movement Log (selected date)</option></select></label>
+        <label>Person Type<select id="hcFilterType" onchange="hcFiltersChanged()"><option value="ALL">Workers and Visitors</option><option value="Worker">Workers only</option><option value="Visitor">Visitors only</option></select></label>
+        <label>Movement Status<select id="hcFilterMovement" onchange="hcFiltersChanged()"><option value="ON MARINE SIDE" selected>On marine side</option><option value="ALL">All statuses</option><option value="ON LAND SIDE / NO OPEN TRIP">On land side / no open trip</option></select></label>
+        <label>Marine Location<select id="hcFilterLocation" onchange="hcFiltersChanged()"><option value="ALL">All locations</option></select></label>
+        <label>Movement Date<input id="hcFilterDate" type="date" onchange="hcFiltersChanged()" aria-label="Filter movement log by date"></label>
+        <label>Search Name / Company / ID<input id="hcFilterSearch" type="search" placeholder="Type to search…" oninput="hcFiltersChanged()"></label>
+      </div>
+      <div class="hc-table-tools">
+        <span id="hcResultCount">Apply a filter or enter a search to display people.</span>
+        <button type="button" class="hc-secondary-btn" onclick="hcPrintPdf()">Download / Save PDF</button>
+      </div>
+      <div class="hc-table-wrap"><table class="hc-table"><thead><tr><th>No.</th><th>Name</th><th>ID / IC / Passport</th><th>Company</th><th>Person Type</th><th>Movement Status</th><th>Marine Location</th><th>Movement Date / Time</th><th>Pass / Record Status</th></tr></thead><tbody id="hcTableBody"><tr><td colspan="9" class="hc-empty">Select Emergency Roll-Call and keep “On marine side” to list people expected to return from marine.</td></tr></tbody></table></div>
+      <div class="hc-pagination" id="hcPagination" hidden>
+        <span id="hcPageInfo">Page 1</span>
+        <div><button type="button" class="hc-secondary-btn" id="hcPrevPage" onclick="hcChangePage(-1)">‹ Previous</button><button type="button" class="hc-secondary-btn" id="hcNextPage" onclick="hcChangePage(1)">Next ›</button></div>
+      </div>
+      <p class="hc-note"><strong>Emergency-use note:</strong> Emergency Roll-Call lists people whose latest recorded movement indicates they are on the marine side as of the selected date (today uses the latest current status). Use Movement Log to review individual departure/return events on a specific date. This record does not prove physical presence; confirm every person at the assembly point.</p>
+    </div>
+    <button type="button" class="portal-menu-back" onclick="go('main-menu')" style="margin-top:18px">← Back to Main Menu</button>
   </section>
 
   <!-- SECURITY CONTROL: isolated visitor-pass management module -->
@@ -6422,6 +6587,7 @@ const pageMeta = {
   "equipment-inspection":["Machinery & Equipment Inspection","Machinery and equipment inspection module"],
   "daily-checklist":["Daily Checklist","Daily HSE checklist module"],
   "security-control":["Security Control","Visitor requests, individual passes and movement history"],
+  "headcount-system":["Headcount System","Project headcount management module"],
   manhour:["Manhour","Manhour performance by contractor and month"],
   manday:["Manday","Manpower and manday performance"],
   lagging:["Lagging","Lagging indicators and incident rates"],
@@ -6498,7 +6664,7 @@ function scSyncFilterControls(){
   const search=document.getElementById('scFilterSearch'),start=document.getElementById('scFilterStart'),end=document.getElementById('scFilterEnd'),status=document.getElementById('scFilterStatus'),label=document.getElementById('scFilterStatusLabel');
   if(!search||!start||!end||!status)return;
   search.value=state.search;start.value=state.start;end.value=state.end;status.innerHTML='';
-  const configs={requests:{label:'Request status',placeholder:'All statuses',options:['PENDING APPROVAL','APPROVED','REJECTED','EXPIRED','CANCELLED'],search:'Search request ID, host, purpose or destination…'},visitors:{label:'Pass status',placeholder:'All pass statuses',options:['ACTIVE','REVOKED'],search:'Search visitor ID, name, company or host…'},movements:{label:'Movement type',placeholder:'All movements',options:['ENTRY','EXIT'],search:'Search person, ID, location or officer…'}};
+  const configs={requests:{label:'Request status',placeholder:'All statuses',options:['PENDING APPROVAL','APPROVED','REJECTED','EXPIRED','CANCELLED'],search:'Search request ID, host, purpose or destination…'},visitors:{label:'Pass status',placeholder:'All pass statuses',options:['ACTIVE','UPCOMING','EXPIRED','REVOKED'],search:'Search visitor ID, name, company or host…'},movements:{label:'Movement type',placeholder:'All movements',options:['ENTRY','EXIT'],search:'Search person, ID, location or officer…'}};
   const cfg=configs[scActiveTab]||configs.requests;if(label)label.textContent=cfg.label;
   status.add(new Option(cfg.placeholder,''));cfg.options.forEach(v=>status.add(new Option(v,v)));status.value=state.status;search.placeholder=cfg.search;
 }
@@ -6514,7 +6680,7 @@ function scFilterRows(type,rows){
       const visitStart=toInputDate(r.Visit_Start_Date),visitEnd=toInputDate(r.Visit_End_Date)||visitStart;
       if(from&&(!visitEnd||visitEnd<from))return false;if(to&&(!visitStart||visitStart>to))return false;
     }
-    const value=type==='requests'?r.Request_Status:type==='visitors'?r.Pass_Status:r.Movement_Type;
+    const value=type==='requests'?r.Request_Status:type==='visitors'?scEffectivePassStatus(r):r.Movement_Type;
     if(selected&&String(value||'').toUpperCase().replace(/[ _-]+/g,' ')!==selected.replace(/[ _-]+/g,' '))return false;
     return true;
   });
@@ -6539,10 +6705,27 @@ function scShowRequestDetail(id){if(!scIsAdmin()){scMsg('Only admin users can vi
 function scBackToRequests(){document.getElementById('scRequestDetailPanel').style.display='none';document.getElementById('scRequestsPanel').style.display='block';document.getElementById('scTabButtons').style.display='flex';const filters=document.getElementById('scFilters');if(filters)filters.style.display='grid';scActiveTab='requests';scSyncFilterControls();}
 function scParseDate(value){if(!value)return null;if(value instanceof Date&&!isNaN(value))return value;const s=String(value).trim();let m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(m){const d=new Date(Number(m[3]),Number(m[1])-1,Number(m[2]));return isNaN(d)?null:d;}m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);if(m){const d=new Date(Number(m[1]),Number(m[2])-1,Number(m[3]));return isNaN(d)?null:d;}const d=new Date(s);return isNaN(d)?null:d;}
 function scDayStart(value){const d=scParseDate(value);return d?new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime():null;}
+function scEffectivePassStatus(v){
+ const stored=String(v.Pass_Status||'').trim().toUpperCase();
+ if(stored==='REVOKED')return 'REVOKED';
+ if(stored!=='ACTIVE')return stored||'UNKNOWN';
+ const parseExact=value=>{
+  const t=String(value||'').trim();
+  let m=t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[ ,T]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
+  if(m)return new Date(+m[3],+m[1]-1,+m[2],+(m[4]||0),+(m[5]||0),+(m[6]||0));
+  m=t.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:[ T]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
+  if(m)return new Date(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0),+(m[6]||0));
+  return new Date(t);
+ };
+ const now=Date.now(),start=parseExact(v.Visit_Start_Date),end=parseExact(v.Visit_End_Date);
+ if(Number.isFinite(end.getTime())&&now>end.getTime())return 'EXPIRED';
+ if(Number.isFinite(start.getTime())&&now<start.getTime())return 'UPCOMING';
+ return 'ACTIVE';
+}
 function scRenderKpis(d){const requests=d.requests||[],visitors=d.visitors||[],movements=d.movements||[];const norm=v=>String(v||'').trim().toUpperCase().replace(/[ _-]+/g,' ');const today=new Date();const todayStart=new Date(today.getFullYear(),today.getMonth(),today.getDate()).getTime();
  const pending=requests.filter(r=>norm(r.Request_Status)==='PENDING APPROVAL').length;const approved=requests.filter(r=>norm(r.Request_Status)==='APPROVED').length;
  const expectedToday=requests.filter(r=>norm(r.Request_Status)==='APPROVED'&&scDayStart(r.Visit_Start_Date)!==null&&scDayStart(r.Visit_End_Date)!==null&&scDayStart(r.Visit_Start_Date)<=todayStart&&scDayStart(r.Visit_End_Date)>=todayStart).reduce((sum,r)=>sum+(Array.isArray(r.Expected_Visitors)?r.Expected_Visitors.length:(Number(r.Total_Visitors)||0)),0);
- const active=visitors.filter(v=>norm(v.Pass_Status)==='ACTIVE').length;const revoked=visitors.filter(v=>norm(v.Pass_Status)==='REVOKED').length;
+ const active=visitors.filter(v=>scEffectivePassStatus(v)==='ACTIVE').length;const revoked=visitors.filter(v=>norm(v.Pass_Status)==='REVOKED').length;
  // Use the newest movement per person from the movement records returned by the backend (latest 500 records).
  const latest={};movements.forEach((m,i)=>{const id=String(m.Person_ID||'').trim();if(!id)return;const t=scParseDate(m.Timestamp);const time=t?t.getTime():0;if(!latest[id]||time>latest[id].time||(time===latest[id].time&&i<latest[id].index))latest[id]={type:norm(m.Movement_Type),time,index:i};});
  const inside=Object.values(latest).filter(m=>m.type==='ENTRY').length;const vals=[pending,approved,expectedToday,active,inside,revoked];document.querySelectorAll('#scKpiGrid .sc-kpi-card .sc-kpi-value').forEach((el,i)=>el.textContent=String(vals[i]));
@@ -6550,7 +6733,7 @@ function scRenderKpis(d){const requests=d.requests||[],visitors=d.visitors||[],m
 function scRender(){const d=scDataCache||{requests:[],visitors:[],movements:[]};scRenderKpis(d);
  const requests=scFilterRows('requests',d.requests||[]).map(r=>{const visitors=(r.Expected_Visitors||[]).map(v=>scEsc(v.name)+(v.company?' ('+scEsc(v.company)+')':'')+(v.registrationStatus?' — '+scEsc(v.registrationStatus):'')).join('<br>');const status=String(r.Request_Status||'PENDING APPROVAL').toUpperCase();return '<tr><td>'+scEsc(r.Request_ID)+'</td><td>'+scEsc(r.Host_Name)+'<br><small>'+scEsc(r.Host_Email)+'</small></td><td>'+scEsc(r.Visit_Purpose)+'</td><td>'+scEsc(r.Destination)+'</td><td>'+scEsc(r.Visit_Start_Date)+' – '+scEsc(r.Visit_End_Date)+'</td><td>'+scEsc(r.Total_Visitors)+'</td><td>'+visitors+'</td><td><span class="sc-status-pill '+(/APPROVED/.test(status)?'approved':/REJECTED|CANCELLED|EXPIRED/.test(status)?'closed':'pending')+'">'+scEsc(status)+'</span></td><td>'+(scIsAdmin()?'<button type="button" class="dss-view-only-btn" data-request-id="'+scEsc(r.Request_ID)+'" onclick="scShowRequestDetail(this.dataset.requestId)">View</button>':'<span class="sc-readonly-note">Admin only</span>')+'</td></tr>';});
  document.getElementById('scRequestsTable').innerHTML=scTable(['Request ID','Host','Purpose','Destination','Visit Dates','Visitors','Expected Visitors','Status','Action'],requests);
- const visitors=scFilterRows('visitors',d.visitors||[]).map(v=>{const status=String(v.Pass_Status||'').toUpperCase();const next=status==='REVOKED'?'ACTIVE':'REVOKED';const passControls=scIsAdmin()?'<div class="sc-pass-tools"><button type="button" class="sc-action-btn sc-view-pass-btn" data-visitor-id="'+scEsc(v.Visitor_ID)+'" onclick="scViewPass(this.dataset.visitorId)">View Pass</button></div>':'<span class="sc-readonly-note">Admin only</span>';return '<tr><td><div class="sc-visitor-id-cell"><strong>'+scEsc(v.Visitor_ID)+'</strong>'+passControls+'</div></td><td>'+scEsc(v.Full_Name)+'</td><td>'+scEsc(v.IC_Passport_No)+'</td><td>'+scEsc(v.Company)+'</td><td>'+scEsc(v.Host_Name)+'</td><td>'+scEsc(v.Request_ID)+'</td><td>'+scEsc(v.Visit_Start_Date)+' – '+scEsc(v.Visit_End_Date)+'</td><td><span class="sc-status-pill '+(status==='ACTIVE'?'approved':'closed')+'">'+scEsc(status)+'</span></td><td>'+(scIsAdmin()?'<button type="button" class="sc-action-btn '+(next==='ACTIVE'?'approve':'revoke')+'" data-visitor-id="'+scEsc(v.Visitor_ID)+'" data-next-status="'+next+'" onclick="scUpdatePass(this.dataset.visitorId,this.dataset.nextStatus)">'+(next==='ACTIVE'?'Reactivate':'Revoke')+'</button>':'<span class="sc-readonly-note">Admin only</span>')+'</td></tr>';});
+ const visitors=scFilterRows('visitors',d.visitors||[]).map(v=>{const status=scEffectivePassStatus(v);const next=String(v.Pass_Status||'').toUpperCase()==='REVOKED'?'ACTIVE':'REVOKED';const passControls=scIsAdmin()?'<div class="sc-pass-tools"><button type="button" class="sc-action-btn sc-view-pass-btn" data-visitor-id="'+scEsc(v.Visitor_ID)+'" onclick="scViewPass(this.dataset.visitorId)">View Pass</button></div>':'<span class="sc-readonly-note">Admin only</span>';return '<tr><td><div class="sc-visitor-id-cell"><strong>'+scEsc(v.Visitor_ID)+'</strong>'+passControls+'</div></td><td>'+scEsc(v.Full_Name)+'</td><td>'+scEsc(v.IC_Passport_No)+'</td><td>'+scEsc(v.Company)+'</td><td>'+scEsc(v.Host_Name)+'</td><td>'+scEsc(v.Request_ID)+'</td><td>'+scEsc(v.Visit_Start_Date)+' – '+scEsc(v.Visit_End_Date)+'</td><td><span class="sc-status-pill '+(status==='ACTIVE'?'approved':status==='UPCOMING'?'pending':'closed')+'">'+scEsc(status)+'</span></td><td>'+(scIsAdmin()?'<button type="button" class="sc-action-btn '+(next==='ACTIVE'?'approve':'revoke')+'" data-visitor-id="'+scEsc(v.Visitor_ID)+'" data-next-status="'+next+'" onclick="scUpdatePass(this.dataset.visitorId,this.dataset.nextStatus)">'+(next==='ACTIVE'?'Reactivate':'Revoke')+'</button>':'<span class="sc-readonly-note">Admin only</span>')+'</td></tr>';});
  document.getElementById('scVisitorsTable').innerHTML=scTable(['Visitor ID / Digital Pass','Full Name','IC/Passport','Company','Host','Request ID','Visit Dates','Pass Status','Action'],visitors);
  const movements=scFilterRows('movements',d.movements||[]).map(m=>'<tr><td>'+scEsc(m.Timestamp)+'</td><td>'+scEsc(m.Person_Type)+'</td><td>'+scEsc(m.Person_Name)+'</td><td>'+scEsc(m.Person_ID)+'</td><td>'+scEsc(m.Movement_Type)+'</td><td>'+scEsc(m.Location_ID)+'</td><td>'+scEsc(m.Recorded_By)+'</td><td>'+scEsc(m.Remarks)+'</td></tr>');
  document.getElementById('scMovementsTable').innerHTML=scTable(['Timestamp','Person Type','Name','Person ID','Movement','Location','Recorded By','Remarks'],movements);
@@ -6579,6 +6762,7 @@ function go(page){
   document.getElementById("pageTitle").textContent=meta[0];
   document.getElementById("pageSub").textContent=meta[1];
   if(page==="security-control"){if(!window.scFiltersInitialized){scInitFilters();window.scFiltersInitialized=true;}if(!scDataCache) scLoad(true);}
+  if(page==="headcount-system"){if(!hcDataCache) hcLoad(true);}
   const dashBtn=document.querySelector(".portal-dashboard-menu-btn");
   if(dashBtn)dashBtn.style.display=["manhour","manday","lagging","leading","observation","training","dashboard-menu"].includes(page)?"inline-flex":"none";
   const mainBtn=document.querySelector(".portal-top-menu-btn");
@@ -7350,6 +7534,219 @@ function dssInit(){
   document.getElementById("dssPdfBtn")?.addEventListener("click",dssSavePdf);
   ["dssFilterStart","dssFilterEnd"].forEach(id=>document.getElementById(id)?.addEventListener("change",dssRender));
   document.getElementById("dssResetFilters")?.addEventListener("click",()=>{document.getElementById("dssFilterStart").value="";document.getElementById("dssFilterEnd").value="";dssSelectedYears=[];dssSelectedCompanies=[];dssSelectedStatuses=[];["dssFilterYear","dssFilterCompany","dssFilterStatus"].forEach(id=>{const wrap=document.getElementById(id);if(wrap){wrap.classList.remove("open");wrap.querySelectorAll('.multi-option input[type="checkbox"]').forEach(cb=>cb.checked=false);const all=wrap.querySelector('.multi-all input[type="checkbox"]');if(all)all.checked=true;if(wrap._updateTrigger)wrap._updateTrigger();else{const trigger=wrap.querySelector(".multi-select-trigger");if(trigger)trigger.textContent=id==="dssFilterStatus"?"All statuses":trigger.textContent;}}});dssRender();});
+}
+
+
+/* Emergency Headcount page controller */
+let hcDataCache = null;
+let hcLoading = false;
+async function hcPost(payload){
+  const u = getCurrentPortalUser();
+  const response = await fetch(GOOGLE_API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({...payload,authToken:u.token||u.authToken||''})});
+  const result = await response.json();
+  if(!result.success) throw new Error(result.error||'Headcount request failed.');
+  return result;
+}
+function hcEsc(value){return String(value==null?'':value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function hcMsg(message,error){const el=document.getElementById('hcLocationMessage');if(el){el.textContent=message||'';el.classList.toggle('error',!!error);}}
+function hcIsAdmin(){return typeof isCurrentUserAdmin==='function'&&isCurrentUserAdmin();}
+function hcSetRefresh(message){const el=document.getElementById('hcRefreshStatus');if(el)el.textContent=message||'';}
+async function hcLoad(force){
+  if(hcLoading)return;
+  if(hcDataCache&&!force){hcRenderTable();return;}
+  hcLoading=true;hcSetRefresh('Loading…');hcMsg('');
+  const refreshBtn=document.querySelector('#page-headcount-system .wp-refresh-inspection-btn');
+  if(refreshBtn){refreshBtn.disabled=true;refreshBtn.classList.add('is-refreshing');}
+  if(typeof showPortalLoading==='function')showPortalLoading('Loading emergency headcount data…');
+  try{
+    hcDataCache=await hcPost({action:'headcount_admin_data'});
+    hcRenderLocations();hcRenderTable();
+    const d=new Date(hcDataCache.generatedAt);
+    document.getElementById('hcGeneratedAt').textContent='Updated '+(isNaN(d.getTime())?'just now':d.toLocaleString());
+    hcSetRefresh('Updated just now');
+    const admin=hcIsAdmin();
+    document.querySelectorAll('#page-headcount-system .hc-location-tools input,#page-headcount-system .hc-location-tools select,#page-headcount-system .hc-location-tools button').forEach(el=>{el.disabled=!admin;});
+    const note=document.querySelector('#page-headcount-system .hc-admin-note');
+    if(note)note.textContent=admin?'Admin access':'Admin access required';
+  }catch(err){hcSetRefresh('Load failed');hcMsg(err.message||String(err),true);document.getElementById('hcTableBody').innerHTML='<tr><td colspan="9" class="hc-empty">Could not load headcount records. Please refresh or log in again.</td></tr>';document.getElementById('hcLocationTableBody').innerHTML='<tr><td colspan="5" class="hc-empty">Could not load marine locations.</td></tr>';}
+  finally{hcLoading=false;if(refreshBtn){refreshBtn.disabled=false;refreshBtn.classList.remove('is-refreshing');}if(typeof hidePortalLoading==='function')hidePortalLoading();}
+}
+function hcRenderLocations(){
+  const locations=hcDataCache?.locations||[];
+  const filter=document.getElementById('hcFilterLocation');
+  const oldFilter=filter.value;
+  filter.innerHTML='<option value="ALL">All locations</option>';
+  const active=locations.filter(l=>String(l.locationStatus).toUpperCase()==='ACTIVE').sort((a,b)=>String(a.locationName||'').localeCompare(String(b.locationName||'')));
+  active.forEach(l=>{
+    const option=document.createElement('option');option.value=l.locationName;option.textContent=l.locationName;filter.appendChild(option);
+  });
+  if([...filter.options].some(o=>o.value===oldFilter))filter.value=oldFilter;
+  const body=document.getElementById('hcLocationTableBody');
+  if(!active.length){
+    body.innerHTML='<tr><td colspan="5" class="hc-empty">No active marine locations registered.</td></tr>';
+  } else {
+    body.innerHTML=active.map((l,i)=>'<tr><td>'+(i+1)+'</td><td><strong>'+hcEsc(l.locationName)+'</strong></td><td>'+hcEsc(l.locationType||'Marine')+'</td><td><span class="hc-pill marine">ACTIVE</span></td><td><button type="button" class="hc-location-delete-btn" onclick="hcDeleteLocation(\''+hcEsc(l.locationId).replace(/'/g,'&#39;')+'\',\''+hcEsc(l.locationName).replace(/'/g,'&#39;')+'\')">Delete</button></td></tr>').join('');
+  }
+  const canManage=hcIsAdmin();
+  document.querySelectorAll('#page-headcount-system .hc-location-delete-btn').forEach(btn=>{btn.disabled=!canManage;btn.title=canManage?'Deactivate this location':'Admin access required';});
+  const addBtn=document.getElementById('hcShowAddLocation');
+  if(addBtn)addBtn.disabled=!canManage;
+  const form=document.getElementById('hcAddLocationForm');
+  if(form&&!canManage)form.hidden=true;
+}
+function hcToggleAddLocation(show){
+  const form=document.getElementById('hcAddLocationForm');
+  if(form)form.hidden=!show;
+  if(show)document.getElementById('hcNewLocationName')?.focus();
+}
+function hcModeChanged(){
+  const mode=document.getElementById('hcFilterMode')?.value||'EMERGENCY';
+  const movement=document.getElementById('hcFilterMovement');
+  if(movement){
+    // Emergency roll-call defaults to people last recorded on the marine side.
+    // Movement-log mode defaults to all events so departures and returns are both visible.
+    movement.value=mode==='HISTORY'?'ALL':'ON MARINE SIDE';
+  }
+  hcFiltersChanged();
+}
+function hcLatestSnapshotForDate(people,movementHistory,selectedDate){
+  const latestById=new Map();
+  movementHistory.forEach(m=>{
+    if(!m.personId||!m.movementDate||m.movementDate>selectedDate)return;
+    const previous=latestById.get(String(m.personId));
+    const currentTime=new Date(m.movementTimestamp||0).getTime()||0;
+    const previousTime=previous?(new Date(previous.movementTimestamp||0).getTime()||0):-1;
+    if(!previous||m.movementDate>previous.movementDate||(m.movementDate===previous.movementDate&&currentTime>=previousTime))latestById.set(String(m.personId),m);
+  });
+  return people.map(person=>{
+    const last=latestById.get(String(person.personId));
+    if(!last){
+      // No movement event is recorded on or before the selected date. Treat as land-side/no open trip,
+      // while making clear this is based on the available log rather than proof of presence.
+      return {...person,movementStatus:'ON LAND SIDE / NO OPEN TRIP',location:'',movementType:'',movementTimestamp:''};
+    }
+    const isDepart=last.movementType==='DEPART_TO_MARINE';
+    return {...person,
+      movementStatus:isDepart?'ON MARINE SIDE':'ON LAND SIDE / NO OPEN TRIP',
+      location:isDepart?(last.location||''):'',
+      movementType:last.movementType||'',
+      movementTimestamp:last.movementTimestamp||'',
+      movementDate:last.movementDate||''
+    };
+  });
+}
+function hcFilteredPeople(){
+  const people=hcDataCache?.people||[];
+  const movementHistory=hcDataCache?.movementHistory||[];
+  const mode=document.getElementById('hcFilterMode')?.value||'EMERGENCY';
+  const type=document.getElementById('hcFilterType').value;
+  const movement=document.getElementById('hcFilterMovement').value;
+  const location=document.getElementById('hcFilterLocation').value;
+  const selectedDate=document.getElementById('hcFilterDate')?.value||'';
+  const query=document.getElementById('hcFilterSearch').value.trim().toLowerCase();
+  let source=[];
+  if(mode==='HISTORY'){
+    // Event mode must be date-scoped to avoid accidentally loading the entire movement log.
+    source=selectedDate?movementHistory.filter(m=>m.movementDate===selectedDate):[];
+  }else{
+    const today=new Date();
+    const todayString=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+    // For today (or no date), use the actual current open-trip state. For a past date,
+    // reconstruct each person's last recorded state at the end of that date.
+    source=(!selectedDate||selectedDate===todayString)?people:hcLatestSnapshotForDate(people,movementHistory,selectedDate);
+  }
+  return source.filter(p=>{
+    if(type!=='ALL'&&p.personType!==type)return false;
+    if(movement!=='ALL'&&p.movementStatus!==movement)return false;
+    if(location!=='ALL'&&!String(p.location||'').toLowerCase().includes(location.toLowerCase()))return false;
+    if(query&&!([p.name,p.company,p.personId,p.idNumber,p.passStatus,p.movementType].join(' ').toLowerCase().includes(query)))return false;
+    return true;
+  }).sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''))||(new Date(a.movementTimestamp||0).getTime()||0)-(new Date(b.movementTimestamp||0).getTime()||0));
+}
+let hcFiltersApplied=false;
+let hcPrinting=false;
+let hcCurrentPage=1;
+const HC_PAGE_SIZE=30;
+function hcFiltersChanged(){hcFiltersApplied=true;hcCurrentPage=1;hcRenderTable();}
+function hcChangePage(delta){
+  const people=hcFilteredPeople();
+  const pages=Math.max(1,Math.ceil(people.length/HC_PAGE_SIZE));
+  hcCurrentPage=Math.max(1,Math.min(pages,hcCurrentPage+delta));
+  hcRenderTable();
+}
+function hcRenderTable(){
+  const body=document.getElementById('hcTableBody');
+  const k=hcDataCache?.kpis||{};
+  const peopleAll=hcDataCache?.people||[];
+  const workers=peopleAll.filter(p=>p.personType==='Worker');
+  const visitors=peopleAll.filter(p=>p.personType==='Visitor'&&String(p.recordStatus||'').toUpperCase()==='ACTIVE');
+  const landWorkers=workers.filter(p=>p.movementStatus==='ON LAND SIDE / NO OPEN TRIP');
+  const marineWorkers=workers.filter(p=>p.movementStatus==='ON MARINE SIDE');
+  document.getElementById('hcKpiWorkers').textContent=Number(k.registeredWorkers ?? k.activeWorkers ?? workers.length).toLocaleString();
+  document.getElementById('hcKpiVisitors').textContent=Number(k.activeRegisteredVisitors ?? visitors.length).toLocaleString();
+  document.getElementById('hcKpiLandWorkers').textContent=landWorkers.length.toLocaleString();
+  document.getElementById('hcKpiMarineWorkers').textContent=marineWorkers.length.toLocaleString();
+  document.getElementById('hcKpiLocations').textContent=marineWorkers.length.toLocaleString();
+  const pagination=document.getElementById('hcPagination');
+  if(!hcFiltersApplied){
+    document.getElementById('hcKpiFiltered').textContent='0';
+    document.getElementById('hcResultCount').textContent='Apply a filter or enter a search to display people.';
+    body.innerHTML='<tr><td colspan="9" class="hc-empty">Select Emergency Roll-Call and keep “On marine side” to list people expected to return from marine.</td></tr>';
+    pagination.hidden=true;
+    return;
+  }
+  const people=hcFilteredPeople();
+  const pages=Math.max(1,Math.ceil(people.length/HC_PAGE_SIZE));
+  hcCurrentPage=Math.min(hcCurrentPage,pages);
+  const start=(hcCurrentPage-1)*HC_PAGE_SIZE;
+  const pageRows=hcPrinting?people:people.slice(start,start+HC_PAGE_SIZE);
+  document.getElementById('hcKpiFiltered').textContent=people.length.toLocaleString();
+  document.getElementById('hcResultCount').textContent=people.length+' people match filters';
+  if(!people.length){const historyNeedsDate=(document.getElementById('hcFilterMode')?.value==='HISTORY'&&!document.getElementById('hcFilterDate')?.value);body.innerHTML='<tr><td colspan="9" class="hc-empty">'+(historyNeedsDate?'Select a Movement Date to view departure and return events.':'No people match the selected filters.')+'</td></tr>';}
+  else {
+    body.innerHTML=pageRows.map((p,i)=>{
+      const personPill=p.personType==='Visitor'?'<span class="hc-pill visitor">VISITOR</span>':'<span class="hc-pill">WORKER</span>';
+      const movementClass=(p.movementStatus==='ON MARINE SIDE'||p.movementType==='DEPART_TO_MARINE')?'marine':'';
+      const movementLabel=p.movementType==='DEPART_TO_MARINE'?'DEPARTED TO MARINE':p.movementType==='RETURN_TO_LAND'?'RETURNED TO LAND':(p.movementStatus||'UNKNOWN');
+      const status=p.passStatus||p.recordStatus||'—';
+      const timestamp=p.movementTimestamp?new Date(p.movementTimestamp).toLocaleString():'—';
+      return '<tr><td>'+(start+i+1)+'</td><td><strong>'+hcEsc(p.name)+'</strong></td><td>'+hcEsc(p.idNumber||p.personId||'—')+'</td><td>'+hcEsc(p.company||'—')+'</td><td>'+personPill+'</td><td><span class="hc-pill '+movementClass+'">'+hcEsc(movementLabel)+'</span></td><td>'+hcEsc(p.location||'—')+'</td><td>'+hcEsc(timestamp)+'</td><td>'+hcEsc(status)+'</td></tr>';
+    }).join('');
+  }
+  pagination.hidden=people.length<=HC_PAGE_SIZE;
+  document.getElementById('hcPageInfo').textContent='Page '+hcCurrentPage+' of '+pages+' · Showing '+(people.length?start+1:0)+'–'+Math.min(start+HC_PAGE_SIZE,people.length)+' of '+people.length;
+  document.getElementById('hcPrevPage').disabled=hcCurrentPage<=1;
+  document.getElementById('hcNextPage').disabled=hcCurrentPage>=pages;
+}
+async function hcAddLocation(){
+  if(!hcIsAdmin()){hcMsg('Only admin users can manage marine locations.',true);return;}
+  const name=document.getElementById('hcNewLocationName').value.trim();
+  const type=document.getElementById('hcNewLocationType').value;
+  if(!name){hcMsg('Enter a marine location name.',true);return;}
+  if(typeof showPortalLoading==='function')showPortalLoading('Adding marine location…');
+  try{await hcPost({action:'headcount_location_add',locationName:name,locationType:type});document.getElementById('hcNewLocationName').value='';hcToggleAddLocation(false);hcMsg('Marine location added.');hcDataCache=null;await hcLoad(true);}
+  catch(err){hcMsg(err.message||String(err),true);}finally{if(typeof hidePortalLoading==='function')hidePortalLoading();}
+}
+async function hcDeleteLocation(id, locationName){
+  if(!hcIsAdmin()){hcMsg('Only admin users can manage marine locations.',true);return;}
+  if(!id){hcMsg('Select a location to deactivate.',true);return;}
+  const name=locationName||'this location';
+  if(!confirm('Deactivate "'+name+'"? It will no longer appear in the QR form. Historical movement records will be retained.'))return;
+  if(typeof showPortalLoading==='function')showPortalLoading('Updating marine locations…');
+  try{await hcPost({action:'headcount_location_delete',locationId:id});hcMsg('Location deactivated; history preserved.');hcDataCache=null;await hcLoad(true);}
+  catch(err){hcMsg(err.message||String(err),true);}finally{if(typeof hidePortalLoading==='function')hidePortalLoading();}
+}
+function hcPrintPdf(){
+  if(!hcDataCache){hcMsg('Load the headcount records before exporting.',true);return;}
+  if(!hcFiltersApplied){hcMsg('Please apply a filter or enter a search before exporting.',true);return;}
+  const rows=hcFilteredPeople();
+  if(!rows.length){hcMsg('There are no matching people to export.',true);return;}
+  const oldTitle=document.title;
+  document.title=(document.getElementById('hcFilterMode')?.value==='HISTORY'?'Movement Log':'Emergency Roll-Call')+' - '+(document.getElementById('hcFilterDate')?.value||'Current')+' - '+new Date().toLocaleString();
+  hcPrinting=true;hcRenderTable();
+  window.print();
+  hcPrinting=false;hcRenderTable();
+  setTimeout(()=>{document.title=oldTitle;},1000);
 }
 
 </script>
