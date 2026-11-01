@@ -3184,6 +3184,544 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
 @media(max-width:650px){#page-headcount-system .hc-page-title .wp-refresh-actions{width:100%;justify-content:flex-end}#page-headcount-system .hc-page-title .wp-refresh-status{font-size:11px}}
 @media(prefers-reduced-motion:reduce){#page-headcount-system .hc-page-title .wp-refresh-inspection-btn.is-refreshing .refresh-glyph{animation:none!important}}
 </style>
+
+<style id="manpower-management-module-shell">
+.mm-landing-page,.mm-submodule-page{max-width:1240px;margin:0 auto}
+.mm-page-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin:4px 0 20px}
+.mm-eyebrow{font-size:10px;font-weight:900;letter-spacing:1.7px;color:#1682bd;margin-bottom:7px}
+.mm-page-heading h2,.mm-submodule-header h2{margin:0;color:#123b72;font-size:27px;font-weight:850;letter-spacing:-.4px}
+.mm-page-heading p,.mm-submodule-header p{margin:7px 0 0;color:#667d91;font-size:13px;line-height:1.5}
+.mm-back{white-space:nowrap}
+.mm-overview-strip{display:flex;align-items:center;gap:16px;padding:18px 21px;margin-bottom:19px;border:1px solid #d8e7f3;border-radius:16px;background:linear-gradient(110deg,#f7fbff,#eaf5fd);box-shadow:0 5px 17px rgba(20,63,105,.05)}
+.mm-overview-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:#fff;font-size:25px;box-shadow:0 3px 10px rgba(20,63,105,.08);flex:0 0 auto}
+.mm-overview-strip strong{display:block;color:#123b72;font-size:15px;margin-bottom:4px}
+.mm-overview-strip span{display:block;color:#61798e;font-size:12px;line-height:1.5}
+.mm-module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.mm-module-card{appearance:none;text-align:left;position:relative;display:flex;flex-direction:column;align-items:flex-start;min-height:218px;padding:22px 23px;border:1px solid #dce7f0;border-radius:18px;background:#fff;box-shadow:0 7px 22px rgba(20,63,105,.055);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;color:#18365f}
+.mm-module-card:hover{transform:translateY(-3px);box-shadow:0 13px 28px rgba(20,63,105,.11);border-color:#9fc8e6}
+.mm-module-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:#eef6fd;font-size:25px;margin-bottom:15px}
+.mm-module-number{font-size:9px;letter-spacing:1.4px;font-weight:900;color:#8194a6;margin-bottom:5px}
+.mm-module-card strong{font-size:18px;color:#123b72;font-weight:850}
+.mm-module-description{font-size:12px;line-height:1.55;color:#687f92;margin-top:8px;max-width:520px}
+.mm-module-link{display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:auto;padding-top:17px;color:#0879bd;font-size:11px;font-weight:850}
+.mm-module-link b{font-size:19px;line-height:12px}
+.mm-competency .mm-module-icon{background:#f0efff}.mm-rewards .mm-module-icon{background:#fff7e9}.mm-consequence .mm-module-icon{background:#edf8f4}
+.mm-footer-note{margin-top:20px;padding:15px 18px;border:1px solid #e0e9f0;border-radius:14px;background:#fff}
+.mm-footer-note>span{display:block;color:#8494a3;font-size:9px;font-weight:900;letter-spacing:1.4px;margin-bottom:5px}
+.mm-footer-note strong{color:#24496f;font-size:12px}
+.mm-footer-note p{margin:5px 0 0;color:#718397;font-size:11px;line-height:1.5}
+/* Manpower submodules use the same heading, dashboard and table structure as existing portal modules. */
+.mm-standard-title{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.mm-standard-title h2{margin:0}
+.mm-return-button{display:inline-flex!important;align-items:center;justify-content:center;margin:0!important;white-space:nowrap;min-height:38px}
+.mm-standard-description{margin:7px 0 18px;color:#667d91;font-size:13px;line-height:1.5}
+.mm-module-empty-state{min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;color:#71869a}
+.mm-module-empty-state span{font-size:30px;color:#8aa8c1}
+.mm-module-empty-state p{font-size:13px;margin:10px 0 0}
+@media(max-width:700px){
+ .mm-standard-title{align-items:flex-start;flex-direction:column}
+ .mm-return-button{align-self:flex-start}
+}
+.mm-submodule-header{margin:4px 0 19px}
+.mm-submodule-header .portal-menu-back{margin-bottom:20px}
+.mm-coming-soon{min-height:270px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:35px 24px;border:1px solid #dce7f0;border-radius:18px;background:linear-gradient(145deg,#fff,#f7fbfe);box-shadow:0 7px 22px rgba(20,63,105,.05)}
+.mm-coming-soon>span{font-size:38px;margin-bottom:12px}
+.mm-coming-soon h3{margin:0;color:#123b72;font-size:20px}
+.mm-coming-soon p{max-width:600px;color:#687f92;font-size:13px;line-height:1.6;margin:9px 0 15px}
+.mm-coming-soon small{padding:6px 11px;border-radius:20px;background:#eef5fa;color:#52718a;font-size:10px;font-weight:800;letter-spacing:.4px}
+@media(max-width:700px){
+ .mm-page-heading{align-items:flex-start;flex-direction:column}
+ .mm-page-heading h2,.mm-submodule-header h2{font-size:23px}
+ .mm-module-grid{grid-template-columns:1fr;gap:12px}
+ .mm-module-card{min-height:195px;padding:19px}
+ .mm-overview-strip{align-items:flex-start;padding:15px}
+ .mm-overview-icon{width:42px;height:42px}
+}
+
+/* Worker Registration visual refinements */
+#page-mm-worker-registration .mm-worker-page-title{width:100%;justify-content:flex-start!important;text-align:left!important}
+#page-mm-worker-registration .mm-worker-page-title h2{flex:1;text-align:left!important}
+#page-mm-worker-registration .mm-worker-page-title .mm-return-button{margin-left:auto!important}
+#page-mm-worker-registration .mm-worker-kpis .hc-kpi-card{border:0!important;box-shadow:0 5px 15px rgba(15,45,75,.12)!important}
+#page-mm-worker-registration .mm-worker-kpis .hc-kpi-card span,
+#page-mm-worker-registration .mm-worker-kpis .hc-kpi-card strong,
+#page-mm-worker-registration .mm-worker-kpis .hc-kpi-card small{color:#fff!important}
+#page-mm-worker-registration .mm-worker-kpis .hc-kpi-card strong{font-size:30px;font-weight:900}
+#page-mm-worker-registration .mm-worker-kpis .mm-worker-kpi-total{background:#1769aa!important}
+#page-mm-worker-registration .mm-worker-kpis .mm-worker-kpi-active{background:#18845b!important}
+#page-mm-worker-registration .mm-worker-kpis .mm-worker-kpi-planned{background:#d18a16!important}
+#page-mm-worker-registration .mm-worker-kpis .mm-worker-kpi-other{background:#7052a5!important}
+#page-mm-worker-registration .mm-worker-table-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin-bottom:13px}
+#page-mm-worker-registration .mm-worker-add-action{display:flex;align-items:center;justify-content:flex-start}
+#page-mm-worker-registration .mm-worker-refresh-action{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-left:auto}
+#page-mm-worker-registration .mm-worker-refresh-action .wp-refresh-status{text-align:right}
+@media(max-width:700px){
+ #page-mm-worker-registration .mm-worker-page-title{align-items:flex-start!important;flex-direction:column!important}
+ #page-mm-worker-registration .mm-worker-page-title .mm-return-button{margin-left:0!important}
+ #page-mm-worker-registration .mm-worker-table-actions{align-items:stretch;flex-direction:column}
+ #page-mm-worker-registration .mm-worker-refresh-action{justify-content:flex-end}
+ #page-mm-worker-registration .mm-worker-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* Worker Registration KPI cards and refresh controls — match existing Workplace Inspection components */
+#page-mm-worker-registration .mm-worker-kpis{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;margin:0 0 18px!important}
+#page-mm-worker-registration .mm-worker-kpis .wp-title-kpi{min-width:0;min-height:112px;padding:16px 17px!important;border:1px solid #d9e6f2!important;border-radius:15px!important;box-shadow:0 7px 20px rgba(20,63,105,.07)!important;display:flex;flex-direction:column;justify-content:space-between}
+#page-mm-worker-registration .mm-worker-kpis .kpi-title{font-size:11px!important;font-weight:800!important;line-height:1.35!important;color:#fff!important}
+#page-mm-worker-registration .mm-worker-kpis .kpi-value{font-size:29px!important;line-height:1.1!important;font-weight:900!important;color:#fff!important;margin:7px 0 3px!important}
+#page-mm-worker-registration .mm-worker-kpis .kpi-cum{font-size:10px!important;color:rgba(255,255,255,.9)!important}
+#page-mm-worker-registration .mm-worker-kpis .mm-worker-kpi-total{background:#1769aa!important;border-color:#1769aa!important}
+#page-mm-worker-registration .mm-worker-kpis .mm-worker-kpi-active{background:#18845b!important;border-color:#18845b!important}
+#page-mm-worker-registration .mm-worker-kpis .mm-worker-kpi-planned{background:#d18a16!important;border-color:#d18a16!important}
+#page-mm-worker-registration .mm-worker-kpis .mm-worker-kpi-other{background:#7052a5!important;border-color:#7052a5!important}
+#page-mm-worker-registration .mm-worker-refresh-action{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-left:auto}
+#page-mm-worker-registration .mm-worker-refresh-action .wp-refresh-status{font-size:11px;font-weight:700;color:#218047;white-space:nowrap;text-align:right}
+#page-mm-worker-registration .mm-worker-refresh-action .wp-refresh-inspection-btn{
+ appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:37px;padding:8px 13px;
+ border:1px solid #bfd8ec;border-radius:9px;background:#f7fbff;color:#164c80;font:700 12px Arial,Helvetica,sans-serif;
+ box-shadow:0 3px 8px rgba(23,111,177,.07);cursor:pointer;white-space:nowrap;line-height:1.2;
+ transition:background .15s ease,border-color .15s ease,transform .15s ease
+}
+#page-mm-worker-registration .mm-worker-refresh-action .wp-refresh-inspection-btn:hover{background:#eaf5ff;border-color:#8bbfe1;transform:translateY(-1px)}
+#page-mm-worker-registration .mm-worker-refresh-action .wp-refresh-inspection-btn:disabled{opacity:.62;cursor:wait;transform:none}
+#page-mm-worker-registration .mm-worker-refresh-action .wp-refresh-inspection-btn .refresh-glyph{display:inline-block;font-size:16px;line-height:1}
+#page-mm-worker-registration .mm-worker-refresh-action .wp-refresh-inspection-btn.is-refreshing .refresh-glyph{animation:portalLoadingSpin .8s linear infinite}
+@media(max-width:900px){#page-mm-worker-registration .mm-worker-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:520px){#page-mm-worker-registration .mm-worker-kpis{grid-template-columns:1fr!important}}
+/* Worker Registration — uses existing HSE portal dashboard/table components */
+#page-mm-worker-registration .mm-worker-kpis{margin:0 0 18px}
+#page-mm-worker-registration .mm-worker-list-card{overflow:hidden}
+#page-mm-worker-registration .wp-table-card-head{gap:12px;flex-wrap:wrap}
+#page-mm-worker-registration .wp-refresh-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#page-mm-worker-registration .mm-worker-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 16px 14px;padding:14px;background:#f7fafc;border:1px solid #e0eaf1;border-radius:12px}
+.mm-worker-filters .filter-group{min-width:0}.mm-worker-filters label{display:block;font-size:11px;font-weight:800;color:#375775;margin-bottom:5px}.mm-worker-filters input,.mm-worker-filters select{width:100%;height:36px;border:1px solid #d2e2ec;border-radius:8px;padding:7px 9px;background:#fff;color:#24475b;font:12px Arial}
+.mm-worker-table-wrap{width:100%;overflow:auto}.mm-worker-table{width:100%;min-width:950px;border-collapse:collapse}.mm-worker-table th,.mm-worker-table td{padding:10px 11px;border-bottom:1px solid #e7edf2;text-align:left;font-size:12px;white-space:nowrap}.mm-worker-table th{background:#f2f7fa;color:#34536d;font-weight:800;position:sticky;top:0;z-index:1}.mm-worker-table td:nth-child(2){font-weight:700;color:#183f66}.mm-worker-empty{text-align:center!important;color:#75899b;padding:35px!important}
+.mm-worker-status{display:inline-block;border-radius:20px;padding:4px 8px;font-size:10px;font-weight:800;background:#eef2f6;color:#5b6b79}.mm-worker-status.active{background:#e5f5eb;color:#187044}.mm-worker-status.planned{background:#fff4df;color:#9b6400}.mm-worker-row-actions{display:flex;gap:5px}.mm-worker-action{border:1px solid #cbdde9;background:#fff;color:#0b5f98;border-radius:7px;padding:6px 9px;font-size:11px;font-weight:800;cursor:pointer}.mm-worker-action:hover{background:#eef7fc}.mm-worker-table-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;color:#63798c;font-size:11px}.mm-worker-table-foot>div{display:flex;align-items:center;gap:9px}.mm-worker-table-foot .btn{padding:7px 10px}.mm-worker-message{margin-top:10px;font-size:12px;color:#187044}.mm-worker-message.error{color:#b42318}
+.mm-worker-form{display:grid;gap:14px}.mm-form-section{padding:0 0 15px}.mm-form-section .wp-table-card-head{padding:14px 17px;border-bottom:1px solid #e7edf2}.mm-form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;padding:16px}.mm-form-grid label{display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:800;color:#375775;min-width:0}.mm-form-grid label b{display:inline;color:#c0392b}.mm-form-grid input,.mm-form-grid select,.mm-form-grid textarea{width:100%;min-width:0;border:1px solid #d2e2ec;border-radius:8px;padding:9px 10px;background:#fff;color:#24475b;font:12px Arial}.mm-form-grid input:focus,.mm-form-grid select:focus,.mm-form-grid textarea:focus{outline:none;border-color:#1684c2;box-shadow:0 0 0 2px rgba(22,132,194,.1)}.mm-form-grid input[readonly]{background:#f1f5f8;color:#687d8f}.mm-form-wide{grid-column:1/-1}.mm-form-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:4px 0 20px}.mm-form-actions span{margin-right:auto;font-size:12px;color:#b42318}.mm-profile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;padding:18px}.mm-profile-field small{display:block;color:#7b8e9e;font-size:10px;font-weight:800;text-transform:uppercase;margin-bottom:4px}.mm-profile-field strong{display:block;color:#24445f;font-size:13px;overflow-wrap:anywhere}.mm-profile-actions{display:flex;gap:8px;flex-wrap:wrap;padding:0 18px 18px}.mm-worker-profile-title{padding:17px 18px;border-bottom:1px solid #e7edf2}.mm-worker-profile-title h3{margin:0;color:#123b72}.mm-worker-profile-title p{margin:5px 0 0;color:#71869a;font-size:12px}
+@media(max-width:850px){#page-mm-worker-registration .mm-worker-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.mm-form-grid,.mm-profile-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){#page-mm-worker-registration .mm-worker-filters{grid-template-columns:1fr;margin:0 10px 12px;padding:10px}.mm-worker-table-foot{align-items:flex-start;flex-direction:column}.mm-form-grid,.mm-profile-grid{grid-template-columns:1fr;padding:13px}.mm-form-wide{grid-column:auto}.mm-form-actions{flex-wrap:wrap}.mm-form-actions span{flex-basis:100%}#page-mm-worker-registration .wp-refresh-actions{width:100%}#page-mm-worker-registration .wp-refresh-actions button{flex:1}}
+</style>
+
+<style id="mm-competency-styles">
+#page-mm-competency .mm-competency-kpis{margin:0 0 18px}
+#page-mm-competency .mm-competency-kpi{cursor:pointer;transition:transform .15s ease,box-shadow .15s ease;border:1px solid #d9e6f2}
+#page-mm-competency .mm-competency-kpi:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(20,63,105,.12)}
+#page-mm-competency .mm-competency-kpi.selected{outline:3px solid #0b72d1;outline-offset:2px}
+#page-mm-competency .mm-competency-kpi .kpi-title{font-size:11px;font-weight:800;color:#597487}
+#page-mm-competency .mm-competency-kpi .kpi-value{font-size:26px;font-weight:900;color:#0d467c;margin:8px 0}
+#page-mm-competency .mm-competency-kpi .kpi-cum{font-size:10px;color:#8295a3}
+#page-mm-competency .mm-competency-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
+#page-mm-competency .mm-competency-refresh{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-left:auto}
+#page-mm-competency .mm-competency-refresh .wp-refresh-status{font-size:11px;font-weight:700;color:#218047;white-space:nowrap}
+#page-mm-competency .mm-competency-refresh .wp-refresh-inspection-btn{appearance:none;display:inline-flex;align-items:center;gap:7px;min-height:37px;padding:8px 13px;border:1px solid #bfd8ec;border-radius:9px;background:#f7fbff;color:#164c80;font:700 12px Arial,Helvetica,sans-serif;box-shadow:0 3px 8px rgba(23,111,177,.07);cursor:pointer}
+#page-mm-competency .mm-competency-filters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:0 0 14px;padding:14px;background:#f7fafc;border:1px solid #e0eaf1;border-radius:12px}
+.mm-competency-filters .filter-group{min-width:0}.mm-competency-filters label{display:block;font-size:11px;font-weight:800;color:#375775;margin-bottom:5px}.mm-competency-filters input,.mm-competency-filters select{width:100%;height:36px;border:1px solid #d2e2ec;border-radius:8px;padding:7px 9px;background:#fff;color:#24475b;font:12px Arial;box-sizing:border-box}
+.mm-competency-table-wrap{width:100%;overflow:auto}.mm-competency-table{width:100%;min-width:1100px;border-collapse:collapse}.mm-competency-table th,.mm-competency-table td{padding:10px 11px;border-bottom:1px solid #e7edf2;text-align:left;font-size:12px;white-space:nowrap}.mm-competency-table th{background:#f2f7fa;color:#34536d;font-weight:800;position:sticky;top:0;z-index:1}
+.mm-comp-status{display:inline-block;border-radius:20px;padding:4px 8px;font-size:10px;font-weight:800}.mm-comp-status.valid{background:#e5f5eb;color:#187044}.mm-comp-status.soon{background:#fff4df;color:#9b6400}.mm-comp-status.expired{background:#fde8e7;color:#b42318}.mm-comp-status.noexpiry{background:#eef2f6;color:#5b6b79}
+.mm-comp-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.mm-comp-form-grid .wp-inspection-field{min-width:0}.mm-comp-form-grid input,.mm-comp-form-grid select,.mm-comp-form-grid textarea{width:100%;box-sizing:border-box}.mm-comp-upload small{display:block;color:#71869a;font-size:10px;margin-top:5px}.mm-comp-form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}.mm-comp-title-form{display:grid;grid-template-columns:1fr 1.5fr auto;gap:12px;align-items:end;padding:14px;background:#f7fafc;border:1px solid #e0eaf1;border-radius:12px;margin-bottom:15px}.mm-comp-title-form input{width:100%;height:38px;border:1px solid #d2e2ec;border-radius:8px;padding:7px 9px;box-sizing:border-box}
+@media(max-width:950px){#page-mm-competency .mm-competency-filters{grid-template-columns:repeat(3,minmax(0,1fr))}.mm-comp-title-form{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){#page-mm-competency .mm-competency-actions{align-items:stretch;flex-direction:column}.mm-competency-refresh{justify-content:flex-end}.mm-comp-form-grid{grid-template-columns:1fr}.mm-comp-title-form{grid-template-columns:1fr}.mm-comp-form-actions{flex-wrap:wrap}}
+</style>
+
+<style id="mm-comp-worker-picker-styles">
+.mm-comp-worker-picker{position:relative}
+.mm-comp-worker-suggestions{position:absolute;top:calc(100% - 18px);left:0;right:0;z-index:50;max-height:260px;overflow:auto;background:#fff;border:1px solid #cbddea;border-radius:9px;box-shadow:0 12px 28px rgba(16,54,86,.16)}
+.mm-comp-worker-suggestions[hidden]{display:none}
+.mm-comp-worker-suggestion{display:block;width:100%;padding:10px 12px;text-align:left;border:0;border-bottom:1px solid #edf2f6;background:#fff;color:#173e61;cursor:pointer;font:12px Arial,Helvetica,sans-serif}
+.mm-comp-worker-suggestion:last-child{border-bottom:0}
+.mm-comp-worker-suggestion:hover,.mm-comp-worker-suggestion:focus{background:#edf6fc;outline:none}
+.mm-comp-worker-suggestion strong{display:block;font-size:12px;color:#123f6d}
+.mm-comp-worker-suggestion small{display:block;font-size:10px;color:#71869a;margin-top:3px}
+.mm-comp-worker-selected{display:block;margin-top:5px;color:#71869a;font-size:10px}
+</style>
+
+<style id="mm-comp-view-edit-styles">
+.mm-comp-modal[hidden]{display:none!important}.mm-comp-modal{position:fixed;inset:0;z-index:10050;display:flex;align-items:center;justify-content:center;padding:18px}
+.mm-comp-modal-backdrop{position:absolute;inset:0;background:rgba(7,28,48,.58)}
+.mm-comp-modal-panel{position:relative;width:min(850px,96vw);max-height:88vh;overflow:auto;background:#fff;border-radius:16px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.mm-comp-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #e4edf3;padding-bottom:12px;margin-bottom:16px}
+.mm-comp-modal-head h3{margin:0;color:#123f70;font-size:18px;font-weight:900}
+.mm-comp-view-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.mm-comp-view-item{padding:10px 12px;background:#f6f9fc;border:1px solid #e1eaf1;border-radius:9px;min-width:0}
+.mm-comp-view-item small{display:block;font-size:10px;font-weight:800;color:#6b8498;text-transform:uppercase;margin-bottom:5px}
+.mm-comp-view-item strong{display:block;font-size:13px;color:#173e61;overflow-wrap:anywhere}
+.mm-comp-modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;padding-top:14px;border-top:1px solid #e4edf3}
+@media(max-width:600px){.mm-comp-modal-panel{padding:15px}.mm-comp-view-grid{grid-template-columns:1fr}.mm-comp-modal-actions{flex-wrap:wrap}}
+</style>
+
+
+<style id="mm-competency-title-alignment-fix">
+#page-mm-competency > .section-title.mm-standard-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  text-align:left;
+}
+#page-mm-competency > .section-title.mm-standard-title h2{
+  text-align:left;
+  margin-left:0;
+  margin-right:auto;
+}
+</style>
+
+<style id="mm-rewards-styles">
+#page-mm-rewards .mm-rewards-kpis{margin:0 0 18px}
+.mm-rewards-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 16px 14px}
+.mm-rewards-refresh{display:flex;align-items:center;gap:10px}
+.mm-rewards-filters{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr)) auto;gap:12px;margin:0 16px 16px}
+.mm-rewards-pagination{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;gap:12px;font-size:12px;color:#58718a}
+.mm-rewards-modal[hidden],.mm-rewards-suggestions[hidden]{display:none!important}
+.mm-rewards-modal{position:fixed;inset:0;z-index:10050;display:flex;align-items:center;justify-content:center;padding:18px}
+.mm-rewards-modal-backdrop{position:absolute;inset:0;background:rgba(7,28,48,.58)}
+.mm-rewards-modal-panel{position:relative;width:min(900px,96vw);max-height:88vh;overflow:auto;background:#fff;border-radius:16px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.mm-rewards-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #e4edf3;padding-bottom:12px;margin-bottom:16px}
+.mm-rewards-modal-head h3{margin:0;color:#123f70;font-size:18px;font-weight:900}
+.mm-rewards-view-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.mm-rewards-view-item{padding:10px 12px;background:#f6f9fc;border:1px solid #e1eaf1;border-radius:9px;min-width:0}
+.mm-rewards-view-item small{display:block;font-size:10px;font-weight:800;color:#6b8498;text-transform:uppercase;margin-bottom:5px}
+.mm-rewards-view-item strong{display:block;font-size:13px;color:#173e61;overflow-wrap:anywhere;white-space:pre-wrap}
+.mm-rewards-modal-actions,.mm-rewards-form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;padding-top:14px;border-top:1px solid #e4edf3}
+.mm-rewards-form-card{padding:20px}
+.mm-rewards-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.mm-rewards-wide{grid-column:1/-1}
+.mm-rewards-worker-picker{position:relative}
+.mm-rewards-suggestions{position:absolute;top:100%;left:0;right:0;z-index:50;max-height:250px;overflow:auto;background:#fff;border:1px solid #cbddea;border-radius:9px;box-shadow:0 12px 28px rgba(16,54,86,.16)}
+.mm-rewards-suggestion{display:block;width:100%;padding:10px 12px;text-align:left;border:0;border-bottom:1px solid #edf2f6;background:#fff;color:#173e61;cursor:pointer}
+.mm-rewards-suggestion:hover{background:#edf6fc}
+.mm-rewards-suggestion strong,.mm-rewards-suggestion small{display:block}
+.mm-rewards-suggestion small{font-size:10px;color:#71869a;margin-top:3px}
+.mm-rewards-worker-picker>small{display:block;margin-top:5px;color:#71869a;font-size:10px}
+@media(max-width:850px){.mm-rewards-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.mm-rewards-actions,.mm-rewards-pagination{align-items:stretch;flex-direction:column}.mm-rewards-refresh{justify-content:space-between}.mm-rewards-filters,.mm-rewards-form-grid,.mm-rewards-view-grid{grid-template-columns:1fr}.mm-rewards-wide{grid-column:auto}.mm-rewards-modal-panel{padding:15px}.mm-rewards-modal-actions,.mm-rewards-form-actions{flex-wrap:wrap}}
+</style>
+\n
+<style id="mm-rewards-consistency-fix">
+/* Match the left-aligned section headings used throughout the portal. */
+#page-mm-rewards .mm-standard-title,
+#page-mm-rewards-form .mm-standard-title{
+  justify-content:flex-start!important;
+  text-align:left!important;
+}
+#page-mm-rewards .mm-standard-title h2,
+#page-mm-rewards-form .mm-standard-title h2{
+  text-align:left!important;
+  flex:1 1 auto;
+}
+/* Full-colour KPI cards, consistent rounded card dimensions. */
+#page-mm-rewards #mmRewardsKpis .wp-title-kpi{
+  border:0!important;
+  border-top:0!important;
+  border-radius:15px!important;
+  min-height:105px;
+  padding:16px!important;
+  box-shadow:0 7px 20px rgba(20,63,105,.10)!important;
+}
+#page-mm-rewards #mmRewardsKpis .wp-title-kpi .kpi-title,
+#page-mm-rewards #mmRewardsKpis .wp-title-kpi .kpi-value,
+#page-mm-rewards #mmRewardsKpis .wp-title-kpi .kpi-cum{
+  color:#fff!important;
+}
+#page-mm-rewards #mmRewardsKpis .wp-title-kpi .kpi-title{font-size:11px}
+#page-mm-rewards #mmRewardsKpis .wp-title-kpi .kpi-value{font-size:29px;margin:8px 0 2px}
+/* Use the same refresh-button treatment as the inspection pages. */
+#page-mm-rewards .wp-refresh-inspection-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:37px;padding:8px 13px;
+  border:1px solid #bfd8ec;border-radius:9px;background:#f7fbff;color:#164c80;
+  font:700 12px Arial,Helvetica,sans-serif;box-shadow:0 3px 8px rgba(23,111,177,.07);
+  cursor:pointer;white-space:nowrap;transition:background .15s ease,border-color .15s ease,transform .15s ease;
+}
+#page-mm-rewards .wp-refresh-inspection-btn:hover{background:#eaf5ff;border-color:#8bbfe1;transform:translateY(-1px)}
+#page-mm-rewards .wp-refresh-inspection-btn:disabled{opacity:.62;cursor:wait;transform:none}
+#page-mm-rewards .wp-refresh-inspection-btn .refresh-glyph{display:inline-block;font-size:16px;line-height:1}
+/* Normalize all form controls, including textareas and file inputs. */
+#page-mm-rewards-form .mm-rewards-form-grid .filter-group{
+  display:flex;flex-direction:column;align-items:stretch;min-width:0;gap:6px;
+}
+#page-mm-rewards-form .mm-rewards-form-grid .filter-group label{
+  display:block;margin:0;font-size:10px;font-weight:800;color:#58748a;
+}
+#page-mm-rewards-form .mm-rewards-form-grid input:not([type="hidden"]),
+#page-mm-rewards-form .mm-rewards-form-grid select,
+#page-mm-rewards-form .mm-rewards-form-grid textarea{
+  display:block;width:100%;max-width:100%;min-width:0;box-sizing:border-box;
+  min-height:40px;padding:10px 12px;background:#f8fbfd!important;
+  border:1px solid #d6e4ef!important;border-radius:10px!important;
+  color:#18384a!important;font:13px Arial,Helvetica,sans-serif;
+  box-shadow:none!important;
+}
+#page-mm-rewards-form .mm-rewards-form-grid textarea{
+  min-height:94px;resize:vertical;line-height:1.5;
+}
+#page-mm-rewards-form .mm-rewards-form-grid input[type="file"]{
+  padding:8px 10px;min-height:42px;
+}
+#page-mm-rewards-form .mm-rewards-form-grid input:focus,
+#page-mm-rewards-form .mm-rewards-form-grid select:focus,
+#page-mm-rewards-form .mm-rewards-form-grid textarea:focus{
+  outline:none;border-color:#00a4d6!important;box-shadow:0 0 0 3px rgba(0,164,214,.12)!important;
+}
+#page-mm-rewards-form .mm-rewards-form-grid input[readonly]{
+  background:#eef4f8!important;color:#536d80!important;
+}
+#page-mm-rewards-form .mm-rewards-form-grid small{
+  color:#71869a;font-size:10px;line-height:1.4;
+}
+</style>
+
+<style id="mm-rewards-delete-style">
+#page-mm-rewards .mm-rewards-delete-btn{color:#a52828!important;border-color:#e8bcbc!important;background:#fff7f7!important}
+#page-mm-rewards .mm-rewards-delete-btn:hover{background:#fdeaea!important;border-color:#d88b8b!important}
+</style>
+
+
+<style id="mm-rewards-custom-confirm-style">
+.mm-rewards-confirm[hidden]{display:none!important}
+.mm-rewards-confirm{position:fixed;inset:0;z-index:20000;display:flex;align-items:center;justify-content:center;padding:18px}
+.mm-rewards-confirm-backdrop{position:absolute;inset:0;background:rgba(10,29,48,.58);backdrop-filter:blur(2px)}
+.mm-rewards-confirm-panel{position:relative;width:min(440px,94vw);background:#fff;border:1px solid #e2eaf1;border-radius:16px;padding:25px 25px 20px;box-shadow:0 22px 65px rgba(8,35,60,.28);text-align:center;animation:mmRewardsConfirmIn .16s ease-out}
+.mm-rewards-confirm-icon{width:46px;height:46px;margin:0 auto 12px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff1f1;color:#bd3434;font-size:25px;font-weight:900}
+.mm-rewards-confirm-panel h3{margin:0 0 10px;color:#153f68;font-size:19px;font-weight:900}
+.mm-rewards-confirm-panel p{margin:0;color:#38566e;font-size:13px;line-height:1.55}
+.mm-rewards-confirm-panel .mm-rewards-confirm-note{margin-top:10px;padding:10px 12px;border-radius:9px;background:#f5f8fb;color:#62788b;font-size:11px}
+.mm-rewards-confirm-actions{display:flex;justify-content:center;gap:10px;margin-top:20px}
+.mm-rewards-confirm-delete{border:1px solid #b52e2e;background:#b52e2e;color:#fff;border-radius:9px;padding:10px 17px;font-size:11px;font-weight:900;cursor:pointer}
+.mm-rewards-confirm-delete:hover{background:#982525}
+.mm-rewards-confirm-delete:disabled{opacity:.6;cursor:wait}
+@keyframes mmRewardsConfirmIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:480px){.mm-rewards-confirm-panel{padding:21px 17px}.mm-rewards-confirm-actions{flex-direction:column-reverse}.mm-rewards-confirm-actions button{width:100%}}
+</style>
+
+
+<style id="portal-global-mobile-responsive-v1">
+/* ==========================================================
+   PENTA-OCEAN HSE PORTAL — GLOBAL RESPONSIVE LAYOUT
+   Applies to all existing and future portal pages/modules.
+   Desktop styling remains the default; these rules activate
+   at tablet/mobile widths.
+   ========================================================== */
+html,body{max-width:100%;overflow-x:hidden}
+body{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img,svg,canvas,video,iframe{max-width:100%}
+.app,.main,.page,.page.active,
+.page-header,.page-content,.wp-dashboard-wrap,
+.wp-table-card,.card,.section-card,.content-card{
+  min-width:0;max-width:100%;
+}
+.main,.page{width:100%}
+.page *{min-width:0}
+.page input,.page select,.page textarea,.page button{max-width:100%;box-sizing:border-box}
+.page input,.page select,.page textarea{font-size:16px}
+.page textarea{width:100%;resize:vertical}
+.page-header,.section-title,.report-section-title,.sc-section-title,
+.mm-standard-title,.wp-section-title{
+  min-width:0;flex-wrap:wrap;gap:10px;
+}
+.page-header>* , .section-title>* , .report-section-title>*,
+.sc-section-title>* , .mm-standard-title>*{min-width:0}
+.page-header h1,.page-header h2,.section-title h1,.section-title h2,
+.report-section-title h1,.report-section-title h2,
+.mm-standard-title h2{overflow-wrap:anywhere}
+.kpis,.grid2,.gridEqual,.training-kpis,.lagging-rate-grid-modern,
+.wp-kpi-grid,.wp-kpi-row,.mm-worker-kpis,.mm-competency-kpis,
+.mm-rewards-kpis,.sc-kpi-grid{
+  min-width:0;max-width:100%;
+}
+.filters,.filter-bar,.wp-filters,.mm-worker-filters,
+.mm-competency-filters,.mm-rewards-filters,.sc-filters{
+  min-width:0;max-width:100%;
+}
+.filters>* ,.filter-bar>* ,.wp-filters>* ,.mm-worker-filters>*,
+.mm-competency-filters>* ,.mm-rewards-filters>* ,.sc-filters>*{
+  min-width:0;max-width:100%;
+}
+/* Any table holder scrolls horizontally inside its own boundary. */
+.page .table-wrap,
+.page .wp-table-wrap,
+.page .wp-data-table-wrap,
+.page .table-container,
+.page .table-responsive,
+.page .responsive-table,
+.page .data-table-wrap,
+.page .inspection-table-wrap,
+.page .mm-worker-table-wrap,
+.page .mm-comp-table-wrap,
+.page .mm-rewards-table-wrap,
+.page .sc-table-wrap,
+.page .dss-table-wrap,
+.page .table-scroll,
+.page div:has(> table){
+  display:block;max-width:100%;width:100%;
+  overflow-x:auto!important;overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+}
+.page table{
+  width:100%;
+  max-width:none;
+  border-collapse:collapse;
+}
+.page .table-wrap table,
+.page .wp-table-wrap table,
+.page .wp-data-table-wrap table,
+.page .table-container table,
+.page .table-responsive table,
+.page .responsive-table table,
+.page .data-table-wrap table,
+.page .inspection-table-wrap table,
+.page .mm-worker-table-wrap table,
+.page .mm-comp-table-wrap table,
+.page .mm-rewards-table-wrap table,
+.page .sc-table-wrap table,
+.page .dss-table-wrap table,
+.page .table-scroll table,
+.page div:has(> table) > table{
+  min-width:720px;
+}
+.page th{white-space:nowrap}
+.page td{overflow-wrap:anywhere}
+.page .chart,.page .chart-container,.page .chart-wrap,
+.page .chart-card,.page .graph-container{
+  min-width:0;max-width:100%;
+}
+.page canvas,.page svg{max-width:100%}
+button,a,.btn{touch-action:manipulation}
+input,select,textarea{touch-action:manipulation}
+
+/* Tablet */
+@media(max-width:900px){
+  .main{margin-left:0!important;width:100%!important;max-width:100%!important;padding:18px!important}
+  .app{min-width:0;display:block}
+  .sidebar{
+    position:relative!important;left:auto!important;top:auto!important;bottom:auto!important;
+    width:100%!important;height:auto!important;max-height:none!important;
+  }
+  .sidebar .brand{padding:12px 14px!important;margin-bottom:8px!important}
+  .sidebar .brand-logo{width:145px!important}
+  .sidebar .nav{
+    display:flex!important;flex-direction:row!important;gap:6px!important;
+    overflow-x:auto!important;overflow-y:hidden!important;
+    white-space:nowrap;padding:8px 10px!important;
+    -webkit-overflow-scrolling:touch;
+  }
+  .sidebar .nav button{flex:0 0 auto!important;width:auto!important;white-space:nowrap}
+  .grid2,.gridEqual{grid-template-columns:minmax(0,1fr)!important}
+  .page-header{padding:18px!important}
+  .page-header img{max-width:100%;height:auto}
+}
+
+/* Mobile */
+@media(max-width:650px){
+  .main{padding:12px 10px 28px!important}
+  .topbar{align-items:flex-start;flex-direction:column;gap:10px}
+  .page-title{font-size:20px;line-height:1.25}
+  .page-sub{line-height:1.45}
+  .source{max-width:100%;overflow-wrap:anywhere}
+  .page-header{padding:15px!important;border-radius:14px!important;margin-bottom:14px!important}
+  .page-header h1{font-size:clamp(24px,7vw,36px)!important;line-height:1.1}
+  .page-header h2{font-size:clamp(19px,5vw,27px)!important}
+  .section-title,.report-section-title,.sc-section-title,
+  .mm-standard-title,.wp-section-title{
+    align-items:flex-start!important;justify-content:flex-start!important;
+    flex-direction:column!important;
+  }
+  .section-title h2,.report-section-title h2,.sc-section-title h2,
+  .mm-standard-title h2,.wp-section-title h2{
+    width:100%;text-align:left!important;font-size:21px!important;line-height:1.25;
+  }
+  .section-title button,.report-section-title button,.sc-section-title button,
+  .mm-standard-title button,.wp-section-title button{
+    max-width:100%;white-space:normal;
+  }
+  .kpis,.wp-kpi-grid,.wp-kpi-row,.mm-worker-kpis,
+  .mm-competency-kpis,.mm-rewards-kpis,.sc-kpi-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;
+  }
+  .kpi,.wp-title-kpi,.mm-competency-kpi,.sc-kpi-card{min-width:0;padding:10px!important}
+  .kpi .value,.wp-title-kpi .kpi-value{font-size:clamp(19px,5vw,26px)!important;overflow-wrap:anywhere}
+  .grid2,.gridEqual,.training-kpis,.lagging-rate-grid-modern{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  .filters,.filter-bar,.wp-filters,.mm-worker-filters,
+  .mm-competency-filters,.mm-rewards-filters,.sc-filters{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:9px!important;padding:10px!important;
+  }
+  .filters .field,.filters .filter-group,
+  .wp-filters .filter-group,.mm-worker-filters .filter-group,
+  .mm-competency-filters .filter-group,.mm-rewards-filters .filter-group,
+  .sc-filters .filter-group{min-width:0;width:100%}
+  .filters label,.filter-group label{font-size:10px}
+  .filters input,.filters select,.filter-group input,
+  .filter-group select,.filter-group textarea{
+    width:100%;min-width:0;max-width:100%;
+  }
+  .card,.wp-table-card,.section-card,.content-card{padding:12px!important}
+  .wp-table-card-head,.wp-table-card-head-copy{min-width:0;max-width:100%}
+  .mm-rewards-actions,.mm-rewards-pagination,
+  .mm-competency-actions,.mm-worker-actions{
+    align-items:stretch;flex-direction:column;min-width:0;
+  }
+  .mm-rewards-refresh,.wp-refresh-actions,.wp-refresh-row{
+    width:100%;justify-content:space-between;flex-wrap:wrap;
+  }
+  .mm-rewards-actions button,.wp-refresh-actions button,
+  .wp-new-inspection-btn{max-width:100%;white-space:normal}
+  .wp-inspection-actions,.form-actions,.mm-form-actions,
+  .mm-comp-form-actions,.mm-rewards-form-actions{
+    display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;
+  }
+  .wp-inspection-actions button,.form-actions button,
+  .mm-form-actions button,.mm-comp-form-actions button,
+  .mm-rewards-form-actions button{min-height:40px}
+  .mm-form-grid,.mm-profile-grid,.mm-comp-form-grid,
+  .mm-rewards-form-grid,.sc-detail-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  .mm-form-wide,.mm-rewards-wide{grid-column:auto!important}
+  .mm-rewards-modal,.mm-comp-modal{padding:8px!important}
+  .mm-rewards-modal-panel,.mm-comp-modal-panel{
+    width:100%!important;max-width:100%!important;max-height:92vh!important;padding:14px!important;
+  }
+  .mm-rewards-view-grid,.mm-comp-view-grid{grid-template-columns:1fr!important}
+  .portal-loading-card{width:min(92vw,380px)!important;max-width:92vw!important}
+  .login-stage,.login-card,.login-brand{max-width:100%;min-width:0}
+  .nav button{min-height:42px}
+  .footer-note{overflow-wrap:anywhere}
+}
+
+/* Very small phones */
+@media(max-width:380px){
+  .main{padding:9px 7px 22px!important}
+  .kpis,.wp-kpi-grid,.wp-kpi-row,.mm-worker-kpis,
+  .mm-competency-kpis,.mm-rewards-kpis,.sc-kpi-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  .filters,.filter-bar,.wp-filters,.mm-worker-filters,
+  .mm-competency-filters,.mm-rewards-filters,.sc-filters{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  .page-title{font-size:18px}
+}
+</style>
+
+
+<style id="mm-consequence-styles">
+.mm-consequence-history{margin-top:16px;padding-top:12px;border-top:1px solid #e4edf3}
+.mm-consequence-history h4{margin:0 0 10px;color:#17466e;font-size:13px}
+.mm-consequence-history-item{padding:9px 11px;margin:7px 0;border-left:3px solid #1976b8;background:#f5f9fc;border-radius:7px}
+.mm-consequence-history-item strong{display:block;color:#17466e;font-size:11px}
+.mm-consequence-history-item small{display:block;color:#6c8295;font-size:10px;margin-top:3px}
+.mm-consequence-history-item p{margin:5px 0 0;color:#36536c;font-size:12px;white-space:pre-wrap}
+#page-mm-consequence .mm-rewards-kpis .wp-title-kpi{border:0!important;border-radius:14px!important;min-height:100px;padding:15px!important;box-shadow:0 7px 20px rgba(20,63,105,.10)!important}
+#page-mm-consequence .mm-rewards-kpis .kpi-title,#page-mm-consequence .mm-rewards-kpis .kpi-value,#page-mm-consequence .mm-rewards-kpis .kpi-cum{color:#fff!important}
+#page-mm-consequence-form .mm-rewards-form-grid .filter-group{display:flex;flex-direction:column;align-items:stretch;min-width:0;gap:6px}
+#page-mm-consequence-form .mm-rewards-form-grid .filter-group label{display:block;margin:0;font-size:10px;font-weight:800;color:#58748a}
+#page-mm-consequence-form .mm-rewards-form-grid input:not([type=hidden]),#page-mm-consequence-form .mm-rewards-form-grid select,#page-mm-consequence-form .mm-rewards-form-grid textarea{display:block;width:100%;max-width:100%;min-width:0;box-sizing:border-box;min-height:40px;padding:10px 12px;background:#f8fbfd!important;border:1px solid #d6e4ef!important;border-radius:10px!important;color:#18384a!important;font:13px Arial,Helvetica,sans-serif;box-shadow:none!important}
+#page-mm-consequence-form .mm-rewards-form-grid textarea{min-height:94px;resize:vertical;line-height:1.5}
+#page-mm-consequence-form .mm-rewards-form-grid input[type=file]{padding:8px 10px}
+#page-mm-consequence-form .mm-rewards-form-grid input:focus,#page-mm-consequence-form .mm-rewards-form-grid select:focus,#page-mm-consequence-form .mm-rewards-form-grid textarea:focus{outline:none;border-color:#00a4d6!important;box-shadow:0 0 0 3px rgba(0,164,214,.12)!important}
+#page-mm-consequence-form .mm-rewards-form-grid input[readonly]{background:#eef4f8!important;color:#536d80!important}
+@media(max-width:650px){#page-mm-consequence-form .mm-rewards-form-grid{grid-template-columns:minmax(0,1fr)!important}#page-mm-consequence-form .mm-rewards-wide{grid-column:auto!important}}
+</style>
+
 </head>
 <body>
 <div id="portalLoadingOverlay" class="portal-loading-overlay" role="status" aria-live="polite" aria-hidden="true">
@@ -3418,6 +3956,10 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
             <span class="portal-home-icon">♟</span><h3>Headcount System</h3>
             <p>Open the project headcount management module.</p><span class="portal-home-arrow">›</span>
           </button>
+          <button type="button" class="portal-home-module blue" onclick="go('manpower-management')">
+            <span class="portal-home-icon">👷</span><h3>Manpower Management</h3>
+            <p>Manage worker records and manpower information.</p><span class="portal-home-arrow">›</span>
+          </button>
         </div>
       </div>
 
@@ -3597,6 +4139,356 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
   </section>
   <section id="page-daily-checklist" class="page portal-menu-page">
     <div class="portal-module-placeholder"><div class="big-icon">☷</div><h2>Daily Checklist</h2><p>This page is reserved for the Daily Checklist module. The module can be added without replacing the existing dashboard data or Workplace Inspection submissions.</p></div>
+  </section>
+  <section id="page-manpower-management" class="page portal-menu-page mm-landing-page">
+    <div class="mm-page-heading">
+      <div>
+        <h2>Manpower Management</h2>
+        <p>Centralised workforce administration, competency, recognition and consequence management.</p>
+      </div>
+      <button type="button" class="portal-menu-back mm-back" onclick="go('main-menu')">← Back to Main Menu</button>
+    </div>
+
+    <div class="mm-overview-strip">
+      <div class="mm-overview-icon">👷</div>
+      <div>
+        <strong>Central Manpower Database</strong>
+        <span>One worker master record shared by the Manpower Management modules and, progressively, other HSE systems.</span>
+      </div>
+    </div>
+
+    <div class="mm-module-grid">
+      <button type="button" class="mm-module-card mm-worker" onclick="go('mm-worker-registration')">
+        <span class="mm-module-icon">👥</span>
+        <strong>Worker Registration</strong>
+        <span class="mm-module-description">Register workers, maintain personal and employment details, and manage worker profiles.</span>
+        <span class="mm-module-link">Open module <b>→</b></span>
+      </button>
+      <button type="button" class="mm-module-card mm-competency" onclick="go('mm-competency')">
+        <span class="mm-module-icon">🎓</span>
+        <strong>Manpower Competency</strong>
+        <span class="mm-module-description">Manage competency titles, worker certificates, PDF documents and expiry monitoring.</span>
+        <span class="mm-module-link">Open module <b>→</b></span>
+      </button>
+      <button type="button" class="mm-module-card mm-rewards" onclick="go('mm-rewards')">
+        <span class="mm-module-icon">🏆</span>
+        <strong>Rewards &amp; Recognition</strong>
+        <span class="mm-module-description">Record positive safety contributions, recognition, supporting evidence and review workflow.</span>
+        <span class="mm-module-link">Open module <b>→</b></span>
+      </button>
+      <button type="button" class="mm-module-card mm-consequence" onclick="go('mm-consequence')">
+        <span class="mm-module-icon">🛡️</span>
+        <strong>Consequence Management</strong>
+        <span class="mm-module-description">Record violations, immediate actions, consequences, corrective actions and follow-up.</span>
+        <span class="mm-module-link">Open module <b>→</b></span>
+      </button>
+    </div>
+
+    <div class="mm-footer-note">
+      <span>DATABASE STATUS</span>
+      <strong>Existing Manpower Management spreadsheet structure retained</strong>
+      <p>SIC Data, Competency Master, Competency Records, Rewards Records, Consequence Records, Workflow Log, Category Master, Audit Log and System Settings will be reused.</p>
+    </div>
+  </section>
+
+  <section id="page-mm-worker-registration" class="page mm-submodule-page">
+    <div class="section-title mm-standard-title mm-worker-page-title" style="margin-top:4px">
+      <h2>Worker Registration</h2>
+      <button type="button" class="portal-menu-back mm-return-button" onclick="go('manpower-management')">← Back to Manpower Management</button>
+    </div>
+    <p class="mm-standard-description">Central worker master records from the existing SIC Data sheet.</p>
+    <div class="wp-kpi-grid mm-worker-kpis" id="mmWorkerKpis">
+      <div class="wp-title-kpi mm-worker-kpi-total"><div class="kpi-title">Total Registered Workers</div><div class="kpi-value" id="mmKpiTotal">—</div><div class="kpi-cum">Records in SIC Data</div></div>
+      <div class="wp-title-kpi mm-worker-kpi-active"><div class="kpi-title">Active Workers</div><div class="kpi-value" id="mmKpiActive">—</div><div class="kpi-cum">Employment status: Active</div></div>
+      <div class="wp-title-kpi mm-worker-kpi-planned"><div class="kpi-title">Planned for Induction</div><div class="kpi-value" id="mmKpiPlanned">—</div><div class="kpi-cum">Awaiting induction / activation</div></div>
+      <div class="wp-title-kpi mm-worker-kpi-other"><div class="kpi-title">Other / Unverified Status</div><div class="kpi-value" id="mmKpiOther">—</div><div class="kpi-cum">Including blank status</div></div>
+    </div>
+    <div class="wp-table-card mm-worker-list-card">
+      <div class="wp-table-card-head">
+        <div class="wp-table-card-head-copy"><h3>Worker Database</h3><div class="wp-card-sub">Search and filter the central worker master records.</div></div>
+      </div>
+      <div class="mm-worker-table-actions">
+        <div class="mm-worker-add-action"><button type="button" class="wp-new-inspection-btn" onclick="mmOpenWorkerForm()">＋ ADD NEW WORKER</button></div>
+        <div class="mm-worker-refresh-action"><span id="mmWorkerRefreshStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" class="wp-refresh-inspection-btn" onclick="mmLoadWorkers(true)"><span class="refresh-glyph">↻</span><span>Refresh</span></button></div>
+      </div>
+      <div class="filters mm-worker-filters" id="mmWorkerFilters">
+        <div class="filter-group"><label for="mmWorkerSearch">Search Worker ID / Name / IC</label><input id="mmWorkerSearch" type="search" placeholder="Enter Worker ID, name or IC / Passport"></div>
+        <div class="filter-group"><label for="mmWorkerCompany">Company</label><select id="mmWorkerCompany"><option value="">All Companies</option></select></div>
+        <div class="filter-group"><label for="mmWorkerStatus">Employment Status</label><select id="mmWorkerStatus"><option value="">All Statuses</option></select></div>
+        <div class="filter-group"><label for="mmWorkerCategory">Job Category</label><select id="mmWorkerCategory"><option value="">All Job Categories</option></select></div>
+        <div class="filter-group"><label for="mmWorkerNationality">Nationality</label><select id="mmWorkerNationality"><option value="">All Nationalities</option></select></div>
+        <div class="filter-group"><label>&nbsp;</label><button type="button" class="btn" onclick="mmResetWorkerFilters()">Reset Filters</button></div>
+      </div>
+      <div class="mm-worker-table-wrap"><table class="hc-table mm-worker-table"><thead><tr><th>Worker ID</th><th>Worker Name</th><th>Company</th><th>Designation</th><th>Job Category</th><th>Nationality</th><th>Employment Status</th><th>Action</th></tr></thead><tbody id="mmWorkerTableBody"><tr><td colspan="8" class="mm-worker-empty">Loading worker records…</td></tr></tbody></table></div>
+      <div class="mm-worker-table-foot"><span id="mmWorkerCount">0 records</span><div><button type="button" class="btn" id="mmWorkerPrev" onclick="mmWorkerPage(-1)" disabled>← Previous</button><span id="mmWorkerPageLabel">Page 1</span><button type="button" class="btn" id="mmWorkerNext" onclick="mmWorkerPage(1)" disabled>Next →</button></div></div>
+    </div>
+    <div id="mmWorkerMessage" class="mm-worker-message" role="status" aria-live="polite"></div>
+  </section>
+
+  <section id="page-mm-worker-form" class="page mm-submodule-page">
+    <div class="section-title mm-standard-title" style="margin-top:4px"><h2 id="mmWorkerFormHeading">Add New Worker</h2><button type="button" class="portal-menu-back mm-return-button" onclick="mmReturnToWorkerList()">← Back to Worker Registration</button></div>
+    <p class="mm-standard-description">Enter worker information. Worker ID is generated automatically and cannot be changed.</p>
+    <form id="mmWorkerForm" class="mm-worker-form" onsubmit="mmSaveWorker(event)">
+      <input type="hidden" id="mmWorkerFormMode" value="add"><input type="hidden" id="mmWorkerOriginalId" value="">
+      <div class="wp-table-card mm-form-section"><div class="wp-table-card-head"><div class="wp-table-card-head-copy"><h3>Worker Identification</h3></div></div><div class="mm-form-grid">
+        <label>Worker ID<input id="mmFWorkerId" readonly placeholder="Generated on save"></label><label>Worker Name <b>*</b><input id="mmFName" required maxlength="150"></label><label>IC / Passport No. <b>*</b><input id="mmFIC" required maxlength="60"></label><label>Nationality <b>*</b><input id="mmFNationality" required maxlength="60"></label>
+      </div></div>
+      <div class="wp-table-card mm-form-section"><div class="wp-table-card-head"><div class="wp-table-card-head-copy"><h3>Employment Details</h3></div></div><div class="mm-form-grid">
+        <label>Company <b>*</b><input id="mmFCompany" required maxlength="150"></label><label>Designation <b>*</b><input id="mmFDesignation" required maxlength="120"></label><label>Job Category <b>*</b><input id="mmFCategory" required maxlength="100"></label><label>Employment Status<select id="mmFStatus"><option value="Planned for Induction">Planned for Induction</option><option value="Active">Active</option><option value="Resigned">Resigned</option><option value="Terminated">Terminated</option><option value="Transferred">Transferred</option><option value="Blacklisted">Blacklisted</option></select></label>
+      </div></div>
+      <div class="wp-table-card mm-form-section"><div class="wp-table-card-head"><div class="wp-table-card-head-copy"><h3>Induction &amp; Certification</h3></div></div><div class="mm-form-grid">
+        <label>Safety Induction Date<input id="mmFInduction" type="date"></label><label>CIDB Expiry Date<input id="mmFCidbExpiry" type="date"></label><label>Work Permit No.<input id="mmFPermitNo" maxlength="80"></label><label>Work Permit Expiry Date<input id="mmFPermitExpiry" type="date"></label><label>CIDB Card No.<input id="mmFCidbNo" maxlength="80"></label><label>OGSP Card No.<input id="mmFOgspNo" maxlength="80"></label><label>OGSP Expiry Date<input id="mmFOgspExpiry" type="date"></label>
+      </div></div>
+      <div class="wp-table-card mm-form-section"><div class="wp-table-card-head"><div class="wp-table-card-head-copy"><h3>Contact Information</h3></div></div><div class="mm-form-grid">
+        <label class="mm-form-wide">Address<textarea id="mmFAddress" rows="2"></textarea></label><label>Postcode<input id="mmFPostcode" maxlength="20"></label><label>District<input id="mmFDistrict" maxlength="80"></label><label>State<input id="mmFState" maxlength="80"></label><label>Contact No.<input id="mmFContact" maxlength="40"></label><label>Email Address<input id="mmFEmail" type="email" maxlength="150"></label>
+      </div></div>
+      <div class="wp-table-card mm-form-section"><div class="wp-table-card-head"><div class="wp-table-card-head-copy"><h3>Emergency Contact</h3></div></div><div class="mm-form-grid">
+        <label>Next of Kin<input id="mmFNextOfKin" maxlength="150"></label><label>Relationship<input id="mmFRelationship" maxlength="60"></label><label>Emergency Contact No.<input id="mmFEmergency" maxlength="40"></label><label>E-Vetting Ref No.<input id="mmFEvetting" maxlength="80"></label><label class="mm-form-wide">Remarks<textarea id="mmFRemarks" rows="2"></textarea></label>
+      </div></div>
+      <div class="mm-form-actions"><span id="mmWorkerFormMessage" role="status"></span><button type="button" class="btn" onclick="mmReturnToWorkerList()">Cancel</button><button type="submit" class="wp-new-inspection-btn" id="mmWorkerSaveButton">SAVE WORKER</button></div>
+    </form>
+  </section>
+
+  <section id="page-mm-worker-profile" class="page mm-submodule-page">
+    <div class="section-title mm-standard-title" style="margin-top:4px"><h2>Worker Profile</h2><button type="button" class="portal-menu-back mm-return-button" onclick="mmReturnToWorkerList()">← Back to Worker Registration</button></div>
+    <div id="mmWorkerProfileContent" class="wp-table-card mm-worker-profile-card"></div>
+  </section>
+
+  <section id="page-mm-competency" class="page mm-submodule-page">
+    <div class="section-title mm-standard-title" style="margin-top:4px">
+      <h2>Manpower Competency</h2>
+      <button type="button" class="portal-menu-back mm-return-button" onclick="go('manpower-management')">← Back to Manpower Management</button>
+    </div>
+    <p class="mm-standard-description">Manage worker competency records, certificates and expiry monitoring.</p>
+    <div class="wp-dashboard-wrap">
+      <div class="wp-dashboard-head"><div><h2>Competency Overview</h2><p>Click a competency card to view the workers registered under that competency.</p></div></div>
+      <div id="mmCompetencyKpis" class="wp-kpi-grid mm-competency-kpis"><div class="wp-title-kpi"><div class="kpi-title">Loading competency summary…</div></div></div>
+      <div class="wp-table-card mm-competency-list-card">
+        <div class="wp-table-card-head"><div class="wp-table-card-head-copy"><h3>Competency Records</h3><div class="wp-card-sub">Search and filter worker competency certificates.</div></div></div>
+        <div class="mm-competency-actions">
+          <button type="button" class="wp-new-inspection-btn" onclick="mmOpenCompetencyForm()">＋ REGISTER COMPETENCY</button>
+          <div class="mm-competency-refresh"><span id="mmCompetencyRefreshStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" class="wp-refresh-inspection-btn" onclick="mmLoadCompetencies(true)"><span class="refresh-glyph">↻</span><span>Refresh</span></button></div>
+        </div>
+        <div class="filters mm-competency-filters">
+          <div class="filter-group"><label for="mmCompSearch">Search Worker / Certificate</label><input id="mmCompSearch" type="search" placeholder="Worker ID, name or certificate no."></div>
+          <div class="filter-group"><label for="mmCompTitle">Competency Title</label><select id="mmCompTitle"><option value="">All Competencies</option></select></div>
+          <div class="filter-group"><label for="mmCompCompany">Company</label><select id="mmCompCompany"><option value="">All Companies</option></select></div>
+          <div class="filter-group"><label for="mmCompStatus">Certificate Status</label><select id="mmCompStatus"><option value="">All Statuses</option><option>Valid</option><option>Expiring Soon</option><option>Expired</option><option>No Expiry Date</option></select></div>
+          <div class="filter-group"><label for="mmCompReset">&nbsp;</label><button type="button" class="btn" id="mmCompReset">Reset Filters</button></div>
+        </div>
+        <div class="mm-competency-table-wrap"><table class="hc-table mm-competency-table"><thead><tr><th>Worker ID</th><th>Worker Name</th><th>Company</th><th>Competency Title</th><th>Provider / Accreditor</th><th>Certificate No.</th><th>Expiry Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="mmCompetencyTableBody"><tr><td colspan="9" class="mm-worker-empty">Loading competency records…</td></tr></tbody></table></div>
+        <div class="mm-worker-table-foot"><span id="mmCompetencyCount">0 records</span><div><button type="button" class="btn" id="mmCompPrev" onclick="mmCompPage(-1)" disabled>← Previous</button><span id="mmCompPageLabel">Page 1</span><button type="button" class="btn" id="mmCompNext" onclick="mmCompPage(1)" disabled>Next →</button></div></div>
+      </div>
+    </div>
+    <div id="mmCompetencyMessage" class="mm-worker-message" role="status" aria-live="polite"></div>
+    <div id="mmCompViewModal" class="mm-comp-modal" hidden>
+      <div class="mm-comp-modal-backdrop" onclick="mmCloseCompView()"></div>
+      <div class="mm-comp-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mmCompViewTitle">
+        <div class="mm-comp-modal-head"><h3 id="mmCompViewTitle">Competency Record</h3><button type="button" class="mm-worker-action" onclick="mmCloseCompView()">✕ Close</button></div>
+        <div id="mmCompViewContent" class="mm-comp-view-grid"></div>
+        <div class="mm-comp-modal-actions"><a id="mmCompViewPdf" class="mm-worker-action" href="#" target="_blank" rel="noopener">VIEW CERTIFICATE PDF</a><button id="mmCompViewEdit" type="button" class="wp-new-inspection-btn" onclick="mmEditCurrentCompetency()">EDIT RECORD</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-mm-competency-form" class="page mm-submodule-page">
+    <div class="section-title mm-standard-title" style="margin-top:4px"><h2 id="mmCompFormHeading">Register Worker Competency</h2><button type="button" class="portal-menu-back mm-return-button" onclick="mmReturnCompetencyList()">← Back to Manpower Competency</button></div>
+    <p class="mm-standard-description">Register a worker's competency and upload the supporting PDF certificate.</p>
+    <div class="wp-inspection-card">
+      <form id="mmCompForm" class="mm-comp-form"><input type="hidden" id="mmCompRecordId">
+        <div class="mm-comp-form-grid">
+          <div class="wp-inspection-field mm-comp-worker-picker"><label for="mmCompWorkerSearch">Worker Name *</label><input id="mmCompWorkerSearch" type="text" placeholder="Type worker name or Worker ID…" autocomplete="off" required aria-autocomplete="list" aria-controls="mmCompWorkerSuggestions" aria-expanded="false"><input id="mmCompWorker" type="hidden"><div id="mmCompWorkerSuggestions" class="mm-comp-worker-suggestions" role="listbox" hidden></div><small id="mmCompWorkerSelected" class="mm-comp-worker-selected">Select a worker from the suggestions.</small></div>
+          <div class="wp-inspection-field"><label for="mmCompWorkerId">Worker ID</label><input id="mmCompWorkerId" readonly></div>
+          <div class="wp-inspection-field"><label for="mmCompWorkerCompany">Company</label><input id="mmCompWorkerCompany" readonly></div>
+          <div class="wp-inspection-field"><label for="mmCompFormTitle">Competency Title *</label><select id="mmCompFormTitle" required><option value="">Select competency</option></select></div>
+          <div class="wp-inspection-field"><label for="mmCompProvider">Provider / Accreditor *</label><input id="mmCompProvider" required maxlength="150"></div>
+          <div class="wp-inspection-field"><label for="mmCompCertificateNo">Certificate Number</label><input id="mmCompCertificateNo" maxlength="100"></div>
+          <div class="wp-inspection-field"><label for="mmCompIssueDate">Issue Date</label><input id="mmCompIssueDate" type="date"></div>
+          <div class="wp-inspection-field"><label for="mmCompExpiryDate">Expiry Date</label><input id="mmCompExpiryDate" type="date"></div>
+          <div class="wp-inspection-field mm-comp-upload"><label for="mmCompPdf">Certificate PDF <span id="mmCompPdfRequired">*</span></label><input id="mmCompPdf" type="file" accept="application/pdf,.pdf" required><small id="mmCompPdfHelp">PDF only. Maximum file size: 10 MB.</small><div id="mmCompPdfName" class="wp-photo-selected"></div></div>
+          <div class="wp-inspection-field mm-comp-remarks"><label for="mmCompRemarks">Remarks</label><textarea id="mmCompRemarks" rows="3" maxlength="1000"></textarea></div>
+        </div>
+        <div id="mmCompFormMessage" class="mm-worker-message" role="status" aria-live="polite"></div>
+        <div class="mm-comp-form-actions"><button type="button" class="mm-worker-action" onclick="mmReturnCompetencyList()">CANCEL</button><button type="submit" class="wp-new-inspection-btn" id="mmCompSaveButton">SAVE COMPETENCY</button></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="page-mm-competency-titles" class="page mm-submodule-page">
+    <div class="section-title mm-standard-title" style="margin-top:4px"><h2>Competency Title Management</h2><button type="button" class="portal-menu-back mm-return-button" onclick="go('mm-competency')">← Back to Manpower Competency</button></div>
+    <p class="mm-standard-description">Admin-only management of the competency titles available for registration.</p>
+    <div class="wp-table-card">
+      <div class="wp-table-card-head"><div class="wp-table-card-head-copy"><h3>Competency Master</h3><div class="wp-card-sub">Create, edit or deactivate competency titles.</div></div></div>
+      <form id="mmCompTitleForm" class="mm-comp-title-form">
+        <input type="hidden" id="mmCompTitleId">
+        <div class="wp-inspection-field"><label for="mmCompTitleName">Competency Title *</label><input id="mmCompTitleName" required maxlength="150"></div>
+        <div class="wp-inspection-field"><label for="mmCompTitleDescription">Description</label><input id="mmCompTitleDescription" maxlength="500"></div>
+        <div class="mm-comp-form-actions"><button type="button" class="mm-worker-action" onclick="mmResetCompTitleForm()">CLEAR</button><button type="submit" class="wp-new-inspection-btn">SAVE TITLE</button></div>
+      </form>
+      <div class="mm-competency-table-wrap"><table class="hc-table mm-competency-table"><thead><tr><th>Competency ID</th><th>Competency Title</th><th>Description</th><th>Status</th><th>Action</th></tr></thead><tbody id="mmCompTitlesBody"></tbody></table></div>
+    </div>
+    <div id="mmCompTitleMessage" class="mm-worker-message" role="status" aria-live="polite"></div>
+  </section>
+
+  <section id="page-mm-rewards" class="page mm-submodule-page">
+    <div class="section-title mm-standard-title" style="margin-top:4px">
+      <h2>Rewards &amp; Recognition</h2>
+      <button type="button" class="portal-menu-back mm-return-button" onclick="go('manpower-management')">← Back to Manpower Management</button>
+    </div>
+    <p class="mm-standard-description">Recognise positive safety behaviour, workforce contributions and good safety practices.</p>
+    <div class="wp-dashboard-wrap">
+      <div class="wp-dashboard-head"><div><h2>Recognition Overview</h2><p>Monitor recognition records and positive contributions across the workforce.</p></div></div>
+      <div id="mmRewardsKpis" class="wp-kpi-grid mm-rewards-kpis"><div class="wp-title-kpi"><div class="kpi-title">Loading summary…</div></div></div>
+      <div class="wp-table-card">
+        <div class="wp-table-card-head"><div class="wp-table-card-head-copy"><h3>Rewards &amp; Recognition Records</h3><div class="wp-card-sub">Search, filter and view workforce recognition records.</div></div></div>
+        <div class="mm-rewards-actions">
+          <button type="button" class="wp-new-inspection-btn" id="mmRewardsRegisterBtn" onclick="mmRewardsOpenForm()">＋ REGISTER RECOGNITION</button>
+          <div class="mm-rewards-refresh"><span id="mmRewardsRefreshStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" class="wp-refresh-inspection-btn" onclick="mmRewardsLoad(true)"><span class="refresh-glyph">↻</span><span>Refresh</span></button></div>
+        </div>
+        <div class="filters mm-rewards-filters">
+          <div class="filter-group"><label for="mmRewardsSearch">Search Worker / Reference</label><input id="mmRewardsSearch" type="search" placeholder="Worker ID, name or reference no."></div>
+          <div class="filter-group"><label for="mmRewardsCategoryFilter">Recognition Category</label><select id="mmRewardsCategoryFilter"><option value="">All Categories</option></select></div>
+          <div class="filter-group"><label for="mmRewardsCompanyFilter">Company</label><select id="mmRewardsCompanyFilter"><option value="">All Companies</option></select></div>
+          <div class="filter-group"><label for="mmRewardsStatusFilter">Status</label><select id="mmRewardsStatusFilter"><option value="">All Statuses</option></select></div>
+          <button type="button" class="mm-worker-action" onclick="mmRewardsResetFilters()">Reset Filters</button>
+        </div>
+        <div class="wp-table-wrap"><table class="wp-data-table mm-rewards-table"><thead><tr><th>Reference No.</th><th>Date</th><th>Worker ID</th><th>Worker Name</th><th>Company</th><th>Recognition Category</th><th>Recognition Given</th><th>Status</th><th>Action</th></tr></thead><tbody id="mmRewardsTableBody"><tr><td colspan="9">Loading records…</td></tr></tbody></table></div>
+        <div class="mm-rewards-pagination"><span id="mmRewardsCount">0 records</span><div><button type="button" class="mm-worker-action" id="mmRewardsPrev" onclick="mmRewardsPage(-1)">← Previous</button> <span id="mmRewardsPageLabel">Page 1 of 1</span> <button type="button" class="mm-worker-action" id="mmRewardsNext" onclick="mmRewardsPage(1)">Next →</button></div></div>
+      </div>
+      <div id="mmRewardsMessage" class="mm-worker-message" role="status" aria-live="polite"></div>
+    </div>
+    <div id="mmRewardsViewModal" class="mm-rewards-modal" hidden>
+      <div class="mm-rewards-modal-backdrop" onclick="mmRewardsCloseView()"></div>
+      <div class="mm-rewards-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mmRewardsViewTitle">
+        <div class="mm-rewards-modal-head"><h3 id="mmRewardsViewTitle">Recognition Record</h3><button type="button" class="mm-worker-action" onclick="mmRewardsCloseView()">✕ Close</button></div>
+        <div id="mmRewardsViewContent" class="mm-rewards-view-grid"></div>
+        <div class="mm-rewards-modal-actions"><a id="mmRewardsEvidenceLink" class="mm-worker-action" href="#" target="_blank" rel="noopener">VIEW SUPPORTING EVIDENCE</a><a id="mmRewardsPdfLink" class="mm-worker-action" href="#" target="_blank" rel="noopener">VIEW RECORD PDF</a><button id="mmRewardsViewEdit" type="button" class="wp-new-inspection-btn" onclick="mmRewardsEditCurrent()">EDIT RECORD</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-mm-rewards-form" class="page mm-submodule-page">
+    <div class="section-title mm-standard-title" style="margin-top:4px">
+      <h2 id="mmRewardsFormHeading">Register Recognition</h2>
+      <button type="button" class="portal-menu-back mm-return-button" onclick="mmRewardsCancelForm()">← Back to Rewards &amp; Recognition</button>
+    </div>
+    <p class="mm-standard-description">Record a worker's positive safety contribution and supporting evidence.</p>
+    <div class="wp-table-card mm-rewards-form-card">
+      <form id="mmRewardsForm" onsubmit="mmRewardsSave(event)">
+        <input type="hidden" id="mmRewardsRecordId">
+        <div class="mm-rewards-form-grid">
+          <div class="filter-group mm-rewards-worker-picker"><label for="mmRewardsWorkerSearch">Worker Name *</label><input id="mmRewardsWorkerSearch" type="text" placeholder="Type worker name or Worker ID…" autocomplete="off" required><input id="mmRewardsWorkerId" type="hidden"><div id="mmRewardsWorkerSuggestions" class="mm-rewards-suggestions" hidden></div><small id="mmRewardsWorkerSelected">Select a worker from the suggestions.</small></div>
+          <div class="filter-group"><label for="mmRewardsWorkerIdDisplay">Worker ID</label><input id="mmRewardsWorkerIdDisplay" readonly></div>
+          <div class="filter-group"><label for="mmRewardsCompany">Company</label><input id="mmRewardsCompany" readonly></div>
+          <div class="filter-group"><label for="mmRewardsDesignation">Designation</label><input id="mmRewardsDesignation" readonly></div>
+          <div class="filter-group"><label for="mmRewardsDate">Recognition Date *</label><input id="mmRewardsDate" type="date" required></div>
+          <div class="filter-group"><label for="mmRewardsCategory">Recognition Category *</label><input id="mmRewardsCategory" required placeholder="e.g. Safe Act, Good Catch, Safety Initiative"></div>
+          <div class="filter-group mm-rewards-wide"><label for="mmRewardsDescription">Description *</label><textarea id="mmRewardsDescription" rows="3" required placeholder="Describe the positive behaviour or contribution observed."></textarea></div>
+          <div class="filter-group mm-rewards-wide"><label for="mmRewardsGiven">Recognition Given *</label><textarea id="mmRewardsGiven" rows="2" required placeholder="Describe the recognition, appreciation or reward given."></textarea></div>
+          <div class="filter-group mm-rewards-wide"><label for="mmRewardsEvidence">Supporting Evidence (PDF / Image, maximum 10 MB)</label><input id="mmRewardsEvidence" type="file" accept="application/pdf,image/*"><small id="mmRewardsEvidenceHelp">Optional. Upload a photo, certificate or other supporting document.</small><small id="mmRewardsEvidenceName"></small></div>
+        </div>
+        <div id="mmRewardsFormMessage" class="mm-worker-message" role="status" aria-live="polite"></div>
+        <div class="mm-rewards-form-actions"><button type="button" class="mm-worker-action" onclick="mmRewardsCancelForm()">CANCEL</button><button type="submit" id="mmRewardsSaveBtn" class="wp-new-inspection-btn">SAVE RECOGNITION</button></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="page-mm-consequence" class="page mm-submodule-page">
+    <div class="section-title mm-standard-title" style="margin-top:4px">
+      <h2>Consequence Management</h2>
+      <button type="button" class="portal-menu-back mm-return-button" onclick="go('manpower-management')">← Back to Manpower Management</button>
+    </div>
+    <p class="mm-standard-description">Record workforce safety violations, immediate actions, consequences and corrective actions.</p>
+    <div class="wp-dashboard-wrap">
+      <div class="wp-dashboard-head"><div><h2>Consequence Overview</h2><p>Track submitted records and their review and approval status.</p></div></div>
+      <div id="mmConsequenceKpis" class="wp-kpi-grid mm-rewards-kpis"><div class="wp-title-kpi"><div class="kpi-title">Loading summary…</div></div></div>
+      <div class="wp-table-card">
+        <div class="wp-table-card-head"><div class="wp-table-card-head-copy"><h3>Consequence Records</h3><div class="wp-card-sub">Submit, review and monitor consequence records.</div></div></div>
+        <div class="mm-rewards-actions">
+          <button type="button" class="wp-new-inspection-btn" id="mmConsequenceRegisterBtn" onclick="mmConsequenceOpenForm()">＋ REGISTER CONSEQUENCE</button>
+          <div class="mm-rewards-refresh"><span id="mmConsequenceRefreshStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" class="wp-refresh-inspection-btn" onclick="mmConsequenceLoad(true)"><span class="refresh-glyph">↻</span><span>Refresh</span></button></div>
+        </div>
+        <div class="filters mm-rewards-filters">
+          <div class="filter-group"><label for="mmConsequenceSearch">Search Worker / Reference</label><input id="mmConsequenceSearch" type="search" placeholder="Worker ID, name or reference no."></div>
+          <div class="filter-group"><label for="mmConsequenceCategoryFilter">Violation Category</label><select id="mmConsequenceCategoryFilter"><option value="">All Categories</option></select></div>
+          <div class="filter-group"><label for="mmConsequenceCompanyFilter">Company</label><select id="mmConsequenceCompanyFilter"><option value="">All Companies</option></select></div>
+          <div class="filter-group"><label for="mmConsequenceStatusFilter">Workflow Status</label><select id="mmConsequenceStatusFilter"><option value="">All Statuses</option></select></div>
+          <button type="button" class="mm-worker-action" onclick="mmConsequenceResetFilters()">Reset Filters</button>
+        </div>
+        <div class="wp-table-wrap"><table class="wp-data-table mm-rewards-table"><thead><tr><th>Reference No.</th><th>Date</th><th>Worker ID</th><th>Worker Name</th><th>Company</th><th>Violation Category</th><th>Consequence Type</th><th>Status</th><th>Action</th></tr></thead><tbody id="mmConsequenceTableBody"><tr><td colspan="9">Loading records…</td></tr></tbody></table></div>
+        <div class="mm-rewards-pagination"><span id="mmConsequenceCount">0 records</span><div><button type="button" class="mm-worker-action" id="mmConsequencePrev" onclick="mmConsequencePage(-1)">← Previous</button> <span id="mmConsequencePageLabel">Page 1 of 1</span> <button type="button" class="mm-worker-action" id="mmConsequenceNext" onclick="mmConsequencePage(1)">Next →</button></div></div>
+      </div>
+      <div id="mmConsequenceMessage" class="mm-worker-message" role="status" aria-live="polite"></div>
+    </div>
+    <div id="mmConsequenceViewModal" class="mm-rewards-modal" hidden>
+      <div class="mm-rewards-modal-backdrop" onclick="mmConsequenceCloseView()"></div>
+      <div class="mm-rewards-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mmConsequenceViewTitle">
+        <div class="mm-rewards-modal-head"><h3 id="mmConsequenceViewTitle">Consequence Record</h3><button type="button" class="mm-worker-action" onclick="mmConsequenceCloseView()">✕ Close</button></div>
+        <div id="mmConsequenceViewContent" class="mm-rewards-view-grid"></div>
+        <div id="mmConsequenceWorkflowHistory" class="mm-consequence-history"></div>
+        <div class="mm-rewards-modal-actions">
+          <a id="mmConsequenceEvidenceLink" class="mm-worker-action" href="#" target="_blank" rel="noopener">VIEW SUPPORTING EVIDENCE</a>
+          <a id="mmConsequencePdfLink" class="mm-worker-action" href="#" target="_blank" rel="noopener">VIEW RECORD PDF</a>
+          <button id="mmConsequenceViewEdit" type="button" class="wp-new-inspection-btn" onclick="mmConsequenceEditCurrent()">EDIT RECORD</button>
+          <button id="mmConsequenceReviewBtn" type="button" class="mm-worker-action" onclick="mmConsequenceOpenReview()">REVIEW</button>
+        </div>
+      </div>
+    </div>
+    <div id="mmConsequenceReviewModal" class="mm-rewards-modal" hidden>
+      <div class="mm-rewards-modal-backdrop" onclick="mmConsequenceCloseReview()"></div>
+      <div class="mm-rewards-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mmConsequenceReviewTitle">
+        <div class="mm-rewards-modal-head"><h3 id="mmConsequenceReviewTitle">Review Consequence Record</h3><button type="button" class="mm-worker-action" onclick="mmConsequenceCloseReview()">✕ Close</button></div>
+        <p class="mm-standard-description">Only Admin can review and approve consequence records. Add comments and select the next workflow status.</p>
+        <div class="filter-group"><label for="mmConsequenceReviewComments">Review Comments *</label><textarea id="mmConsequenceReviewComments" rows="4" placeholder="Enter review findings, required amendments or approval comments."></textarea></div>
+        <div class="mm-rewards-form-actions">
+          <button type="button" class="mm-worker-action" onclick="mmConsequenceCloseReview()">CANCEL</button>
+          <button type="button" class="mm-worker-action" onclick="mmConsequenceSubmitReview('Rejected')">REJECT</button>
+          <button type="button" class="mm-worker-action" onclick="mmConsequenceSubmitReview('Under Review')">MARK UNDER REVIEW</button>
+          <button type="button" class="wp-new-inspection-btn" onclick="mmConsequenceSubmitReview('Approved')">APPROVE</button>
+        </div>
+      </div>
+    </div>
+    <div id="mmConsequenceDeleteConfirm" class="mm-rewards-confirm" hidden>
+      <div class="mm-rewards-confirm-backdrop" data-mm-consequence-cancel></div>
+      <div class="mm-rewards-confirm-panel" role="dialog" aria-modal="true" aria-labelledby="mmConsequenceDeleteTitle" aria-describedby="mmConsequenceDeleteText">
+        <div class="mm-rewards-confirm-icon">!</div>
+        <h3 id="mmConsequenceDeleteTitle">Delete Consequence Record?</h3>
+        <p id="mmConsequenceDeleteText">Are you sure you want to delete this record?</p>
+        <p class="mm-rewards-confirm-note">This will permanently delete the consequence record, its workflow history, supporting evidence and generated PDF. This action cannot be undone.</p>
+        <div class="mm-rewards-confirm-actions">
+          <button type="button" class="mm-worker-action" data-mm-consequence-cancel>CANCEL</button>
+          <button type="button" id="mmConsequenceDeleteConfirmBtn" class="mm-rewards-confirm-delete">DELETE RECORD</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-mm-consequence-form" class="page mm-submodule-page">
+    <div class="section-title mm-standard-title" style="margin-top:4px">
+      <h2 id="mmConsequenceFormHeading">Register Consequence</h2>
+      <button type="button" class="portal-menu-back mm-return-button" onclick="mmConsequenceCancelForm()">← Back to Consequence Management</button>
+    </div>
+    <p class="mm-standard-description">Submit a safety violation record with immediate action, consequence and corrective action details.</p>
+    <div class="wp-table-card mm-rewards-form-card">
+      <form id="mmConsequenceForm" onsubmit="mmConsequenceSave(event)">
+        <input type="hidden" id="mmConsequenceRecordId">
+        <div class="mm-rewards-form-grid">
+          <div class="filter-group mm-rewards-worker-picker"><label for="mmConsequenceWorkerSearch">Worker Name *</label><input id="mmConsequenceWorkerSearch" type="text" placeholder="Type worker name or Worker ID…" autocomplete="off" required><input id="mmConsequenceWorkerId" type="hidden"><div id="mmConsequenceWorkerSuggestions" class="mm-rewards-suggestions" hidden></div><small id="mmConsequenceWorkerSelected">Select a worker from the suggestions.</small></div>
+          <div class="filter-group"><label for="mmConsequenceWorkerIdDisplay">Worker ID</label><input id="mmConsequenceWorkerIdDisplay" readonly></div>
+          <div class="filter-group"><label for="mmConsequenceCompany">Company</label><input id="mmConsequenceCompany" readonly></div>
+          <div class="filter-group"><label for="mmConsequenceDesignation">Designation</label><input id="mmConsequenceDesignation" readonly></div>
+          <div class="filter-group"><label for="mmConsequenceDate">Record Date *</label><input id="mmConsequenceDate" type="date" required></div>
+          <div class="filter-group"><label for="mmConsequenceCategory">Violation Category *</label><input id="mmConsequenceCategory" required placeholder="e.g. PPE violation, unsafe act, PTW breach"></div>
+          <div class="filter-group mm-rewards-wide"><label for="mmConsequenceFinding">Finding Description *</label><textarea id="mmConsequenceFinding" rows="4" required placeholder="Describe the violation, unsafe act or non-compliance observed."></textarea></div>
+          <div class="filter-group mm-rewards-wide"><label for="mmConsequenceImmediate">Immediate Action Taken *</label><textarea id="mmConsequenceImmediate" rows="3" required placeholder="Describe the immediate action taken to control the situation."></textarea></div>
+          <div class="filter-group"><label for="mmConsequenceType">Consequence Type *</label><select id="mmConsequenceType" required><option value="">Select consequence type</option><option>Verbal Warning</option><option>Written Warning</option><option>Show Cause Letter</option><option>Stop Work / Removal from Work</option><option>Suspension</option><option>Other</option></select></div>
+          <div class="filter-group"><label for="mmConsequenceEvidence">Supporting Evidence (PDF / Image, maximum 10 MB)</label><input id="mmConsequenceEvidence" type="file" accept="application/pdf,image/*"><small id="mmConsequenceEvidenceHelp">Optional. Upload photographs or supporting documents.</small><small id="mmConsequenceEvidenceName"></small></div>
+          <div class="filter-group mm-rewards-wide"><label for="mmConsequenceCorrective">Corrective Action / Follow-up *</label><textarea id="mmConsequenceCorrective" rows="3" required placeholder="Describe corrective action, responsible party or follow-up required."></textarea></div>
+        </div>
+        <div id="mmConsequenceFormMessage" class="mm-worker-message" role="status" aria-live="polite"></div>
+        <div class="mm-rewards-form-actions"><button type="button" class="mm-worker-action" onclick="mmConsequenceCancelForm()">CANCEL</button><button type="submit" id="mmConsequenceSaveBtn" class="wp-new-inspection-btn">SUBMIT FOR REVIEW</button></div>
+      </form>
+    </div>
   </section>
 
   <!-- MANHOUR -->
@@ -6586,6 +7478,17 @@ const pageMeta = {
   "daily-surveillance":["Daily Site Surveillance","Daily site surveillance module"],
   "equipment-inspection":["Machinery & Equipment Inspection","Machinery and equipment inspection module"],
   "daily-checklist":["Daily Checklist","Daily HSE checklist module"],
+  "manpower-management":["Manpower Management","Centralised workforce administration and management"],
+  "mm-worker-registration":["Worker Registration","Central worker master records"],
+  "mm-worker-form":["Add New Worker","Register or update a worker master record"],
+  "mm-worker-profile":["Worker Profile","Worker master record details"],
+  "mm-competency":["Manpower Competency","Competency records and certificate management"],
+  "mm-competency-form":["Register Worker Competency","Register a worker competency certificate"],
+  "mm-competency-titles":["Competency Title Management","Admin competency master settings"],
+  "mm-rewards":["Rewards & Recognition","Positive safety behaviour and workforce recognition"],
+  "mm-rewards-form":["Register Recognition","Record a positive workforce contribution"],
+  "mm-consequence":["Consequence Management","Violation records and corrective action tracking"],
+  "mm-consequence-form":["Register Consequence","Submit a safety violation for Admin review"],
   "security-control":["Security Control","Visitor requests, individual passes and movement history"],
   "headcount-system":["Headcount System","Project headcount management module"],
   manhour:["Manhour","Manhour performance by contractor and month"],
@@ -6763,6 +7666,10 @@ function go(page){
   document.getElementById("pageSub").textContent=meta[1];
   if(page==="security-control"){if(!window.scFiltersInitialized){scInitFilters();window.scFiltersInitialized=true;}if(!scDataCache) scLoad(true);}
   if(page==="headcount-system"){if(!hcDataCache) hcLoad(true);}
+  if(page==="mm-competency"){mmInitCompetencyFilters();if(!window.mmCompetencyLoaded){window.mmCompetencyLoaded=true;mmLoadCompetencies(true);}}
+  if(page==="mm-rewards"&&!window.mmRewardsLoaded){window.mmRewardsLoaded=true;mmRewardsLoad(true);}
+  if(page==="mm-consequence"&&!window.mmConsequenceLoaded){window.mmConsequenceLoaded=true;mmConsequenceLoad(true);}
+
   const dashBtn=document.querySelector(".portal-dashboard-menu-btn");
   if(dashBtn)dashBtn.style.display=["manhour","manday","lagging","leading","observation","training","dashboard-menu"].includes(page)?"inline-flex":"none";
   const mainBtn=document.querySelector(".portal-top-menu-btn");
@@ -7890,6 +8797,214 @@ function hcPrintPdf(){
 #page-security-control .sc-kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 18px}#page-security-control .sc-kpi-card{background:#fff;border:1px solid #dce7f1;border-radius:10px;padding:13px 15px;min-width:0;box-shadow:none;border-top:3px solid #2563eb}#page-security-control .sc-kpi-card.pending{border-top-color:#d97706}#page-security-control .sc-kpi-card.approved{border-top-color:#16834a}#page-security-control .sc-kpi-card.expected{border-top-color:#2563eb}#page-security-control .sc-kpi-card.active{border-top-color:#7c3aed}#page-security-control .sc-kpi-card.inside{border-top-color:#0891b2}#page-security-control .sc-kpi-card.revoked{border-top-color:#c93636}#page-security-control .sc-kpi-top{display:flex;align-items:center;gap:8px;min-width:0}#page-security-control .sc-kpi-icon{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:7px;background:#edf5fc;color:#176fb1;font-size:17px;font-weight:800;flex:0 0 auto}#page-security-control .sc-kpi-card.pending .sc-kpi-icon{background:#fff4df;color:#b76b00}#page-security-control .sc-kpi-card.approved .sc-kpi-icon{background:#e7f7ed;color:#16834a}#page-security-control .sc-kpi-card.active .sc-kpi-icon{background:#f1eafe;color:#7c3aed}#page-security-control .sc-kpi-card.inside .sc-kpi-icon{background:#e5f8fc;color:#087d98}#page-security-control .sc-kpi-card.revoked .sc-kpi-icon{background:#feecec;color:#c93636}#page-security-control .sc-kpi-label{font-size:11px;font-weight:800;color:#526b80;line-height:1.25}#page-security-control .sc-kpi-value{font-size:27px;font-weight:800;line-height:1.2;color:#103f70;margin-top:8px}#page-security-control .sc-kpi-note{font-size:10px;color:#718397;line-height:1.4;margin-top:3px}@media(max-width:900px){#page-security-control .sc-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){#page-security-control .sc-kpi-grid{grid-template-columns:1fr 1fr;gap:8px}#page-security-control .sc-kpi-card{padding:10px}#page-security-control .sc-kpi-value{font-size:23px}#page-security-control .sc-kpi-label{font-size:10px}#page-security-control .sc-kpi-note{font-size:9px}}
 #page-security-control .sc-section-title{margin-top:4px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}#page-security-control .sc-section-title h2{text-align:left;margin-right:auto}#page-security-control .sc-description{color:#6c7f95;margin:0 0 14px}#page-security-control .sc-tab-buttons{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}#page-security-control .sc-tab-button{border:0;border-radius:10px;padding:10px 12px;min-height:37px;background:linear-gradient(110deg,#29357f,#176fb1);color:#fff;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;box-shadow:0 5px 14px rgba(23,111,177,.15)}#page-security-control .sc-tab-button:hover{filter:brightness(1.06)}#page-security-control .wp-refresh-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}#page-security-control .wp-refresh-status{font-size:11px;font-weight:700;color:#218047}#page-security-control .wp-refresh-inspection-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:37px;padding:8px 13px;border:1px solid #bfd8ec;border-radius:9px;background:#f7fbff;color:#164c80;font:700 12px Arial,Helvetica,sans-serif;cursor:pointer;white-space:nowrap;transition:background .15s ease,border-color .15s ease,transform .15s ease}#page-security-control .wp-refresh-inspection-btn:hover{background:#eaf5ff;border-color:#8bbfe1;transform:translateY(-1px)}#page-security-control .wp-refresh-inspection-btn:disabled{opacity:.62;cursor:wait;transform:none}#page-security-control .wp-refresh-inspection-btn .refresh-glyph{display:inline-block;font-size:16px;line-height:1}#page-security-control .wp-refresh-inspection-btn.is-refreshing .refresh-glyph{animation:portalLoadingSpin .8s linear infinite}#page-security-control .wp-table-card{margin:12px 0 18px}#page-security-control .table-wrap{overflow:auto;max-width:100%}#page-security-control table{min-width:1050px;width:100%;border-collapse:collapse}#page-security-control th,#page-security-control td{padding:9px 10px;border-bottom:1px solid #e3ebf2;text-align:left;vertical-align:top;font-size:12px}#page-security-control th{background:#f2f7fb;color:#173f70;position:sticky;top:0;z-index:1}#page-security-control td small{color:#6c7f95}#page-security-control .dss-view-only-btn,#page-security-control .sc-action-btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:6px;padding:8px 12px;min-height:32px;font:700 11px Arial,Helvetica,sans-serif;cursor:pointer;box-shadow:none;white-space:nowrap}#page-security-control .dss-view-only-btn{background:#0b72d1;color:#fff}#page-security-control .dss-view-only-btn:hover{background:#095eae}#page-security-control .sc-action-btn.approve{background:#16834a;color:#fff}#page-security-control .sc-action-btn.reject,#page-security-control .sc-action-btn.revoke{background:#c93636;color:#fff}#page-security-control .sc-action-btn.cancel{background:#64748b;color:#fff}#page-security-control .sc-action-btn:hover{filter:brightness(.95)}#page-security-control .sc-status-pill{display:inline-block;border-radius:5px;padding:4px 7px;background:#edf2f7;color:#334155;font-size:10px;font-weight:800;white-space:nowrap}#page-security-control .sc-status-pill.approved{background:#e6f6ec;color:#167342}#page-security-control .sc-status-pill.closed{background:#feecec;color:#a52626}#page-security-control .sc-status-pill.pending{background:#fff4d8;color:#946200}#page-security-control .sc-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 20px}#page-security-control .sc-detail-field{border:1px solid #e1eaf2;border-radius:8px;padding:10px 12px;min-width:0}#page-security-control .sc-detail-field label{display:block;color:#61768b;font-size:10px;font-weight:800;margin-bottom:6px}#page-security-control .sc-detail-field div{font-size:12px;color:#173f70;overflow-wrap:anywhere}#page-security-control .sc-expected-title{color:#173f70;margin:10px 0}#page-security-control .sc-detail-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:18px}#page-security-control .wp-back-btn{border:1px solid #cbdce8;background:#fff;color:#164c80;border-radius:8px;padding:9px 13px;font-size:11px;font-weight:800;cursor:pointer}@media(max-width:700px){#page-security-control .sc-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){#page-security-control .sc-detail-grid{grid-template-columns:1fr}#page-security-control .sc-tab-buttons{display:grid;grid-template-columns:1fr}#page-security-control .sc-tab-button{width:100%}}
 </style>
+
+<script>
+/* MANPOWER MANAGEMENT — WORKER REGISTRATION */
+let mmWorkerRows=[],mmWorkerPageNo=1,mmWorkerPageSize=25,mmWorkerTotal=0,mmWorkerCurrent=null,mmWorkerDebounce=null;
+const mmWorkerFields={
+ 'NO.':'','REMARKS':'mmFRemarks','SAFETY INDUCTION DATE':'mmFInduction','NAME':'mmFName','IC / PASSPORT NO.':'mmFIC','COMPANY':'mmFCompany','DESIGNATION':'mmFDesignation','JOB CATEGORY':'mmFCategory','CIDB EXPIRED DATE':'mmFCidbExpiry','WORK PERMIT NO.':'mmFPermitNo','WORK PERMIT EXPIRY DATE':'mmFPermitExpiry','CIDB CARD NO.':'mmFCidbNo','OGSP CARD NO.':'mmFOgspNo','OGSP EXPIRED DATE':'mmFOgspExpiry','NATIONALITY':'mmFNationality','ADDRESS':'mmFAddress','POSTCODE':'mmFPostcode','DISTRICT':'mmFDistrict','STATE':'mmFState','CONTACT NO.':'mmFContact','EMAIL ADD':'mmFEmail','NEXT OF KIN':'mmFNextOfKin','RELATIONSHIP':'mmFRelationship','EMERGENCY CONTACT':'mmFEmergency','E-VETTING REF NO.':'mmFEvetting','WORKER ID':'mmFWorkerId','EMPLOYMENT STATUS':'mmFStatus'
+};
+function mmEsc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function mmWorkerMsg(msg,isError){const el=document.getElementById('mmWorkerMessage');if(el){el.textContent=msg||'';el.classList.toggle('error',!!isError);}}
+async function mmWorkerPost(action,extra={}){const u=getCurrentPortalUser();const res=await fetch(GOOGLE_API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,authToken:u.token||u.authToken||'',...extra})});if(!res.ok)throw new Error('API returned HTTP '+res.status);const out=await res.json();if(!out.success)throw new Error(out.error||out.message||'Worker Registration request failed.');return out;}
+function mmWorkerFilters(){return {search:document.getElementById('mmWorkerSearch').value.trim(),company:document.getElementById('mmWorkerCompany').value,status:document.getElementById('mmWorkerStatus').value,jobCategory:document.getElementById('mmWorkerCategory').value,nationality:document.getElementById('mmWorkerNationality').value,page:mmWorkerPageNo,pageSize:mmWorkerPageSize};}
+function mmFillFilter(id,values,label){const el=document.getElementById(id);if(!el)return;const old=el.value;el.innerHTML='<option value="">'+label+'</option>'+values.map(v=>'<option value="'+mmEsc(v)+'">'+mmEsc(v)+'</option>').join('');if(values.includes(old))el.value=old;}
+async function mmLoadWorkers(withOverlay=false){if(!isCurrentUserAdmin()){mmWorkerMsg('Worker Registration is restricted to Admin users.',true);return;}const status=document.getElementById('mmWorkerRefreshStatus');if(withOverlay)showPortalLoading('Loading worker master records…');if(status)status.textContent='Loading…';try{const out=await mmWorkerPost('mm_workers_list',{filters:mmWorkerFilters()});mmWorkerRows=out.workers||[];mmWorkerTotal=Number(out.total)||0;const all=out.filterOptions||{};mmFillFilter('mmWorkerCompany',all.companies||[],'All Companies');mmFillFilter('mmWorkerStatus',all.statuses||[],'All Statuses');mmFillFilter('mmWorkerCategory',all.jobCategories||[],'All Job Categories');mmFillFilter('mmWorkerNationality',all.nationalities||[],'All Nationalities');mmRenderWorkerTable();mmRenderWorkerKpis(out.kpis||{});if(status)status.textContent='Updated just now';}catch(e){mmWorkerMsg(e.message||String(e),true);const body=document.getElementById('mmWorkerTableBody');if(body)body.innerHTML='<tr><td colspan="8" class="mm-worker-empty">Unable to load worker records. '+mmEsc(e.message||e)+'</td></tr>';if(status)status.textContent='Load failed';}finally{if(withOverlay)hidePortalLoading();}}
+function mmRenderWorkerKpis(k){document.getElementById('mmKpiTotal').textContent=k.total??'—';document.getElementById('mmKpiActive').textContent=k.active??'—';document.getElementById('mmKpiPlanned').textContent=k.planned??'—';document.getElementById('mmKpiOther').textContent=k.other??'—';}
+function mmRenderWorkerTable(){const body=document.getElementById('mmWorkerTableBody');if(!body)return;if(!mmWorkerRows.length){body.innerHTML='<tr><td colspan="8" class="mm-worker-empty">No worker records match the selected filters.</td></tr>';}else{body.innerHTML=mmWorkerRows.map(w=>{const id=w['WORKER ID']||'',st=w['EMPLOYMENT STATUS']||'Unverified / Blank';const cls=st==='Active'?'active':st==='Planned for Induction'?'planned':'';return '<tr><td><strong>'+mmEsc(id||'—')+'</strong></td><td>'+mmEsc(w.NAME||'—')+'</td><td>'+mmEsc(w.COMPANY||'—')+'</td><td>'+mmEsc(w.DESIGNATION||'—')+'</td><td>'+mmEsc(w['JOB CATEGORY']||'—')+'</td><td>'+mmEsc(w.NATIONALITY||'—')+'</td><td><span class="mm-worker-status '+cls+'">'+mmEsc(st)+'</span></td><td><div class="mm-worker-row-actions"><button class="mm-worker-action" onclick="mmViewWorker(\''+mmEsc(id)+'\')">View</button><button class="mm-worker-action" onclick="mmEditWorker(\''+mmEsc(id)+'\')">Edit</button></div></td></tr>';}).join('');}document.getElementById('mmWorkerCount').textContent=mmWorkerTotal+' worker records';const pages=Math.max(1,Math.ceil(mmWorkerTotal/mmWorkerPageSize));document.getElementById('mmWorkerPageLabel').textContent='Page '+mmWorkerPageNo+' of '+pages;document.getElementById('mmWorkerPrev').disabled=mmWorkerPageNo<=1;document.getElementById('mmWorkerNext').disabled=mmWorkerPageNo>=pages;}
+function mmWorkerPage(delta){mmWorkerPageNo=Math.max(1,mmWorkerPageNo+delta);mmLoadWorkers(true);}
+function mmResetWorkerFilters(){['mmWorkerSearch','mmWorkerCompany','mmWorkerStatus','mmWorkerCategory','mmWorkerNationality'].forEach(id=>document.getElementById(id).value='');mmWorkerPageNo=1;mmLoadWorkers(true);}
+function mmInitWorkerFilters(){['mmWorkerSearch','mmWorkerCompany','mmWorkerStatus','mmWorkerCategory','mmWorkerNationality'].forEach(id=>{const el=document.getElementById(id);if(!el||el.dataset.mmReady)return;el.dataset.mmReady='1';el.addEventListener(id==='mmWorkerSearch'?'input':'change',()=>{if(id==='mmWorkerSearch'){clearTimeout(mmWorkerDebounce);mmWorkerDebounce=setTimeout(()=>{mmWorkerPageNo=1;mmLoadWorkers(false);},300);}else{mmWorkerPageNo=1;mmLoadWorkers(false);}});});}
+function mmOpenWorkerForm(){if(!isCurrentUserAdmin()){mmWorkerMsg('Only Admin users can register workers.',true);return;}mmWorkerCurrent=null;document.getElementById('mmWorkerForm').reset();document.getElementById('mmWorkerFormMode').value='add';document.getElementById('mmWorkerOriginalId').value='';document.getElementById('mmFWorkerId').value='Auto-generated on save';document.getElementById('mmWorkerFormHeading').textContent='Add New Worker';document.getElementById('mmWorkerSaveButton').textContent='SAVE WORKER';document.getElementById('mmWorkerFormMessage').textContent='';go('mm-worker-form');}
+function mmReturnToWorkerList(){go('mm-worker-registration');if(isCurrentUserAdmin())mmLoadWorkers(false);}
+function mmDateForInput(v){if(!v)return '';const s=String(v);const m=s.match(/^(\d{4}-\d{2}-\d{2})/);return m?m[1]:'';}
+function mmSetFormFromWorker(w){Object.entries(mmWorkerFields).forEach(([key,id])=>{if(!id)return;const el=document.getElementById(id);if(el)el.value=key.includes('DATE')?mmDateForInput(w[key]):(w[key]??'');});}
+async function mmViewWorker(id){showPortalLoading('Loading worker profile…');try{const out=await mmWorkerPost('mm_worker_get',{workerId:id});mmWorkerCurrent=out.worker;mmRenderWorkerProfile(out.worker);go('mm-worker-profile');}catch(e){mmWorkerMsg(e.message||String(e),true);}finally{hidePortalLoading();}}
+async function mmEditWorker(id){showPortalLoading('Loading worker record…');try{const out=await mmWorkerPost('mm_worker_get',{workerId:id});mmWorkerCurrent=out.worker;document.getElementById('mmWorkerForm').reset();document.getElementById('mmWorkerFormMode').value='edit';document.getElementById('mmWorkerOriginalId').value=id;mmSetFormFromWorker(out.worker);document.getElementById('mmFWorkerId').value=id;document.getElementById('mmWorkerFormHeading').textContent='Edit Worker — '+id;document.getElementById('mmWorkerSaveButton').textContent='UPDATE WORKER';document.getElementById('mmWorkerFormMessage').textContent='';go('mm-worker-form');}catch(e){mmWorkerMsg(e.message||String(e),true);}finally{hidePortalLoading();}}
+function mmRenderWorkerProfile(w){const fields=[['Worker ID','WORKER ID'],['Worker Name','NAME'],['IC / Passport No.','IC / PASSPORT NO.'],['Company','COMPANY'],['Designation','DESIGNATION'],['Job Category','JOB CATEGORY'],['Employment Status','EMPLOYMENT STATUS'],['Nationality','NATIONALITY'],['Safety Induction Date','SAFETY INDUCTION DATE'],['CIDB Expiry Date','CIDB EXPIRED DATE'],['Work Permit No.','WORK PERMIT NO.'],['Work Permit Expiry','WORK PERMIT EXPIRY DATE'],['CIDB Card No.','CIDB CARD NO.'],['OGSP Card No.','OGSP CARD NO.'],['OGSP Expiry Date','OGSP EXPIRED DATE'],['Address','ADDRESS'],['Postcode','POSTCODE'],['District','DISTRICT'],['State','STATE'],['Contact No.','CONTACT NO.'],['Email','EMAIL ADD'],['Next of Kin','NEXT OF KIN'],['Relationship','RELATIONSHIP'],['Emergency Contact','EMERGENCY CONTACT'],['E-Vetting Ref No.','E-VETTING REF NO.'],['Remarks','REMARKS']];document.getElementById('mmWorkerProfileContent').innerHTML='<div class="mm-worker-profile-title"><h3>'+mmEsc(w.NAME||'Worker Profile')+'</h3><p>'+mmEsc(w['WORKER ID']||'')+' · '+mmEsc(w.COMPANY||'')+'</p></div><div class="mm-profile-grid">'+fields.map(([label,key])=>'<div class="mm-profile-field"><small>'+mmEsc(label)+'</small><strong>'+mmEsc(w[key]||'—')+'</strong></div>').join('')+'</div><div class="mm-profile-actions"><button class="wp-new-inspection-btn" onclick="mmEditWorker(\''+mmEsc(w['WORKER ID'])+'\')">EDIT WORKER</button><button class="mm-worker-action" style="color:#b42318;border-color:#e6b9b9" onclick="mmDeleteWorker(\''+mmEsc(w['WORKER ID'])+'\')">DELETE WORKER</button></div>'}
+function mmCollectWorkerForm(){const out={};Object.entries(mmWorkerFields).forEach(([key,id])=>{if(!id||key==='NO.'||key==='WORKER ID')return;const el=document.getElementById(id);if(el)out[key]=el.value.trim();});return out;}
+async function mmSaveWorker(event){event.preventDefault();if(!isCurrentUserAdmin())return;const mode=document.getElementById('mmWorkerFormMode').value;const msg=document.getElementById('mmWorkerFormMessage');const btn=document.getElementById('mmWorkerSaveButton');btn.disabled=true;msg.textContent='Saving…';try{const worker=mmCollectWorkerForm();const out=await mmWorkerPost(mode==='edit'?'mm_worker_update':'mm_worker_add',{workerId:document.getElementById('mmWorkerOriginalId').value,worker});msg.style.color='#187044';msg.textContent=out.message||'Saved successfully.';await new Promise(r=>setTimeout(r,650));mmWorkerPageNo=1;go('mm-worker-registration');await mmLoadWorkers(true);if(out.workerId)await mmViewWorker(out.workerId);}catch(e){msg.style.color='#b42318';msg.textContent=e.message||String(e);}finally{btn.disabled=false;}}
+async function mmDeleteWorker(id){if(!isCurrentUserAdmin())return;const typed=prompt('Permanent deletion. Enter Worker ID '+id+' to confirm:');if(typed!==id)return;showPortalLoading('Deleting worker record…');try{const out=await mmWorkerPost('mm_worker_delete',{workerId:id,confirmWorkerId:typed});mmWorkerMsg(out.message||'Worker deleted.',false);go('mm-worker-registration');await mmLoadWorkers(false);}catch(e){mmWorkerMsg(e.message||String(e),true);}finally{hidePortalLoading();}}
+const mmOriginalGo=go;go=function(page){mmOriginalGo(page);if(page==='mm-worker-registration'){mmInitWorkerFilters();if(isCurrentUserAdmin()&&!window.mmWorkerLoadedOnce){window.mmWorkerLoadedOnce=true;mmLoadWorkers(true);}else if(!isCurrentUserAdmin())mmWorkerMsg('Access restricted. Worker Registration is available to Admin users only.',true);}};
+</script>
+
+
+<script>
+let mmCompRows=[],mmCompTitles=[],mmCompPageNo=1,mmCompPageSize=25,mmCompTotal=0,mmCompSelectedTitle='',mmCompDebounce=null,mmCompWorkers=[];
+function mmCompEsc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+async function mmCompPost(action,extra={}){return await mmWorkerPost(action,extra);}
+function mmCompFilters(){return {search:document.getElementById('mmCompSearch').value.trim(),title:document.getElementById('mmCompTitle').value,company:document.getElementById('mmCompCompany').value,status:document.getElementById('mmCompStatus').value,page:mmCompPageNo,pageSize:mmCompPageSize};}
+function mmCompFillSelect(id,values,label){const el=document.getElementById(id);if(!el)return;const old=el.value;el.innerHTML='<option value="">'+label+'</option>'+values.map(v=>'<option value="'+mmCompEsc(v)+'">'+mmCompEsc(v)+'</option>').join('');if(values.includes(old))el.value=old;}
+function mmCompKpis(items){const box=document.getElementById('mmCompetencyKpis');if(!box)return;const colors=['#1769aa','#18845b','#d18a16','#7052a5','#087e8b','#a64b72'];box.innerHTML=items.length?items.map((x,i)=>'<div class="wp-title-kpi mm-competency-kpi '+(mmCompSelectedTitle===x.title?'selected':'')+'" role="button" tabindex="0" onclick="mmCompChooseTitle('+JSON.stringify(x.title).replace(/"/g,'&quot;')+')" onkeydown="if(event.key===&quot;Enter&quot;||event.key===&quot; &quot;){event.preventDefault();mmCompChooseTitle('+JSON.stringify(x.title).replace(/"/g,'&quot;')+')} " style="border-top:4px solid '+colors[i%colors.length]+'"><div class="kpi-title">'+mmCompEsc(x.title)+'</div><div class="kpi-value">'+x.count+'</div><div class="kpi-cum">Registered workers</div></div>').join(''):'<div class="wp-title-kpi"><div class="kpi-title">No active competency titles found</div></div>';}
+function mmCompChooseTitle(title){mmCompSelectedTitle=mmCompSelectedTitle===title?'':title;document.getElementById('mmCompTitle').value=mmCompSelectedTitle;mmCompPageNo=1;mmCompRenderKpisFromLast();mmLoadCompetencies(false);}
+let mmCompLastKpis=[];
+function mmCompRenderKpisFromLast(){mmCompKpis(mmCompLastKpis);}
+function mmCompRenderTable(){const body=document.getElementById('mmCompetencyTableBody');if(!body)return;if(!mmCompRows.length){body.innerHTML='<tr><td colspan="9" class="mm-worker-empty">No competency records match the selected filters.</td></tr>';}else{body.innerHTML=mmCompRows.map((r,i)=>{const status=String(r.STATUS||'No Expiry Date'),cls=status==='Valid'?'valid':status==='Expiring Soon'?'soon':status==='Expired'?'expired':'noexpiry';return '<tr><td><strong>'+mmCompEsc(r['WORKER ID'])+'</strong></td><td>'+mmCompEsc(r['WORKER NAME'])+'</td><td>'+mmCompEsc(r.COMPANY)+'</td><td>'+mmCompEsc(r['COMPETENCY TITLE'])+'</td><td>'+mmCompEsc(r['PROVIDER / ACCREDITOR'])+'</td><td>'+mmCompEsc(r['CERTIFICATE NUMBER']||'—')+'</td><td>'+mmCompEsc(r['EXPIRY DATE']||'—')+'</td><td><span class="mm-comp-status '+cls+'">'+mmCompEsc(status)+'</span></td><td><button type="button" class="mm-worker-action" onclick="mmViewCompetency('+i+')">VIEW</button> '+(isCurrentUserAdmin()?'<button type="button" class="mm-worker-action" onclick="mmEditCompetency('+i+')">EDIT</button>':'')+'</td></tr>';}).join('');}document.getElementById('mmCompetencyCount').textContent=mmCompTotal+' competency records';const pages=Math.max(1,Math.ceil(mmCompTotal/mmCompPageSize));document.getElementById('mmCompPageLabel').textContent='Page '+mmCompPageNo+' of '+pages;document.getElementById('mmCompPrev').disabled=mmCompPageNo<=1;document.getElementById('mmCompNext').disabled=mmCompPageNo>=pages;}
+let mmCompCurrentRecord=null;
+function mmCompViewFields(r){const fields=[['Record ID','RECORD ID'],['Worker ID','WORKER ID'],['Worker Name','WORKER NAME'],['Company','COMPANY'],['Competency Title','COMPETENCY TITLE'],['Provider / Accreditor','PROVIDER / ACCREDITOR'],['Certificate Number','CERTIFICATE NUMBER'],['Issue Date','ISSUE DATE'],['Expiry Date','EXPIRY DATE'],['Status','STATUS'],['Remarks','REMARKS'],['Registered By','REGISTERED BY'],['Registration Date','REGISTRATION DATE'],['Last Updated By','LAST UPDATED BY'],['Last Updated Date','LAST UPDATED DATE']];return fields.map(([label,key])=>'<div class="mm-comp-view-item"><small>'+label+'</small><strong>'+mmCompEsc(r[key]||'—')+'</strong></div>').join('');}
+function mmViewCompetency(index){const r=mmCompRows[index];if(!r)return;mmCompCurrentRecord=r;document.getElementById('mmCompViewContent').innerHTML=mmCompViewFields(r);const pdf=document.getElementById('mmCompViewPdf');pdf.style.display=r['CERTIFICATE PDF LINK']?'inline-flex':'none';pdf.href=r['CERTIFICATE PDF LINK']||'#';document.getElementById('mmCompViewEdit').style.display=isCurrentUserAdmin()?'inline-flex':'none';document.getElementById('mmCompViewModal').hidden=false;}
+function mmCloseCompView(){document.getElementById('mmCompViewModal').hidden=true;}
+async function mmEditCompetency(index){const r=mmCompRows[index];if(!r||!isCurrentUserAdmin())return;mmCompCurrentRecord=r;mmCloseCompView();showPortalLoading('Loading competency record for editing…');try{const out=await mmCompPost('mm_competency_form_data',{});mmCompWorkers=out.workers||[];const w=mmCompWorkers.find(x=>x.id===r['WORKER ID']);document.getElementById('mmCompWorker').value=r['WORKER ID'];document.getElementById('mmCompWorkerSearch').value=r['WORKER NAME'];document.getElementById('mmCompWorkerId').value=r['WORKER ID'];document.getElementById('mmCompWorkerCompany').value=r.COMPANY||'';document.getElementById('mmCompWorkerSelected').textContent='Selected: '+r['WORKER NAME']+' ('+r['WORKER ID']+')';document.getElementById('mmCompWorkerSuggestions').hidden=true;const ts=document.getElementById('mmCompFormTitle');ts.innerHTML='<option value="">Select competency</option>'+(out.titles||[]).map(x=>'<option value="'+mmCompEsc(x.id)+'">'+mmCompEsc(x.title)+'</option>').join('');ts.value=r['COMPETENCY ID'];document.getElementById('mmCompProvider').value=r['PROVIDER / ACCREDITOR']||'';document.getElementById('mmCompCertificateNo').value=r['CERTIFICATE NUMBER']||'';document.getElementById('mmCompIssueDate').value=r['ISSUE DATE']||'';document.getElementById('mmCompExpiryDate').value=r['EXPIRY DATE']||'';document.getElementById('mmCompRemarks').value=r.REMARKS||'';document.getElementById('mmCompRecordId').value=r['RECORD ID'];document.getElementById('mmCompFormHeading').textContent='Edit Worker Competency';document.getElementById('mmCompSaveButton').textContent='UPDATE COMPETENCY';document.getElementById('mmCompPdf').required=false;document.getElementById('mmCompPdfRequired').textContent='(Optional — leave blank to keep current PDF)';document.getElementById('mmCompPdfHelp').textContent='PDF only, maximum 10 MB. Upload a new PDF only if replacing the current certificate.';document.getElementById('mmCompPdfName').textContent='Current certificate: '+(r['CERTIFICATE PDF LINK']?'available':'not attached');document.getElementById('mmCompFormMessage').textContent='Editing existing record. The original record remains in the system and the previous PDF will not be deleted.';go('mm-competency-form');}catch(e){mmCompMsg(e.message||String(e),true);}finally{hidePortalLoading();}}
+function mmEditCurrentCompetency(){const i=mmCompRows.findIndex(r=>r['RECORD ID']===mmCompCurrentRecord?.['RECORD ID']);if(i>=0)mmEditCompetency(i);}
+function mmCompPage(delta){mmCompPageNo=Math.max(1,mmCompPageNo+delta);mmLoadCompetencies(true);}
+function mmCompMsg(msg,error=false){const el=document.getElementById('mmCompetencyMessage');if(el){el.textContent=msg;el.classList.toggle('error',!!error);}}
+async function mmLoadCompetencies(withOverlay=false){const status=document.getElementById('mmCompetencyRefreshStatus');if(withOverlay)showPortalLoading('Loading competency records…');if(status)status.textContent='Refreshing…';try{const out=await mmCompPost('mm_competency_list',{filters:mmCompFilters()});mmCompRows=out.records||[];mmCompTotal=out.total||0;mmCompTitles=out.titles||[];mmCompLastKpis=out.kpis||[];mmCompKpis(mmCompLastKpis);mmCompFillSelect('mmCompTitle',out.filterOptions.titles||[],'All Competencies');if(mmCompSelectedTitle)document.getElementById('mmCompTitle').value=mmCompSelectedTitle;mmCompFillSelect('mmCompCompany',out.filterOptions.companies||[],'All Companies');mmCompRenderTable();if(status)status.textContent='Updated just now';const registerBtn=document.querySelector('#page-mm-competency .mm-competency-actions > .wp-new-inspection-btn');if(registerBtn)registerBtn.style.display=out.canManageTitles?'':'none';if(out.canManageTitles){let b=document.getElementById('mmCompManageTitlesBtn');if(!b){b=document.createElement('button');b.id='mmCompManageTitlesBtn';b.className='mm-worker-action';b.textContent='MANAGE COMPETENCY TITLES';b.onclick=mmOpenCompTitleManager;document.querySelector('#page-mm-competency .mm-competency-actions').insertBefore(b,document.querySelector('#page-mm-competency .mm-competency-refresh'));}}}catch(e){mmCompMsg(e.message||String(e),true);if(status)status.textContent='Refresh failed';}finally{if(withOverlay)hidePortalLoading();}}
+function mmInitCompetencyFilters(){[['mmCompSearch','input'],['mmCompTitle','change'],['mmCompCompany','change'],['mmCompStatus','change']].forEach(([id,event])=>{const el=document.getElementById(id);if(!el||el.dataset.ready)return;el.dataset.ready='1';el.addEventListener(event,()=>{mmCompPageNo=1;if(id==='mmCompTitle')mmCompSelectedTitle=el.value;mmLoadCompetencies(false);});});const reset=document.getElementById('mmCompReset');if(reset&&!reset.dataset.ready){reset.dataset.ready='1';reset.onclick=()=>{mmCompSelectedTitle='';['mmCompSearch','mmCompTitle','mmCompCompany','mmCompStatus'].forEach(id=>document.getElementById(id).value='');mmCompPageNo=1;mmLoadCompetencies(false);};}}
+async function mmOpenCompetencyForm(){if(!isCurrentUserAdmin()){mmCompMsg('Only Admin users can register competencies.',true);return;}showPortalLoading('Loading worker and competency lists…');try{const out=await mmCompPost('mm_competency_form_data',{});mmCompWorkers=out.workers||[];const w=document.getElementById('mmCompWorker');w.innerHTML='<option value="">Select worker</option>'+mmCompWorkers.map(x=>'<option value="'+mmCompEsc(x.id)+'">'+mmCompEsc(x.id+' — '+x.name+' ('+x.company+')')+'</option>').join('');const titleSelect=document.getElementById('mmCompFormTitle');titleSelect.innerHTML='<option value="">Select competency</option>'+(out.titles||[]).map(x=>'<option value="'+mmCompEsc(x.id)+'">'+mmCompEsc(x.title)+'</option>').join('');document.getElementById('mmCompForm').reset();document.getElementById('mmCompPdfName').textContent='';mmCompClearWorkerSelection();document.getElementById('mmCompFormMessage').textContent='';go('mm-competency-form');}catch(e){mmCompMsg(e.message||String(e),true);}finally{hidePortalLoading();}}
+function mmReturnCompetencyList(){go('mm-competency');mmLoadCompetencies(false);}
+function mmOpenCompTitleManager(){if(!isCurrentUserAdmin()){mmCompMsg('Only Admin users can manage competency titles.',true);return;}go('mm-competency-titles');mmLoadCompTitles();}
+function mmResetCompTitleForm(){document.getElementById('mmCompTitleForm').reset();document.getElementById('mmCompTitleId').value='';}
+async function mmLoadCompTitles(){try{const out=await mmCompPost('mm_competency_titles_list',{});mmCompTitles=out.titles||[];document.getElementById('mmCompTitlesBody').innerHTML=mmCompTitles.map(t=>'<tr><td>'+mmCompEsc(t.id)+'</td><td>'+mmCompEsc(t.title)+'</td><td>'+mmCompEsc(t.description||'')+'</td><td>'+mmCompEsc(t.status)+'</td><td><button class="mm-worker-action" onclick="mmEditCompTitle('+JSON.stringify(t.id).replace(/"/g,'&quot;')+')">Edit</button> <button class="mm-worker-action" onclick="mmToggleCompTitle('+JSON.stringify(t.id).replace(/"/g,'&quot;')+')">'+(t.status==='Active'?'Deactivate':'Activate')+'</button></td></tr>').join('')||'<tr><td colspan="5" class="mm-worker-empty">No competency titles registered.</td></tr>';}catch(e){document.getElementById('mmCompTitleMessage').textContent=e.message||String(e);}}
+function mmEditCompTitle(id){const t=mmCompTitles.find(x=>x.id===id);if(!t)return;document.getElementById('mmCompTitleId').value=t.id;document.getElementById('mmCompTitleName').value=t.title;document.getElementById('mmCompTitleDescription').value=t.description||'';}
+async function mmToggleCompTitle(id){const t=mmCompTitles.find(x=>x.id===id);if(!t)return;const status=t.status==='Active'?'Inactive':'Active';if(!confirm('Set '+t.title+' to '+status+'?'))return;try{await mmCompPost('mm_competency_title_status',{competencyId:id,status});await mmLoadCompTitles();}catch(e){document.getElementById('mmCompTitleMessage').textContent=e.message||String(e);}}
+async function mmSaveCompTitle(event){event.preventDefault();if(!isCurrentUserAdmin())return;const title=document.getElementById('mmCompTitleName').value.trim(),description=document.getElementById('mmCompTitleDescription').value.trim(),id=document.getElementById('mmCompTitleId').value,form=document.getElementById('mmCompTitleForm'),saveButton=form?form.querySelector('button[type="submit"]'):null;if(!title){document.getElementById('mmCompTitleMessage').textContent='Competency title is required.';return;}if(saveButton)saveButton.disabled=true;showPortalLoading(id?'Updating competency title…':'Saving competency title…');try{await mmCompPost('mm_competency_title_save',{competencyId:id,title,description});mmResetCompTitleForm();document.getElementById('mmCompTitleMessage').textContent='Competency title saved successfully.';await mmLoadCompTitles();}catch(e){document.getElementById('mmCompTitleMessage').textContent=e.message||String(e);}finally{hidePortalLoading();if(saveButton)saveButton.disabled=false;}}
+function mmCompClearWorkerSelection(){document.getElementById('mmCompWorker').value='';document.getElementById('mmCompWorkerId').value='';document.getElementById('mmCompWorkerCompany').value='';document.getElementById('mmCompWorkerSelected').textContent='Select a worker from the suggestions.';}
+function mmCompRenderWorkerSuggestions(){const input=document.getElementById('mmCompWorkerSearch'),box=document.getElementById('mmCompWorkerSuggestions');if(!input||!box)return;const q=input.value.trim().toLowerCase();if(!q){box.hidden=true;input.setAttribute('aria-expanded','false');return;}const matches=mmCompWorkers.filter(w=>(w.name+' '+w.id+' '+w.company).toLowerCase().includes(q)).slice(0,15);box.innerHTML=matches.length?matches.map((w,i)=>'<button type="button" class="mm-comp-worker-suggestion" role="option" data-worker-id="'+mmCompEsc(w.id)+'"><strong>'+mmCompEsc(w.name)+'</strong><small>'+mmCompEsc(w.id)+' · '+mmCompEsc(w.company||'Company not specified')+'</small></button>').join(''):'<div class="mm-comp-worker-suggestion" aria-disabled="true">No matching worker found.</div>';box.hidden=false;input.setAttribute('aria-expanded','true');box.querySelectorAll('[data-worker-id]').forEach(btn=>btn.addEventListener('click',()=>mmCompChooseWorker(btn.dataset.workerId)));}
+function mmCompChooseWorker(id){const w=mmCompWorkers.find(x=>x.id===id);if(!w)return;document.getElementById('mmCompWorker').value=w.id;document.getElementById('mmCompWorkerSearch').value=w.name;document.getElementById('mmCompWorkerId').value=w.id;document.getElementById('mmCompWorkerCompany').value=w.company||'';document.getElementById('mmCompWorkerSelected').textContent='Selected: '+w.name+' ('+w.id+')';const box=document.getElementById('mmCompWorkerSuggestions');box.hidden=true;document.getElementById('mmCompWorkerSearch').setAttribute('aria-expanded','false');}
+function mmCompSelectWorker(){const input=document.getElementById('mmCompWorkerSearch');if(!document.getElementById('mmCompWorker').value||!mmCompWorkers.some(w=>w.id===document.getElementById('mmCompWorker').value&&w.name===input.value))mmCompClearWorkerSelection();mmCompRenderWorkerSuggestions();}
+async function mmSaveCompetency(event){event.preventDefault();if(!isCurrentUserAdmin())return;const recordId=document.getElementById('mmCompRecordId').value,file=document.getElementById('mmCompPdf').files[0],isEdit=!!recordId;if(!isEdit&&!file){document.getElementById('mmCompFormMessage').textContent='Please select a PDF certificate.';return;}if(file&&((file.type!=='application/pdf'&&!file.name.toLowerCase().endsWith('.pdf'))||file.size>10*1024*1024)){document.getElementById('mmCompFormMessage').textContent='Please select a PDF certificate not exceeding 10 MB.';return;}const workerId=document.getElementById('mmCompWorker').value;if(!workerId||!mmCompWorkers.some(w=>w.id===workerId)){document.getElementById('mmCompFormMessage').textContent='Please select a worker from the suggestions.';return;}const payload={recordId,workerId,competencyId:document.getElementById('mmCompFormTitle').value,provider:document.getElementById('mmCompProvider').value.trim(),certificateNumber:document.getElementById('mmCompCertificateNo').value.trim(),issueDate:document.getElementById('mmCompIssueDate').value,expiryDate:document.getElementById('mmCompExpiryDate').value,remarks:document.getElementById('mmCompRemarks').value.trim()};const save=async(fileData)=>{document.getElementById('mmCompSaveButton').disabled=true;showPortalLoading(isEdit?'Updating competency record…':'Uploading certificate and saving competency…');try{const saved=await mmCompPost(isEdit?'mm_competency_update':'mm_competency_add',{...payload,...fileData});document.getElementById('mmCompFormMessage').textContent=isEdit?'Competency record updated successfully. Previous values are retained in the audit log.':'Competency registered successfully.';document.getElementById('mmCompForm').reset();document.getElementById('mmCompPdfName').textContent='';document.getElementById('mmCompRecordId').value='';document.getElementById('mmCompPdf').required=true;document.getElementById('mmCompPdfRequired').textContent='*';document.getElementById('mmCompFormHeading').textContent='Register Worker Competency';document.getElementById('mmCompSaveButton').textContent='SAVE COMPETENCY';document.getElementById('mmCompPdfHelp').textContent='PDF only. Maximum file size: 10 MB.';mmCompClearWorkerSelection();setTimeout(mmReturnCompetencyList,900);}catch(e){document.getElementById('mmCompFormMessage').textContent=e.message||String(e);}finally{document.getElementById('mmCompSaveButton').disabled=false;hidePortalLoading();}};if(!file){save({});return;}const reader=new FileReader();reader.onload=()=>save({fileName:file.name,mimeType:file.type||'application/pdf',fileData:String(reader.result).split(',')[1]});reader.onerror=()=>document.getElementById('mmCompFormMessage').textContent='Unable to read selected PDF.';reader.readAsDataURL(file);}
+
+document.addEventListener('DOMContentLoaded',()=>{if(document.getElementById('mmCompForm')){mmInitCompetencyFilters();document.getElementById('mmCompForm').addEventListener('submit',mmSaveCompetency);document.getElementById('mmCompTitleForm').addEventListener('submit',mmSaveCompTitle);document.getElementById('mmCompWorkerSearch').addEventListener('input',()=>{mmCompClearWorkerSelection();mmCompRenderWorkerSuggestions();});document.getElementById('mmCompWorkerSearch').addEventListener('focus',mmCompRenderWorkerSuggestions);document.addEventListener('click',e=>{const picker=document.querySelector('.mm-comp-worker-picker');if(picker&&!picker.contains(e.target)){document.getElementById('mmCompWorkerSuggestions').hidden=true;document.getElementById('mmCompWorkerSearch').setAttribute('aria-expanded','false');}});document.getElementById('mmCompPdf').addEventListener('change',e=>document.getElementById('mmCompPdfName').textContent=e.target.files[0]?e.target.files[0].name:'');}});
+</script>
+
+<script id="mm-rewards-script">
+let mmRewardsRows=[],mmRewardsWorkers=[],mmRewardsPageNo=1,mmRewardsPageSize=25,mmRewardsTotal=0,mmRewardsCurrent=null,mmRewardsTimer=null;
+function mmRewardsEsc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+async function mmRewardsPost(action,extra={}){return await mmWorkerPost(action,extra);}
+function mmRewardsFilters(){return {search:document.getElementById('mmRewardsSearch').value.trim(),category:document.getElementById('mmRewardsCategoryFilter').value,company:document.getElementById('mmRewardsCompanyFilter').value,status:document.getElementById('mmRewardsStatusFilter').value,page:mmRewardsPageNo,pageSize:mmRewardsPageSize};}
+function mmRewardsSelect(id,values,label){const el=document.getElementById(id),old=el.value;el.innerHTML='<option value="">'+label+'</option>'+values.map(v=>'<option value="'+mmRewardsEsc(v)+'">'+mmRewardsEsc(v)+'</option>').join('');if(values.includes(old))el.value=old;}
+function mmRewardsKpis(k){const el=document.getElementById('mmRewardsKpis');const cards=[['Total Recognition',k.total||0,'#1769aa'],['This Month',k.thisMonth||0,'#18845b'],['Unique Workers',k.workers||0,'#d18a16'],['Companies',k.companies||0,'#7052a5']];el.innerHTML=cards.map(c=>'<div class="wp-title-kpi" style="background:'+c[2]+';color:#fff"><div class="kpi-title">'+c[0]+'</div><div class="kpi-value">'+c[1]+'</div><div class="kpi-cum">Recognition records</div></div>').join('');}
+function mmRewardsRender(){const body=document.getElementById('mmRewardsTableBody');if(!mmRewardsRows.length){body.innerHTML='<tr><td colspan="9" class="mm-worker-empty">No recognition records found.</td></tr>';}else body.innerHTML=mmRewardsRows.map((r,i)=>'<tr><td><strong>'+mmRewardsEsc(r['REFERENCE NO.'])+'</strong></td><td>'+mmRewardsEsc(r['RECORD DATE'])+'</td><td>'+mmRewardsEsc(r['WORKER ID'])+'</td><td>'+mmRewardsEsc(r['WORKER NAME'])+'</td><td>'+mmRewardsEsc(r.COMPANY)+'</td><td>'+mmRewardsEsc(r['RECOGNITION CATEGORY'])+'</td><td>'+mmRewardsEsc(r['RECOGNITION GIVEN'])+'</td><td><span class="mm-comp-status '+(r.STATUS==='Submitted'?'valid':'soon')+'">'+mmRewardsEsc(r.STATUS||'Submitted')+'</span></td><td><button type="button" class="mm-worker-action" onclick="mmRewardsView('+i+')">VIEW</button> '+(isCurrentUserAdmin()&&r.STATUS!=='Deleted'?'<button type="button" class="mm-worker-action" onclick="mmRewardsEdit('+i+')">EDIT</button> <button type="button" class="mm-worker-action mm-rewards-delete-btn" onclick="mmRewardsDelete('+i+')">DELETE</button>':'')+'</td></tr>').join('');document.getElementById('mmRewardsCount').textContent=mmRewardsTotal+' recognition records';const pages=Math.max(1,Math.ceil(mmRewardsTotal/mmRewardsPageSize));document.getElementById('mmRewardsPageLabel').textContent='Page '+mmRewardsPageNo+' of '+pages;document.getElementById('mmRewardsPrev').disabled=mmRewardsPageNo<=1;document.getElementById('mmRewardsNext').disabled=mmRewardsPageNo>=pages;}
+async function mmRewardsLoad(overlay=false){const st=document.getElementById('mmRewardsRefreshStatus');if(overlay)showPortalLoading('Loading Rewards & Recognition…');if(st)st.textContent='Refreshing…';try{const out=await mmRewardsPost('mm_rewards_list',{filters:mmRewardsFilters()});mmRewardsRows=out.records||[];mmRewardsTotal=out.total||0;mmRewardsKpis(out.kpis||{});mmRewardsSelect('mmRewardsCategoryFilter',out.filterOptions.categories||[],'All Categories');mmRewardsSelect('mmRewardsCompanyFilter',out.filterOptions.companies||[],'All Companies');mmRewardsSelect('mmRewardsStatusFilter',out.filterOptions.statuses||[],'All Statuses');mmRewardsRender();const b=document.getElementById('mmRewardsRegisterBtn');if(b)b.style.display='';if(st)st.textContent='Updated just now';}catch(e){document.getElementById('mmRewardsMessage').textContent=e.message||String(e);if(st)st.textContent='Refresh failed';}finally{if(overlay)hidePortalLoading();}}
+function mmRewardsResetFilters(){['mmRewardsSearch','mmRewardsCategoryFilter','mmRewardsCompanyFilter','mmRewardsStatusFilter'].forEach(id=>document.getElementById(id).value='');mmRewardsPageNo=1;mmRewardsLoad(true);}
+function mmRewardsPage(d){mmRewardsPageNo=Math.max(1,mmRewardsPageNo+d);mmRewardsLoad(true);}
+function mmRewardsViewFields(r){const f=[['Reference No.','REFERENCE NO.'],['Record Date','RECORD DATE'],['Worker ID','WORKER ID'],['Worker Name','WORKER NAME'],['Company','COMPANY'],['Designation','DESIGNATION'],['Recognition Category','RECOGNITION CATEGORY'],['Description','DESCRIPTION'],['Recognition Given','RECOGNITION GIVEN'],['Status','STATUS'],['Submitted By','SUBMITTED BY'],['Submitted Date','SUBMITTED DATE']];return f.map(x=>'<div class="mm-rewards-view-item"><small>'+x[0]+'</small><strong>'+mmRewardsEsc(r[x[1]]||'—')+'</strong></div>').join('');}
+function mmRewardsView(i){const r=mmRewardsRows[i];if(!r)return;mmRewardsCurrent=r;document.getElementById('mmRewardsViewContent').innerHTML=mmRewardsViewFields(r);const ev=document.getElementById('mmRewardsEvidenceLink'),pdf=document.getElementById('mmRewardsPdfLink');ev.href=r['SUPPORTING EVIDENCE']||'#';ev.style.display=r['SUPPORTING EVIDENCE']?'inline-flex':'none';pdf.href=r['PDF LINK']||'#';pdf.style.display=r['PDF LINK']?'inline-flex':'none';document.getElementById('mmRewardsViewEdit').style.display=isCurrentUserAdmin()?'':'none';document.getElementById('mmRewardsViewModal').hidden=false;}
+function mmRewardsCloseView(){document.getElementById('mmRewardsViewModal').hidden=true;}
+async function mmRewardsLoadWorkers(){const out=await mmRewardsPost('mm_rewards_form_data',{});mmRewardsWorkers=out.workers||[];}
+function mmRewardsOpenForm(){mmRewardsPrepareForm(null);}
+async function mmRewardsPrepareForm(r){showPortalLoading(r?'Loading recognition record…':'Preparing recognition form…');try{await mmRewardsLoadWorkers();document.getElementById('mmRewardsForm').reset();document.getElementById('mmRewardsRecordId').value=r?r['RECORD ID']:'';document.getElementById('mmRewardsWorkerSearch').value=r?r['WORKER NAME']:'';document.getElementById('mmRewardsWorkerId').value=r?r['WORKER ID']:'';document.getElementById('mmRewardsWorkerIdDisplay').value=r?r['WORKER ID']:'';document.getElementById('mmRewardsCompany').value=r?r.COMPANY:'';document.getElementById('mmRewardsDesignation').value=r?r.DESIGNATION:'';document.getElementById('mmRewardsWorkerSelected').textContent=r?'Selected: '+r['WORKER NAME']+' ('+r['WORKER ID']+')':'Select a worker from the suggestions.';document.getElementById('mmRewardsDate').value=r?r['RECORD DATE']:(typeof wpToday==='function'?wpToday():new Date().toISOString().slice(0,10));document.getElementById('mmRewardsCategory').value=r?r['RECOGNITION CATEGORY']:'';document.getElementById('mmRewardsDescription').value=r?r.DESCRIPTION:'';document.getElementById('mmRewardsGiven').value=r?r['RECOGNITION GIVEN']:'';document.getElementById('mmRewardsEvidenceName').textContent=r&&r['SUPPORTING EVIDENCE']?'Existing evidence is attached. Upload a file only to replace it.':'';document.getElementById('mmRewardsFormHeading').textContent=r?'Edit Recognition Record':'Register Recognition';document.getElementById('mmRewardsSaveBtn').textContent=r?'UPDATE RECOGNITION':'SAVE RECOGNITION';document.getElementById('mmRewardsFormMessage').textContent='';go('mm-rewards-form');}catch(e){document.getElementById('mmRewardsMessage').textContent=e.message||String(e);}finally{hidePortalLoading();}}
+function mmRewardsEdit(i){if(!isCurrentUserAdmin())return;const r=mmRewardsRows[i];if(r)mmRewardsPrepareForm(r);}
+let mmRewardsPendingDelete=null;
+function mmRewardsDelete(i){
+  if(!isCurrentUserAdmin())return;
+  const r=mmRewardsRows[i];
+  if(!r||r.STATUS==='Deleted')return;
+  mmRewardsPendingDelete=r;
+  const dialog=document.getElementById('mmRewardsDeleteConfirm');
+  document.getElementById('mmRewardsDeleteText').textContent='Delete recognition record '+(r['REFERENCE NO.']||r['RECORD ID'])+'?';
+  dialog.hidden=false;
+}
+function mmRewardsCloseDeleteConfirm(){
+  document.getElementById('mmRewardsDeleteConfirm').hidden=true;
+  mmRewardsPendingDelete=null;
+}
+async function mmRewardsConfirmDelete(){
+  if(!mmRewardsPendingDelete||!isCurrentUserAdmin())return;
+  const r=mmRewardsPendingDelete,btn=document.getElementById('mmRewardsDeleteConfirmBtn');
+  btn.disabled=true;
+  try{
+    showPortalLoading('Deleting recognition record…');
+    const out=await mmRewardsPost('mm_rewards_delete',{recordId:r['RECORD ID']});
+    mmRewardsCloseDeleteConfirm();
+    document.getElementById('mmRewardsMessage').textContent=out.message||'Recognition record permanently deleted.';
+    await mmRewardsLoad(false);
+  }catch(e){
+    document.getElementById('mmRewardsMessage').textContent=e.message||String(e);
+  }finally{
+    btn.disabled=false;
+    hidePortalLoading();
+  }
+}
+function mmRewardsEditCurrent(){const i=mmRewardsRows.findIndex(r=>r['RECORD ID']===mmRewardsCurrent?.['RECORD ID']);mmRewardsCloseView();if(i>=0)mmRewardsEdit(i);}
+function mmRewardsChooseWorker(id){const w=mmRewardsWorkers.find(x=>x.id===id);if(!w)return;document.getElementById('mmRewardsWorkerId').value=w.id;document.getElementById('mmRewardsWorkerSearch').value=w.name;document.getElementById('mmRewardsWorkerIdDisplay').value=w.id;document.getElementById('mmRewardsCompany').value=w.company;document.getElementById('mmRewardsDesignation').value=w.designation||'';document.getElementById('mmRewardsWorkerSelected').textContent='Selected: '+w.name+' ('+w.id+')';document.getElementById('mmRewardsWorkerSuggestions').hidden=true;}
+function mmRewardsSuggest(){const q=document.getElementById('mmRewardsWorkerSearch').value.trim().toLowerCase(),box=document.getElementById('mmRewardsWorkerSuggestions');document.getElementById('mmRewardsWorkerId').value='';document.getElementById('mmRewardsWorkerIdDisplay').value='';document.getElementById('mmRewardsCompany').value='';document.getElementById('mmRewardsDesignation').value='';if(!q){box.hidden=true;return;}const matches=mmRewardsWorkers.filter(w=>(w.name+' '+w.id+' '+w.company).toLowerCase().includes(q)).slice(0,15);box.innerHTML=matches.length?matches.map(w=>'<button type="button" class="mm-rewards-suggestion" data-id="'+mmRewardsEsc(w.id)+'"><strong>'+mmRewardsEsc(w.name)+'</strong><small>'+mmRewardsEsc(w.id)+' · '+mmRewardsEsc(w.company)+'</small></button>').join(''):'<div class="mm-rewards-suggestion">No matching worker found.</div>';box.hidden=false;box.querySelectorAll('[data-id]').forEach(b=>b.addEventListener('click',()=>mmRewardsChooseWorker(b.dataset.id)));}
+function mmRewardsCancelForm(){go('mm-rewards');}
+async function mmRewardsSave(e){e.preventDefault();const id=document.getElementById('mmRewardsRecordId').value,file=document.getElementById('mmRewardsEvidence').files[0],wid=document.getElementById('mmRewardsWorkerId').value;if(!wid||!mmRewardsWorkers.some(w=>w.id===wid)){document.getElementById('mmRewardsFormMessage').textContent='Please select a worker from the suggestions.';return;}if(file&&file.size>10*1024*1024){document.getElementById('mmRewardsFormMessage').textContent='Supporting evidence must not exceed 10 MB.';return;}const payload={recordId:id,workerId:wid,recordDate:document.getElementById('mmRewardsDate').value,category:document.getElementById('mmRewardsCategory').value.trim(),description:document.getElementById('mmRewardsDescription').value.trim(),recognitionGiven:document.getElementById('mmRewardsGiven').value.trim()};const send=async(fileData)=>{const btn=document.getElementById('mmRewardsSaveBtn');btn.disabled=true;showPortalLoading(id?'Updating recognition record…':'Saving recognition record…');try{const out=await mmRewardsPost(id?'mm_rewards_update':'mm_rewards_add',{...payload,...fileData});document.getElementById('mmRewardsFormMessage').textContent=out.message||'Recognition record saved successfully.';setTimeout(()=>{go('mm-rewards');mmRewardsLoad(true);},700);}catch(err){document.getElementById('mmRewardsFormMessage').textContent=err.message||String(err);}finally{btn.disabled=false;hidePortalLoading();}};if(!file){send({});return;}const reader=new FileReader();reader.onload=()=>send({fileName:file.name,mimeType:file.type||'application/octet-stream',fileData:String(reader.result).split(',')[1]});reader.onerror=()=>document.getElementById('mmRewardsFormMessage').textContent='Unable to read supporting evidence.';reader.readAsDataURL(file);}
+document.addEventListener('DOMContentLoaded',()=>{const confirmBtn=document.getElementById('mmRewardsDeleteConfirmBtn');if(confirmBtn)confirmBtn.addEventListener('click',mmRewardsConfirmDelete);document.querySelectorAll('[data-mm-rewards-cancel]').forEach(b=>b.addEventListener('click',mmRewardsCloseDeleteConfirm));document.addEventListener('keydown',e=>{if(e.key==='Escape'){const d=document.getElementById('mmRewardsDeleteConfirm');if(d&&!d.hidden)mmRewardsCloseDeleteConfirm();}});const s=document.getElementById('mmRewardsSearch');if(s)s.addEventListener('input',()=>{clearTimeout(mmRewardsTimer);mmRewardsTimer=setTimeout(()=>{mmRewardsPageNo=1;mmRewardsLoad(false);},300);});['mmRewardsCategoryFilter','mmRewardsCompanyFilter','mmRewardsStatusFilter'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('change',()=>{mmRewardsPageNo=1;mmRewardsLoad(false);});});const wi=document.getElementById('mmRewardsWorkerSearch');if(wi)wi.addEventListener('input',mmRewardsSuggest);document.addEventListener('click',e=>{const p=document.querySelector('.mm-rewards-worker-picker');if(p&&!p.contains(e.target))document.getElementById('mmRewardsWorkerSuggestions').hidden=true;});});
+</script>
+\n
+<div id="mmRewardsDeleteConfirm" class="mm-rewards-confirm" hidden>
+  <div class="mm-rewards-confirm-backdrop" data-mm-rewards-cancel></div>
+  <div class="mm-rewards-confirm-panel" role="dialog" aria-modal="true" aria-labelledby="mmRewardsDeleteTitle" aria-describedby="mmRewardsDeleteText">
+    <div class="mm-rewards-confirm-icon">!</div>
+    <h3 id="mmRewardsDeleteTitle">Delete Recognition Record?</h3>
+    <p id="mmRewardsDeleteText">Are you sure you want to delete this recognition record?</p>
+    <p class="mm-rewards-confirm-note">This recognition record will be permanently deleted. Its supporting evidence and generated PDF will also be moved to Google Drive Trash.</p>
+    <div class="mm-rewards-confirm-actions">
+      <button type="button" class="mm-worker-action" data-mm-rewards-cancel>CANCEL</button>
+      <button type="button" id="mmRewardsDeleteConfirmBtn" class="mm-rewards-confirm-delete">DELETE RECORD</button>
+    </div>
+  </div>
+</div>
+
+<script id="mm-consequence-script">
+let mmConsequenceRows=[],mmConsequenceWorkers=[],mmConsequencePageNo=1,mmConsequencePageSize=25,mmConsequenceTotal=0,mmConsequenceCurrent=null,mmConsequenceTimer=null;
+function mmConsequenceEsc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function mmConsequencePost(action,extra={}){return mmWorkerPost(action,extra);}
+function mmConsequenceFilters(){return {search:document.getElementById('mmConsequenceSearch').value.trim(),category:document.getElementById('mmConsequenceCategoryFilter').value,company:document.getElementById('mmConsequenceCompanyFilter').value,status:document.getElementById('mmConsequenceStatusFilter').value,page:mmConsequencePageNo,pageSize:mmConsequencePageSize};}
+function mmConsequenceFill(id,values,label){const el=document.getElementById(id),old=el.value;el.innerHTML='<option value="">'+label+'</option>'+values.map(v=>'<option value="'+mmConsequenceEsc(v)+'">'+mmConsequenceEsc(v)+'</option>').join('');if(values.includes(old))el.value=old;}
+function mmConsequenceKpis(k){const el=document.getElementById('mmConsequenceKpis'),cards=[['Total Records',k.total||0,'#1769aa'],['Pending Review',k.pending||0,'#d18a16'],['Approved',k.approved||0,'#18845b'],['Rejected',k.rejected||0,'#7052a5']];el.innerHTML=cards.map(c=>'<div class="wp-title-kpi" style="background:'+c[2]+';color:#fff"><div class="kpi-title">'+c[0]+'</div><div class="kpi-value">'+c[1]+'</div><div class="kpi-cum">Consequence records</div></div>').join('');}
+function mmConsequenceRender(){const body=document.getElementById('mmConsequenceTableBody');if(!mmConsequenceRows.length){body.innerHTML='<tr><td colspan="9" class="mm-worker-empty">No consequence records found.</td></tr>';}else body.innerHTML=mmConsequenceRows.map((r,i)=>'<tr><td><strong>'+mmConsequenceEsc(r['REFERENCE NO.'])+'</strong></td><td>'+mmConsequenceEsc(r['RECORD DATE'])+'</td><td>'+mmConsequenceEsc(r['WORKER ID'])+'</td><td>'+mmConsequenceEsc(r['WORKER NAME'])+'</td><td>'+mmConsequenceEsc(r.COMPANY)+'</td><td>'+mmConsequenceEsc(r['VIOLATION CATEGORY'])+'</td><td>'+mmConsequenceEsc(r['CONSEQUENCE TYPE'])+'</td><td><span class="mm-comp-status '+(r.STATUS==='Approved'?'valid':r.STATUS==='Rejected'?'soon':'')+'">'+mmConsequenceEsc(r.STATUS||'Pending Review')+'</span></td><td><button type="button" class="mm-worker-action" onclick="mmConsequenceView('+i+')">VIEW</button> '+(r.canEdit?'<button type="button" class="mm-worker-action" onclick="mmConsequenceEdit('+i+')">EDIT</button>':'')+(r.canReview&&r.STATUS!=='Approved'&&r.STATUS!=='Rejected'?'<button type="button" class="mm-worker-action" onclick="mmConsequenceView('+i+',true)">REVIEW</button>':'')+(r.canEdit?'<button type="button" class="mm-worker-action mm-consequence-delete-btn" onclick="mmConsequenceDelete('+i+')">DELETE</button>':'')+'</td></tr>').join('');document.getElementById('mmConsequenceCount').textContent=mmConsequenceTotal+' consequence records';const pages=Math.max(1,Math.ceil(mmConsequenceTotal/mmConsequencePageSize));document.getElementById('mmConsequencePageLabel').textContent='Page '+mmConsequencePageNo+' of '+pages;document.getElementById('mmConsequencePrev').disabled=mmConsequencePageNo<=1;document.getElementById('mmConsequenceNext').disabled=mmConsequencePageNo>=pages;}
+async function mmConsequenceLoad(overlay=false){const st=document.getElementById('mmConsequenceRefreshStatus');if(overlay)showPortalLoading('Loading Consequence Management…');if(st)st.textContent='Refreshing…';try{const out=await mmConsequencePost('mm_consequence_list',{filters:mmConsequenceFilters()});mmConsequenceRows=out.records||[];mmConsequenceTotal=out.total||0;mmConsequenceKpis(out.kpis||{});mmConsequenceFill('mmConsequenceCategoryFilter',out.filterOptions.categories||[],'All Categories');mmConsequenceFill('mmConsequenceCompanyFilter',out.filterOptions.companies||[],'All Companies');mmConsequenceFill('mmConsequenceStatusFilter',out.filterOptions.statuses||[],'All Statuses');mmConsequenceRender();if(st)st.textContent='Updated just now';}catch(e){document.getElementById('mmConsequenceMessage').textContent=e.message||String(e);if(st)st.textContent='Refresh failed';}finally{if(overlay)hidePortalLoading();}}
+function mmConsequenceResetFilters(){['mmConsequenceSearch','mmConsequenceCategoryFilter','mmConsequenceCompanyFilter','mmConsequenceStatusFilter'].forEach(id=>document.getElementById(id).value='');mmConsequencePageNo=1;mmConsequenceLoad(true);}
+function mmConsequencePage(d){mmConsequencePageNo=Math.max(1,mmConsequencePageNo+d);mmConsequenceLoad(true);}
+function mmConsequenceFields(r){const f=[['Reference No.','REFERENCE NO.'],['Date','RECORD DATE'],['Worker ID','WORKER ID'],['Worker Name','WORKER NAME'],['Company','COMPANY'],['Designation','DESIGNATION'],['Violation Category','VIOLATION CATEGORY'],['Finding Description','FINDING DESCRIPTION'],['Immediate Action','IMMEDIATE ACTION'],['Consequence Type','CONSEQUENCE TYPE'],['Corrective Action','CORRECTIVE ACTION'],['Status','STATUS'],['Submitted By','SUBMITTED BY'],['Submitted Date','SUBMITTED DATE']];return f.map(x=>'<div class="mm-rewards-view-item"><small>'+x[0]+'</small><strong>'+mmConsequenceEsc(r[x[1]]||'—')+'</strong></div>').join('');}
+async function mmConsequenceView(i,openReview=false){const r=mmConsequenceRows[i];if(!r)return;mmConsequenceCurrent=r;showPortalLoading('Loading consequence record…');try{const out=await mmConsequencePost('mm_consequence_details',{recordId:r['RECORD ID']});document.getElementById('mmConsequenceViewContent').innerHTML=mmConsequenceFields(out.record||r);document.getElementById('mmConsequenceWorkflowHistory').innerHTML='<h4>Workflow History</h4>'+(out.workflow||[]).map(w=>'<div class="mm-consequence-history-item"><strong>'+mmConsequenceEsc(w.ACTION)+' · '+mmConsequenceEsc(w['NEW STATUS'])+'</strong><small>'+mmConsequenceEsc(w['ACTION BY'])+' · '+mmConsequenceEsc(w['ACTION DATE'])+'</small><p>'+mmConsequenceEsc(w.COMMENTS||'No comments')+'</p></div>').join('')||'<small>No workflow actions recorded.</small>';const ev=document.getElementById('mmConsequenceEvidenceLink'),pdf=document.getElementById('mmConsequencePdfLink');ev.href=(out.record||r)['SUPPORTING EVIDENCE']||'#';ev.style.display=(out.record||r)['SUPPORTING EVIDENCE']?'inline-flex':'none';pdf.href=(out.record||r)['PDF LINK']||'#';pdf.style.display=(out.record||r)['PDF LINK']?'inline-flex':'none';document.getElementById('mmConsequenceViewEdit').style.display=r.canEdit?'':'none';document.getElementById('mmConsequenceReviewBtn').style.display=r.canReview&&r.STATUS!=='Approved'&&r.STATUS!=='Rejected'?'':'none';document.getElementById('mmConsequenceViewModal').hidden=false;if(openReview)mmConsequenceOpenReview();}catch(e){document.getElementById('mmConsequenceMessage').textContent=e.message||String(e);}finally{hidePortalLoading();}}
+function mmConsequenceCloseView(){document.getElementById('mmConsequenceViewModal').hidden=true;}
+function mmConsequenceEditCurrent(){const i=mmConsequenceRows.findIndex(r=>r['RECORD ID']===mmConsequenceCurrent?.['RECORD ID']);mmConsequenceCloseView();if(i>=0)mmConsequenceEdit(i);}
+async function mmConsequenceLoadWorkers(){const out=await mmConsequencePost('mm_consequence_form_data',{});mmConsequenceWorkers=out.workers||[];}
+function mmConsequenceOpenForm(){mmConsequencePrepareForm(null);}
+async function mmConsequencePrepareForm(r){showPortalLoading(r?'Loading consequence record…':'Preparing consequence form…');try{await mmConsequenceLoadWorkers();document.getElementById('mmConsequenceForm').reset();document.getElementById('mmConsequenceRecordId').value=r?r['RECORD ID']:'';document.getElementById('mmConsequenceWorkerSearch').value=r?r['WORKER NAME']:'';document.getElementById('mmConsequenceWorkerId').value=r?r['WORKER ID']:'';document.getElementById('mmConsequenceWorkerIdDisplay').value=r?r['WORKER ID']:'';document.getElementById('mmConsequenceCompany').value=r?r.COMPANY:'';document.getElementById('mmConsequenceDesignation').value=r?r.DESIGNATION:'';document.getElementById('mmConsequenceWorkerSelected').textContent=r?'Selected: '+r['WORKER NAME']+' ('+r['WORKER ID']+')':'Select a worker from the suggestions.';document.getElementById('mmConsequenceDate').value=r?r['RECORD DATE']:(typeof wpToday==='function'?wpToday():new Date().toISOString().slice(0,10));document.getElementById('mmConsequenceCategory').value=r?r['VIOLATION CATEGORY']:'';document.getElementById('mmConsequenceFinding').value=r?r['FINDING DESCRIPTION']:'';document.getElementById('mmConsequenceImmediate').value=r?r['IMMEDIATE ACTION']:'';document.getElementById('mmConsequenceType').value=r?r['CONSEQUENCE TYPE']:'';document.getElementById('mmConsequenceCorrective').value=r?r['CORRECTIVE ACTION']:'';document.getElementById('mmConsequenceEvidenceName').textContent=r&&r['SUPPORTING EVIDENCE']?'Existing evidence is attached. Upload a file only to replace it.':'';document.getElementById('mmConsequenceFormHeading').textContent=r?'Edit Consequence Record':'Register Consequence';document.getElementById('mmConsequenceSaveBtn').textContent=r?'UPDATE RECORD':'SUBMIT FOR REVIEW';document.getElementById('mmConsequenceFormMessage').textContent='';go('mm-consequence-form');}catch(e){document.getElementById('mmConsequenceMessage').textContent=e.message||String(e);}finally{hidePortalLoading();}}
+function mmConsequenceEdit(i){const r=mmConsequenceRows[i];if(r&&r.canEdit)mmConsequencePrepareForm(r);}
+function mmConsequenceChooseWorker(id){const w=mmConsequenceWorkers.find(x=>x.id===id);if(!w)return;document.getElementById('mmConsequenceWorkerId').value=w.id;document.getElementById('mmConsequenceWorkerSearch').value=w.name;document.getElementById('mmConsequenceWorkerIdDisplay').value=w.id;document.getElementById('mmConsequenceCompany').value=w.company;document.getElementById('mmConsequenceDesignation').value=w.designation||'';document.getElementById('mmConsequenceWorkerSelected').textContent='Selected: '+w.name+' ('+w.id+')';document.getElementById('mmConsequenceWorkerSuggestions').hidden=true;}
+function mmConsequenceSuggest(){const q=document.getElementById('mmConsequenceWorkerSearch').value.trim().toLowerCase(),box=document.getElementById('mmConsequenceWorkerSuggestions');document.getElementById('mmConsequenceWorkerId').value='';document.getElementById('mmConsequenceWorkerIdDisplay').value='';document.getElementById('mmConsequenceCompany').value='';document.getElementById('mmConsequenceDesignation').value='';if(!q){box.hidden=true;return;}const matches=mmConsequenceWorkers.filter(w=>(w.name+' '+w.id+' '+w.company).toLowerCase().includes(q)).slice(0,15);box.innerHTML=matches.length?matches.map(w=>'<button type="button" class="mm-rewards-suggestion" data-id="'+mmConsequenceEsc(w.id)+'"><strong>'+mmConsequenceEsc(w.name)+'</strong><small>'+mmConsequenceEsc(w.id)+' · '+mmConsequenceEsc(w.company)+'</small></button>').join(''):'<div class="mm-rewards-suggestion">No matching worker found.</div>';box.hidden=false;box.querySelectorAll('[data-id]').forEach(b=>b.addEventListener('click',()=>mmConsequenceChooseWorker(b.dataset.id)));}
+function mmConsequenceCancelForm(){go('mm-consequence');}
+function mmConsequenceOpenReview(){if(!isCurrentUserAdmin()||!mmConsequenceCurrent)return;document.getElementById('mmConsequenceReviewComments').value='';document.getElementById('mmConsequenceReviewModal').hidden=false;}
+function mmConsequenceCloseReview(){document.getElementById('mmConsequenceReviewModal').hidden=true;}
+async function mmConsequenceSubmitReview(status){if(!isCurrentUserAdmin()||!mmConsequenceCurrent)return;const comments=document.getElementById('mmConsequenceReviewComments').value.trim();if(!comments){document.getElementById('mmConsequenceReviewComments').focus();return;}showPortalLoading('Updating review status…');try{const out=await mmConsequencePost('mm_consequence_review',{recordId:mmConsequenceCurrent['RECORD ID'],status,comments});mmConsequenceCloseReview();mmConsequenceCloseView();document.getElementById('mmConsequenceMessage').textContent=out.message||'Review status updated.';await mmConsequenceLoad(false);}catch(e){document.getElementById('mmConsequenceMessage').textContent=e.message||String(e);}finally{hidePortalLoading();}}
+async function mmConsequenceSave(e){e.preventDefault();const id=document.getElementById('mmConsequenceRecordId').value,file=document.getElementById('mmConsequenceEvidence').files[0],wid=document.getElementById('mmConsequenceWorkerId').value;if(!wid||!mmConsequenceWorkers.some(w=>w.id===wid)){document.getElementById('mmConsequenceFormMessage').textContent='Please select a worker from the suggestions.';return;}if(file&&file.size>10*1024*1024){document.getElementById('mmConsequenceFormMessage').textContent='Supporting evidence must not exceed 10 MB.';return;}const payload={recordId:id,workerId:wid,recordDate:document.getElementById('mmConsequenceDate').value,category:document.getElementById('mmConsequenceCategory').value.trim(),finding:document.getElementById('mmConsequenceFinding').value.trim(),immediateAction:document.getElementById('mmConsequenceImmediate').value.trim(),consequenceType:document.getElementById('mmConsequenceType').value,correctiveAction:document.getElementById('mmConsequenceCorrective').value.trim()};const send=async(fileData)=>{const btn=document.getElementById('mmConsequenceSaveBtn');btn.disabled=true;showPortalLoading(id?'Updating consequence record…':'Submitting consequence for review…');try{const out=await mmConsequencePost(id?'mm_consequence_update':'mm_consequence_add',{...payload,...fileData});document.getElementById('mmConsequenceFormMessage').textContent=out.message||'Consequence record submitted.';setTimeout(()=>{go('mm-consequence');mmConsequenceLoad(true);},700);}catch(err){document.getElementById('mmConsequenceFormMessage').textContent=err.message||String(err);}finally{btn.disabled=false;hidePortalLoading();}};if(!file){send({});return;}const reader=new FileReader();reader.onload=()=>send({fileName:file.name,mimeType:file.type||'application/octet-stream',fileData:String(reader.result).split(',')[1]});reader.onerror=()=>document.getElementById('mmConsequenceFormMessage').textContent='Unable to read supporting evidence.';reader.readAsDataURL(file);}
+let mmConsequencePendingDelete=null;
+function mmConsequenceDelete(i){if(!isCurrentUserAdmin())return;const r=mmConsequenceRows[i];if(!r)return;mmConsequencePendingDelete=r;document.getElementById('mmConsequenceDeleteText').textContent='Permanently delete consequence record '+(r['REFERENCE NO.']||r['RECORD ID'])+' for '+(r['WORKER NAME']||'the selected worker')+'?';document.getElementById('mmConsequenceDeleteConfirm').hidden=false;}
+function mmConsequenceCloseDelete(){document.getElementById('mmConsequenceDeleteConfirm').hidden=true;mmConsequencePendingDelete=null;}
+async function mmConsequenceConfirmDelete(){if(!mmConsequencePendingDelete||!isCurrentUserAdmin())return;const r=mmConsequencePendingDelete,btn=document.getElementById('mmConsequenceDeleteConfirmBtn');btn.disabled=true;showPortalLoading('Deleting consequence record…');try{const out=await mmConsequencePost('mm_consequence_delete',{recordId:r['RECORD ID']});mmConsequenceCloseDelete();document.getElementById('mmConsequenceMessage').textContent=out.message||'Consequence record permanently deleted.';if(mmConsequenceCurrent&&mmConsequenceCurrent['RECORD ID']===r['RECORD ID'])mmConsequenceCloseView();await mmConsequenceLoad(false);}catch(e){document.getElementById('mmConsequenceMessage').textContent=e.message||String(e);}finally{btn.disabled=false;hidePortalLoading();}}
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-mm-consequence-cancel]').forEach(x=>x.addEventListener('click',mmConsequenceCloseDelete));const del=document.getElementById('mmConsequenceDeleteConfirmBtn');if(del)del.addEventListener('click',mmConsequenceConfirmDelete);const s=document.getElementById('mmConsequenceSearch');if(s)s.addEventListener('input',()=>{clearTimeout(mmConsequenceTimer);mmConsequenceTimer=setTimeout(()=>{mmConsequencePageNo=1;mmConsequenceLoad(false);},300);});['mmConsequenceCategoryFilter','mmConsequenceCompanyFilter','mmConsequenceStatusFilter'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('change',()=>{mmConsequencePageNo=1;mmConsequenceLoad(false);});});const wi=document.getElementById('mmConsequenceWorkerSearch');if(wi)wi.addEventListener('input',mmConsequenceSuggest);document.addEventListener('click',e=>{const p=document.querySelector('#page-mm-consequence-form .mm-rewards-worker-picker');if(p&&!p.contains(e.target))document.getElementById('mmConsequenceWorkerSuggestions').hidden=true;});});
+</script>
+
+
+<style id="mm-consequence-title-refresh-fix">
+/* Keep Consequence Management heading aligned with the other Manpower modules. */
+#page-mm-consequence > .section-title.mm-standard-title{
+  display:flex;align-items:center;justify-content:space-between;text-align:left;
+}
+#page-mm-consequence > .section-title.mm-standard-title h2{
+  text-align:left;margin-left:0;margin-right:auto;
+}
+/* Match the refresh control used by the other portal modules. */
+#page-mm-consequence .mm-rewards-refresh{
+  display:flex;align-items:center;justify-content:flex-end;gap:10px;
+}
+#page-mm-consequence .wp-refresh-status{
+  font-size:11px;font-weight:700;color:#218047;white-space:nowrap;
+}
+#page-mm-consequence .wp-refresh-inspection-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:37px;
+  padding:8px 13px;border:1px solid #bfd8ec;border-radius:9px;background:#f7fbff;
+  color:#164c80;font:700 12px Arial,Helvetica,sans-serif;
+  box-shadow:0 3px 8px rgba(23,111,177,.07);cursor:pointer;white-space:nowrap;
+  transition:background .15s ease,border-color .15s ease,transform .15s ease;
+}
+#page-mm-consequence .wp-refresh-inspection-btn:hover{
+  background:#eaf5ff;border-color:#8bbfe1;transform:translateY(-1px);
+}
+#page-mm-consequence .wp-refresh-inspection-btn:disabled{opacity:.62;cursor:wait;transform:none;}
+#page-mm-consequence .wp-refresh-inspection-btn .refresh-glyph{font-size:14px;line-height:1;}
+@media(max-width:640px){
+  #page-mm-consequence > .section-title.mm-standard-title{align-items:flex-start;}
+  #page-mm-consequence .mm-rewards-refresh{gap:7px;}
+}
+</style>
+
 </body>
 </html>
 
