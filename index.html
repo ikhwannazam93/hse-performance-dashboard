@@ -1197,6 +1197,8 @@ select:focus,input:focus{outline:none !important;border-color:#00a4d6 !important
 .wp-view-mode .wp-add-finding,.wp-view-mode .wp-remove-finding{display:none}
 .wp-view-mode input[type="file"]{display:none}
 .wp-view-mode .wp-photo-picker-actions{display:none}
+#page-inspection-form.wp-view-mode .wp-photo-picker{display:none!important}
+.wp-view-mode .wp-inspection-field > .wp-photo-note:not(.wp-existing-photo){display:none!important}
 .wp-view-mode .wp-submit-btn,.wp-view-mode .wp-reset-btn{display:none}
 .wp-existing-photo{display:inline-flex;align-items:center;gap:5px;margin-top:6px}
 .wp-existing-photo a{color:#0067a5;font-weight:800;text-decoration:none}
@@ -2791,6 +2793,9 @@ body.portal-home-active #portal-home-combined .topbar .project-title-main {
 .dss-signature-summary>div:last-child{border-right:0}
 .dss-signature-summary strong{display:block;background:#e5f0f7;padding:9px;margin:-12px -12px 10px;text-align:center;color:#123f63}
 .dss-signature-image{max-width:180px;max-height:55px;object-fit:contain;display:block;margin:6px auto;border-bottom:1px solid #9bb0bf}
+/* Daily Site Surveillance: fixed full-width signature line, matching Workplace Inspection */
+#dssSignatureCard .dss-signature-summary>div>div[id$="Signature"]{height:64px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #9bb0bf;margin-bottom:8px}
+#dssSignatureCard .dss-signature-image{max-width:100%;max-height:60px;border-bottom:0}
 @media(max-width:650px){.dss-signature-summary{grid-template-columns:1fr}.dss-signature-summary>div{border-right:0;border-bottom:1px solid #dbe7ef}}
 </style>
 <style id="dss-v7-dashboard-polish">
@@ -4005,7 +4010,7 @@ input,select,textarea{touch-action:manipulation}
     <p class="hc-description">Workers and registered visitors · Filter the list for emergency roll-call and export the current results as a PDF.</p>
 
     <div class="hc-kpi-grid" id="hcKpiGrid">
-      <div class="hc-kpi-card hc-kpi-blue"><span>Registered Workers</span><strong id="hcKpiWorkers">—</strong><small>Registered in Workers_DB</small></div>
+      <div class="hc-kpi-card hc-kpi-blue"><span>Registered Workers</span><strong id="hcKpiWorkers">—</strong><small>Registered in SIC Data</small></div>
       <div class="hc-kpi-card hc-kpi-purple"><span>Active Registered Visitors</span><strong id="hcKpiVisitors">—</strong><small>Valid visitor passes</small></div>
       <div class="hc-kpi-card hc-kpi-teal"><span>Land Side Workers</span><strong id="hcKpiLandWorkers">—</strong><small>No open marine trip</small></div>
       <div class="hc-kpi-card hc-kpi-orange"><span>Marine Resident Workers</span><strong id="hcKpiMarineWorkers">—</strong><small>Currently recorded on marine side</small></div>
@@ -8380,7 +8385,9 @@ async function dssSavePdf(){
 .wp-pdf-report .dss-pdf-signature-table{width:100%!important;max-width:100%!important;table-layout:fixed!important;break-inside:avoid!important;page-break-inside:avoid!important}
 .wp-pdf-report .dss-pdf-signature-table th,.wp-pdf-report .dss-pdf-signature-table td{width:33.333%!important;max-width:33.333%!important;padding:1.5mm!important;vertical-align:top!important;overflow-wrap:anywhere!important;word-break:break-word!important}
 .wp-pdf-report .dss-pdf-signature-table img{display:block!important;width:auto!important;max-width:36mm!important;max-height:16mm!important;height:auto!important;object-fit:contain!important;margin:0 auto 1.5mm!important}
-</style><div class="wp-pdf-page" style="height:auto;min-height:276mm;overflow:visible"><div class="wp-pdf-header"><img class="wp-pdf-logo" src="${typeof WP_PDF_LOGO!=="undefined"?WP_PDF_LOGO:""}"><div class="wp-pdf-project">ENGINEERING, PROCUREMENT AND CONSTRUCTION (EPC)<br>OF JETTY 3 EXPANSION &amp; ASSOCIATED DREDGING (PHASE 1)</div><div class="wp-pdf-docbox"><div class="k">Document</div><div class="v">DAILY SITE SURVEILLANCE</div></div></div><div class="wp-pdf-title-row"><div class="wp-pdf-title">DAILY SITE SURVEILLANCE REPORT</div><div class="wp-pdf-no"><b>Surveillance No.</b><br>${esc(r.surveillanceNo)}</div></div><div class="wp-pdf-section"><h2>1. SURVEILLANCE INFORMATION</h2><table style="width:100%;border-collapse:collapse;font-size:8pt"><tr><td style="padding:2mm;border:1px solid #d3e0e8"><b>Date</b><br>${esc(dssPrettyDate(r.date))}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Time</b><br>${esc(r.time)}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Location</b><br>${esc(r.location)}</td></tr><tr><td style="padding:2mm;border:1px solid #d3e0e8"><b>Company</b><br>${esc(r.company)}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Inspector</b><br>${esc(r.inspector)}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Activity</b><br>${esc(r.activity)}</td></tr></table><h2>2. FINDINGS &amp; CORRECTIVE ACTIONS</h2>${findingHtml}<h2>3. OVERALL REMARKS</h2><div style="border:1px solid #d3e0e8;padding:3mm;min-height:12mm">${esc(r.remarks||"—")}</div><h2 class="dss-pdf-signatures-title">4. SIGNATURE / ACKNOWLEDGEMENT</h2><table class="dss-pdf-signature-table" style="width:100%;max-width:100%;table-layout:fixed;border-collapse:collapse;font-size:7pt;overflow-wrap:anywhere"><tr><th style="width:33.333%;background:#e5f0f7;padding:1.5mm;border:1px solid #cbdce8;overflow-wrap:anywhere">Inspector</th><th style="width:33.333%;background:#e5f0f7;padding:1.5mm;border:1px solid #cbdce8;overflow-wrap:anywhere">Reviewer</th><th style="width:33.333%;background:#e5f0f7;padding:1.5mm;border:1px solid #cbdce8;overflow-wrap:anywhere">Approver (if required)</th></tr><tr><td style="padding:2mm;border:1px solid #cbdce8;height:24mm">${photo(r.inspectorSignatureUrl,r.inspectorSignatureDataUrl,"Inspector signature")}<hr>${esc(r.inspector)}<br>Date: ${esc(dssPrettyDate(r.inspectorSignedAt))}</td><td style="padding:2mm;border:1px solid #cbdce8">${photo(r.reviewerSignatureUrl,r.reviewerSignatureDataUrl,"Reviewer signature")}<hr>${esc(r.acknowledgedBy||"")}<br>Date: ${esc(r.acknowledgedAt?dssPrettyDate(r.acknowledgedAt):"—")}${String(r.status).toLowerCase()!=="acknowledged"?(r.previousAcknowledgementDate?`<br>Previous acknowledgement date: ${esc(dssPrettyDate(r.previousAcknowledgementDate))}`:"")+"<br><b>Pending acknowledgement</b>":""}</td><td style="padding:2mm;border:1px solid #cbdce8">Name:<br>Designation:<br>Date:</td></tr></table></div>`;
+.wp-pdf-report .dss-pdf-signature-block{height:22mm;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #6f7f88;margin-bottom:1.5mm;box-sizing:border-box}
+.wp-pdf-report .dss-pdf-signature-block img{display:block!important;width:auto!important;max-width:36mm!important;max-height:16mm!important;height:auto!important;object-fit:contain!important;margin:0 auto!important;border:0!important;padding:0!important;box-shadow:none!important}
+</style><div class="wp-pdf-page" style="height:auto;min-height:276mm;overflow:visible"><div class="wp-pdf-header"><img class="wp-pdf-logo" src="${typeof WP_PDF_LOGO!=="undefined"?WP_PDF_LOGO:""}"><div class="wp-pdf-project">ENGINEERING, PROCUREMENT AND CONSTRUCTION (EPC)<br>OF JETTY 3 EXPANSION &amp; ASSOCIATED DREDGING (PHASE 1)</div><div class="wp-pdf-docbox"><div class="k">Document</div><div class="v">DAILY SITE SURVEILLANCE</div></div></div><div class="wp-pdf-title-row"><div class="wp-pdf-title">DAILY SITE SURVEILLANCE REPORT</div><div class="wp-pdf-no"><b>Surveillance No.</b><br>${esc(r.surveillanceNo)}</div></div><div class="wp-pdf-section"><h2>1. SURVEILLANCE INFORMATION</h2><table style="width:100%;border-collapse:collapse;font-size:8pt"><tr><td style="padding:2mm;border:1px solid #d3e0e8"><b>Date</b><br>${esc(dssPrettyDate(r.date))}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Time</b><br>${esc(r.time)}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Location</b><br>${esc(r.location)}</td></tr><tr><td style="padding:2mm;border:1px solid #d3e0e8"><b>Company</b><br>${esc(r.company)}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Inspector</b><br>${esc(r.inspector)}</td><td style="padding:2mm;border:1px solid #d3e0e8"><b>Activity</b><br>${esc(r.activity)}</td></tr></table><h2>2. FINDINGS &amp; CORRECTIVE ACTIONS</h2>${findingHtml}<h2>3. OVERALL REMARKS</h2><div style="border:1px solid #d3e0e8;padding:3mm;min-height:12mm">${esc(r.remarks||"—")}</div><h2 class="dss-pdf-signatures-title">4. SIGNATURE / ACKNOWLEDGEMENT</h2><table class="dss-pdf-signature-table" style="width:100%;max-width:100%;table-layout:fixed;border-collapse:collapse;font-size:7pt;overflow-wrap:anywhere"><tr><th style="width:33.333%;background:#e5f0f7;padding:1.5mm;border:1px solid #cbdce8;overflow-wrap:anywhere">Inspector</th><th style="width:33.333%;background:#e5f0f7;padding:1.5mm;border:1px solid #cbdce8;overflow-wrap:anywhere">Reviewer</th><th style="width:33.333%;background:#e5f0f7;padding:1.5mm;border:1px solid #cbdce8;overflow-wrap:anywhere">Approver (if required)</th></tr><tr><td style="padding:2mm;border:1px solid #cbdce8;height:24mm">${(String(r.inspectorSignatureDataUrl||"").startsWith("data:image/")||r.inspectorSignatureUrl)?`<div class="dss-pdf-signature-block"><img src="${esc(String(r.inspectorSignatureDataUrl||"").startsWith("data:image/")?r.inspectorSignatureDataUrl:dssDriveImageUrl(r.inspectorSignatureUrl))}" alt="Inspector signature"></div>`:`<div class="dss-pdf-signature-block"></div>`}${esc(r.inspector)}<br>Date: ${esc(dssPrettyDate(r.inspectorSignedAt))}</td><td style="padding:2mm;border:1px solid #cbdce8">${(String(r.reviewerSignatureDataUrl||"").startsWith("data:image/")||r.reviewerSignatureUrl)?`<div class="dss-pdf-signature-block"><img src="${esc(String(r.reviewerSignatureDataUrl||"").startsWith("data:image/")?r.reviewerSignatureDataUrl:dssDriveImageUrl(r.reviewerSignatureUrl))}" alt="Reviewer signature"></div>`:`<div class="dss-pdf-signature-block"></div>`}${esc(r.acknowledgedBy||"")}<br>Date: ${esc(r.acknowledgedAt?dssPrettyDate(r.acknowledgedAt):"—")}${String(r.status).toLowerCase()!=="acknowledged"?(r.previousAcknowledgementDate?`<br>Previous acknowledgement date: ${esc(dssPrettyDate(r.previousAcknowledgementDate))}`:"")+"<br><b>Pending acknowledgement</b>":""}</td><td style="padding:2mm;border:1px solid #cbdce8">Name:<br>Designation:<br>Date:</td></tr></table></div>`;
   shell.style.width="178mm";shell.style.maxWidth="178mm";shell.style.margin="0 auto";shell.style.position="relative";shell.style.left="auto";shell.style.top="auto";shell.style.background="#fff";document.body.appendChild(shell);
   try{await Promise.all([...shell.querySelectorAll("img")].map(img=>img.complete&&img.naturalWidth>0?Promise.resolve():new Promise(res=>{const done=()=>res();img.addEventListener("load",done,{once:true});img.addEventListener("error",done,{once:true});setTimeout(done,3500);})));const opt={margin:[4,15,8,15],filename:`${r.surveillanceNo||"Daily-Site-Surveillance"}.pdf`,image:{type:"jpeg",quality:0.96},html2canvas:{scale:2,useCORS:true,allowTaint:false,backgroundColor:"#ffffff",scrollY:0},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},pagebreak:{mode:["css"],avoid:[".wp-pdf-header",".wp-pdf-title-row",".dss-pdf-signatures-title",".dss-pdf-signature-table","table tr","img"]}};const worker=html2pdf().set(opt).from(shell).toPdf();const pdf=await worker.get("pdf");const pages=pdf.internal.getNumberOfPages();for(let i=1;i<=pages;i++){pdf.setPage(i);pdf.setDrawColor(11,103,170);pdf.setLineWidth(.65);pdf.line(15,pdf.internal.pageSize.getHeight()-11.5,pdf.internal.pageSize.getWidth()-15,pdf.internal.pageSize.getHeight()-11.5);pdf.setFont("helvetica","normal");pdf.setFontSize(6.2);pdf.setTextColor(92,110,121);pdf.text("Daily Site Surveillance",15,pdf.internal.pageSize.getHeight()-6.5);pdf.text(`Page ${i} of ${pages}`,pdf.internal.pageSize.getWidth()-15,pdf.internal.pageSize.getHeight()-6.5,{align:"right"});}await worker.save();}
   finally{shell.remove();}
@@ -8643,17 +8650,56 @@ async function hcDeleteLocation(id, locationName){
   try{await hcPost({action:'headcount_location_delete',locationId:id});hcMsg('Location deactivated; history preserved.');hcDataCache=null;await hcLoad(true);}
   catch(err){hcMsg(err.message||String(err),true);}finally{if(typeof hidePortalLoading==='function')hidePortalLoading();}
 }
-function hcPrintPdf(){
+async function hcPrintPdf(){
   if(!hcDataCache){hcMsg('Load the headcount records before exporting.',true);return;}
   if(!hcFiltersApplied){hcMsg('Please apply a filter or enter a search before exporting.',true);return;}
+  if(typeof html2pdf!=='function'){hcMsg('PDF library is unavailable. Please refresh the portal and try again.',true);return;}
   const rows=hcFilteredPeople();
   if(!rows.length){hcMsg('There are no matching people to export.',true);return;}
-  const oldTitle=document.title;
-  document.title=(document.getElementById('hcFilterMode')?.value==='HISTORY'?'Movement Log':'Emergency Roll-Call')+' - '+(document.getElementById('hcFilterDate')?.value||'Current')+' - '+new Date().toLocaleString();
-  hcPrinting=true;hcRenderTable();
-  window.print();
-  hcPrinting=false;hcRenderTable();
-  setTimeout(()=>{document.title=oldTitle;},1000);
+
+  const mode=document.getElementById('hcFilterMode')?.value||'EMERGENCY';
+  const reportTitle=mode==='HISTORY'?'MOVEMENT LOG':'EMERGENCY HEADCOUNT LIST';
+  const selectedDate=document.getElementById('hcFilterDate')?.value||'';
+  const dateLabel=selectedDate?new Date(selectedDate+'T00:00:00').toLocaleDateString():'Current status';
+  const typeLabel=document.getElementById('hcFilterType')?.selectedOptions?.[0]?.textContent||'Workers and Visitors';
+  const movementLabel=document.getElementById('hcFilterMovement')?.selectedOptions?.[0]?.textContent||'All statuses';
+  const locationLabel=document.getElementById('hcFilterLocation')?.selectedOptions?.[0]?.textContent||'All locations';
+  const searchValue=document.getElementById('hcFilterSearch')?.value?.trim()||'';
+  const generatedAt=new Date().toLocaleString();
+  const tableRows=rows.map((p,i)=>{
+    const movement=p.movementType==='DEPART_TO_MARINE'?'DEPARTED TO MARINE':p.movementType==='RETURN_TO_LAND'?'RETURNED TO LAND':(p.movementStatus||'UNKNOWN');
+    const timestamp=p.movementTimestamp?new Date(p.movementTimestamp).toLocaleString():'—';
+    const status=p.passStatus||p.recordStatus||'—';
+    return `<tr><td class="num">${i+1}</td><td class="name">${hcEsc(p.name||'—')}</td><td>${hcEsc(p.idNumber||p.personId||'—')}</td><td>${hcEsc(p.company||'—')}</td><td>${hcEsc(p.personType||'—')}</td><td class="movement ${movement==='DEPARTED TO MARINE'?'marine':movement==='RETURNED TO LAND'?'land':''}">${hcEsc(movement)}</td><td>${hcEsc(p.location||'—')}</td><td>${hcEsc(timestamp)}</td><td>${hcEsc(status)}</td></tr>`;
+  }).join('');
+
+  let shell=null;
+  if(typeof showPortalLoading==='function')showPortalLoading('Generating Emergency Headcount PDF…');
+  try{
+    shell=document.createElement('div');
+    shell.style.cssText='position:fixed;left:-20000px;top:0;width:1100px;background:#fff;z-index:-1;';
+    shell.innerHTML=`<div class="hc-pdf-report" style="font-family:Arial,Helvetica,sans-serif;color:#142b45;background:#fff;width:1100px;padding:28px 30px;font-size:12px;">
+      <header style="border-bottom:3px solid #1670b7;padding-bottom:12px;margin-bottom:14px;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.7px;color:#15558b;">PENTA-OCEAN CONSTRUCTION</div>
+        <h1 style="font-size:23px;margin:7px 0 4px;letter-spacing:.2px;">${reportTitle}</h1>
+        <div style="font-size:11px;color:#40566d;line-height:1.4;">ENGINEERING, PROCUREMENT AND CONSTRUCTION (EPC) OF JETTY 3 EXPANSION &amp; ASSOCIATED DREDGING (PHASE 1)</div>
+      </header>
+      <div style="display:flex;flex-wrap:wrap;gap:8px 20px;margin:12px 0;font-size:10px;color:#263e56;">
+        <span><b>Movement date:</b> ${hcEsc(dateLabel)}</span><span><b>Person type:</b> ${hcEsc(typeLabel)}</span><span><b>Movement status:</b> ${hcEsc(movementLabel)}</span><span><b>Marine location:</b> ${hcEsc(locationLabel)}</span>${searchValue?`<span><b>Search:</b> ${hcEsc(searchValue)}</span>`:''}<span style="margin-left:auto;font-weight:700;color:#15558b;">Total records: ${rows.length}</span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;table-layout:fixed;font-size:9px;">
+        <thead><tr>${['No.','Name','ID / IC / Passport','Company','Person Type','Movement Status','Marine Location','Movement Date / Time','Pass / Record Status'].map((h,i)=>`<th style="background:#e8f1f9;color:#123e68;font-weight:700;text-align:left;border:1px solid #b9cddd;padding:8px 5px;vertical-align:middle;width:${[4,14,12,13,8,13,14,14,8][i]}%;">${h}</th>`).join('')}</tr></thead>
+        <tbody>${tableRows}</tbody>
+      </table>
+      <div style="margin-top:12px;padding-top:7px;border-top:1px solid #b9cddd;font-size:9px;color:#63778a;display:flex;justify-content:space-between;gap:20px;"><span>Generated: ${hcEsc(generatedAt)} · HSE Portal</span><span>For emergency roll-call verification — confirm physical presence at assembly point.</span></div>
+    </div>`;
+    document.body.appendChild(shell);
+    const filename=(mode==='HISTORY'?'Movement-Log':'Emergency-Headcount')+'-'+(selectedDate||new Date().toISOString().slice(0,10))+'.pdf';
+    const opt={margin:[8,7,10,7],filename,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,scrollX:0,scrollY:0},jsPDF:{unit:'mm',format:'a4',orientation:'landscape',compress:true},pagebreak:{mode:['css','legacy'],avoid:['tr']}};
+    await html2pdf().set(opt).from(shell.querySelector('.hc-pdf-report')).save();
+    hcMsg('PDF downloaded successfully.',false);
+  }catch(err){hcMsg('Unable to generate PDF: '+(err.message||String(err)),true);}
+  finally{if(shell&&shell.parentNode)shell.parentNode.removeChild(shell);if(typeof hidePortalLoading==='function')hidePortalLoading();}
 }
 
 </script>
@@ -9144,4 +9190,25 @@ document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[da
 
 /* Security Control digital-pass actions — isolated additions */
 #page-security-control .sc-visitor-id-cell{display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:145px}#page-security-control .sc-pass-tools{display:flex;gap:5px;flex-wrap:wrap}#page-security-control .sc-pass-tools .sc-action-btn{font-size:10px;min-height:28px;padding:6px 8px}#page-security-control .sc-action-btn.sc-view-pass-btn{background:#176fb1;color:#fff}#page-security-control .sc-action-btn.sc-download-pass-btn{background:#15803d;color:#fff}#page-security-control .sc-action-btn.sc-view-pass-btn:hover,#page-security-control .sc-action-btn.sc-download-pass-btn:hover{filter:brightness(.94)}@media(max-width:600px){#page-security-control .sc-visitor-id-cell{min-width:130px}#page-security-control .sc-pass-tools{flex-direction:column;align-items:stretch}#page-security-control .sc-pass-tools .sc-action-btn{width:100%}}
+</style>
+
+
+<style id="wp-signature-inner-containers-fix">
+/* Appearance-only adjustment: give Inspector and Reviewer separate inner containers. */
+#page-inspection-form .wp-ack-grid{
+  border:0;
+  border-radius:0;
+  overflow:visible;
+  gap:12px;
+}
+#page-inspection-form .wp-ack-box{
+  border:1px solid var(--portal-line,#d9e6f2);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(20,63,105,.04);
+}
+#page-inspection-form .wp-ack-box+.wp-ack-box{border-left:1px solid var(--portal-line,#d9e6f2)}
+@media(max-width:600px){
+  #page-inspection-form .wp-ack-box+.wp-ack-box{border-top:1px solid var(--portal-line,#d9e6f2)}
+}
 </style>
