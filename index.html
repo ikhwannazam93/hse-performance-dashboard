@@ -3944,6 +3944,190 @@ input,select,textarea{touch-action:manipulation}
 }
 </style>
 
+
+<style>
+/* Emergency Headcount filters: align with the shared dashboard filter design. */
+#page-headcount-system .hc-filters{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-end;
+  gap:10px;
+  padding:14px;
+  margin:0 0 18px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+#page-headcount-system .hc-filters .field{min-width:145px;flex:1 1 145px}
+#page-headcount-system .hc-filters .field.small{min-width:120px;flex:0 0 145px}
+#page-headcount-system .hc-filters .field label{
+  display:block;
+  margin:0 0 5px;
+  color:#647985;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+}
+#page-headcount-system .hc-filters input,
+#page-headcount-system .hc-filters select{
+  width:100%;
+  height:36px;
+  min-width:0;
+  box-sizing:border-box;
+  padding:0 9px;
+  border:1px solid #cbd9e1;
+  border-radius:6px;
+  background:#fff;
+  color:var(--text);
+  font:inherit;
+  font-size:13px;
+}
+@media(max-width:700px){
+  #page-headcount-system .hc-filters .field,
+  #page-headcount-system .hc-filters .field.small{flex:1 1 100%;min-width:0}
+}
+</style>
+
+
+<style id="hc-dashboard-dropdown-multiselect-style">
+#page-headcount-system .hc-filters .field > select,
+#page-headcount-system .hc-filters .field > input,
+#page-headcount-system .hc-filters .hc-multi-filter .multi-select-trigger{
+  height:34px!important;min-height:34px!important;box-sizing:border-box!important;
+  padding:0 10px!important;border:1px solid #d3e1eb!important;border-radius:8px!important;
+  background:#f7fafc!important;color:#18384a!important;box-shadow:none!important;
+  font-size:13px!important;line-height:32px!important;
+}
+#page-headcount-system .hc-filters .hc-multi-filter .multi-select-trigger{
+  display:block;width:100%;text-align:left;padding-right:30px!important;position:relative;
+}
+#page-headcount-system .hc-filters .hc-multi-filter.open .multi-select-trigger{
+  border-color:#70b6df!important;box-shadow:0 0 0 2px rgba(0,103,165,.10)!important;
+}
+#page-headcount-system .hc-filters .hc-multi-filter .multi-select-menu{
+  width:280px;max-width:min(320px,80vw);z-index:1200;
+}
+#page-headcount-system .hc-filters .hc-multi-filter .multi-search{
+  width:100%;height:34px;min-height:34px;padding:7px 9px!important;
+  border:1px solid #d9e6ed!important;border-radius:8px!important;background:#fff!important;
+  box-sizing:border-box!important;
+}
+#page-headcount-system .hc-filters .hc-multi-filter .multi-option{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:7px!important;
+  width:100%!important;
+  min-height:32px!important;
+  box-sizing:border-box!important;
+  padding:6px 5px!important;
+  margin:0!important;
+  text-align:left!important;
+  white-space:normal!important;
+  border-radius:5px!important;
+  color:#526b82!important;
+  font-size:10px!important;
+  line-height:1.25!important;
+  font-weight:700!important;
+  text-transform:uppercase!important;
+  letter-spacing:.25px!important;
+  cursor:pointer!important;
+}
+#page-headcount-system .hc-filters .hc-multi-filter .multi-option:hover{background:#f3f8fa!important}
+#page-headcount-system .hc-filters .hc-multi-filter .multi-option input[type="checkbox"]{
+  display:inline-block!important;
+  appearance:auto!important;-webkit-appearance:checkbox!important;
+  width:16px!important;min-width:16px!important;max-width:16px!important;
+  height:16px!important;min-height:16px!important;max-height:16px!important;
+  margin:0!important;padding:0!important;
+  flex:0 0 16px!important;
+  align-self:center!important;
+  accent-color:#0067a5!important;
+}
+#page-headcount-system .hc-filters .hc-multi-filter .multi-option span{
+  display:inline-block!important;
+  flex:1 1 auto!important;
+  min-width:0!important;
+  width:auto!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:left!important;
+  line-height:1.25!important;
+}
+#page-headcount-system .hc-filters .hc-multi-filter .multi-options{
+  max-height:230px!important;
+  overflow-y:auto!important;
+  padding:4px 0!important;
+  border-top:1px solid #edf2f5!important;
+  border-bottom:1px solid #edf2f5!important;
+}
+#page-headcount-system .hc-filters .hc-multi-filter .multi-all{
+  font-weight:800!important;
+  color:#526b82!important;
+}
+#page-headcount-system .hc-filters .multi-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
+@media(max-width:650px){
+  #page-headcount-system .hc-filters .hc-multi-filter .multi-select-menu{width:min(280px,calc(100vw - 42px));}
+}
+</style>
+
+
+<style id="hc-headcount-table-readability">
+/* Keep the emergency list readable: wider Name column with horizontal scrolling. */
+#page-headcount-system .hc-headcount-table-wrap{
+  width:100%;
+  max-width:100%;
+  overflow-x:auto!important;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-gutter:stable;
+}
+#page-headcount-system .hc-headcount-table{
+  width:100%;
+  min-width:1450px!important;
+  table-layout:fixed;
+}
+#page-headcount-system .hc-headcount-table th:nth-child(1),
+#page-headcount-system .hc-headcount-table td:nth-child(1){width:55px}
+#page-headcount-system .hc-headcount-table th:nth-child(2),
+#page-headcount-system .hc-headcount-table td:nth-child(2){width:230px;min-width:230px}
+#page-headcount-system .hc-headcount-table th:nth-child(3),
+#page-headcount-system .hc-headcount-table td:nth-child(3){width:145px}
+#page-headcount-system .hc-headcount-table th:nth-child(4),
+#page-headcount-system .hc-headcount-table td:nth-child(4){width:130px}
+#page-headcount-system .hc-headcount-table th:nth-child(5),
+#page-headcount-system .hc-headcount-table td:nth-child(5){width:150px}
+#page-headcount-system .hc-headcount-table th:nth-child(6),
+#page-headcount-system .hc-headcount-table td:nth-child(6){width:105px}
+#page-headcount-system .hc-headcount-table th:nth-child(7),
+#page-headcount-system .hc-headcount-table td:nth-child(7){width:170px}
+#page-headcount-system .hc-headcount-table th:nth-child(8),
+#page-headcount-system .hc-headcount-table td:nth-child(8){width:180px}
+#page-headcount-system .hc-headcount-table th:nth-child(9),
+#page-headcount-system .hc-headcount-table td:nth-child(9){width:175px}
+#page-headcount-system .hc-headcount-table th:nth-child(10),
+#page-headcount-system .hc-headcount-table td:nth-child(10){width:140px}
+#page-headcount-system .hc-headcount-table td:nth-child(2){
+  white-space:normal!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  min-width:230px;
+}
+#page-headcount-system .hc-headcount-table td:nth-child(2) strong{
+  display:block;
+  white-space:normal!important;
+  overflow-wrap:break-word!important;
+  word-break:normal!important;
+  line-height:1.35;
+}
+@media(max-width:700px){
+  #page-headcount-system .hc-headcount-table{min-width:1450px!important}
+}
+</style>
+
 </head>
 <body>
 <div id="portalLoadingOverlay" class="portal-loading-overlay" role="status" aria-live="polite" aria-hidden="true">
@@ -4257,19 +4441,20 @@ input,select,textarea{touch-action:manipulation}
 
     <div class="hc-panel">
       <div class="hc-panel-heading"><h3>Emergency Headcount List</h3><span id="hcGeneratedAt" class="hc-updated">Not loaded</span></div>
-      <div class="hc-filters">
-        <label>List Mode<select id="hcFilterMode" onchange="hcModeChanged()"><option value="EMERGENCY">Emergency Roll-Call</option><option value="HISTORY">Movement Log (selected date)</option></select></label>
-        <label>Person Type<select id="hcFilterType" onchange="hcFiltersChanged()"><option value="ALL">Workers and Visitors</option><option value="Worker">Workers only</option><option value="Visitor">Visitors only</option></select></label>
-        <label>Movement Status<select id="hcFilterMovement" onchange="hcFiltersChanged()"><option value="ON MARINE SIDE" selected>On marine side</option><option value="ALL">All statuses</option><option value="ON LAND SIDE / NO OPEN TRIP">On land side / no open trip</option></select></label>
-        <label>Marine Location<select id="hcFilterLocation" onchange="hcFiltersChanged()"><option value="ALL">All locations</option></select></label>
-        <label>Movement Date<input id="hcFilterDate" type="date" onchange="hcFiltersChanged()" aria-label="Filter movement log by date"></label>
-        <label>Search Name / Company / ID<input id="hcFilterSearch" type="search" placeholder="Type to search…" oninput="hcFiltersChanged()"></label>
+      <div class="filters hc-filters">
+        <div class="field"><label>List Mode</label><select id="hcFilterMode" onchange="hcModeChanged()"><option value="EMERGENCY">Emergency Roll-Call</option><option value="HISTORY">Movement Log</option></select></div>
+        <div class="field"><label>Person Type</label><div id="hcFilterType" class="multi-select hc-multi-filter" aria-label="Person type filter"></div></div>
+        <div class="field"><label>Movement Status</label><div id="hcFilterMovement" class="multi-select hc-multi-filter" aria-label="Movement status filter"></div></div>
+        <div class="field"><label>Marine Location</label><div id="hcFilterLocation" class="multi-select hc-multi-filter" aria-label="Marine location filter"></div></div>
+        <div class="field small"><label>From Date</label><input id="hcFilterStartDate" type="date" onchange="hcFiltersChanged()" aria-label="Filter movement from date"></div>
+        <div class="field small"><label>Until Date</label><input id="hcFilterEndDate" type="date" onchange="hcFiltersChanged()" aria-label="Filter movement until date"></div>
+        <div class="field"><label>Search Name / Company / ID / Phone</label><input id="hcFilterSearch" type="search" placeholder="Type to search…" oninput="hcFiltersChanged()"></div>
       </div>
       <div class="hc-table-tools">
         <span id="hcResultCount">Apply a filter or enter a search to display people.</span>
         <button type="button" class="hc-secondary-btn" onclick="hcPrintPdf()">Download / Save PDF</button>
       </div>
-      <div class="hc-table-wrap"><table class="hc-table"><thead><tr><th>No.</th><th>Name</th><th>ID / IC / Passport</th><th>Company</th><th>Person Type</th><th>Movement Status</th><th>Marine Location</th><th>Movement Date / Time</th><th>Pass / Record Status</th></tr></thead><tbody id="hcTableBody"><tr><td colspan="9" class="hc-empty">Select Emergency Roll-Call and keep “On marine side” to list people expected to return from marine.</td></tr></tbody></table></div>
+      <div class="hc-table-wrap hc-headcount-table-wrap"><table class="hc-table hc-headcount-table"><thead><tr><th>No.</th><th>Name</th><th>ID / IC / Passport</th><th>Phone Number</th><th>Company</th><th>Person Type</th><th>Movement Status</th><th>Marine Location</th><th>Movement Date / Time</th><th>Pass / Record Status</th></tr></thead><tbody id="hcTableBody"><tr><td colspan="10" class="hc-empty">Select Emergency Roll-Call and keep “On marine side” to list people expected to return from marine.</td></tr></tbody></table></div>
       <div class="hc-pagination" id="hcPagination" hidden>
         <span id="hcPageInfo">Page 1</span>
         <div><button type="button" class="hc-secondary-btn" id="hcPrevPage" onclick="hcChangePage(-1)">‹ Previous</button><button type="button" class="hc-secondary-btn" id="hcNextPage" onclick="hcChangePage(1)">Next ›</button></div>
@@ -7214,22 +7399,14 @@ function renderWPAcknowledgementPanel(){
  const inspectorName=document.getElementById("wpInspectionInspector")?.value||"";
  const reviewerName=wpCurrentSignatures.acknowledgedBy||document.getElementById("wpInspectionReviewer")?.value||DATA.adminReviewer||"";
  const fmt=value=>{
-  const raw=String(value||"").trim();if(!raw)return"";
-  const mo=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  // Backend audit timestamps without a zone are explicitly Malaysia-local text.
-  // Do not pass them through Date(), which can reinterpret them using the browser timezone.
-  const local=raw.match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T]\d{2}:\d{2}(?::\d{2})?)?$/);
-  if(local)return `${local[3]} ${mo[+local[2]-1]||""} ${local[1]}`;
-  // Only timestamps with an explicit timezone suffix are converted to Malaysia time.
-  if(/[zZ]$|[+-]\d{2}:?\d{2}$/.test(raw)){
-    const d=new Date(raw);if(Number.isNaN(d.getTime()))return"";
-    const parts=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Kuala_Lumpur",day:"2-digit",month:"short",year:"numeric"}).formatToParts(d);
-    const val=type=>parts.find(p=>p.type===type)?.value||"";
-    return `${val("day")} ${val("month")} ${val("year")}`;
-  }
+  // Match Daily Site Surveillance exactly: preserve the date portion of
+  // ISO/backend date strings; only parse other formats and display Malaysia time.
+  const raw=String(value||"");
+  if(!raw)return"";
   const m=raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
-  if(m)return `${m[3]} ${mo[+m[2]-1]||""} ${m[1]}`;
-  return "";
+  if(m)return `${Number(m[3])} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][Number(m[2])-1]} ${m[1]}`;
+  const d=new Date(raw);
+  return Number.isNaN(d.getTime())?raw:d.toLocaleDateString("en-GB",{timeZone:"Asia/Kuala_Lumpur",day:"2-digit",month:"short",year:"numeric"});
  };
  const sig=(id,data,url)=>{const img=document.getElementById(id);if(!img)return;const src=String(data||"").startsWith("data:image/")?data:(url?wpDrivePreviewUrl(url):"");img.src=src;img.style.display=src?"block":"none";img.onerror=()=>{img.style.display="none";};};
  sig("wpAckInspectorSignature",wpCurrentSignatures.inspectorDataUrl,wpCurrentSignatures.inspectorUrl);
@@ -7281,7 +7458,7 @@ async function loadWPInspectionRecord(inspectionNo,mode="view"){
     wpCurrentSignatures={
       inspectorUrl:s.inspectorSignatureUrl||sig.inspectorUrl||"",
       inspectorDataUrl:s.inspectorSignatureDataUrl||sig.inspectorDataUrl||"",
-      inspectorSignedAt:s.submittedAt||s.inspectorSignedAt||sig.inspectorSignedAt||"",
+      inspectorSignedAt:s.inspectorSignedAt||sig.inspectorSignedAt||s.submittedAt||"",
       reviewerUrl:s.reviewerSignatureUrl||sig.reviewerUrl||"",
       reviewerDataUrl:s.reviewerSignatureDataUrl||sig.reviewerDataUrl||"",
       acknowledgedBy:s.acknowledgedBy||s.reviewerName||sig.acknowledgedBy||matchingLogRecord?.acknowledgedBy||"",
@@ -7883,21 +8060,22 @@ function scShowRequestDetail(id){if(!scIsAdmin()){scMsg('Only admin users can vi
 function scBackToRequests(){document.getElementById('scRequestDetailPanel').style.display='none';document.getElementById('scRequestsPanel').style.display='block';document.getElementById('scTabButtons').style.display='flex';const filters=document.getElementById('scFilters');if(filters)filters.style.display='grid';scActiveTab='requests';scSyncFilterControls();}
 function scParseDate(value){if(!value)return null;if(value instanceof Date&&!isNaN(value))return value;const s=String(value).trim();let m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(m){const d=new Date(Number(m[3]),Number(m[1])-1,Number(m[2]));return isNaN(d)?null:d;}m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);if(m){const d=new Date(Number(m[1]),Number(m[2])-1,Number(m[3]));return isNaN(d)?null:d;}const d=new Date(s);return isNaN(d)?null:d;}
 function scDayStart(value){const d=scParseDate(value);return d?new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime():null;}
+function scDisplayDate(value){const d=scParseDate(value);if(!d)return String(value||'—');return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();}
 function scEffectivePassStatus(v){
  const stored=String(v.Pass_Status||'').trim().toUpperCase();
  if(stored==='REVOKED')return 'REVOKED';
  if(stored!=='ACTIVE')return stored||'UNKNOWN';
- const parseExact=value=>{
-  const t=String(value||'').trim();
-  let m=t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[ ,T]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
-  if(m)return new Date(+m[3],+m[1]-1,+m[2],+(m[4]||0),+(m[5]||0),+(m[6]||0));
-  m=t.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:[ T]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
-  if(m)return new Date(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0),+(m[6]||0));
-  return new Date(t);
- };
- const now=Date.now(),start=parseExact(v.Visit_Start_Date),end=parseExact(v.Visit_End_Date);
- if(Number.isFinite(end.getTime())&&now>end.getTime())return 'EXPIRED';
- if(Number.isFinite(start.getTime())&&now<start.getTime())return 'UPCOMING';
+
+ // Pass validity is determined by calendar dates, not midnight timestamps.
+ // A pass remains valid throughout its selected end date.
+ const today=new Date();
+ const todayDay=new Date(today.getFullYear(),today.getMonth(),today.getDate()).getTime();
+ const startDay=scDayStart(v.Visit_Start_Date);
+ let endDay=scDayStart(v.Pass_Expiry_Date);
+ if(endDay===null)endDay=scDayStart(v.Visit_End_Date);
+
+ if(endDay!==null&&todayDay>endDay)return 'EXPIRED';
+ if(startDay!==null&&todayDay<startDay)return 'UPCOMING';
  return 'ACTIVE';
 }
 function scRenderKpis(d){const requests=d.requests||[],visitors=d.visitors||[],movements=d.movements||[];const norm=v=>String(v||'').trim().toUpperCase().replace(/[ _-]+/g,' ');const today=new Date();const todayStart=new Date(today.getFullYear(),today.getMonth(),today.getDate()).getTime();
@@ -7911,7 +8089,7 @@ function scRenderKpis(d){const requests=d.requests||[],visitors=d.visitors||[],m
 function scRender(){const d=scDataCache||{requests:[],visitors:[],movements:[]};scRenderKpis(d);
  const requests=scFilterRows('requests',d.requests||[]).map(r=>{const visitors=(r.Expected_Visitors||[]).map(v=>scEsc(v.name)+(v.company?' ('+scEsc(v.company)+')':'')+(v.registrationStatus?' — '+scEsc(v.registrationStatus):'')).join('<br>');const status=String(r.Request_Status||'PENDING APPROVAL').toUpperCase();return '<tr><td>'+scEsc(r.Request_ID)+'</td><td>'+scEsc(r.Host_Name)+'<br><small>'+scEsc(r.Host_Email)+'</small></td><td>'+scEsc(r.Visit_Purpose)+'</td><td>'+scEsc(r.Destination)+'</td><td>'+scEsc(r.Visit_Start_Date)+' – '+scEsc(r.Visit_End_Date)+'</td><td>'+scEsc(r.Total_Visitors)+'</td><td>'+visitors+'</td><td><span class="sc-status-pill '+(/APPROVED/.test(status)?'approved':/REJECTED|CANCELLED|EXPIRED/.test(status)?'closed':'pending')+'">'+scEsc(status)+'</span></td><td>'+(scIsAdmin()?'<button type="button" class="dss-view-only-btn" data-request-id="'+scEsc(r.Request_ID)+'" onclick="scShowRequestDetail(this.dataset.requestId)">View</button>':'<span class="sc-readonly-note">Admin only</span>')+'</td></tr>';});
  document.getElementById('scRequestsTable').innerHTML=scTable(['Request ID','Host','Purpose','Destination','Visit Dates','Visitors','Expected Visitors','Status','Action'],requests);
- const visitors=scFilterRows('visitors',d.visitors||[]).map(v=>{const status=scEffectivePassStatus(v);const next=String(v.Pass_Status||'').toUpperCase()==='REVOKED'?'ACTIVE':'REVOKED';const passControls=scIsAdmin()?'<div class="sc-pass-tools"><button type="button" class="sc-action-btn sc-view-pass-btn" data-visitor-id="'+scEsc(v.Visitor_ID)+'" onclick="scViewPass(this.dataset.visitorId)">View Pass</button></div>':'<span class="sc-readonly-note">Admin only</span>';return '<tr><td><div class="sc-visitor-id-cell"><strong>'+scEsc(v.Visitor_ID)+'</strong>'+passControls+'</div></td><td>'+scEsc(v.Full_Name)+'</td><td>'+scEsc(v.IC_Passport_No)+'</td><td>'+scEsc(v.Company)+'</td><td>'+scEsc(v.Host_Name)+'</td><td>'+scEsc(v.Request_ID)+'</td><td>'+scEsc(v.Visit_Start_Date)+' – '+scEsc(v.Visit_End_Date)+'</td><td><span class="sc-status-pill '+(status==='ACTIVE'?'approved':status==='UPCOMING'?'pending':'closed')+'">'+scEsc(status)+'</span></td><td>'+(scIsAdmin()?'<button type="button" class="sc-action-btn '+(next==='ACTIVE'?'approve':'revoke')+'" data-visitor-id="'+scEsc(v.Visitor_ID)+'" data-next-status="'+next+'" onclick="scUpdatePass(this.dataset.visitorId,this.dataset.nextStatus)">'+(next==='ACTIVE'?'Reactivate':'Revoke')+'</button>':'<span class="sc-readonly-note">Admin only</span>')+'</td></tr>';});
+ const visitors=scFilterRows('visitors',d.visitors||[]).map(v=>{const status=scEffectivePassStatus(v);const next=String(v.Pass_Status||'').toUpperCase()==='REVOKED'?'ACTIVE':'REVOKED';const passControls=scIsAdmin()?'<div class="sc-pass-tools"><button type="button" class="sc-action-btn sc-view-pass-btn" data-visitor-id="'+scEsc(v.Visitor_ID)+'" onclick="scViewPass(this.dataset.visitorId)">View Pass</button></div>':'<span class="sc-readonly-note">Admin only</span>';return '<tr><td><div class="sc-visitor-id-cell"><strong>'+scEsc(v.Visitor_ID)+'</strong>'+passControls+'</div></td><td>'+scEsc(v.Full_Name)+'</td><td>'+scEsc(v.IC_Passport_No)+'</td><td>'+scEsc(v.Company)+'</td><td>'+scEsc(v.Host_Name)+'</td><td>'+scEsc(v.Request_ID)+'</td><td>'+scEsc(scDisplayDate(v.Visit_Start_Date))+' – '+scEsc(scDisplayDate(v.Visit_End_Date))+'</td><td><span class="sc-status-pill '+(status==='ACTIVE'?'approved':status==='UPCOMING'?'pending':'closed')+'">'+scEsc(status)+'</span></td><td>'+(scIsAdmin()?'<button type="button" class="sc-action-btn '+(next==='ACTIVE'?'approve':'revoke')+'" data-visitor-id="'+scEsc(v.Visitor_ID)+'" data-next-status="'+next+'" onclick="scUpdatePass(this.dataset.visitorId,this.dataset.nextStatus)">'+(next==='ACTIVE'?'Reactivate':'Revoke')+'</button>':'<span class="sc-readonly-note">Admin only</span>')+'</td></tr>';});
  document.getElementById('scVisitorsTable').innerHTML=scTable(['Visitor ID / Digital Pass','Full Name','IC/Passport','Company','Host','Request ID','Visit Dates','Pass Status','Action'],visitors);
  const movements=scFilterRows('movements',d.movements||[]).map(m=>'<tr><td>'+scEsc(m.Timestamp)+'</td><td>'+scEsc(m.Person_Type)+'</td><td>'+scEsc(m.Person_Name)+'</td><td>'+scEsc(m.Person_ID)+'</td><td>'+scEsc(m.Movement_Type)+'</td><td>'+scEsc(m.Location_ID)+'</td><td>'+scEsc(m.Recorded_By)+'</td><td>'+scEsc(m.Remarks)+'</td></tr>');
  document.getElementById('scMovementsTable').innerHTML=scTable(['Timestamp','Person Type','Name','Person ID','Movement','Location','Recorded By','Remarks'],movements);
@@ -8769,6 +8947,8 @@ async function hcLoad(force){
   if(typeof showPortalLoading==='function')showPortalLoading('Loading emergency headcount data…');
   try{
     hcDataCache=await hcPost({action:'headcount_admin_data'});
+    hcBuildMultiFilter('hcFilterType',['Worker','Visitor'],[],'Workers and Visitors');
+    hcBuildMultiFilter('hcFilterMovement',['ON MARINE SIDE','ON LAND SIDE / NO OPEN TRIP'],['ON MARINE SIDE'],'On marine side');
     hcRenderLocations();hcRenderTable();
     const d=new Date(hcDataCache.generatedAt);
     document.getElementById('hcGeneratedAt').textContent='Updated '+(isNaN(d.getTime())?'just now':d.toLocaleString());
@@ -8777,19 +8957,79 @@ async function hcLoad(force){
     document.querySelectorAll('#page-headcount-system .hc-location-tools input,#page-headcount-system .hc-location-tools select,#page-headcount-system .hc-location-tools button').forEach(el=>{el.disabled=!admin;});
     const note=document.querySelector('#page-headcount-system .hc-admin-note');
     if(note)note.textContent=admin?'Admin access':'Admin access required';
-  }catch(err){hcSetRefresh('Load failed');hcMsg(err.message||String(err),true);document.getElementById('hcTableBody').innerHTML='<tr><td colspan="9" class="hc-empty">Could not load headcount records. Please refresh or log in again.</td></tr>';document.getElementById('hcLocationTableBody').innerHTML='<tr><td colspan="5" class="hc-empty">Could not load marine locations.</td></tr>';}
+  }catch(err){hcSetRefresh('Load failed');hcMsg(err.message||String(err),true);document.getElementById('hcTableBody').innerHTML='<tr><td colspan="10" class="hc-empty">Could not load headcount records. Please refresh or log in again.</td></tr>';document.getElementById('hcLocationTableBody').innerHTML='<tr><td colspan="5" class="hc-empty">Could not load marine locations.</td></tr>';}
   finally{hcLoading=false;if(refreshBtn){refreshBtn.disabled=false;refreshBtn.classList.remove('is-refreshing');}if(typeof hidePortalLoading==='function')hidePortalLoading();}
 }
+
+function hcBuildMultiFilter(id, values, defaultSelected, allLabel, onApply){
+  const wrap=document.getElementById(id);
+  if(!wrap)return;
+  const previous=Array.isArray(wrap._selected)?wrap._selected.slice():null;
+  const selected=previous?previous.filter(v=>values.includes(v)):(defaultSelected||[]).filter(v=>values.includes(v));
+  wrap.innerHTML='';
+  wrap.classList.add('multi-select','hc-multi-filter');
+  wrap._selected=selected;
+  const trigger=document.createElement('button');
+  trigger.type='button';trigger.className='multi-select-trigger';
+  trigger.setAttribute('aria-haspopup','listbox');trigger.setAttribute('aria-expanded','false');
+  const menu=document.createElement('div');menu.className='multi-select-menu';
+  const search=document.createElement('input');
+  search.type='search';search.className='multi-search';search.placeholder='Search...';
+  search.setAttribute('aria-label','Search filter options');menu.appendChild(search);
+  const list=document.createElement('div');list.className='multi-options';
+  const allRow=document.createElement('label');allRow.className='multi-option multi-all';
+  const allCb=document.createElement('input');allCb.type='checkbox';allCb.checked=selected.length===0;
+  const allText=document.createElement('span');allText.textContent=allLabel||'All';
+  allRow.append(allCb,allText);list.appendChild(allRow);
+  const checks=[];
+  values.forEach(value=>{
+    const row=document.createElement('label');row.className='multi-option';
+    const cb=document.createElement('input');cb.type='checkbox';cb.value=value;cb.checked=selected.includes(value);
+    const text=document.createElement('span');text.textContent=value;
+    row.append(cb,text);list.appendChild(row);checks.push(cb);
+  });
+  menu.appendChild(list);
+  const actions=document.createElement('div');actions.className='multi-actions';
+  const clear=document.createElement('button');clear.type='button';clear.className='multi-clear';clear.textContent='Clear';
+  const apply=document.createElement('button');apply.type='button';apply.className='multi-apply';apply.textContent='Apply';
+  actions.append(clear,apply);menu.appendChild(actions);
+  const updateTrigger=()=>{
+    const vals=wrap._selected||[];
+    trigger.innerHTML=vals.length?'<span class="multi-count">'+vals.length+'</span> '+(vals.length===1?hcEsc(vals[0]):vals.length+' selected'):hcEsc(allLabel||'All');
+  };
+  const close=()=>{wrap.classList.remove('open');trigger.setAttribute('aria-expanded','false');};
+  allCb.addEventListener('change',()=>{if(allCb.checked)checks.forEach(cb=>cb.checked=false);});
+  checks.forEach(cb=>cb.addEventListener('change',()=>{if(cb.checked)allCb.checked=false;if(!checks.some(x=>x.checked))allCb.checked=true;}));
+  search.addEventListener('input',()=>{
+    const q=search.value.trim().toLowerCase();
+    checks.forEach(cb=>{cb.parentElement.style.display=cb.value.toLowerCase().includes(q)?'flex':'none';});
+  });
+  clear.addEventListener('click',()=>{checks.forEach(cb=>cb.checked=false);allCb.checked=true;});
+  apply.addEventListener('click',()=>{
+    wrap._selected=checks.filter(cb=>cb.checked).map(cb=>cb.value);
+    updateTrigger();close();
+    if(typeof onApply==='function')onApply();else hcFiltersChanged();
+  });
+  trigger.addEventListener('click',e=>{
+    e.stopPropagation();
+    document.querySelectorAll('#page-headcount-system .hc-multi-filter.open').forEach(x=>{
+      if(x!==wrap){x.classList.remove('open');x.querySelector('.multi-select-trigger')?.setAttribute('aria-expanded','false');}
+    });
+    const opening=!wrap.classList.contains('open');
+    wrap.classList.toggle('open',opening);trigger.setAttribute('aria-expanded',String(opening));
+  });
+  menu.addEventListener('click',e=>e.stopPropagation());
+  wrap.append(trigger,menu);updateTrigger();
+}
+function hcMultiValues(id){
+  const values=document.getElementById(id)?._selected||[];
+  return values.length?values:['ALL'];
+}
+
 function hcRenderLocations(){
   const locations=hcDataCache?.locations||[];
-  const filter=document.getElementById('hcFilterLocation');
-  const oldFilter=filter.value;
-  filter.innerHTML='<option value="ALL">All locations</option>';
   const active=locations.filter(l=>String(l.locationStatus).toUpperCase()==='ACTIVE').sort((a,b)=>String(a.locationName||'').localeCompare(String(b.locationName||'')));
-  active.forEach(l=>{
-    const option=document.createElement('option');option.value=l.locationName;option.textContent=l.locationName;filter.appendChild(option);
-  });
-  if([...filter.options].some(o=>o.value===oldFilter))filter.value=oldFilter;
+  hcBuildMultiFilter('hcFilterLocation',active.map(l=>String(l.locationName||'')).filter(Boolean),[],'All locations');
   const body=document.getElementById('hcLocationTableBody');
   if(!active.length){
     body.innerHTML='<tr><td colspan="5" class="hc-empty">No active marine locations registered.</td></tr>';
@@ -8810,12 +9050,12 @@ function hcToggleAddLocation(show){
 }
 function hcModeChanged(){
   const mode=document.getElementById('hcFilterMode')?.value||'EMERGENCY';
+  // Emergency roll-call defaults to marine-side people; Movement Log defaults
+  // to both movement states so departures and returns are visible.
+  const defaults=mode==='HISTORY'?[]:['ON MARINE SIDE'];
   const movement=document.getElementById('hcFilterMovement');
-  if(movement){
-    // Emergency roll-call defaults to people last recorded on the marine side.
-    // Movement-log mode defaults to all events so departures and returns are both visible.
-    movement.value=mode==='HISTORY'?'ALL':'ON MARINE SIDE';
-  }
+  if(movement)movement._selected=defaults;
+  hcBuildMultiFilter('hcFilterMovement',['ON MARINE SIDE','ON LAND SIDE / NO OPEN TRIP'],defaults,mode==='HISTORY'?'All statuses':'On marine side');
   hcFiltersChanged();
 }
 function hcLatestSnapshotForDate(people,movementHistory,selectedDate){
@@ -8848,27 +9088,32 @@ function hcFilteredPeople(){
   const people=hcDataCache?.people||[];
   const movementHistory=hcDataCache?.movementHistory||[];
   const mode=document.getElementById('hcFilterMode')?.value||'EMERGENCY';
-  const type=document.getElementById('hcFilterType').value;
-  const movement=document.getElementById('hcFilterMovement').value;
-  const location=document.getElementById('hcFilterLocation').value;
-  const selectedDate=document.getElementById('hcFilterDate')?.value||'';
+  const type=hcMultiValues('hcFilterType');
+  const movement=hcMultiValues('hcFilterMovement');
+  const location=hcMultiValues('hcFilterLocation');
+  const startDate=document.getElementById('hcFilterStartDate')?.value||'';
+  const endDate=document.getElementById('hcFilterEndDate')?.value||'';
+  const snapshotDate=endDate||startDate;
   const query=document.getElementById('hcFilterSearch').value.trim().toLowerCase();
   let source=[];
   if(mode==='HISTORY'){
-    // Event mode must be date-scoped to avoid accidentally loading the entire movement log.
-    source=selectedDate?movementHistory.filter(m=>m.movementDate===selectedDate):[];
+    // Event mode is bounded by the selected From/Until dates (inclusive).
+    // At least one boundary is required to avoid loading the entire movement log.
+    source=(startDate||endDate)?movementHistory.filter(m=>
+      (!startDate||m.movementDate>=startDate)&&(!endDate||m.movementDate<=endDate)
+    ):[];
   }else{
     const today=new Date();
     const todayString=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
-    // For today (or no date), use the actual current open-trip state. For a past date,
-    // reconstruct each person's last recorded state at the end of that date.
-    source=(!selectedDate||selectedDate===todayString)?people:hcLatestSnapshotForDate(people,movementHistory,selectedDate);
+    // Emergency Roll-Call is a point-in-time snapshot. Use Until Date as the
+    // snapshot date (or From Date when Until Date is blank).
+    source=(!snapshotDate||snapshotDate===todayString)?people:hcLatestSnapshotForDate(people,movementHistory,snapshotDate);
   }
   return source.filter(p=>{
-    if(type!=='ALL'&&p.personType!==type)return false;
-    if(movement!=='ALL'&&p.movementStatus!==movement)return false;
-    if(location!=='ALL'&&!String(p.location||'').toLowerCase().includes(location.toLowerCase()))return false;
-    if(query&&!([p.name,p.company,p.personId,p.idNumber,p.passStatus,p.movementType].join(' ').toLowerCase().includes(query)))return false;
+    if(!type.includes('ALL')&&!type.includes(p.personType))return false;
+    if(!movement.includes('ALL')&&!movement.includes(p.movementStatus))return false;
+    if(!location.includes('ALL')&&!String(p.location||'').split(', ').some(loc=>location.includes(loc)))return false;
+    if(query&&!([p.name,p.company,p.personId,p.idNumber,p.phone,p.passStatus,p.movementType].join(' ').toLowerCase().includes(query)))return false;
     return true;
   }).sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''))||(new Date(a.movementTimestamp||0).getTime()||0)-(new Date(b.movementTimestamp||0).getTime()||0));
 }
@@ -8900,7 +9145,7 @@ function hcRenderTable(){
   if(!hcFiltersApplied){
     document.getElementById('hcKpiFiltered').textContent='0';
     document.getElementById('hcResultCount').textContent='Apply a filter or enter a search to display people.';
-    body.innerHTML='<tr><td colspan="9" class="hc-empty">Select Emergency Roll-Call and keep “On marine side” to list people expected to return from marine.</td></tr>';
+    body.innerHTML='<tr><td colspan="10" class="hc-empty">Select Emergency Roll-Call and keep “On marine side” to list people expected to return from marine.</td></tr>';
     pagination.hidden=true;
     return;
   }
@@ -8911,7 +9156,7 @@ function hcRenderTable(){
   const pageRows=hcPrinting?people:people.slice(start,start+HC_PAGE_SIZE);
   document.getElementById('hcKpiFiltered').textContent=people.length.toLocaleString();
   document.getElementById('hcResultCount').textContent=people.length+' people match filters';
-  if(!people.length){const historyNeedsDate=(document.getElementById('hcFilterMode')?.value==='HISTORY'&&!document.getElementById('hcFilterDate')?.value);body.innerHTML='<tr><td colspan="9" class="hc-empty">'+(historyNeedsDate?'Select a Movement Date to view departure and return events.':'No people match the selected filters.')+'</td></tr>';}
+  if(!people.length){const historyNeedsDate=(document.getElementById('hcFilterMode')?.value==='HISTORY'&&!document.getElementById('hcFilterStartDate')?.value&&!document.getElementById('hcFilterEndDate')?.value);body.innerHTML='<tr><td colspan="10" class="hc-empty">'+(historyNeedsDate?'Select a From Date and/or Until Date to view departure and return events.':'No people match the selected filters.')+'</td></tr>';}
   else {
     body.innerHTML=pageRows.map((p,i)=>{
       const personPill=p.personType==='Visitor'?'<span class="hc-pill visitor">VISITOR</span>':'<span class="hc-pill">WORKER</span>';
@@ -8919,7 +9164,7 @@ function hcRenderTable(){
       const movementLabel=p.movementType==='DEPART_TO_MARINE'?'DEPARTED TO MARINE':p.movementType==='RETURN_TO_LAND'?'RETURNED TO LAND':(p.movementStatus||'UNKNOWN');
       const status=p.passStatus||p.recordStatus||'—';
       const timestamp=p.movementTimestamp?new Date(p.movementTimestamp).toLocaleString():'—';
-      return '<tr><td>'+(start+i+1)+'</td><td><strong>'+hcEsc(p.name)+'</strong></td><td>'+hcEsc(p.idNumber||p.personId||'—')+'</td><td>'+hcEsc(p.company||'—')+'</td><td>'+personPill+'</td><td><span class="hc-pill '+movementClass+'">'+hcEsc(movementLabel)+'</span></td><td>'+hcEsc(p.location||'—')+'</td><td>'+hcEsc(timestamp)+'</td><td>'+hcEsc(status)+'</td></tr>';
+      return '<tr><td>'+(start+i+1)+'</td><td><strong>'+hcEsc(p.name)+'</strong></td><td>'+hcEsc(p.idNumber||p.personId||'—')+'</td><td>'+hcEsc(p.phone||'—')+'</td><td>'+hcEsc(p.company||'—')+'</td><td>'+personPill+'</td><td><span class="hc-pill '+movementClass+'">'+hcEsc(movementLabel)+'</span></td><td>'+hcEsc(p.location||'—')+'</td><td>'+hcEsc(timestamp)+'</td><td>'+hcEsc(status)+'</td></tr>';
     }).join('');
   }
   pagination.hidden=people.length<=HC_PAGE_SIZE;
@@ -8954,18 +9199,21 @@ async function hcPrintPdf(){
 
   const mode=document.getElementById('hcFilterMode')?.value||'EMERGENCY';
   const reportTitle=mode==='HISTORY'?'MOVEMENT LOG':'EMERGENCY HEADCOUNT LIST';
-  const selectedDate=document.getElementById('hcFilterDate')?.value||'';
-  const dateLabel=selectedDate?new Date(selectedDate+'T00:00:00').toLocaleDateString():'Current status';
-  const typeLabel=document.getElementById('hcFilterType')?.selectedOptions?.[0]?.textContent||'Workers and Visitors';
-  const movementLabel=document.getElementById('hcFilterMovement')?.selectedOptions?.[0]?.textContent||'All statuses';
-  const locationLabel=document.getElementById('hcFilterLocation')?.selectedOptions?.[0]?.textContent||'All locations';
+  const startDate=document.getElementById('hcFilterStartDate')?.value||'';
+  const endDate=document.getElementById('hcFilterEndDate')?.value||'';
+  const formatDateLabel=value=>value?new Date(value+'T00:00:00').toLocaleDateString():'';
+  const dateLabel=startDate||endDate?(startDate?formatDateLabel(startDate):'Any')+' – '+(endDate?formatDateLabel(endDate):'Any'):(mode==='HISTORY'?'All dates':'Current status');
+  const selectedLabels=(id,allLabel)=>{const vals=document.getElementById(id)?._selected||[];return vals.length?vals.join(', '):allLabel;};
+  const typeLabel=selectedLabels('hcFilterType','Workers and Visitors');
+  const movementLabel=selectedLabels('hcFilterMovement','All statuses');
+  const locationLabel=selectedLabels('hcFilterLocation','All locations');
   const searchValue=document.getElementById('hcFilterSearch')?.value?.trim()||'';
   const generatedAt=new Date().toLocaleString();
   const tableRows=rows.map((p,i)=>{
     const movement=p.movementType==='DEPART_TO_MARINE'?'DEPARTED TO MARINE':p.movementType==='RETURN_TO_LAND'?'RETURNED TO LAND':(p.movementStatus||'UNKNOWN');
     const timestamp=p.movementTimestamp?new Date(p.movementTimestamp).toLocaleString():'—';
     const status=p.passStatus||p.recordStatus||'—';
-    return `<tr><td class="num">${i+1}</td><td class="name">${hcEsc(p.name||'—')}</td><td>${hcEsc(p.idNumber||p.personId||'—')}</td><td>${hcEsc(p.company||'—')}</td><td>${hcEsc(p.personType||'—')}</td><td class="movement ${movement==='DEPARTED TO MARINE'?'marine':movement==='RETURNED TO LAND'?'land':''}">${hcEsc(movement)}</td><td>${hcEsc(p.location||'—')}</td><td>${hcEsc(timestamp)}</td><td>${hcEsc(status)}</td></tr>`;
+    return `<tr><td class="num">${i+1}</td><td class="name">${hcEsc(p.name||'—')}</td><td>${hcEsc(p.idNumber||p.personId||'—')}</td><td>${hcEsc(p.phone||'—')}</td><td>${hcEsc(p.company||'—')}</td><td>${hcEsc(p.personType||'—')}</td><td class="movement ${movement==='DEPARTED TO MARINE'?'marine':movement==='RETURNED TO LAND'?'land':''}">${hcEsc(movement)}</td><td>${hcEsc(p.location||'—')}</td><td>${hcEsc(timestamp)}</td><td>${hcEsc(status)}</td></tr>`;
   }).join('');
 
   let shell=null;
@@ -8983,13 +9231,13 @@ async function hcPrintPdf(){
         <span><b>Movement date:</b> ${hcEsc(dateLabel)}</span><span><b>Person type:</b> ${hcEsc(typeLabel)}</span><span><b>Movement status:</b> ${hcEsc(movementLabel)}</span><span><b>Marine location:</b> ${hcEsc(locationLabel)}</span>${searchValue?`<span><b>Search:</b> ${hcEsc(searchValue)}</span>`:''}<span style="margin-left:auto;font-weight:700;color:#15558b;">Total records: ${rows.length}</span>
       </div>
       <table style="width:100%;border-collapse:collapse;table-layout:fixed;font-size:9px;">
-        <thead><tr>${['No.','Name','ID / IC / Passport','Company','Person Type','Movement Status','Marine Location','Movement Date / Time','Pass / Record Status'].map((h,i)=>`<th style="background:#e8f1f9;color:#123e68;font-weight:700;text-align:left;border:1px solid #b9cddd;padding:8px 5px;vertical-align:middle;width:${[4,14,12,13,8,13,14,14,8][i]}%;">${h}</th>`).join('')}</tr></thead>
+        <thead><tr>${['No.','Name','ID / IC / Passport','Phone Number','Company','Person Type','Movement Status','Marine Location','Movement Date / Time','Pass / Record Status'].map((h,i)=>`<th style="background:#e8f1f9;color:#123e68;font-weight:700;text-align:left;border:1px solid #b9cddd;padding:8px 5px;vertical-align:middle;width:${[4,13,11,9,12,7,11,12,13,8][i]}%;">${h}</th>`).join('')}</tr></thead>
         <tbody>${tableRows}</tbody>
       </table>
       <div style="margin-top:12px;padding-top:7px;border-top:1px solid #b9cddd;font-size:9px;color:#63778a;display:flex;justify-content:space-between;gap:20px;"><span>Generated: ${hcEsc(generatedAt)} · HSE Portal</span><span>For emergency roll-call verification — confirm physical presence at assembly point.</span></div>
     </div>`;
     document.body.appendChild(shell);
-    const filename=(mode==='HISTORY'?'Movement-Log':'Emergency-Headcount')+'-'+(selectedDate||new Date().toISOString().slice(0,10))+'.pdf';
+    const filename=(mode==='HISTORY'?'Movement-Log':'Emergency-Headcount')+'-'+(startDate||'start')+'-'+(endDate||'end')+'.pdf';
     const opt={margin:[8,7,10,7],filename,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,useCORS:true,allowTaint:false,backgroundColor:'#ffffff',logging:false,scrollX:0,scrollY:0},jsPDF:{unit:'mm',format:'a4',orientation:'landscape',compress:true},pagebreak:{mode:['css','legacy'],avoid:['tr']}};
     await html2pdf().set(opt).from(shell.querySelector('.hc-pdf-report')).save();
     hcMsg('PDF downloaded successfully.',false);
