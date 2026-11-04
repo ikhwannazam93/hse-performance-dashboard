@@ -3727,6 +3727,223 @@ input,select,textarea{touch-action:manipulation}
 @media(max-width:650px){#page-mm-consequence-form .mm-rewards-form-grid{grid-template-columns:minmax(0,1fr)!important}#page-mm-consequence-form .mm-rewards-wide{grid-column:auto!important}}
 </style>
 
+
+<style id="workplace-inspection-full-color-kpis">
+/* Workplace Inspection KPI cards: distinct full-card colors; scoped to this dashboard only. */
+#page-inspection #wpInspectionKpis .wp-title-kpi {
+  color: #fff !important;
+  border: 1px solid transparent !important;
+  border-radius: 15px !important;
+  box-shadow: 0 8px 20px rgba(24, 55, 95, .14) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform .18s ease, box-shadow .18s ease !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(24, 55, 95, .19) !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:before {
+  display: none !important;
+  content: none !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi .kpi-title,
+#page-inspection #wpInspectionKpis .wp-title-kpi .kpi-value,
+#page-inspection #wpInspectionKpis .wp-title-kpi .kpi-cum,
+#page-inspection #wpInspectionKpis .wp-title-kpi .kpi-cum strong {
+  color: #fff !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi .kpi-title { opacity: .96; }
+#page-inspection #wpInspectionKpis .wp-title-kpi .kpi-value {
+  font-size: 29px !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.12);
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi .kpi-cum { opacity: .88; }
+#page-inspection #wpInspectionKpis .wp-title-kpi:nth-child(1) {
+  background: linear-gradient(135deg,#0879b9,#13a6d5) !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:nth-child(2) {
+  background: linear-gradient(135deg,#16834c,#31b878) !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:nth-child(3) {
+  background: linear-gradient(135deg,#c45b13,#f39a32) !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:nth-child(4) {
+  background: linear-gradient(135deg,#6541a5,#9872dc) !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:nth-child(5) {
+  background: linear-gradient(135deg,#087f86,#16b6ae) !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:nth-child(6) {
+  background: linear-gradient(135deg,#b8324b,#e45b70) !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:nth-child(7) {
+  background: linear-gradient(135deg,#344f9b,#5278d5) !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:nth-child(8) {
+  background: linear-gradient(135deg,#8a6410,#c99a22) !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:nth-child(9) {
+  background: linear-gradient(135deg,#40566b,#71899e) !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:nth-child(10) {
+  background: linear-gradient(135deg,#0873a2,#28a4c7) !important;
+}
+#page-inspection #wpInspectionKpis .wp-title-kpi:nth-child(11) {
+  background: linear-gradient(135deg,#75417f,#ad68b7) !important;
+}
+</style>
+
+
+<style id="workplace-inspection-inspector-chart-style">
+#page-inspection #wpInspectionInspectorChart {
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+}
+#page-inspection #wpInspectionInspectorChart svg {
+  display:block;
+  height:370px;
+}
+@media(max-width:600px) {
+  #page-inspection #wpInspectionInspectorChart { margin-left:-2px; }
+}
+</style>
+
+
+<style id="mm-worker-filter-consistency">
+#page-mm-worker-registration #mmWorkerFilters.mm-worker-filters{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  align-items:end !important;
+  gap:10px !important;
+  margin:0 0 14px !important;
+  padding:14px !important;
+}
+#page-mm-worker-registration #mmWorkerFilters .field{
+  min-width:145px !important;
+  flex:1 1 145px !important;
+}
+#page-mm-worker-registration #mmWorkerFilters .field label{
+  display:block !important;
+  margin:0 0 5px !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  color:#526b82 !important;
+  text-transform:uppercase !important;
+  letter-spacing:.3px !important;
+}
+#page-mm-worker-registration #mmWorkerFilters .field > input,
+#page-mm-worker-registration #mmWorkerFilters .field .multi-select-trigger{
+  width:100% !important;
+  height:36px !important;
+  min-height:36px !important;
+  box-sizing:border-box !important;
+}
+#page-mm-worker-registration #mmWorkerFilters .field .multi-select{position:relative;width:100%}
+#page-mm-worker-registration #mmWorkerFilters > .btn{
+  height:36px !important;
+  min-height:36px !important;
+  white-space:nowrap;
+}
+@media(max-width:520px){
+  #page-mm-worker-registration #mmWorkerFilters .field{min-width:100%;flex-basis:100%}
+  #page-mm-worker-registration #mmWorkerFilters > .btn{width:100%}
+}
+</style>
+
+
+<style id="mm-competency-filter-consistency">
+#page-mm-competency #mmCompFilters.mm-competency-filters{
+  display:flex !important;flex-wrap:wrap !important;align-items:end !important;
+  gap:10px !important;margin:0 0 14px !important;padding:14px !important;
+}
+#page-mm-competency #mmCompFilters .field{min-width:145px !important;flex:1 1 145px !important;}
+#page-mm-competency #mmCompFilters .field label{
+  display:block !important;margin:0 0 5px !important;font-size:11px !important;
+  font-weight:700 !important;color:#526b82 !important;text-transform:uppercase !important;letter-spacing:.3px !important;
+}
+#page-mm-competency #mmCompFilters .field > input,
+#page-mm-competency #mmCompFilters .field .multi-select-trigger{
+  width:100% !important;height:36px !important;min-height:36px !important;box-sizing:border-box !important;
+}
+#page-mm-competency #mmCompFilters .field .multi-select{position:relative;width:100%}
+#page-mm-competency #mmCompFilters > .btn{height:36px !important;min-height:36px !important;white-space:nowrap}
+@media(max-width:520px){
+  #page-mm-competency #mmCompFilters .field{min-width:100%;flex-basis:100%}
+  #page-mm-competency #mmCompFilters > .btn{width:100%}
+}
+</style>
+
+
+<style id="mm-rewards-consequence-filter-consistency">
+#page-mm-rewards #mmRewardsFilters,
+#page-mm-consequence #mmConsequenceFilters{
+  display:flex !important;flex-wrap:wrap !important;align-items:end !important;
+  gap:10px !important;margin:0 0 14px !important;padding:14px !important;
+}
+#page-mm-rewards #mmRewardsFilters .field,
+#page-mm-consequence #mmConsequenceFilters .field{min-width:145px !important;flex:1 1 145px !important;}
+#page-mm-rewards #mmRewardsFilters .field label,
+#page-mm-consequence #mmConsequenceFilters .field label{
+  display:block !important;margin:0 0 5px !important;font-size:11px !important;
+  font-weight:700 !important;color:#526b82 !important;text-transform:uppercase !important;letter-spacing:.3px !important;
+}
+#page-mm-rewards #mmRewardsFilters .field > input,
+#page-mm-rewards #mmRewardsFilters .field .multi-select-trigger,
+#page-mm-consequence #mmConsequenceFilters .field > input,
+#page-mm-consequence #mmConsequenceFilters .field .multi-select-trigger{
+  width:100% !important;height:36px !important;min-height:36px !important;box-sizing:border-box !important;
+}
+#page-mm-rewards #mmRewardsFilters .field .multi-select,
+#page-mm-consequence #mmConsequenceFilters .field .multi-select{position:relative;width:100%}
+#page-mm-rewards #mmRewardsFilters > .btn,
+#page-mm-consequence #mmConsequenceFilters > .btn{height:36px !important;min-height:36px !important;white-space:nowrap}
+@media(max-width:520px){
+  #page-mm-rewards #mmRewardsFilters .field,
+  #page-mm-consequence #mmConsequenceFilters .field{min-width:100%;flex-basis:100%}
+  #page-mm-rewards #mmRewardsFilters > .btn,
+  #page-mm-consequence #mmConsequenceFilters > .btn{width:100%}
+}
+
+/* Rewards table readability: lighter status typography, balanced cell spacing and cleaner actions. */
+#page-mm-rewards .mm-rewards-table{width:100%;min-width:1120px;border-collapse:separate;border-spacing:0;table-layout:auto}
+#page-mm-rewards .mm-rewards-table th{
+  padding:11px 10px !important;font-size:11px !important;font-weight:750 !important;
+  white-space:nowrap;vertical-align:middle;
+}
+#page-mm-rewards .mm-rewards-table td{
+  padding:10px !important;font-size:11px !important;font-weight:400 !important;
+  line-height:1.4 !important;color:#29435c !important;vertical-align:middle !important;
+  overflow-wrap:anywhere;
+}
+#page-mm-rewards .mm-rewards-table tbody tr:nth-child(even){background:#f8fbfd}
+#page-mm-rewards .mm-rewards-table tbody tr:hover{background:#f0f7fc}
+#page-mm-rewards .mm-rewards-table .mm-rewards-ref{min-width:125px;max-width:150px}
+#page-mm-rewards .mm-rewards-table .mm-rewards-worker-name{min-width:140px}
+#page-mm-rewards .mm-rewards-table .mm-rewards-given{min-width:150px;max-width:230px}
+#page-mm-rewards .mm-rewards-table th:nth-child(8),
+#page-mm-rewards .mm-rewards-table td:nth-child(8){min-width:105px;width:105px}
+#page-mm-rewards .mm-rewards-table th:nth-child(9),
+#page-mm-rewards .mm-rewards-table td:nth-child(9){min-width:160px}
+#page-mm-rewards .mm-rewards-status{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:4px 8px !important;border-radius:999px !important;
+  font-size:10px !important;font-weight:500 !important;line-height:1.25 !important;
+  letter-spacing:0 !important;white-space:nowrap !important;
+}
+#page-mm-rewards .mm-rewards-status.submitted{background:#e8f5ed;color:#287548}
+#page-mm-rewards .mm-rewards-status.other{background:#f1f4f7;color:#5b6e7e}
+#page-mm-rewards .mm-record-actions{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+#page-mm-rewards .mm-record-actions .mm-worker-action{
+  padding:6px 9px !important;font-size:10px !important;line-height:1.1 !important;
+}
+</style>
+
 </head>
 <body>
 <div id="portalLoadingOverlay" class="portal-loading-overlay" role="status" aria-live="polite" aria-hidden="true">
@@ -4113,6 +4330,7 @@ input,select,textarea{touch-action:manipulation}
       <div class="filter-group"><label for="dssFilterStart">Start date</label><input type="date" id="dssFilterStart"></div>
       <div class="filter-group"><label for="dssFilterEnd">End date</label><input type="date" id="dssFilterEnd"></div>
       <div class="filter-group"><label for="dssFilterCompany">Company</label><div id="dssFilterCompany" class="multi-select dss-filter-multi" aria-label="Company filter"></div></div>
+      <div class="filter-group"><label for="dssFilterInspector">Inspector</label><div id="dssFilterInspector" class="multi-select dss-filter-multi" aria-label="Inspector filter"></div></div>
       <div class="filter-group"><label for="dssFilterStatus">Status</label><div id="dssFilterStatus" class="multi-select dss-status-multi" aria-label="Status filter"></div></div>
       <div class="filter-group" style="align-self:end"><button type="button" class="btn" id="dssResetFilters">Reset filters</button></div>
     </div>
@@ -4120,6 +4338,7 @@ input,select,textarea{touch-action:manipulation}
       <div class="wp-dashboard-head"><div><h2>Daily Site Surveillance Overview</h2><p>Surveillance inspections, findings and closure status.</p></div></div>
       <div id="dssKpis" class="wp-kpi-grid"></div>
       <div class="wp-chart-card"><h3>Surveillance Submissions by Month</h3><div class="wp-card-sub">Monthly submission trend based on selected filters</div><div id="dssMonthlyChart" class="wp-month-chart"></div></div>
+      <div class="wp-chart-card"><h3>Surveillance Submissions by Inspector</h3><div class="wp-card-sub">Number of surveillance submissions recorded by each inspector, based on selected filters</div><div id="dssInspectorChart" class="dss-inspector-chart"></div></div>
       <div class="wp-table-card"><div class="wp-table-card-head"><div class="wp-table-card-head-copy"><h3>Daily Site Surveillance Log</h3><div class="wp-card-sub">Latest surveillance inspections</div></div><div class="wp-refresh-actions"><span id="dssRefreshStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" class="wp-refresh-inspection-btn" id="dssRefresh" title="Reload latest daily site surveillance submissions"><span class="refresh-glyph" aria-hidden="true">↻</span><span>Refresh</span></button></div></div><div id="dssTable" class="table-wrap"></div></div>
       <div class="wp-dashboard-head" style="justify-content:flex-end"><button type="button" class="wp-new-inspection-btn" id="dssNewBtn">＋ NEW SITE SURVEILLANCE</button></div>
     </div>
@@ -4217,12 +4436,12 @@ input,select,textarea{touch-action:manipulation}
         <div class="mm-worker-refresh-action"><span id="mmWorkerRefreshStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" class="wp-refresh-inspection-btn" onclick="mmLoadWorkers(true)"><span class="refresh-glyph">↻</span><span>Refresh</span></button></div>
       </div>
       <div class="filters mm-worker-filters" id="mmWorkerFilters">
-        <div class="filter-group"><label for="mmWorkerSearch">Search Worker ID / Name / IC</label><input id="mmWorkerSearch" type="search" placeholder="Enter Worker ID, name or IC / Passport"></div>
-        <div class="filter-group"><label for="mmWorkerCompany">Company</label><select id="mmWorkerCompany"><option value="">All Companies</option></select></div>
-        <div class="filter-group"><label for="mmWorkerStatus">Employment Status</label><select id="mmWorkerStatus"><option value="">All Statuses</option></select></div>
-        <div class="filter-group"><label for="mmWorkerCategory">Job Category</label><select id="mmWorkerCategory"><option value="">All Job Categories</option></select></div>
-        <div class="filter-group"><label for="mmWorkerNationality">Nationality</label><select id="mmWorkerNationality"><option value="">All Nationalities</option></select></div>
-        <div class="filter-group"><label>&nbsp;</label><button type="button" class="btn" onclick="mmResetWorkerFilters()">Reset Filters</button></div>
+        <div class="field"><label for="mmWorkerSearch">Search Worker ID / Name / IC</label><input id="mmWorkerSearch" type="search" placeholder="Enter Worker ID, name or IC / Passport"></div>
+        <div class="field"><label>Company</label><div id="mmWorkerCompany" class="multi-select" aria-label="Company filter"></div></div>
+        <div class="field"><label>Employment Status</label><div id="mmWorkerStatus" class="multi-select" aria-label="Employment status filter"></div></div>
+        <div class="field"><label>Job Category</label><div id="mmWorkerCategory" class="multi-select" aria-label="Job category filter"></div></div>
+        <div class="field"><label>Nationality</label><div id="mmWorkerNationality" class="multi-select" aria-label="Nationality filter"></div></div>
+        <button type="button" class="btn" onclick="mmResetWorkerFilters()">Reset Filters</button>
       </div>
       <div class="mm-worker-table-wrap"><table class="hc-table mm-worker-table"><thead><tr><th>Worker ID</th><th>Worker Name</th><th>Company</th><th>Designation</th><th>Job Category</th><th>Nationality</th><th>Employment Status</th><th>Action</th></tr></thead><tbody id="mmWorkerTableBody"><tr><td colspan="8" class="mm-worker-empty">Loading worker records…</td></tr></tbody></table></div>
       <div class="mm-worker-table-foot"><span id="mmWorkerCount">0 records</span><div><button type="button" class="btn" id="mmWorkerPrev" onclick="mmWorkerPage(-1)" disabled>← Previous</button><span id="mmWorkerPageLabel">Page 1</span><button type="button" class="btn" id="mmWorkerNext" onclick="mmWorkerPage(1)" disabled>Next →</button></div></div>
@@ -4274,12 +4493,12 @@ input,select,textarea{touch-action:manipulation}
           <button type="button" class="wp-new-inspection-btn" onclick="mmOpenCompetencyForm()">＋ REGISTER COMPETENCY</button>
           <div class="mm-competency-refresh"><span id="mmCompetencyRefreshStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" class="wp-refresh-inspection-btn" onclick="mmLoadCompetencies(true)"><span class="refresh-glyph">↻</span><span>Refresh</span></button></div>
         </div>
-        <div class="filters mm-competency-filters">
-          <div class="filter-group"><label for="mmCompSearch">Search Worker / Certificate</label><input id="mmCompSearch" type="search" placeholder="Worker ID, name or certificate no."></div>
-          <div class="filter-group"><label for="mmCompTitle">Competency Title</label><select id="mmCompTitle"><option value="">All Competencies</option></select></div>
-          <div class="filter-group"><label for="mmCompCompany">Company</label><select id="mmCompCompany"><option value="">All Companies</option></select></div>
-          <div class="filter-group"><label for="mmCompStatus">Certificate Status</label><select id="mmCompStatus"><option value="">All Statuses</option><option>Valid</option><option>Expiring Soon</option><option>Expired</option><option>No Expiry Date</option></select></div>
-          <div class="filter-group"><label for="mmCompReset">&nbsp;</label><button type="button" class="btn" id="mmCompReset">Reset Filters</button></div>
+        <div class="filters mm-competency-filters" id="mmCompFilters">
+          <div class="field"><label for="mmCompSearch">Search Worker / Certificate</label><input id="mmCompSearch" type="search" placeholder="Worker ID, name or certificate no."></div>
+          <div class="field"><label>Competency Title</label><div id="mmCompTitle" class="multi-select" aria-label="Competency title filter"></div></div>
+          <div class="field"><label>Company</label><div id="mmCompCompany" class="multi-select" aria-label="Company filter"></div></div>
+          <div class="field"><label>Certificate Status</label><div id="mmCompStatus" class="multi-select" aria-label="Certificate status filter"></div></div>
+          <button type="button" class="btn" id="mmCompReset">Reset Filters</button>
         </div>
         <div class="mm-competency-table-wrap"><table class="hc-table mm-competency-table"><thead><tr><th>Worker ID</th><th>Worker Name</th><th>Company</th><th>Competency Title</th><th>Provider / Accreditor</th><th>Certificate No.</th><th>Expiry Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="mmCompetencyTableBody"><tr><td colspan="9" class="mm-worker-empty">Loading competency records…</td></tr></tbody></table></div>
         <div class="mm-worker-table-foot"><span id="mmCompetencyCount">0 records</span><div><button type="button" class="btn" id="mmCompPrev" onclick="mmCompPage(-1)" disabled>← Previous</button><span id="mmCompPageLabel">Page 1</span><button type="button" class="btn" id="mmCompNext" onclick="mmCompPage(1)" disabled>Next →</button></div></div>
@@ -4350,12 +4569,12 @@ input,select,textarea{touch-action:manipulation}
           <button type="button" class="wp-new-inspection-btn" id="mmRewardsRegisterBtn" onclick="mmRewardsOpenForm()">＋ REGISTER RECOGNITION</button>
           <div class="mm-rewards-refresh"><span id="mmRewardsRefreshStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" class="wp-refresh-inspection-btn" onclick="mmRewardsLoad(true)"><span class="refresh-glyph">↻</span><span>Refresh</span></button></div>
         </div>
-        <div class="filters mm-rewards-filters">
-          <div class="filter-group"><label for="mmRewardsSearch">Search Worker / Reference</label><input id="mmRewardsSearch" type="search" placeholder="Worker ID, name or reference no."></div>
-          <div class="filter-group"><label for="mmRewardsCategoryFilter">Recognition Category</label><select id="mmRewardsCategoryFilter"><option value="">All Categories</option></select></div>
-          <div class="filter-group"><label for="mmRewardsCompanyFilter">Company</label><select id="mmRewardsCompanyFilter"><option value="">All Companies</option></select></div>
-          <div class="filter-group"><label for="mmRewardsStatusFilter">Status</label><select id="mmRewardsStatusFilter"><option value="">All Statuses</option></select></div>
-          <button type="button" class="mm-worker-action" onclick="mmRewardsResetFilters()">Reset Filters</button>
+        <div class="filters mm-rewards-filters" id="mmRewardsFilters">
+          <div class="field"><label for="mmRewardsSearch">Search Worker / Reference</label><input id="mmRewardsSearch" type="search" placeholder="Worker ID, name or reference no."></div>
+          <div class="field"><label>Recognition Category</label><div id="mmRewardsCategoryFilter" class="multi-select" aria-label="Recognition category filter"></div></div>
+          <div class="field"><label>Company</label><div id="mmRewardsCompanyFilter" class="multi-select" aria-label="Company filter"></div></div>
+          <div class="field"><label>Status</label><div id="mmRewardsStatusFilter" class="multi-select" aria-label="Status filter"></div></div>
+          <button type="button" class="btn" onclick="mmRewardsResetFilters()">Reset Filters</button>
         </div>
         <div class="wp-table-wrap"><table class="wp-data-table mm-rewards-table"><thead><tr><th>Reference No.</th><th>Date</th><th>Worker ID</th><th>Worker Name</th><th>Company</th><th>Recognition Category</th><th>Recognition Given</th><th>Status</th><th>Action</th></tr></thead><tbody id="mmRewardsTableBody"><tr><td colspan="9">Loading records…</td></tr></tbody></table></div>
         <div class="mm-rewards-pagination"><span id="mmRewardsCount">0 records</span><div><button type="button" class="mm-worker-action" id="mmRewardsPrev" onclick="mmRewardsPage(-1)">← Previous</button> <span id="mmRewardsPageLabel">Page 1 of 1</span> <button type="button" class="mm-worker-action" id="mmRewardsNext" onclick="mmRewardsPage(1)">Next →</button></div></div>
@@ -4413,12 +4632,12 @@ input,select,textarea{touch-action:manipulation}
           <button type="button" class="wp-new-inspection-btn" id="mmConsequenceRegisterBtn" onclick="mmConsequenceOpenForm()">＋ REGISTER CONSEQUENCE</button>
           <div class="mm-rewards-refresh"><span id="mmConsequenceRefreshStatus" class="wp-refresh-status" aria-live="polite"></span><button type="button" class="wp-refresh-inspection-btn" onclick="mmConsequenceLoad(true)"><span class="refresh-glyph">↻</span><span>Refresh</span></button></div>
         </div>
-        <div class="filters mm-rewards-filters">
-          <div class="filter-group"><label for="mmConsequenceSearch">Search Worker / Reference</label><input id="mmConsequenceSearch" type="search" placeholder="Worker ID, name or reference no."></div>
-          <div class="filter-group"><label for="mmConsequenceCategoryFilter">Violation Category</label><select id="mmConsequenceCategoryFilter"><option value="">All Categories</option></select></div>
-          <div class="filter-group"><label for="mmConsequenceCompanyFilter">Company</label><select id="mmConsequenceCompanyFilter"><option value="">All Companies</option></select></div>
-          <div class="filter-group"><label for="mmConsequenceStatusFilter">Workflow Status</label><select id="mmConsequenceStatusFilter"><option value="">All Statuses</option></select></div>
-          <button type="button" class="mm-worker-action" onclick="mmConsequenceResetFilters()">Reset Filters</button>
+        <div class="filters mm-rewards-filters" id="mmConsequenceFilters">
+          <div class="field"><label for="mmConsequenceSearch">Search Worker / Reference</label><input id="mmConsequenceSearch" type="search" placeholder="Worker ID, name or reference no."></div>
+          <div class="field"><label>Violation Category</label><div id="mmConsequenceCategoryFilter" class="multi-select" aria-label="Violation category filter"></div></div>
+          <div class="field"><label>Company</label><div id="mmConsequenceCompanyFilter" class="multi-select" aria-label="Company filter"></div></div>
+          <div class="field"><label>Workflow Status</label><div id="mmConsequenceStatusFilter" class="multi-select" aria-label="Workflow status filter"></div></div>
+          <button type="button" class="btn" onclick="mmConsequenceResetFilters()">Reset Filters</button>
         </div>
         <div class="wp-table-wrap"><table class="wp-data-table mm-rewards-table"><thead><tr><th>Reference No.</th><th>Date</th><th>Worker ID</th><th>Worker Name</th><th>Company</th><th>Violation Category</th><th>Consequence Type</th><th>Status</th><th>Action</th></tr></thead><tbody id="mmConsequenceTableBody"><tr><td colspan="9">Loading records…</td></tr></tbody></table></div>
         <div class="mm-rewards-pagination"><span id="mmConsequenceCount">0 records</span><div><button type="button" class="mm-worker-action" id="mmConsequencePrev" onclick="mmConsequencePage(-1)">← Previous</button> <span id="mmConsequencePageLabel">Page 1 of 1</span> <button type="button" class="mm-worker-action" id="mmConsequenceNext" onclick="mmConsequencePage(1)">Next →</button></div></div>
@@ -4740,6 +4959,11 @@ input,select,textarea{touch-action:manipulation}
         <h3>Total Workplace Inspection Submission by Month</h3>
         <div class="wp-card-sub">Monthly submission trend based on the selected filters</div>
         <div id="wpInspectionMonthlyChart" class="wp-month-chart"></div>
+      </div>
+      <div class="wp-chart-card">
+        <h3>Total Workplace Inspection Submission by Inspector</h3>
+        <div class="wp-card-sub">Number of inspection submissions by each inspector, based on the selected filters</div>
+        <div id="wpInspectionInspectorChart" class="wp-month-chart wp-inspector-column-chart"></div>
       </div>
       <div class="wp-table-card">
         <div class="wp-table-card-head">
@@ -5951,6 +6175,49 @@ function renderObservation(){
   document.getElementById("bsc-table").innerHTML=sorted.length?`<table><thead><tr><th>Date</th><th>BSC No</th><th>Type</th><th>Hazard</th><th>Observed By</th><th>Position</th><th>Company</th><th>Status</th></tr></thead><tbody>${sorted.map(r=>`<tr><td>${esc(r.dateReported)}</td><td>${esc(r.bscNo)}</td><td>${esc(r.type)}</td><td>${esc(r.hazard)}</td><td>${esc(r.observer)}</td><td>${esc(r.position)}</td><td>${esc(r.company)}</td><td>${esc(r.status)}</td></tr>`).join("")}</tbody></table>`:'<div class="empty">No observations for current filters</div>';
 }
 
+function wpInspectionBuildInspectorColumnChart(rows){
+  const counts = new Map();
+  rows.forEach(r => {
+    const name = String(r.inspector || "").trim() || "Not specified";
+    counts.set(name, (counts.get(name) || 0) + 1);
+  });
+  const values = [...counts.entries()]
+    .map(([k,v]) => ({k,v}))
+    .sort((a,b) => b.v-a.v || a.k.localeCompare(b.k));
+
+  if(!values.length) return '<div class="empty">No submissions for current filters</div>';
+
+  // Keep the chart vertical (columns) and allow horizontal scrolling for many inspectors.
+  const W = Math.max(900, values.length * 115);
+  const H = 370, left = 58, right = 28, top = 28, bottom = 112;
+  const plotW = W-left-right, plotH = H-top-bottom;
+  const max = Math.max(...values.map(x => x.v), 1);
+  const step = plotW/values.length;
+  const barW = Math.min(62, step*0.58);
+  let svg = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Workplace inspection submissions by inspector" style="display:block;max-width:none">`;
+
+  for(let i=0;i<=4;i++){
+    const value = max*i/4;
+    const y = top+plotH-(plotH*i/4);
+    svg += `<line x1="${left}" y1="${y}" x2="${W-right}" y2="${y}" stroke="#e6edf3" stroke-width="1"/>`;
+    svg += `<text x="${left-12}" y="${y+4}" text-anchor="end" font-size="12" fill="#718397">${fmt(Math.round(value))}</text>`;
+  }
+
+  values.forEach((item,i) => {
+    const x = left+step*i+(step-barW)/2;
+    const bh = (item.v/max)*plotH;
+    const y = top+plotH-bh;
+    const cx = x+barW/2;
+    svg += `<rect x="${x}" y="${y}" width="${barW}" height="${Math.max(1,bh)}" rx="5" fill="#087fba"><title>${esc(item.k)}: ${fmt(item.v)} submissions</title></rect>`;
+    svg += `<text x="${cx}" y="${Math.max(top+13,y-8)}" text-anchor="middle" font-size="13" font-weight="700" fill="#23466a">${fmt(item.v)}</text>`;
+    svg += `<text transform="translate(${cx+4},${top+plotH+17}) rotate(42)" text-anchor="start" font-size="12" fill="#526b82">${esc(item.k)}</text>`;
+  });
+
+  svg += `<line x1="${left}" y1="${top+plotH}" x2="${W-right}" y2="${top+plotH}" stroke="#9aabba" stroke-width="1.2"/>`;
+  svg += '</svg>';
+  return svg;
+}
+
 function renderWorkplaceInspectionDashboard(){
   const rows=getFiltered("inspection");
   const cumulative=DATA.inspections||[];
@@ -5968,6 +6235,9 @@ function renderWorkplaceInspectionDashboard(){
   const monthlyValues=Object.keys(monthly).sort().map(k=>{const [y,m]=k.split("-").map(Number);return {k:new Date(y,m-1,1).toLocaleDateString("en-US",{month:"short",year:"numeric"}),v:monthly[k]};});
   const chart=document.getElementById("wpInspectionMonthlyChart");
   if(chart) chart.innerHTML=monthlyValues.length?svgBar(monthlyValues,{color:"#0067a5"}):'<div class="empty">No submissions for current filters</div>';
+
+  const inspectorChart=document.getElementById("wpInspectionInspectorChart");
+  if(inspectorChart) inspectorChart.innerHTML=wpInspectionBuildInspectorColumnChart(rows);
 
   const sorted=[...rows].sort((a,b)=>String(b.date||"").localeCompare(String(a.date||""))||String(b.submittedAt||"").localeCompare(String(a.submittedAt||""))).slice(0,100);
   const table=document.getElementById("wpInspectionTable");
@@ -8046,7 +8316,7 @@ function hidePortalBusyImmediately(overlay) {
 })();
 
 /* ===== Daily Site Surveillance module (isolated from Workplace Inspection) ===== */
-let dssRecords = [], dssFindingsCount = 0, dssCurrentNo = "", dssCurrentRecord=null, dssFormMode="new", dssSelectedStatuses=[], dssSelectedYears=[], dssSelectedCompanies=[];
+let dssRecords = [], dssFindingsCount = 0, dssCurrentNo = "", dssCurrentRecord=null, dssFormMode="new", dssSelectedStatuses=[], dssSelectedYears=[], dssSelectedCompanies=[], dssSelectedInspectors=[];
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",dssInit);else dssInit();
 function dssEsc(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function dssToday(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;}
@@ -8152,12 +8422,12 @@ function dssCanDelete(record){
 }
 function dssBuildFilterMultiSelect(id, values, allLabel, selectedKey){
   const wrap=document.getElementById(id);if(!wrap)return;
-  let selected=selectedKey==="year"?dssSelectedYears:dssSelectedCompanies;
+  let selected=selectedKey==="year"?dssSelectedYears:(selectedKey==="inspector"?dssSelectedInspectors:dssSelectedCompanies);
   selected=selected.filter(v=>values.includes(v));
-  if(selectedKey==="year")dssSelectedYears=selected;else dssSelectedCompanies=selected;
+  if(selectedKey==="year")dssSelectedYears=selected;else if(selectedKey==="inspector")dssSelectedInspectors=selected;else dssSelectedCompanies=selected;
   wrap.innerHTML="";wrap.dataset.ready="1";
   const trigger=document.createElement("button");trigger.type="button";trigger.className="multi-select-trigger";trigger.setAttribute("aria-haspopup","listbox");trigger.setAttribute("aria-expanded","false");
-  const updateTrigger=()=>{const vals=selectedKey==="year"?dssSelectedYears:dssSelectedCompanies;trigger.textContent=vals.length?(vals.length===1?vals[0]:vals.length+" selected"):allLabel;trigger.setAttribute("aria-expanded",wrap.classList.contains("open")?"true":"false");};
+  const updateTrigger=()=>{const vals=selectedKey==="year"?dssSelectedYears:(selectedKey==="inspector"?dssSelectedInspectors:dssSelectedCompanies);trigger.textContent=vals.length?(vals.length===1?vals[0]:vals.length+" selected"):allLabel;trigger.setAttribute("aria-expanded",wrap.classList.contains("open")?"true":"false");};
   const menu=document.createElement("div");menu.className="multi-select-menu";
   const search=document.createElement("input");search.type="text";search.className="multi-search";search.placeholder="Search...";search.setAttribute("aria-label","Search "+allLabel.toLowerCase());menu.appendChild(search);
   const list=document.createElement("div");list.className="multi-options";list.setAttribute("role","group");
@@ -8172,7 +8442,7 @@ function dssBuildFilterMultiSelect(id, values, allLabel, selectedKey){
   allCb.addEventListener("change",()=>{if(allCb.checked)cbs.forEach(cb=>cb.checked=false);});cbs.forEach(cb=>cb.addEventListener("change",updateChecks));
   search.addEventListener("input",()=>{const q=search.value.toLowerCase();cbs.forEach(cb=>{cb.parentElement.style.display=cb.value.toLowerCase().includes(q)?"flex":"none";});allRow.style.display=allLabel.toLowerCase().includes(q)?"flex":"none";});
   clear.addEventListener("click",()=>{cbs.forEach(cb=>cb.checked=false);allCb.checked=true;});
-  apply.addEventListener("click",()=>{const vals=cbs.filter(cb=>cb.checked).map(cb=>cb.value);if(selectedKey==="year")dssSelectedYears=vals;else dssSelectedCompanies=vals;updateTrigger();wrap.classList.remove("open");dssRender();});
+  apply.addEventListener("click",()=>{const vals=cbs.filter(cb=>cb.checked).map(cb=>cb.value);if(selectedKey==="year")dssSelectedYears=vals;else if(selectedKey==="inspector")dssSelectedInspectors=vals;else dssSelectedCompanies=vals;updateTrigger();wrap.classList.remove("open");dssRender();});
   trigger.addEventListener("click",e=>{e.stopPropagation();document.querySelectorAll(".multi-select.open").forEach(x=>{if(x!==wrap)x.classList.remove("open")});wrap.classList.toggle("open");updateTrigger();});menu.addEventListener("click",e=>e.stopPropagation());
   wrap.append(trigger,menu);wrap._updateTrigger=updateTrigger;updateTrigger();
 }
@@ -8229,9 +8499,28 @@ function dssBuildStatusMultiSelect(){
   menu.addEventListener("click",e=>e.stopPropagation());
   wrap.append(trigger,menu);updateTrigger();
 }
+function dssInspectorColumnChart(values){
+  const count=values.length,barSlot=112,W=Math.max(760,count*barSlot),H=350;
+  const p={l:54,r:28,t:30,b:118},cw=W-p.l-p.r,ch=H-p.t-p.b;
+  const max=Math.max(...values.map(x=>Number(x.v)||0),1),slot=cw/count,bw=Math.min(54,slot*.56);
+  let svg=`<svg class="dss-inspector-column-svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Surveillance submissions by inspector column chart">`;
+  for(let i=0;i<=4;i++){
+    const value=max*i/4,y=p.t+ch-(value/max)*ch;
+    svg+=`<line x1="${p.l}" y1="${y}" x2="${W-p.r}" y2="${y}" stroke="#e5edf2" stroke-width="1"/>`;
+    svg+=`<text x="${p.l-10}" y="${y+4}" text-anchor="end" font-size="12" fill="#6b7c88">${fmt(Math.round(value))}</text>`;
+  }
+  svg+=`<line x1="${p.l}" y1="${p.t+ch}" x2="${W-p.r}" y2="${p.t+ch}" stroke="#b9c9d2"/>`;
+  values.forEach((item,i)=>{
+    const value=Number(item.v)||0,x=p.l+i*slot+(slot-bw)/2,h=(value/max)*ch,y=p.t+ch-h,cx=x+bw/2;
+    svg+=`<rect x="${x}" y="${y}" width="${bw}" height="${Math.max(1,h)}" rx="5" fill="#087db5"><title>${dssEsc(item.k)}: ${fmt(value)} submissions</title></rect>`;
+    svg+=`<text x="${cx}" y="${Math.max(p.t+14,y-9)}" text-anchor="middle" font-size="13" font-weight="700" fill="#173042">${fmt(value)}</text>`;
+    svg+=`<text transform="translate(${cx+5},${p.t+ch+17}) rotate(55)" text-anchor="start" font-size="12" fill="#526b7c">${dssEsc(item.k)}</text>`;
+  });
+  return `<div class="dss-inspector-chart-scroll">${svg}</svg></div>`;
+}
 function dssRender(){
   const start=document.getElementById("dssFilterStart").value,end=document.getElementById("dssFilterEnd").value;
-  const rows=dssRecords.filter(r=>(!dssSelectedYears.length||dssSelectedYears.includes(String(r.date||"").slice(0,4)))&&(!start||r.date>=start)&&(!end||r.date<=end)&&(!dssSelectedCompanies.length||dssSelectedCompanies.includes(String(r.company||"")))&&(!dssSelectedStatuses.length||dssSelectedStatuses.includes(dssDisplayStatus(r))));
+  const rows=dssRecords.filter(r=>(!dssSelectedYears.length||dssSelectedYears.includes(String(r.date||"").slice(0,4)))&&(!start||r.date>=start)&&(!end||r.date<=end)&&(!dssSelectedCompanies.length||dssSelectedCompanies.includes(String(r.company||"")))&&(!dssSelectedInspectors.length||dssSelectedInspectors.includes(String(r.inspector||"").trim()))&&(!dssSelectedStatuses.length||dssSelectedStatuses.includes(dssDisplayStatus(r))));
   const totalFindings=rows.reduce((n,r)=>n+(Number(r.findingCount)||0),0),open=rows.reduce((n,r)=>n+(Number(r.openCount)||0),0),closed=rows.reduce((n,r)=>n+(Number(r.closedCount)||0),0);
   const allFindings=dssRecords.reduce((n,r)=>n+(Number(r.findingCount)||0),0);
   const allOpen=dssRecords.reduce((n,r)=>n+(Number(r.openCount)||0),0);
@@ -8246,6 +8535,10 @@ function dssRender(){
   const monthly={}; rows.forEach(r=>{if(/^\d{4}-\d{2}/.test(r.date||""))monthly[r.date.slice(0,7)]=(monthly[r.date.slice(0,7)]||0)+1;});
   const vals=Object.keys(monthly).sort().map(k=>{const [y,m]=k.split("-").map(Number);return {k:new Date(y,m-1,1).toLocaleDateString("en-US",{month:"short",year:"numeric"}),v:monthly[k]};});
   document.getElementById("dssMonthlyChart").innerHTML=vals.length?svgBar(vals,{color:"#0067a5"}):'<div class="empty">No submissions for current filters</div>';
+  const inspectorTotals={};
+  rows.forEach(r=>{const name=String(r.inspector||"").trim()||"Unspecified";inspectorTotals[name]=(inspectorTotals[name]||0)+1;});
+  const inspectorValues=Object.entries(inspectorTotals).map(([k,v])=>({k,v})).sort((a,b)=>b.v-a.v||a.k.localeCompare(b.k));
+  document.getElementById("dssInspectorChart").innerHTML=inspectorValues.length?dssInspectorColumnChart(inspectorValues):'<div class="empty">No submissions for current filters</div>';
   const sorted=[...rows].sort((a,b)=>String(b.date||"").localeCompare(String(a.date||""))).slice(0,100);
   document.getElementById("dssTable").innerHTML=sorted.length?`<table><thead><tr><th>Date</th><th>Surveillance No.</th><th>Location</th><th>Activity</th><th>Company</th><th>Inspector</th><th>Findings</th><th>Open</th><th>Closed</th><th>Status</th><th>Action</th></tr></thead><tbody>${sorted.map(r=>`<tr><td>${dssEsc(r.date)}</td><td>${dssEsc(r.surveillanceNo)}</td><td>${dssEsc(r.location)}</td><td>${dssEsc(r.activity)}</td><td>${dssEsc(r.company)}</td><td>${dssEsc(r.inspector)}</td><td>${r.findingCount||0}</td><td>${r.openCount||0}</td><td>${r.closedCount||0}</td><td><span class="wp-status ${dssStatusClass(dssDisplayStatus(r))}">${dssEsc(dssDisplayStatus(r).toUpperCase())}</span></td><td><div class="wp-row-actions"><button type="button" class="dss-view-only-btn" data-dss-view="${dssEsc(r.surveillanceNo)}">View</button>${dssCanDelete(r)?`<button type="button" class="wp-delete-btn" data-dss-delete="${dssEsc(r.surveillanceNo)}" title="Delete surveillance record">Delete</button>`:""}</div></td></tr>`).join("")}</tbody></table>`:'<div class="empty">No surveillance records for current filters</div>';
   document.querySelectorAll("[data-dss-view]").forEach(b=>b.addEventListener("click",()=>dssView(b.dataset.dssView,"view")));
@@ -8266,7 +8559,9 @@ function dssPopulateFiltersAndRender(){
   const years=[...new Set(dssRecords.map(r=>String(r.date||"").slice(0,4)).filter(Boolean))].sort().reverse();
   const companies=[...new Set(dssRecords.map(r=>String(r.company||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
   dssBuildFilterMultiSelect("dssFilterYear",years,"All years","year");
+  const inspectors=[...new Set(dssRecords.map(r=>String(r.inspector||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
   dssBuildFilterMultiSelect("dssFilterCompany",companies,"All companies","company");
+  dssBuildFilterMultiSelect("dssFilterInspector",inspectors,"All inspectors","inspector");
   dssRender();
 }
 async function dssLoad(){
@@ -8447,7 +8742,7 @@ function dssInit(){
   document.getElementById("dssAckBtn")?.addEventListener("click",dssAcknowledge);
   document.getElementById("dssPdfBtn")?.addEventListener("click",dssSavePdf);
   ["dssFilterStart","dssFilterEnd"].forEach(id=>document.getElementById(id)?.addEventListener("change",dssRender));
-  document.getElementById("dssResetFilters")?.addEventListener("click",()=>{document.getElementById("dssFilterStart").value="";document.getElementById("dssFilterEnd").value="";dssSelectedYears=[];dssSelectedCompanies=[];dssSelectedStatuses=[];["dssFilterYear","dssFilterCompany","dssFilterStatus"].forEach(id=>{const wrap=document.getElementById(id);if(wrap){wrap.classList.remove("open");wrap.querySelectorAll('.multi-option input[type="checkbox"]').forEach(cb=>cb.checked=false);const all=wrap.querySelector('.multi-all input[type="checkbox"]');if(all)all.checked=true;if(wrap._updateTrigger)wrap._updateTrigger();else{const trigger=wrap.querySelector(".multi-select-trigger");if(trigger)trigger.textContent=id==="dssFilterStatus"?"All statuses":trigger.textContent;}}});dssRender();});
+  document.getElementById("dssResetFilters")?.addEventListener("click",()=>{document.getElementById("dssFilterStart").value="";document.getElementById("dssFilterEnd").value="";dssSelectedYears=[];dssSelectedCompanies=[];dssSelectedInspectors=[];dssSelectedStatuses=[];["dssFilterYear","dssFilterCompany","dssFilterInspector","dssFilterStatus"].forEach(id=>{const wrap=document.getElementById(id);if(wrap){wrap.classList.remove("open");wrap.querySelectorAll('.multi-option input[type="checkbox"]').forEach(cb=>cb.checked=false);const all=wrap.querySelector('.multi-all input[type="checkbox"]');if(all)all.checked=true;if(wrap._updateTrigger)wrap._updateTrigger();else{const trigger=wrap.querySelector(".multi-select-trigger");if(trigger)trigger.textContent=id==="dssFilterStatus"?"All statuses":trigger.textContent;}}});dssRender();});
 }
 
 
@@ -8846,22 +9141,133 @@ async function hcPrintPdf(){
 
 <script>
 /* MANPOWER MANAGEMENT — WORKER REGISTRATION */
-let mmWorkerRows=[],mmWorkerPageNo=1,mmWorkerPageSize=25,mmWorkerTotal=0,mmWorkerCurrent=null,mmWorkerDebounce=null;
+let mmWorkerRows=[],mmWorkerFilteredRows=[],mmWorkerPageNo=1,mmWorkerPageSize=25,mmWorkerTotal=0,mmWorkerCurrent=null,mmWorkerDebounce=null;
+const mmWorkerSelectedFilters={company:[],status:[],category:[],nationality:[]};
 const mmWorkerFields={
  'NO.':'','REMARKS':'mmFRemarks','SAFETY INDUCTION DATE':'mmFInduction','NAME':'mmFName','IC / PASSPORT NO.':'mmFIC','COMPANY':'mmFCompany','DESIGNATION':'mmFDesignation','JOB CATEGORY':'mmFCategory','CIDB EXPIRED DATE':'mmFCidbExpiry','WORK PERMIT NO.':'mmFPermitNo','WORK PERMIT EXPIRY DATE':'mmFPermitExpiry','CIDB CARD NO.':'mmFCidbNo','OGSP CARD NO.':'mmFOgspNo','OGSP EXPIRED DATE':'mmFOgspExpiry','NATIONALITY':'mmFNationality','ADDRESS':'mmFAddress','POSTCODE':'mmFPostcode','DISTRICT':'mmFDistrict','STATE':'mmFState','CONTACT NO.':'mmFContact','EMAIL ADD':'mmFEmail','NEXT OF KIN':'mmFNextOfKin','RELATIONSHIP':'mmFRelationship','EMERGENCY CONTACT':'mmFEmergency','E-VETTING REF NO.':'mmFEvetting','WORKER ID':'mmFWorkerId','EMPLOYMENT STATUS':'mmFStatus'
 };
 function mmEsc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function mmWorkerMsg(msg,isError){const el=document.getElementById('mmWorkerMessage');if(el){el.textContent=msg||'';el.classList.toggle('error',!!isError);}}
 async function mmWorkerPost(action,extra={}){const u=getCurrentPortalUser();const res=await fetch(GOOGLE_API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,authToken:u.token||u.authToken||'',...extra})});if(!res.ok)throw new Error('API returned HTTP '+res.status);const out=await res.json();if(!out.success)throw new Error(out.error||out.message||'Worker Registration request failed.');return out;}
-function mmWorkerFilters(){return {search:document.getElementById('mmWorkerSearch').value.trim(),company:document.getElementById('mmWorkerCompany').value,status:document.getElementById('mmWorkerStatus').value,jobCategory:document.getElementById('mmWorkerCategory').value,nationality:document.getElementById('mmWorkerNationality').value,page:mmWorkerPageNo,pageSize:mmWorkerPageSize};}
-function mmFillFilter(id,values,label){const el=document.getElementById(id);if(!el)return;const old=el.value;el.innerHTML='<option value="">'+label+'</option>'+values.map(v=>'<option value="'+mmEsc(v)+'">'+mmEsc(v)+'</option>').join('');if(values.includes(old))el.value=old;}
-async function mmLoadWorkers(withOverlay=false){if(!isCurrentUserAdmin()){mmWorkerMsg('Worker Registration is restricted to Admin users.',true);return;}const status=document.getElementById('mmWorkerRefreshStatus');if(withOverlay)showPortalLoading('Loading worker master records…');if(status)status.textContent='Loading…';try{const out=await mmWorkerPost('mm_workers_list',{filters:mmWorkerFilters()});mmWorkerRows=out.workers||[];mmWorkerTotal=Number(out.total)||0;const all=out.filterOptions||{};mmFillFilter('mmWorkerCompany',all.companies||[],'All Companies');mmFillFilter('mmWorkerStatus',all.statuses||[],'All Statuses');mmFillFilter('mmWorkerCategory',all.jobCategories||[],'All Job Categories');mmFillFilter('mmWorkerNationality',all.nationalities||[],'All Nationalities');mmRenderWorkerTable();mmRenderWorkerKpis(out.kpis||{});if(status)status.textContent='Updated just now';}catch(e){mmWorkerMsg(e.message||String(e),true);const body=document.getElementById('mmWorkerTableBody');if(body)body.innerHTML='<tr><td colspan="8" class="mm-worker-empty">Unable to load worker records. '+mmEsc(e.message||e)+'</td></tr>';if(status)status.textContent='Load failed';}finally{if(withOverlay)hidePortalLoading();}}
+function mmWorkerFilters(){return {page:1,pageSize:10000};}
+function mmWorkerBuildMultiSelect(id,values,label,key){
+  const wrap=document.getElementById(id);if(!wrap)return;
+  const selected=(mmWorkerSelectedFilters[key]||[]).filter(v=>values.includes(v));
+  mmWorkerSelectedFilters[key]=selected;
+  wrap.className='multi-select';wrap.innerHTML='';
+  const trigger=document.createElement('button');trigger.type='button';trigger.className='multi-select-trigger';
+  const updateTrigger=()=>{
+    const vals=mmWorkerSelectedFilters[key]||[];
+    trigger.innerHTML=vals.length?'<span class="multi-count">'+vals.length+'</span> '+(vals.length===1?mmEsc(vals[0]):vals.length+' selected'):mmEsc(label);
+  };
+  updateTrigger();
+  const menu=document.createElement('div');menu.className='multi-select-menu';
+  const search=document.createElement('input');search.type='text';search.className='multi-search';search.placeholder='Search...';menu.appendChild(search);
+  const list=document.createElement('div');list.className='multi-options';
+  const allRow=document.createElement('label');allRow.className='multi-option multi-all';
+  const allCb=document.createElement('input');allCb.type='checkbox';allCb.checked=selected.length===0;
+  const allText=document.createElement('span');allText.textContent=label;
+  allRow.appendChild(allCb);allRow.appendChild(allText);list.appendChild(allRow);
+  const cbs=[];
+  values.forEach(v=>{
+    const row=document.createElement('label');row.className='multi-option';
+    const cb=document.createElement('input');cb.type='checkbox';cb.value=v;cb.checked=selected.includes(v);
+    const span=document.createElement('span');span.textContent=v;
+    row.appendChild(cb);row.appendChild(span);list.appendChild(row);cbs.push(cb);
+  });
+  menu.appendChild(list);
+  const actions=document.createElement('div');actions.className='multi-actions';
+  const clear=document.createElement('button');clear.type='button';clear.className='multi-clear';clear.textContent='Clear';
+  const apply=document.createElement('button');apply.type='button';apply.className='multi-apply';apply.textContent='Apply';
+  actions.appendChild(clear);actions.appendChild(apply);menu.appendChild(actions);
+  allCb.onchange=()=>{if(allCb.checked)cbs.forEach(cb=>cb.checked=false);};
+  cbs.forEach(cb=>cb.onchange=()=>{if(cb.checked)allCb.checked=false;if(!cbs.some(x=>x.checked))allCb.checked=true;});
+  search.oninput=()=>{const q=search.value.toLowerCase();cbs.forEach(cb=>{cb.parentElement.style.display=cb.value.toLowerCase().includes(q)?'flex':'none';});};
+  clear.onclick=()=>{cbs.forEach(cb=>cb.checked=false);allCb.checked=true;};
+  apply.onclick=()=>{
+    mmWorkerSelectedFilters[key]=cbs.filter(cb=>cb.checked).map(cb=>cb.value);
+    updateTrigger();wrap.classList.remove('open');mmWorkerPageNo=1;mmApplyWorkerFilters();
+  };
+  trigger.onclick=e=>{
+    e.stopPropagation();
+    document.querySelectorAll('#mmWorkerFilters .multi-select.open').forEach(x=>{if(x!==wrap)x.classList.remove('open');});
+    wrap.classList.toggle('open');
+  };
+  menu.onclick=e=>e.stopPropagation();
+  wrap.appendChild(trigger);wrap.appendChild(menu);
+}
+function mmPopulateWorkerFilters(options){
+  mmWorkerBuildMultiSelect('mmWorkerCompany',options.companies||[],'All Companies','company');
+  mmWorkerBuildMultiSelect('mmWorkerStatus',options.statuses||[],'All Statuses','status');
+  mmWorkerBuildMultiSelect('mmWorkerCategory',options.jobCategories||[],'All Job Categories','category');
+  mmWorkerBuildMultiSelect('mmWorkerNationality',options.nationalities||[],'All Nationalities','nationality');
+}
+function mmApplyWorkerFilters(){
+  const q=String(document.getElementById('mmWorkerSearch')?.value||'').trim().toLowerCase();
+  const f=mmWorkerSelectedFilters;
+  mmWorkerFilteredRows=mmWorkerRows.filter(w=>{
+    if(q&&!([w['WORKER ID'],w.NAME,w['IC / PASSPORT NO.']].some(v=>String(v||'').toLowerCase().includes(q))))return false;
+    if(f.company.length&&!f.company.includes(String(w.COMPANY||'')))return false;
+    if(f.status.length&&!f.status.includes(String(w['EMPLOYMENT STATUS']||'')))return false;
+    if(f.category.length&&!f.category.includes(String(w['JOB CATEGORY']||'')))return false;
+    if(f.nationality.length&&!f.nationality.includes(String(w.NATIONALITY||'')))return false;
+    return true;
+  });
+  mmWorkerTotal=mmWorkerFilteredRows.length;
+  const pages=Math.max(1,Math.ceil(mmWorkerTotal/mmWorkerPageSize));
+  mmWorkerPageNo=Math.min(Math.max(1,mmWorkerPageNo),pages);
+  mmRenderWorkerTable();
+}
+async function mmLoadWorkers(withOverlay=false){
+  if(!isCurrentUserAdmin()){mmWorkerMsg('Worker Registration is restricted to Admin users.',true);return;}
+  const status=document.getElementById('mmWorkerRefreshStatus');
+  if(withOverlay)showPortalLoading('Loading worker master records…');
+  if(status)status.textContent='Loading…';
+  try{
+    const out=await mmWorkerPost('mm_workers_list',{filters:mmWorkerFilters()});
+    mmWorkerRows=out.workers||[];
+    const all=out.filterOptions||{};
+    mmPopulateWorkerFilters(all);
+    mmRenderWorkerKpis(out.kpis||{});
+    mmWorkerPageNo=1;mmApplyWorkerFilters();
+    if(status)status.textContent='Updated just now';
+  }catch(e){
+    mmWorkerMsg(e.message||String(e),true);
+    const body=document.getElementById('mmWorkerTableBody');
+    if(body)body.innerHTML='<tr><td colspan="8" class="mm-worker-empty">Unable to load worker records. '+mmEsc(e.message||e)+'</td></tr>';
+    if(status)status.textContent='Load failed';
+  }finally{if(withOverlay)hidePortalLoading();}
+}
 function mmRenderWorkerKpis(k){document.getElementById('mmKpiTotal').textContent=k.total??'—';document.getElementById('mmKpiActive').textContent=k.active??'—';document.getElementById('mmKpiPlanned').textContent=k.planned??'—';document.getElementById('mmKpiOther').textContent=k.other??'—';}
-function mmRenderWorkerTable(){const body=document.getElementById('mmWorkerTableBody');if(!body)return;if(!mmWorkerRows.length){body.innerHTML='<tr><td colspan="8" class="mm-worker-empty">No worker records match the selected filters.</td></tr>';}else{body.innerHTML=mmWorkerRows.map(w=>{const id=w['WORKER ID']||'',st=w['EMPLOYMENT STATUS']||'Unverified / Blank';const cls=st==='Active'?'active':st==='Planned for Induction'?'planned':'';return '<tr><td><strong>'+mmEsc(id||'—')+'</strong></td><td>'+mmEsc(w.NAME||'—')+'</td><td>'+mmEsc(w.COMPANY||'—')+'</td><td>'+mmEsc(w.DESIGNATION||'—')+'</td><td>'+mmEsc(w['JOB CATEGORY']||'—')+'</td><td>'+mmEsc(w.NATIONALITY||'—')+'</td><td><span class="mm-worker-status '+cls+'">'+mmEsc(st)+'</span></td><td><div class="mm-worker-row-actions"><button class="mm-worker-action" onclick="mmViewWorker(\''+mmEsc(id)+'\')">View</button><button class="mm-worker-action" onclick="mmEditWorker(\''+mmEsc(id)+'\')">Edit</button></div></td></tr>';}).join('');}document.getElementById('mmWorkerCount').textContent=mmWorkerTotal+' worker records';const pages=Math.max(1,Math.ceil(mmWorkerTotal/mmWorkerPageSize));document.getElementById('mmWorkerPageLabel').textContent='Page '+mmWorkerPageNo+' of '+pages;document.getElementById('mmWorkerPrev').disabled=mmWorkerPageNo<=1;document.getElementById('mmWorkerNext').disabled=mmWorkerPageNo>=pages;}
-function mmWorkerPage(delta){mmWorkerPageNo=Math.max(1,mmWorkerPageNo+delta);mmLoadWorkers(true);}
-function mmResetWorkerFilters(){['mmWorkerSearch','mmWorkerCompany','mmWorkerStatus','mmWorkerCategory','mmWorkerNationality'].forEach(id=>document.getElementById(id).value='');mmWorkerPageNo=1;mmLoadWorkers(true);}
-function mmInitWorkerFilters(){['mmWorkerSearch','mmWorkerCompany','mmWorkerStatus','mmWorkerCategory','mmWorkerNationality'].forEach(id=>{const el=document.getElementById(id);if(!el||el.dataset.mmReady)return;el.dataset.mmReady='1';el.addEventListener(id==='mmWorkerSearch'?'input':'change',()=>{if(id==='mmWorkerSearch'){clearTimeout(mmWorkerDebounce);mmWorkerDebounce=setTimeout(()=>{mmWorkerPageNo=1;mmLoadWorkers(false);},300);}else{mmWorkerPageNo=1;mmLoadWorkers(false);}});});}
-function mmOpenWorkerForm(){if(!isCurrentUserAdmin()){mmWorkerMsg('Only Admin users can register workers.',true);return;}mmWorkerCurrent=null;document.getElementById('mmWorkerForm').reset();document.getElementById('mmWorkerFormMode').value='add';document.getElementById('mmWorkerOriginalId').value='';document.getElementById('mmFWorkerId').value='Auto-generated on save';document.getElementById('mmWorkerFormHeading').textContent='Add New Worker';document.getElementById('mmWorkerSaveButton').textContent='SAVE WORKER';document.getElementById('mmWorkerFormMessage').textContent='';go('mm-worker-form');}
+function mmRenderWorkerTable(){
+  const body=document.getElementById('mmWorkerTableBody');if(!body)return;
+  const start=(mmWorkerPageNo-1)*mmWorkerPageSize;
+  const pageRows=mmWorkerFilteredRows.slice(start,start+mmWorkerPageSize);
+  if(!pageRows.length){body.innerHTML='<tr><td colspan="8" class="mm-worker-empty">No worker records match the selected filters.</td></tr>';}
+  else{body.innerHTML=pageRows.map(w=>{const id=w['WORKER ID']||'',st=w['EMPLOYMENT STATUS']||'Unverified / Blank';const cls=st==='Active'?'active':st==='Planned for Induction'?'planned':'';return '<tr><td><strong>'+mmEsc(id||'—')+'</strong></td><td>'+mmEsc(w.NAME||'—')+'</td><td>'+mmEsc(w.COMPANY||'—')+'</td><td>'+mmEsc(w.DESIGNATION||'—')+'</td><td>'+mmEsc(w['JOB CATEGORY']||'—')+'</td><td>'+mmEsc(w.NATIONALITY||'—')+'</td><td><span class="mm-worker-status '+cls+'">'+mmEsc(st)+'</span></td><td><div class="mm-worker-row-actions"><button class="mm-worker-action" onclick="mmViewWorker(\''+mmEsc(id)+'\')">View</button><button class="mm-worker-action" onclick="mmEditWorker(\''+mmEsc(id)+'\')">Edit</button></div></td></tr>';}).join('');}
+  document.getElementById('mmWorkerCount').textContent=mmWorkerTotal+' worker records';
+  const pages=Math.max(1,Math.ceil(mmWorkerTotal/mmWorkerPageSize));
+  document.getElementById('mmWorkerPageLabel').textContent='Page '+mmWorkerPageNo+' of '+pages;
+  document.getElementById('mmWorkerPrev').disabled=mmWorkerPageNo<=1;
+  document.getElementById('mmWorkerNext').disabled=mmWorkerPageNo>=pages;
+}
+function mmWorkerPage(delta){mmWorkerPageNo=Math.max(1,Math.min(Math.ceil(mmWorkerTotal/mmWorkerPageSize),mmWorkerPageNo+delta));mmRenderWorkerTable();}
+function mmResetWorkerFilters(){
+  const search=document.getElementById('mmWorkerSearch');if(search)search.value='';
+  Object.keys(mmWorkerSelectedFilters).forEach(k=>mmWorkerSelectedFilters[k]=[]);
+  mmPopulateWorkerFilters({
+    companies:[...new Set(mmWorkerRows.map(w=>String(w.COMPANY||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b)),
+    statuses:[...new Set(mmWorkerRows.map(w=>String(w['EMPLOYMENT STATUS']||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b)),
+    jobCategories:[...new Set(mmWorkerRows.map(w=>String(w['JOB CATEGORY']||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b)),
+    nationalities:[...new Set(mmWorkerRows.map(w=>String(w.NATIONALITY||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b))
+  });
+  mmWorkerPageNo=1;mmApplyWorkerFilters();
+}
+function mmInitWorkerFilters(){
+  const search=document.getElementById('mmWorkerSearch');
+  if(search&&!search.dataset.mmReady){search.dataset.mmReady='1';search.addEventListener('input',()=>{mmWorkerPageNo=1;mmApplyWorkerFilters();});}
+  document.addEventListener('click',e=>{if(!e.target.closest('#mmWorkerFilters .multi-select'))document.querySelectorAll('#mmWorkerFilters .multi-select.open').forEach(x=>x.classList.remove('open'));});
+}function mmOpenWorkerForm(){if(!isCurrentUserAdmin()){mmWorkerMsg('Only Admin users can register workers.',true);return;}mmWorkerCurrent=null;document.getElementById('mmWorkerForm').reset();document.getElementById('mmWorkerFormMode').value='add';document.getElementById('mmWorkerOriginalId').value='';document.getElementById('mmFWorkerId').value='Auto-generated on save';document.getElementById('mmWorkerFormHeading').textContent='Add New Worker';document.getElementById('mmWorkerSaveButton').textContent='SAVE WORKER';document.getElementById('mmWorkerFormMessage').textContent='';go('mm-worker-form');}
 function mmReturnToWorkerList(){go('mm-worker-registration');if(isCurrentUserAdmin())mmLoadWorkers(false);}
 function mmDateForInput(v){if(!v)return '';const s=String(v);const m=s.match(/^(\d{4}-\d{2}-\d{2})/);return m?m[1]:'';}
 function mmSetFormFromWorker(w){Object.entries(mmWorkerFields).forEach(([key,id])=>{if(!id)return;const el=document.getElementById(id);if(el)el.value=key.includes('DATE')?mmDateForInput(w[key]):(w[key]??'');});}
@@ -8876,26 +9282,152 @@ const mmOriginalGo=go;go=function(page){mmOriginalGo(page);if(page==='mm-worker-
 
 
 <script>
-let mmCompRows=[],mmCompTitles=[],mmCompPageNo=1,mmCompPageSize=25,mmCompTotal=0,mmCompSelectedTitle='',mmCompDebounce=null,mmCompWorkers=[];
+let mmCompRows=[],mmCompAllRows=[],mmCompTitles=[],mmCompPageNo=1,mmCompPageSize=25,mmCompTotal=0,mmCompSelectedTitle='',mmCompDebounce=null,mmCompWorkers=[];
+const mmCompSelectedFilters={title:[],company:[],status:[]};
 function mmCompEsc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 async function mmCompPost(action,extra={}){return await mmWorkerPost(action,extra);}
-function mmCompFilters(){return {search:document.getElementById('mmCompSearch').value.trim(),title:document.getElementById('mmCompTitle').value,company:document.getElementById('mmCompCompany').value,status:document.getElementById('mmCompStatus').value,page:mmCompPageNo,pageSize:mmCompPageSize};}
-function mmCompFillSelect(id,values,label){const el=document.getElementById(id);if(!el)return;const old=el.value;el.innerHTML='<option value="">'+label+'</option>'+values.map(v=>'<option value="'+mmCompEsc(v)+'">'+mmCompEsc(v)+'</option>').join('');if(values.includes(old))el.value=old;}
+function mmCompFilters(){return {page:1,pageSize:10000};}
+function mmCompBuildMultiSelect(id,values,label,key){
+  const wrap=document.getElementById(id);if(!wrap)return;
+  const selected=(mmCompSelectedFilters[key]||[]).filter(v=>values.includes(v));
+  mmCompSelectedFilters[key]=selected;
+  wrap.className='multi-select';wrap.innerHTML='';
+  const trigger=document.createElement('button');trigger.type='button';trigger.className='multi-select-trigger';
+  const updateTrigger=()=>{
+    const vals=mmCompSelectedFilters[key]||[];
+    trigger.innerHTML=vals.length?'<span class="multi-count">'+vals.length+'</span> '+(vals.length===1?mmCompEsc(vals[0]):vals.length+' selected'):mmCompEsc(label);
+  };
+  updateTrigger();
+  const menu=document.createElement('div');menu.className='multi-select-menu';
+  const search=document.createElement('input');search.type='text';search.className='multi-search';search.placeholder='Search...';menu.appendChild(search);
+  const list=document.createElement('div');list.className='multi-options';
+  const allRow=document.createElement('label');allRow.className='multi-option multi-all';
+  const allCb=document.createElement('input');allCb.type='checkbox';allCb.checked=selected.length===0;
+  const allText=document.createElement('span');allText.textContent=label;
+  allRow.appendChild(allCb);allRow.appendChild(allText);list.appendChild(allRow);
+  const cbs=[];
+  values.forEach(v=>{
+    const row=document.createElement('label');row.className='multi-option';
+    const cb=document.createElement('input');cb.type='checkbox';cb.value=v;cb.checked=selected.includes(v);
+    const span=document.createElement('span');span.textContent=v;
+    row.appendChild(cb);row.appendChild(span);list.appendChild(row);cbs.push(cb);
+  });
+  menu.appendChild(list);
+  const actions=document.createElement('div');actions.className='multi-actions';
+  const clear=document.createElement('button');clear.type='button';clear.className='multi-clear';clear.textContent='Clear';
+  const apply=document.createElement('button');apply.type='button';apply.className='multi-apply';apply.textContent='Apply';
+  actions.appendChild(clear);actions.appendChild(apply);menu.appendChild(actions);
+  allCb.onchange=()=>{if(allCb.checked)cbs.forEach(cb=>cb.checked=false);};
+  cbs.forEach(cb=>cb.onchange=()=>{if(cb.checked)allCb.checked=false;if(!cbs.some(x=>x.checked))allCb.checked=true;});
+  search.oninput=()=>{const q=search.value.toLowerCase();cbs.forEach(cb=>{cb.parentElement.style.display=cb.value.toLowerCase().includes(q)?'flex':'none';});};
+  clear.onclick=()=>{cbs.forEach(cb=>cb.checked=false);allCb.checked=true;};
+  apply.onclick=()=>{
+    mmCompSelectedFilters[key]=cbs.filter(cb=>cb.checked).map(cb=>cb.value);
+    if(key==='title')mmCompSelectedTitle=mmCompSelectedFilters.title.length===1?mmCompSelectedFilters.title[0]:'';
+    updateTrigger();wrap.classList.remove('open');mmCompPageNo=1;mmCompApplyFilters();mmCompRenderKpisFromLast();
+  };
+  trigger.onclick=e=>{
+    e.stopPropagation();
+    document.querySelectorAll('#mmCompFilters .multi-select.open').forEach(x=>{if(x!==wrap)x.classList.remove('open');});
+    wrap.classList.toggle('open');
+  };
+  menu.onclick=e=>e.stopPropagation();
+  wrap.appendChild(trigger);wrap.appendChild(menu);
+}
+function mmCompPopulateFilters(options){
+  mmCompBuildMultiSelect('mmCompTitle',options.titles||[],'All Competencies','title');
+  mmCompBuildMultiSelect('mmCompCompany',options.companies||[],'All Companies','company');
+  mmCompBuildMultiSelect('mmCompStatus',['Valid','Expiring Soon','Expired','No Expiry Date'],'All Statuses','status');
+}
+function mmCompApplyFilters(){
+  const q=String(document.getElementById('mmCompSearch')?.value||'').trim().toLowerCase();
+  const f=mmCompSelectedFilters;
+  const filtered=mmCompAllRows.filter(r=>{
+    if(q&&![r['WORKER ID'],r['WORKER NAME'],r['CERTIFICATE NUMBER'],r['PROVIDER / ACCREDITOR']].some(v=>String(v||'').toLowerCase().includes(q)))return false;
+    if(f.title.length&&!f.title.includes(String(r['COMPETENCY TITLE']||'')))return false;
+    if(f.company.length&&!f.company.includes(String(r.COMPANY||'')))return false;
+    if(f.status.length&&!f.status.includes(String(r.STATUS||'No Expiry Date')))return false;
+    return true;
+  });
+  mmCompTotal=filtered.length;
+  const pages=Math.max(1,Math.ceil(mmCompTotal/mmCompPageSize));
+  mmCompPageNo=Math.min(Math.max(1,mmCompPageNo),pages);
+  const start=(mmCompPageNo-1)*mmCompPageSize;
+  mmCompRows=filtered.slice(start,start+mmCompPageSize);
+  mmCompRenderTable();
+}
 function mmCompKpis(items){const box=document.getElementById('mmCompetencyKpis');if(!box)return;const colors=['#1769aa','#18845b','#d18a16','#7052a5','#087e8b','#a64b72'];box.innerHTML=items.length?items.map((x,i)=>'<div class="wp-title-kpi mm-competency-kpi '+(mmCompSelectedTitle===x.title?'selected':'')+'" role="button" tabindex="0" onclick="mmCompChooseTitle('+JSON.stringify(x.title).replace(/"/g,'&quot;')+')" onkeydown="if(event.key===&quot;Enter&quot;||event.key===&quot; &quot;){event.preventDefault();mmCompChooseTitle('+JSON.stringify(x.title).replace(/"/g,'&quot;')+')} " style="border-top:4px solid '+colors[i%colors.length]+'"><div class="kpi-title">'+mmCompEsc(x.title)+'</div><div class="kpi-value">'+x.count+'</div><div class="kpi-cum">Registered workers</div></div>').join(''):'<div class="wp-title-kpi"><div class="kpi-title">No active competency titles found</div></div>';}
-function mmCompChooseTitle(title){mmCompSelectedTitle=mmCompSelectedTitle===title?'':title;document.getElementById('mmCompTitle').value=mmCompSelectedTitle;mmCompPageNo=1;mmCompRenderKpisFromLast();mmLoadCompetencies(false);}
+function mmCompChooseTitle(title){
+  mmCompSelectedTitle=mmCompSelectedTitle===title?'':title;
+  mmCompSelectedFilters.title=mmCompSelectedTitle?[mmCompSelectedTitle]:[];
+  mmCompPopulateFilters({titles:mmCompTitles.map(x=>x.title),companies:[...new Set(mmCompAllRows.map(r=>String(r.COMPANY||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b))});
+  mmCompPageNo=1;mmCompRenderKpisFromLast();mmCompApplyFilters();
+}
 let mmCompLastKpis=[];
 function mmCompRenderKpisFromLast(){mmCompKpis(mmCompLastKpis);}
-function mmCompRenderTable(){const body=document.getElementById('mmCompetencyTableBody');if(!body)return;if(!mmCompRows.length){body.innerHTML='<tr><td colspan="9" class="mm-worker-empty">No competency records match the selected filters.</td></tr>';}else{body.innerHTML=mmCompRows.map((r,i)=>{const status=String(r.STATUS||'No Expiry Date'),cls=status==='Valid'?'valid':status==='Expiring Soon'?'soon':status==='Expired'?'expired':'noexpiry';return '<tr><td><strong>'+mmCompEsc(r['WORKER ID'])+'</strong></td><td>'+mmCompEsc(r['WORKER NAME'])+'</td><td>'+mmCompEsc(r.COMPANY)+'</td><td>'+mmCompEsc(r['COMPETENCY TITLE'])+'</td><td>'+mmCompEsc(r['PROVIDER / ACCREDITOR'])+'</td><td>'+mmCompEsc(r['CERTIFICATE NUMBER']||'—')+'</td><td>'+mmCompEsc(r['EXPIRY DATE']||'—')+'</td><td><span class="mm-comp-status '+cls+'">'+mmCompEsc(status)+'</span></td><td><button type="button" class="mm-worker-action" onclick="mmViewCompetency('+i+')">VIEW</button> '+(isCurrentUserAdmin()?'<button type="button" class="mm-worker-action" onclick="mmEditCompetency('+i+')">EDIT</button>':'')+'</td></tr>';}).join('');}document.getElementById('mmCompetencyCount').textContent=mmCompTotal+' competency records';const pages=Math.max(1,Math.ceil(mmCompTotal/mmCompPageSize));document.getElementById('mmCompPageLabel').textContent='Page '+mmCompPageNo+' of '+pages;document.getElementById('mmCompPrev').disabled=mmCompPageNo<=1;document.getElementById('mmCompNext').disabled=mmCompPageNo>=pages;}
+function mmCompRenderTable(){
+  const body=document.getElementById('mmCompetencyTableBody');if(!body)return;
+  if(!mmCompRows.length){body.innerHTML='<tr><td colspan="9" class="mm-worker-empty">No competency records match the selected filters.</td></tr>';}
+  else{body.innerHTML=mmCompRows.map((r,i)=>{const status=String(r.STATUS||'No Expiry Date'),cls=status==='Valid'?'valid':status==='Expiring Soon'?'soon':status==='Expired'?'expired':'noexpiry';return '<tr><td><strong>'+mmCompEsc(r['WORKER ID'])+'</strong></td><td>'+mmCompEsc(r['WORKER NAME'])+'</td><td>'+mmCompEsc(r.COMPANY)+'</td><td>'+mmCompEsc(r['COMPETENCY TITLE'])+'</td><td>'+mmCompEsc(r['PROVIDER / ACCREDITOR'])+'</td><td>'+mmCompEsc(r['CERTIFICATE NUMBER']||'—')+'</td><td>'+mmCompEsc(r['EXPIRY DATE']||'—')+'</td><td><span class="mm-comp-status '+cls+'">'+mmCompEsc(status)+'</span></td><td><button type="button" class="mm-worker-action" onclick="mmViewCompetency('+i+')">VIEW</button> '+(isCurrentUserAdmin()?'<button type="button" class="mm-worker-action" onclick="mmEditCompetency('+i+')">EDIT</button>':'')+'</td></tr>';}).join('');}
+  document.getElementById('mmCompetencyCount').textContent=mmCompTotal+' competency records';
+  const pages=Math.max(1,Math.ceil(mmCompTotal/mmCompPageSize));
+  document.getElementById('mmCompPageLabel').textContent='Page '+mmCompPageNo+' of '+pages;
+  document.getElementById('mmCompPrev').disabled=mmCompPageNo<=1;
+  document.getElementById('mmCompNext').disabled=mmCompPageNo>=pages;
+}
 let mmCompCurrentRecord=null;
 function mmCompViewFields(r){const fields=[['Record ID','RECORD ID'],['Worker ID','WORKER ID'],['Worker Name','WORKER NAME'],['Company','COMPANY'],['Competency Title','COMPETENCY TITLE'],['Provider / Accreditor','PROVIDER / ACCREDITOR'],['Certificate Number','CERTIFICATE NUMBER'],['Issue Date','ISSUE DATE'],['Expiry Date','EXPIRY DATE'],['Status','STATUS'],['Remarks','REMARKS'],['Registered By','REGISTERED BY'],['Registration Date','REGISTRATION DATE'],['Last Updated By','LAST UPDATED BY'],['Last Updated Date','LAST UPDATED DATE']];return fields.map(([label,key])=>'<div class="mm-comp-view-item"><small>'+label+'</small><strong>'+mmCompEsc(r[key]||'—')+'</strong></div>').join('');}
 function mmViewCompetency(index){const r=mmCompRows[index];if(!r)return;mmCompCurrentRecord=r;document.getElementById('mmCompViewContent').innerHTML=mmCompViewFields(r);const pdf=document.getElementById('mmCompViewPdf');pdf.style.display=r['CERTIFICATE PDF LINK']?'inline-flex':'none';pdf.href=r['CERTIFICATE PDF LINK']||'#';document.getElementById('mmCompViewEdit').style.display=isCurrentUserAdmin()?'inline-flex':'none';document.getElementById('mmCompViewModal').hidden=false;}
 function mmCloseCompView(){document.getElementById('mmCompViewModal').hidden=true;}
 async function mmEditCompetency(index){const r=mmCompRows[index];if(!r||!isCurrentUserAdmin())return;mmCompCurrentRecord=r;mmCloseCompView();showPortalLoading('Loading competency record for editing…');try{const out=await mmCompPost('mm_competency_form_data',{});mmCompWorkers=out.workers||[];const w=mmCompWorkers.find(x=>x.id===r['WORKER ID']);document.getElementById('mmCompWorker').value=r['WORKER ID'];document.getElementById('mmCompWorkerSearch').value=r['WORKER NAME'];document.getElementById('mmCompWorkerId').value=r['WORKER ID'];document.getElementById('mmCompWorkerCompany').value=r.COMPANY||'';document.getElementById('mmCompWorkerSelected').textContent='Selected: '+r['WORKER NAME']+' ('+r['WORKER ID']+')';document.getElementById('mmCompWorkerSuggestions').hidden=true;const ts=document.getElementById('mmCompFormTitle');ts.innerHTML='<option value="">Select competency</option>'+(out.titles||[]).map(x=>'<option value="'+mmCompEsc(x.id)+'">'+mmCompEsc(x.title)+'</option>').join('');ts.value=r['COMPETENCY ID'];document.getElementById('mmCompProvider').value=r['PROVIDER / ACCREDITOR']||'';document.getElementById('mmCompCertificateNo').value=r['CERTIFICATE NUMBER']||'';document.getElementById('mmCompIssueDate').value=r['ISSUE DATE']||'';document.getElementById('mmCompExpiryDate').value=r['EXPIRY DATE']||'';document.getElementById('mmCompRemarks').value=r.REMARKS||'';document.getElementById('mmCompRecordId').value=r['RECORD ID'];document.getElementById('mmCompFormHeading').textContent='Edit Worker Competency';document.getElementById('mmCompSaveButton').textContent='UPDATE COMPETENCY';document.getElementById('mmCompPdf').required=false;document.getElementById('mmCompPdfRequired').textContent='(Optional — leave blank to keep current PDF)';document.getElementById('mmCompPdfHelp').textContent='PDF only, maximum 10 MB. Upload a new PDF only if replacing the current certificate.';document.getElementById('mmCompPdfName').textContent='Current certificate: '+(r['CERTIFICATE PDF LINK']?'available':'not attached');document.getElementById('mmCompFormMessage').textContent='Editing existing record. The original record remains in the system and the previous PDF will not be deleted.';go('mm-competency-form');}catch(e){mmCompMsg(e.message||String(e),true);}finally{hidePortalLoading();}}
 function mmEditCurrentCompetency(){const i=mmCompRows.findIndex(r=>r['RECORD ID']===mmCompCurrentRecord?.['RECORD ID']);if(i>=0)mmEditCompetency(i);}
-function mmCompPage(delta){mmCompPageNo=Math.max(1,mmCompPageNo+delta);mmLoadCompetencies(true);}
+function mmCompPage(delta){mmCompPageNo=Math.max(1,Math.min(Math.ceil(mmCompTotal/mmCompPageSize),mmCompPageNo+delta));mmCompApplyFilters();}
 function mmCompMsg(msg,error=false){const el=document.getElementById('mmCompetencyMessage');if(el){el.textContent=msg;el.classList.toggle('error',!!error);}}
-async function mmLoadCompetencies(withOverlay=false){const status=document.getElementById('mmCompetencyRefreshStatus');if(withOverlay)showPortalLoading('Loading competency records…');if(status)status.textContent='Refreshing…';try{const out=await mmCompPost('mm_competency_list',{filters:mmCompFilters()});mmCompRows=out.records||[];mmCompTotal=out.total||0;mmCompTitles=out.titles||[];mmCompLastKpis=out.kpis||[];mmCompKpis(mmCompLastKpis);mmCompFillSelect('mmCompTitle',out.filterOptions.titles||[],'All Competencies');if(mmCompSelectedTitle)document.getElementById('mmCompTitle').value=mmCompSelectedTitle;mmCompFillSelect('mmCompCompany',out.filterOptions.companies||[],'All Companies');mmCompRenderTable();if(status)status.textContent='Updated just now';const registerBtn=document.querySelector('#page-mm-competency .mm-competency-actions > .wp-new-inspection-btn');if(registerBtn)registerBtn.style.display=out.canManageTitles?'':'none';if(out.canManageTitles){let b=document.getElementById('mmCompManageTitlesBtn');if(!b){b=document.createElement('button');b.id='mmCompManageTitlesBtn';b.className='mm-worker-action';b.textContent='MANAGE COMPETENCY TITLES';b.onclick=mmOpenCompTitleManager;document.querySelector('#page-mm-competency .mm-competency-actions').insertBefore(b,document.querySelector('#page-mm-competency .mm-competency-refresh'));}}}catch(e){mmCompMsg(e.message||String(e),true);if(status)status.textContent='Refresh failed';}finally{if(withOverlay)hidePortalLoading();}}
-function mmInitCompetencyFilters(){[['mmCompSearch','input'],['mmCompTitle','change'],['mmCompCompany','change'],['mmCompStatus','change']].forEach(([id,event])=>{const el=document.getElementById(id);if(!el||el.dataset.ready)return;el.dataset.ready='1';el.addEventListener(event,()=>{mmCompPageNo=1;if(id==='mmCompTitle')mmCompSelectedTitle=el.value;mmLoadCompetencies(false);});});const reset=document.getElementById('mmCompReset');if(reset&&!reset.dataset.ready){reset.dataset.ready='1';reset.onclick=()=>{mmCompSelectedTitle='';['mmCompSearch','mmCompTitle','mmCompCompany','mmCompStatus'].forEach(id=>document.getElementById(id).value='');mmCompPageNo=1;mmLoadCompetencies(false);};}}
+async function mmLoadCompetencies(withOverlay=false){
+  const status=document.getElementById('mmCompetencyRefreshStatus');
+  if(withOverlay)showPortalLoading('Loading competency records…');
+  if(status)status.textContent='Refreshing…';
+  try{
+    const out=await mmCompPost('mm_competency_list',{filters:mmCompFilters()});
+    mmCompAllRows=out.records||[];
+    mmCompTitles=(out.filterOptions?.titles||[]).map(title=>({title}));
+    mmCompLastKpis=out.kpis||[];
+    mmCompKpis(mmCompLastKpis);
+    mmCompPopulateFilters(out.filterOptions||{});
+    mmCompApplyFilters();
+    if(status)status.textContent='Updated just now';
+    const registerBtn=document.querySelector('#page-mm-competency .mm-competency-actions > .wp-new-inspection-btn');
+    if(registerBtn)registerBtn.style.display=out.canManageTitles?'':'none';
+    if(out.canManageTitles){
+      let b=document.getElementById('mmCompManageTitlesBtn');
+      if(!b){
+        b=document.createElement('button');b.id='mmCompManageTitlesBtn';b.className='mm-worker-action';
+        b.textContent='MANAGE COMPETENCY TITLES';b.onclick=mmOpenCompTitleManager;
+        document.querySelector('#page-mm-competency .mm-competency-actions').insertBefore(b,document.querySelector('#page-mm-competency .mm-competency-refresh'));
+      }
+    }
+  }catch(e){mmCompMsg(e.message||String(e),true);if(status)status.textContent='Refresh failed';}
+  finally{if(withOverlay)hidePortalLoading();}
+}
+function mmInitCompetencyFilters(){
+  const search=document.getElementById('mmCompSearch');
+  if(search&&!search.dataset.ready){search.dataset.ready='1';search.addEventListener('input',()=>{mmCompPageNo=1;mmCompApplyFilters();});}
+  const reset=document.getElementById('mmCompReset');
+  if(reset&&!reset.dataset.ready){
+    reset.dataset.ready='1';
+    reset.onclick=()=>{
+      mmCompSelectedTitle='';
+      Object.keys(mmCompSelectedFilters).forEach(k=>mmCompSelectedFilters[k]=[]);
+      const input=document.getElementById('mmCompSearch');if(input)input.value='';
+      mmCompPopulateFilters({
+        titles:mmCompTitles.map(x=>x.title),
+        companies:[...new Set(mmCompAllRows.map(r=>String(r.COMPANY||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b))
+      });
+      mmCompPageNo=1;mmCompRenderKpisFromLast();mmCompApplyFilters();
+    };
+  }
+  document.addEventListener('click',e=>{if(!e.target.closest('#mmCompFilters .multi-select'))document.querySelectorAll('#mmCompFilters .multi-select.open').forEach(x=>x.classList.remove('open'));});
+}
 async function mmOpenCompetencyForm(){if(!isCurrentUserAdmin()){mmCompMsg('Only Admin users can register competencies.',true);return;}showPortalLoading('Loading worker and competency lists…');try{const out=await mmCompPost('mm_competency_form_data',{});mmCompWorkers=out.workers||[];const w=document.getElementById('mmCompWorker');w.innerHTML='<option value="">Select worker</option>'+mmCompWorkers.map(x=>'<option value="'+mmCompEsc(x.id)+'">'+mmCompEsc(x.id+' — '+x.name+' ('+x.company+')')+'</option>').join('');const titleSelect=document.getElementById('mmCompFormTitle');titleSelect.innerHTML='<option value="">Select competency</option>'+(out.titles||[]).map(x=>'<option value="'+mmCompEsc(x.id)+'">'+mmCompEsc(x.title)+'</option>').join('');document.getElementById('mmCompForm').reset();document.getElementById('mmCompPdfName').textContent='';mmCompClearWorkerSelection();document.getElementById('mmCompFormMessage').textContent='';go('mm-competency-form');}catch(e){mmCompMsg(e.message||String(e),true);}finally{hidePortalLoading();}}
 function mmReturnCompetencyList(){go('mm-competency');mmLoadCompetencies(false);}
 function mmOpenCompTitleManager(){if(!isCurrentUserAdmin()){mmCompMsg('Only Admin users can manage competency titles.',true);return;}go('mm-competency-titles');mmLoadCompTitles();}
@@ -8915,15 +9447,90 @@ document.addEventListener('DOMContentLoaded',()=>{if(document.getElementById('mm
 
 <script id="mm-rewards-script">
 let mmRewardsRows=[],mmRewardsWorkers=[],mmRewardsPageNo=1,mmRewardsPageSize=25,mmRewardsTotal=0,mmRewardsCurrent=null,mmRewardsTimer=null;
+let mmRewardsAllRows=[];
+const mmRewardsSelectedFilters={category:[],company:[],status:[]};
 function mmRewardsEsc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 async function mmRewardsPost(action,extra={}){return await mmWorkerPost(action,extra);}
-function mmRewardsFilters(){return {search:document.getElementById('mmRewardsSearch').value.trim(),category:document.getElementById('mmRewardsCategoryFilter').value,company:document.getElementById('mmRewardsCompanyFilter').value,status:document.getElementById('mmRewardsStatusFilter').value,page:mmRewardsPageNo,pageSize:mmRewardsPageSize};}
-function mmRewardsSelect(id,values,label){const el=document.getElementById(id),old=el.value;el.innerHTML='<option value="">'+label+'</option>'+values.map(v=>'<option value="'+mmRewardsEsc(v)+'">'+mmRewardsEsc(v)+'</option>').join('');if(values.includes(old))el.value=old;}
+function mmRewardsFilters(){return {page:1,pageSize:10000};}
+function mmRewardsBuildMultiSelect(id,values,label,key){
+  const wrap=document.getElementById(id);if(!wrap)return;
+  const selected=(mmRewardsSelectedFilters[key]||[]).filter(v=>values.includes(v));
+  mmRewardsSelectedFilters[key]=selected;
+  wrap.className='multi-select';wrap.innerHTML='';
+  const trigger=document.createElement('button');trigger.type='button';trigger.className='multi-select-trigger';
+  const updateTrigger=()=>{const vals=mmRewardsSelectedFilters[key]||[];trigger.innerHTML=vals.length?'<span class="multi-count">'+vals.length+'</span> '+(vals.length===1?mmRewardsEsc(vals[0]):vals.length+' selected'):mmRewardsEsc(label);};
+  updateTrigger();
+  const menu=document.createElement('div');menu.className='multi-select-menu';
+  const search=document.createElement('input');search.type='text';search.className='multi-search';search.placeholder='Search...';menu.appendChild(search);
+  const list=document.createElement('div');list.className='multi-options';
+  const allRow=document.createElement('label');allRow.className='multi-option multi-all';
+  const allCb=document.createElement('input');allCb.type='checkbox';allCb.checked=selected.length===0;
+  const allText=document.createElement('span');allText.textContent=label;allRow.appendChild(allCb);allRow.appendChild(allText);list.appendChild(allRow);
+  const cbs=[];
+  values.forEach(v=>{const row=document.createElement('label');row.className='multi-option';const cb=document.createElement('input');cb.type='checkbox';cb.value=v;cb.checked=selected.includes(v);const span=document.createElement('span');span.textContent=v;row.appendChild(cb);row.appendChild(span);list.appendChild(row);cbs.push(cb);});
+  menu.appendChild(list);
+  const actions=document.createElement('div');actions.className='multi-actions';
+  const clear=document.createElement('button');clear.type='button';clear.className='multi-clear';clear.textContent='Clear';
+  const apply=document.createElement('button');apply.type='button';apply.className='multi-apply';apply.textContent='Apply';
+  actions.appendChild(clear);actions.appendChild(apply);menu.appendChild(actions);
+  allCb.onchange=()=>{if(allCb.checked)cbs.forEach(cb=>cb.checked=false);};
+  cbs.forEach(cb=>cb.onchange=()=>{if(cb.checked)allCb.checked=false;if(!cbs.some(x=>x.checked))allCb.checked=true;});
+  search.oninput=()=>{const q=search.value.toLowerCase();cbs.forEach(cb=>{cb.parentElement.style.display=cb.value.toLowerCase().includes(q)?'flex':'none';});};
+  clear.onclick=()=>{cbs.forEach(cb=>cb.checked=false);allCb.checked=true;};
+  apply.onclick=()=>{mmRewardsSelectedFilters[key]=cbs.filter(cb=>cb.checked).map(cb=>cb.value);updateTrigger();wrap.classList.remove('open');mmRewardsPageNo=1;mmRewardsApplyFilters();};
+  trigger.onclick=e=>{e.stopPropagation();document.querySelectorAll('#mmRewardsFilters .multi-select.open').forEach(x=>{if(x!==wrap)x.classList.remove('open');});wrap.classList.toggle('open');};
+  menu.onclick=e=>e.stopPropagation();wrap.appendChild(trigger);wrap.appendChild(menu);
+}
+function mmRewardsPopulateFilters(options){
+  mmRewardsBuildMultiSelect('mmRewardsCategoryFilter',options.categories||[],'All Categories','category');
+  mmRewardsBuildMultiSelect('mmRewardsCompanyFilter',options.companies||[],'All Companies','company');
+  mmRewardsBuildMultiSelect('mmRewardsStatusFilter',options.statuses||[],'All Statuses','status');
+}
+function mmRewardsApplyFilters(){
+  const q=String(document.getElementById('mmRewardsSearch')?.value||'').trim().toLowerCase(),f=mmRewardsSelectedFilters;
+  const filtered=mmRewardsAllRows.filter(r=>{
+    if(q&&![r['WORKER ID'],r['WORKER NAME'],r['REFERENCE NO.']].some(v=>String(v||'').toLowerCase().includes(q)))return false;
+    if(f.category.length&&!f.category.includes(String(r['RECOGNITION CATEGORY']||'')))return false;
+    if(f.company.length&&!f.company.includes(String(r.COMPANY||'')))return false;
+    if(f.status.length&&!f.status.includes(String(r.STATUS||'Submitted')))return false;
+    return true;
+  });
+  mmRewardsTotal=filtered.length;const pages=Math.max(1,Math.ceil(mmRewardsTotal/mmRewardsPageSize));
+  mmRewardsPageNo=Math.min(Math.max(1,mmRewardsPageNo),pages);
+  const start=(mmRewardsPageNo-1)*mmRewardsPageSize;mmRewardsRows=filtered.slice(start,start+mmRewardsPageSize);
+  mmRewardsRender();
+}
 function mmRewardsKpis(k){const el=document.getElementById('mmRewardsKpis');const cards=[['Total Recognition',k.total||0,'#1769aa'],['This Month',k.thisMonth||0,'#18845b'],['Unique Workers',k.workers||0,'#d18a16'],['Companies',k.companies||0,'#7052a5']];el.innerHTML=cards.map(c=>'<div class="wp-title-kpi" style="background:'+c[2]+';color:#fff"><div class="kpi-title">'+c[0]+'</div><div class="kpi-value">'+c[1]+'</div><div class="kpi-cum">Recognition records</div></div>').join('');}
-function mmRewardsRender(){const body=document.getElementById('mmRewardsTableBody');if(!mmRewardsRows.length){body.innerHTML='<tr><td colspan="9" class="mm-worker-empty">No recognition records found.</td></tr>';}else body.innerHTML=mmRewardsRows.map((r,i)=>'<tr><td><strong>'+mmRewardsEsc(r['REFERENCE NO.'])+'</strong></td><td>'+mmRewardsEsc(r['RECORD DATE'])+'</td><td>'+mmRewardsEsc(r['WORKER ID'])+'</td><td>'+mmRewardsEsc(r['WORKER NAME'])+'</td><td>'+mmRewardsEsc(r.COMPANY)+'</td><td>'+mmRewardsEsc(r['RECOGNITION CATEGORY'])+'</td><td>'+mmRewardsEsc(r['RECOGNITION GIVEN'])+'</td><td><span class="mm-comp-status '+(r.STATUS==='Submitted'?'valid':'soon')+'">'+mmRewardsEsc(r.STATUS||'Submitted')+'</span></td><td><button type="button" class="mm-worker-action" onclick="mmRewardsView('+i+')">VIEW</button> '+(isCurrentUserAdmin()&&r.STATUS!=='Deleted'?'<button type="button" class="mm-worker-action" onclick="mmRewardsEdit('+i+')">EDIT</button> <button type="button" class="mm-worker-action mm-rewards-delete-btn" onclick="mmRewardsDelete('+i+')">DELETE</button>':'')+'</td></tr>').join('');document.getElementById('mmRewardsCount').textContent=mmRewardsTotal+' recognition records';const pages=Math.max(1,Math.ceil(mmRewardsTotal/mmRewardsPageSize));document.getElementById('mmRewardsPageLabel').textContent='Page '+mmRewardsPageNo+' of '+pages;document.getElementById('mmRewardsPrev').disabled=mmRewardsPageNo<=1;document.getElementById('mmRewardsNext').disabled=mmRewardsPageNo>=pages;}
-async function mmRewardsLoad(overlay=false){const st=document.getElementById('mmRewardsRefreshStatus');if(overlay)showPortalLoading('Loading Rewards & Recognition…');if(st)st.textContent='Refreshing…';try{const out=await mmRewardsPost('mm_rewards_list',{filters:mmRewardsFilters()});mmRewardsRows=out.records||[];mmRewardsTotal=out.total||0;mmRewardsKpis(out.kpis||{});mmRewardsSelect('mmRewardsCategoryFilter',out.filterOptions.categories||[],'All Categories');mmRewardsSelect('mmRewardsCompanyFilter',out.filterOptions.companies||[],'All Companies');mmRewardsSelect('mmRewardsStatusFilter',out.filterOptions.statuses||[],'All Statuses');mmRewardsRender();const b=document.getElementById('mmRewardsRegisterBtn');if(b)b.style.display='';if(st)st.textContent='Updated just now';}catch(e){document.getElementById('mmRewardsMessage').textContent=e.message||String(e);if(st)st.textContent='Refresh failed';}finally{if(overlay)hidePortalLoading();}}
-function mmRewardsResetFilters(){['mmRewardsSearch','mmRewardsCategoryFilter','mmRewardsCompanyFilter','mmRewardsStatusFilter'].forEach(id=>document.getElementById(id).value='');mmRewardsPageNo=1;mmRewardsLoad(true);}
-function mmRewardsPage(d){mmRewardsPageNo=Math.max(1,mmRewardsPageNo+d);mmRewardsLoad(true);}
+function mmRewardsRender(){
+  const body=document.getElementById('mmRewardsTableBody');if(!body)return;
+  if(!mmRewardsRows.length){body.innerHTML='<tr><td colspan="9" class="mm-worker-empty">No recognition records found.</td></tr>';}
+  else body.innerHTML=mmRewardsRows.map((r,i)=>'<tr><td class="mm-rewards-ref"><strong>'+mmRewardsEsc(r['REFERENCE NO.'])+'</strong></td><td>'+mmRewardsEsc(r['RECORD DATE'])+'</td><td>'+mmRewardsEsc(r['WORKER ID'])+'</td><td class="mm-rewards-worker-name">'+mmRewardsEsc(r['WORKER NAME'])+'</td><td>'+mmRewardsEsc(r.COMPANY)+'</td><td>'+mmRewardsEsc(r['RECOGNITION CATEGORY'])+'</td><td class="mm-rewards-given">'+mmRewardsEsc(r['RECOGNITION GIVEN'])+'</td><td><span class="mm-rewards-status '+(r.STATUS==='Submitted'?'submitted':'other')+'">'+mmRewardsEsc(r.STATUS||'Submitted')+'</span></td><td><div class="mm-record-actions"><button type="button" class="mm-worker-action" onclick="mmRewardsView('+i+')">VIEW</button> '+(isCurrentUserAdmin()&&r.STATUS!=='Deleted'?'<button type="button" class="mm-worker-action" onclick="mmRewardsEdit('+i+')">EDIT</button> <button type="button" class="mm-worker-action mm-rewards-delete-btn" onclick="mmRewardsDelete('+i+')">DELETE</button>':'')+'</div></td></tr>').join('');
+  document.getElementById('mmRewardsCount').textContent=mmRewardsTotal+' recognition records';
+  const pages=Math.max(1,Math.ceil(mmRewardsTotal/mmRewardsPageSize));document.getElementById('mmRewardsPageLabel').textContent='Page '+mmRewardsPageNo+' of '+pages;
+  document.getElementById('mmRewardsPrev').disabled=mmRewardsPageNo<=1;document.getElementById('mmRewardsNext').disabled=mmRewardsPageNo>=pages;
+}
+async function mmRewardsLoad(overlay=false){
+  const st=document.getElementById('mmRewardsRefreshStatus');if(overlay)showPortalLoading('Loading Rewards & Recognition…');if(st)st.textContent='Refreshing…';
+  try{
+    const out=await mmRewardsPost('mm_rewards_list',{filters:mmRewardsFilters()});
+    mmRewardsAllRows=out.records||[];mmRewardsKpis(out.kpis||{});
+    mmRewardsPopulateFilters(out.filterOptions||{});mmRewardsPageNo=1;mmRewardsApplyFilters();
+    const b=document.getElementById('mmRewardsRegisterBtn');if(b)b.style.display='';
+    if(st)st.textContent='Updated just now';
+  }catch(e){document.getElementById('mmRewardsMessage').textContent=e.message||String(e);if(st)st.textContent='Refresh failed';}
+  finally{if(overlay)hidePortalLoading();}
+}
+function mmRewardsResetFilters(){
+  const s=document.getElementById('mmRewardsSearch');if(s)s.value='';
+  Object.keys(mmRewardsSelectedFilters).forEach(k=>mmRewardsSelectedFilters[k]=[]);
+  mmRewardsPopulateFilters({
+    categories:[...new Set(mmRewardsAllRows.map(r=>String(r['RECOGNITION CATEGORY']||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b)),
+    companies:[...new Set(mmRewardsAllRows.map(r=>String(r.COMPANY||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b)),
+    statuses:[...new Set(mmRewardsAllRows.map(r=>String(r.STATUS||'Submitted').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b))
+  });
+  mmRewardsPageNo=1;mmRewardsApplyFilters();
+}
+function mmRewardsPage(d){mmRewardsPageNo=Math.max(1,Math.min(Math.ceil(mmRewardsTotal/mmRewardsPageSize),mmRewardsPageNo+d));mmRewardsApplyFilters();}
 function mmRewardsViewFields(r){const f=[['Reference No.','REFERENCE NO.'],['Record Date','RECORD DATE'],['Worker ID','WORKER ID'],['Worker Name','WORKER NAME'],['Company','COMPANY'],['Designation','DESIGNATION'],['Recognition Category','RECOGNITION CATEGORY'],['Description','DESCRIPTION'],['Recognition Given','RECOGNITION GIVEN'],['Status','STATUS'],['Submitted By','SUBMITTED BY'],['Submitted Date','SUBMITTED DATE']];return f.map(x=>'<div class="mm-rewards-view-item"><small>'+x[0]+'</small><strong>'+mmRewardsEsc(r[x[1]]||'—')+'</strong></div>').join('');}
 function mmRewardsView(i){const r=mmRewardsRows[i];if(!r)return;mmRewardsCurrent=r;document.getElementById('mmRewardsViewContent').innerHTML=mmRewardsViewFields(r);const ev=document.getElementById('mmRewardsEvidenceLink'),pdf=document.getElementById('mmRewardsPdfLink');ev.href=r['SUPPORTING EVIDENCE']||'#';ev.style.display=r['SUPPORTING EVIDENCE']?'inline-flex':'none';pdf.href=r['PDF LINK']||'#';pdf.style.display=r['PDF LINK']?'inline-flex':'none';document.getElementById('mmRewardsViewEdit').style.display=isCurrentUserAdmin()?'':'none';document.getElementById('mmRewardsViewModal').hidden=false;}
 function mmRewardsCloseView(){document.getElementById('mmRewardsViewModal').hidden=true;}
@@ -8967,7 +9574,7 @@ function mmRewardsChooseWorker(id){const w=mmRewardsWorkers.find(x=>x.id===id);i
 function mmRewardsSuggest(){const q=document.getElementById('mmRewardsWorkerSearch').value.trim().toLowerCase(),box=document.getElementById('mmRewardsWorkerSuggestions');document.getElementById('mmRewardsWorkerId').value='';document.getElementById('mmRewardsWorkerIdDisplay').value='';document.getElementById('mmRewardsCompany').value='';document.getElementById('mmRewardsDesignation').value='';if(!q){box.hidden=true;return;}const matches=mmRewardsWorkers.filter(w=>(w.name+' '+w.id+' '+w.company).toLowerCase().includes(q)).slice(0,15);box.innerHTML=matches.length?matches.map(w=>'<button type="button" class="mm-rewards-suggestion" data-id="'+mmRewardsEsc(w.id)+'"><strong>'+mmRewardsEsc(w.name)+'</strong><small>'+mmRewardsEsc(w.id)+' · '+mmRewardsEsc(w.company)+'</small></button>').join(''):'<div class="mm-rewards-suggestion">No matching worker found.</div>';box.hidden=false;box.querySelectorAll('[data-id]').forEach(b=>b.addEventListener('click',()=>mmRewardsChooseWorker(b.dataset.id)));}
 function mmRewardsCancelForm(){go('mm-rewards');}
 async function mmRewardsSave(e){e.preventDefault();const id=document.getElementById('mmRewardsRecordId').value,file=document.getElementById('mmRewardsEvidence').files[0],wid=document.getElementById('mmRewardsWorkerId').value;if(!wid||!mmRewardsWorkers.some(w=>w.id===wid)){document.getElementById('mmRewardsFormMessage').textContent='Please select a worker from the suggestions.';return;}if(file&&file.size>10*1024*1024){document.getElementById('mmRewardsFormMessage').textContent='Supporting evidence must not exceed 10 MB.';return;}const payload={recordId:id,workerId:wid,recordDate:document.getElementById('mmRewardsDate').value,category:document.getElementById('mmRewardsCategory').value.trim(),description:document.getElementById('mmRewardsDescription').value.trim(),recognitionGiven:document.getElementById('mmRewardsGiven').value.trim()};const send=async(fileData)=>{const btn=document.getElementById('mmRewardsSaveBtn');btn.disabled=true;showPortalLoading(id?'Updating recognition record…':'Saving recognition record…');try{const out=await mmRewardsPost(id?'mm_rewards_update':'mm_rewards_add',{...payload,...fileData});document.getElementById('mmRewardsFormMessage').textContent=out.message||'Recognition record saved successfully.';setTimeout(()=>{go('mm-rewards');mmRewardsLoad(true);},700);}catch(err){document.getElementById('mmRewardsFormMessage').textContent=err.message||String(err);}finally{btn.disabled=false;hidePortalLoading();}};if(!file){send({});return;}const reader=new FileReader();reader.onload=()=>send({fileName:file.name,mimeType:file.type||'application/octet-stream',fileData:String(reader.result).split(',')[1]});reader.onerror=()=>document.getElementById('mmRewardsFormMessage').textContent='Unable to read supporting evidence.';reader.readAsDataURL(file);}
-document.addEventListener('DOMContentLoaded',()=>{const confirmBtn=document.getElementById('mmRewardsDeleteConfirmBtn');if(confirmBtn)confirmBtn.addEventListener('click',mmRewardsConfirmDelete);document.querySelectorAll('[data-mm-rewards-cancel]').forEach(b=>b.addEventListener('click',mmRewardsCloseDeleteConfirm));document.addEventListener('keydown',e=>{if(e.key==='Escape'){const d=document.getElementById('mmRewardsDeleteConfirm');if(d&&!d.hidden)mmRewardsCloseDeleteConfirm();}});const s=document.getElementById('mmRewardsSearch');if(s)s.addEventListener('input',()=>{clearTimeout(mmRewardsTimer);mmRewardsTimer=setTimeout(()=>{mmRewardsPageNo=1;mmRewardsLoad(false);},300);});['mmRewardsCategoryFilter','mmRewardsCompanyFilter','mmRewardsStatusFilter'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('change',()=>{mmRewardsPageNo=1;mmRewardsLoad(false);});});const wi=document.getElementById('mmRewardsWorkerSearch');if(wi)wi.addEventListener('input',mmRewardsSuggest);document.addEventListener('click',e=>{const p=document.querySelector('.mm-rewards-worker-picker');if(p&&!p.contains(e.target))document.getElementById('mmRewardsWorkerSuggestions').hidden=true;});});
+document.addEventListener('DOMContentLoaded',()=>{const confirmBtn=document.getElementById('mmRewardsDeleteConfirmBtn');if(confirmBtn)confirmBtn.addEventListener('click',mmRewardsConfirmDelete);document.querySelectorAll('[data-mm-rewards-cancel]').forEach(b=>b.addEventListener('click',mmRewardsCloseDeleteConfirm));document.addEventListener('keydown',e=>{if(e.key==='Escape'){const d=document.getElementById('mmRewardsDeleteConfirm');if(d&&!d.hidden)mmRewardsCloseDeleteConfirm();}});const s=document.getElementById('mmRewardsSearch');if(s)s.addEventListener('input',()=>{mmRewardsPageNo=1;mmRewardsApplyFilters();});document.addEventListener('click',e=>{if(!e.target.closest('#mmRewardsFilters .multi-select'))document.querySelectorAll('#mmRewardsFilters .multi-select.open').forEach(x=>x.classList.remove('open'));});const wi=document.getElementById('mmRewardsWorkerSearch');if(wi)wi.addEventListener('input',mmRewardsSuggest);document.addEventListener('click',e=>{const p=document.querySelector('.mm-rewards-worker-picker');if(p&&!p.contains(e.target))document.getElementById('mmRewardsWorkerSuggestions').hidden=true;});});
 </script>
 \n
 <div id="mmRewardsDeleteConfirm" class="mm-rewards-confirm" hidden>
@@ -8986,15 +9593,89 @@ document.addEventListener('DOMContentLoaded',()=>{const confirmBtn=document.getE
 
 <script id="mm-consequence-script">
 let mmConsequenceRows=[],mmConsequenceWorkers=[],mmConsequencePageNo=1,mmConsequencePageSize=25,mmConsequenceTotal=0,mmConsequenceCurrent=null,mmConsequenceTimer=null;
+let mmConsequenceAllRows=[];
+const mmConsequenceSelectedFilters={category:[],company:[],status:[]};
 function mmConsequenceEsc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function mmConsequencePost(action,extra={}){return mmWorkerPost(action,extra);}
-function mmConsequenceFilters(){return {search:document.getElementById('mmConsequenceSearch').value.trim(),category:document.getElementById('mmConsequenceCategoryFilter').value,company:document.getElementById('mmConsequenceCompanyFilter').value,status:document.getElementById('mmConsequenceStatusFilter').value,page:mmConsequencePageNo,pageSize:mmConsequencePageSize};}
-function mmConsequenceFill(id,values,label){const el=document.getElementById(id),old=el.value;el.innerHTML='<option value="">'+label+'</option>'+values.map(v=>'<option value="'+mmConsequenceEsc(v)+'">'+mmConsequenceEsc(v)+'</option>').join('');if(values.includes(old))el.value=old;}
+function mmConsequenceFilters(){return {page:1,pageSize:10000};}
+function mmConsequenceBuildMultiSelect(id,values,label,key){
+  const wrap=document.getElementById(id);if(!wrap)return;
+  const selected=(mmConsequenceSelectedFilters[key]||[]).filter(v=>values.includes(v));
+  mmConsequenceSelectedFilters[key]=selected;
+  wrap.className='multi-select';wrap.innerHTML='';
+  const trigger=document.createElement('button');trigger.type='button';trigger.className='multi-select-trigger';
+  const updateTrigger=()=>{const vals=mmConsequenceSelectedFilters[key]||[];trigger.innerHTML=vals.length?'<span class="multi-count">'+vals.length+'</span> '+(vals.length===1?mmConsequenceEsc(vals[0]):vals.length+' selected'):mmConsequenceEsc(label);};
+  updateTrigger();
+  const menu=document.createElement('div');menu.className='multi-select-menu';
+  const search=document.createElement('input');search.type='text';search.className='multi-search';search.placeholder='Search...';menu.appendChild(search);
+  const list=document.createElement('div');list.className='multi-options';
+  const allRow=document.createElement('label');allRow.className='multi-option multi-all';
+  const allCb=document.createElement('input');allCb.type='checkbox';allCb.checked=selected.length===0;
+  const allText=document.createElement('span');allText.textContent=label;allRow.appendChild(allCb);allRow.appendChild(allText);list.appendChild(allRow);
+  const cbs=[];
+  values.forEach(v=>{const row=document.createElement('label');row.className='multi-option';const cb=document.createElement('input');cb.type='checkbox';cb.value=v;cb.checked=selected.includes(v);const span=document.createElement('span');span.textContent=v;row.appendChild(cb);row.appendChild(span);list.appendChild(row);cbs.push(cb);});
+  menu.appendChild(list);
+  const actions=document.createElement('div');actions.className='multi-actions';
+  const clear=document.createElement('button');clear.type='button';clear.className='multi-clear';clear.textContent='Clear';
+  const apply=document.createElement('button');apply.type='button';apply.className='multi-apply';apply.textContent='Apply';
+  actions.appendChild(clear);actions.appendChild(apply);menu.appendChild(actions);
+  allCb.onchange=()=>{if(allCb.checked)cbs.forEach(cb=>cb.checked=false);};
+  cbs.forEach(cb=>cb.onchange=()=>{if(cb.checked)allCb.checked=false;if(!cbs.some(x=>x.checked))allCb.checked=true;});
+  search.oninput=()=>{const q=search.value.toLowerCase();cbs.forEach(cb=>{cb.parentElement.style.display=cb.value.toLowerCase().includes(q)?'flex':'none';});};
+  clear.onclick=()=>{cbs.forEach(cb=>cb.checked=false);allCb.checked=true;};
+  apply.onclick=()=>{mmConsequenceSelectedFilters[key]=cbs.filter(cb=>cb.checked).map(cb=>cb.value);updateTrigger();wrap.classList.remove('open');mmConsequencePageNo=1;mmConsequenceApplyFilters();};
+  trigger.onclick=e=>{e.stopPropagation();document.querySelectorAll('#mmConsequenceFilters .multi-select.open').forEach(x=>{if(x!==wrap)x.classList.remove('open');});wrap.classList.toggle('open');};
+  menu.onclick=e=>e.stopPropagation();wrap.appendChild(trigger);wrap.appendChild(menu);
+}
+function mmConsequencePopulateFilters(options){
+  mmConsequenceBuildMultiSelect('mmConsequenceCategoryFilter',options.categories||[],'All Categories','category');
+  mmConsequenceBuildMultiSelect('mmConsequenceCompanyFilter',options.companies||[],'All Companies','company');
+  mmConsequenceBuildMultiSelect('mmConsequenceStatusFilter',options.statuses||[],'All Statuses','status');
+}
+function mmConsequenceApplyFilters(){
+  const q=String(document.getElementById('mmConsequenceSearch')?.value||'').trim().toLowerCase(),f=mmConsequenceSelectedFilters;
+  const filtered=mmConsequenceAllRows.filter(r=>{
+    if(q&&![r['WORKER ID'],r['WORKER NAME'],r['REFERENCE NO.'],r['VIOLATION CATEGORY']].some(v=>String(v||'').toLowerCase().includes(q)))return false;
+    if(f.category.length&&!f.category.includes(String(r['VIOLATION CATEGORY']||'')))return false;
+    if(f.company.length&&!f.company.includes(String(r.COMPANY||'')))return false;
+    if(f.status.length&&!f.status.includes(String(r.STATUS||'Pending Review')))return false;
+    return true;
+  });
+  mmConsequenceTotal=filtered.length;const pages=Math.max(1,Math.ceil(mmConsequenceTotal/mmConsequencePageSize));
+  mmConsequencePageNo=Math.min(Math.max(1,mmConsequencePageNo),pages);
+  const start=(mmConsequencePageNo-1)*mmConsequencePageSize;mmConsequenceRows=filtered.slice(start,start+mmConsequencePageSize);
+  mmConsequenceRender();
+}
 function mmConsequenceKpis(k){const el=document.getElementById('mmConsequenceKpis'),cards=[['Total Records',k.total||0,'#1769aa'],['Pending Review',k.pending||0,'#d18a16'],['Approved',k.approved||0,'#18845b'],['Rejected',k.rejected||0,'#7052a5']];el.innerHTML=cards.map(c=>'<div class="wp-title-kpi" style="background:'+c[2]+';color:#fff"><div class="kpi-title">'+c[0]+'</div><div class="kpi-value">'+c[1]+'</div><div class="kpi-cum">Consequence records</div></div>').join('');}
-function mmConsequenceRender(){const body=document.getElementById('mmConsequenceTableBody');if(!mmConsequenceRows.length){body.innerHTML='<tr><td colspan="9" class="mm-worker-empty">No consequence records found.</td></tr>';}else body.innerHTML=mmConsequenceRows.map((r,i)=>'<tr><td><strong>'+mmConsequenceEsc(r['REFERENCE NO.'])+'</strong></td><td>'+mmConsequenceEsc(r['RECORD DATE'])+'</td><td>'+mmConsequenceEsc(r['WORKER ID'])+'</td><td>'+mmConsequenceEsc(r['WORKER NAME'])+'</td><td>'+mmConsequenceEsc(r.COMPANY)+'</td><td>'+mmConsequenceEsc(r['VIOLATION CATEGORY'])+'</td><td>'+mmConsequenceEsc(r['CONSEQUENCE TYPE'])+'</td><td><span class="mm-comp-status '+(r.STATUS==='Approved'?'valid':r.STATUS==='Rejected'?'soon':'')+'">'+mmConsequenceEsc(r.STATUS||'Pending Review')+'</span></td><td><button type="button" class="mm-worker-action" onclick="mmConsequenceView('+i+')">VIEW</button> '+(r.canEdit?'<button type="button" class="mm-worker-action" onclick="mmConsequenceEdit('+i+')">EDIT</button>':'')+(r.canReview&&r.STATUS!=='Approved'&&r.STATUS!=='Rejected'?'<button type="button" class="mm-worker-action" onclick="mmConsequenceView('+i+',true)">REVIEW</button>':'')+(r.canEdit?'<button type="button" class="mm-worker-action mm-consequence-delete-btn" onclick="mmConsequenceDelete('+i+')">DELETE</button>':'')+'</td></tr>').join('');document.getElementById('mmConsequenceCount').textContent=mmConsequenceTotal+' consequence records';const pages=Math.max(1,Math.ceil(mmConsequenceTotal/mmConsequencePageSize));document.getElementById('mmConsequencePageLabel').textContent='Page '+mmConsequencePageNo+' of '+pages;document.getElementById('mmConsequencePrev').disabled=mmConsequencePageNo<=1;document.getElementById('mmConsequenceNext').disabled=mmConsequencePageNo>=pages;}
-async function mmConsequenceLoad(overlay=false){const st=document.getElementById('mmConsequenceRefreshStatus');if(overlay)showPortalLoading('Loading Consequence Management…');if(st)st.textContent='Refreshing…';try{const out=await mmConsequencePost('mm_consequence_list',{filters:mmConsequenceFilters()});mmConsequenceRows=out.records||[];mmConsequenceTotal=out.total||0;mmConsequenceKpis(out.kpis||{});mmConsequenceFill('mmConsequenceCategoryFilter',out.filterOptions.categories||[],'All Categories');mmConsequenceFill('mmConsequenceCompanyFilter',out.filterOptions.companies||[],'All Companies');mmConsequenceFill('mmConsequenceStatusFilter',out.filterOptions.statuses||[],'All Statuses');mmConsequenceRender();if(st)st.textContent='Updated just now';}catch(e){document.getElementById('mmConsequenceMessage').textContent=e.message||String(e);if(st)st.textContent='Refresh failed';}finally{if(overlay)hidePortalLoading();}}
-function mmConsequenceResetFilters(){['mmConsequenceSearch','mmConsequenceCategoryFilter','mmConsequenceCompanyFilter','mmConsequenceStatusFilter'].forEach(id=>document.getElementById(id).value='');mmConsequencePageNo=1;mmConsequenceLoad(true);}
-function mmConsequencePage(d){mmConsequencePageNo=Math.max(1,mmConsequencePageNo+d);mmConsequenceLoad(true);}
+function mmConsequenceRender(){
+  const body=document.getElementById('mmConsequenceTableBody');if(!body)return;
+  if(!mmConsequenceRows.length){body.innerHTML='<tr><td colspan="9" class="mm-worker-empty">No consequence records found.</td></tr>';}
+  else body.innerHTML=mmConsequenceRows.map((r,i)=>'<tr><td><strong>'+mmConsequenceEsc(r['REFERENCE NO.'])+'</strong></td><td>'+mmConsequenceEsc(r['RECORD DATE'])+'</td><td>'+mmConsequenceEsc(r['WORKER ID'])+'</td><td>'+mmConsequenceEsc(r['WORKER NAME'])+'</td><td>'+mmConsequenceEsc(r.COMPANY)+'</td><td>'+mmConsequenceEsc(r['VIOLATION CATEGORY'])+'</td><td>'+mmConsequenceEsc(r['CONSEQUENCE TYPE'])+'</td><td><span class="mm-comp-status '+(r.STATUS==='Approved'?'valid':r.STATUS==='Rejected'?'soon':'')+'">'+mmConsequenceEsc(r.STATUS||'Pending Review')+'</span></td><td><button type="button" class="mm-worker-action" onclick="mmConsequenceView('+i+')">VIEW</button> '+(r.canEdit?'<button type="button" class="mm-worker-action" onclick="mmConsequenceEdit('+i+')">EDIT</button>':'')+(r.canReview&&r.STATUS!=='Approved'&&r.STATUS!=='Rejected'?'<button type="button" class="mm-worker-action" onclick="mmConsequenceView('+i+',true)">REVIEW</button>':'')+(r.canEdit?'<button type="button" class="mm-worker-action mm-consequence-delete-btn" onclick="mmConsequenceDelete('+i+')">DELETE</button>':'')+'</td></tr>').join('');
+  document.getElementById('mmConsequenceCount').textContent=mmConsequenceTotal+' consequence records';
+  const pages=Math.max(1,Math.ceil(mmConsequenceTotal/mmConsequencePageSize));document.getElementById('mmConsequencePageLabel').textContent='Page '+mmConsequencePageNo+' of '+pages;
+  document.getElementById('mmConsequencePrev').disabled=mmConsequencePageNo<=1;document.getElementById('mmConsequenceNext').disabled=mmConsequencePageNo>=pages;
+}
+async function mmConsequenceLoad(overlay=false){
+  const st=document.getElementById('mmConsequenceRefreshStatus');if(overlay)showPortalLoading('Loading Consequence Management…');if(st)st.textContent='Refreshing…';
+  try{
+    const out=await mmConsequencePost('mm_consequence_list',{filters:mmConsequenceFilters()});
+    mmConsequenceAllRows=out.records||[];mmConsequenceKpis(out.kpis||{});
+    mmConsequencePopulateFilters(out.filterOptions||{});mmConsequencePageNo=1;mmConsequenceApplyFilters();
+    if(st)st.textContent='Updated just now';
+  }catch(e){document.getElementById('mmConsequenceMessage').textContent=e.message||String(e);if(st)st.textContent='Refresh failed';}
+  finally{if(overlay)hidePortalLoading();}
+}
+function mmConsequenceResetFilters(){
+  const s=document.getElementById('mmConsequenceSearch');if(s)s.value='';
+  Object.keys(mmConsequenceSelectedFilters).forEach(k=>mmConsequenceSelectedFilters[k]=[]);
+  mmConsequencePopulateFilters({
+    categories:[...new Set(mmConsequenceAllRows.map(r=>String(r['VIOLATION CATEGORY']||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b)),
+    companies:[...new Set(mmConsequenceAllRows.map(r=>String(r.COMPANY||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b)),
+    statuses:[...new Set(mmConsequenceAllRows.map(r=>String(r.STATUS||'Pending Review').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b))
+  });
+  mmConsequencePageNo=1;mmConsequenceApplyFilters();
+}
+function mmConsequencePage(d){mmConsequencePageNo=Math.max(1,Math.min(Math.ceil(mmConsequenceTotal/mmConsequencePageSize),mmConsequencePageNo+d));mmConsequenceApplyFilters();}
 function mmConsequenceFields(r){const f=[['Reference No.','REFERENCE NO.'],['Date','RECORD DATE'],['Worker ID','WORKER ID'],['Worker Name','WORKER NAME'],['Company','COMPANY'],['Designation','DESIGNATION'],['Violation Category','VIOLATION CATEGORY'],['Finding Description','FINDING DESCRIPTION'],['Immediate Action','IMMEDIATE ACTION'],['Consequence Type','CONSEQUENCE TYPE'],['Corrective Action','CORRECTIVE ACTION'],['Status','STATUS'],['Submitted By','SUBMITTED BY'],['Submitted Date','SUBMITTED DATE']];return f.map(x=>'<div class="mm-rewards-view-item"><small>'+x[0]+'</small><strong>'+mmConsequenceEsc(r[x[1]]||'—')+'</strong></div>').join('');}
 async function mmConsequenceView(i,openReview=false){const r=mmConsequenceRows[i];if(!r)return;mmConsequenceCurrent=r;showPortalLoading('Loading consequence record…');try{const out=await mmConsequencePost('mm_consequence_details',{recordId:r['RECORD ID']});document.getElementById('mmConsequenceViewContent').innerHTML=mmConsequenceFields(out.record||r);document.getElementById('mmConsequenceWorkflowHistory').innerHTML='<h4>Workflow History</h4>'+(out.workflow||[]).map(w=>'<div class="mm-consequence-history-item"><strong>'+mmConsequenceEsc(w.ACTION)+' · '+mmConsequenceEsc(w['NEW STATUS'])+'</strong><small>'+mmConsequenceEsc(w['ACTION BY'])+' · '+mmConsequenceEsc(w['ACTION DATE'])+'</small><p>'+mmConsequenceEsc(w.COMMENTS||'No comments')+'</p></div>').join('')||'<small>No workflow actions recorded.</small>';const ev=document.getElementById('mmConsequenceEvidenceLink'),pdf=document.getElementById('mmConsequencePdfLink');ev.href=(out.record||r)['SUPPORTING EVIDENCE']||'#';ev.style.display=(out.record||r)['SUPPORTING EVIDENCE']?'inline-flex':'none';pdf.href=(out.record||r)['PDF LINK']||'#';pdf.style.display=(out.record||r)['PDF LINK']?'inline-flex':'none';document.getElementById('mmConsequenceViewEdit').style.display=r.canEdit?'':'none';document.getElementById('mmConsequenceReviewBtn').style.display=r.canReview&&r.STATUS!=='Approved'&&r.STATUS!=='Rejected'?'':'none';document.getElementById('mmConsequenceViewModal').hidden=false;if(openReview)mmConsequenceOpenReview();}catch(e){document.getElementById('mmConsequenceMessage').textContent=e.message||String(e);}finally{hidePortalLoading();}}
 function mmConsequenceCloseView(){document.getElementById('mmConsequenceViewModal').hidden=true;}
@@ -9014,7 +9695,7 @@ let mmConsequencePendingDelete=null;
 function mmConsequenceDelete(i){if(!isCurrentUserAdmin())return;const r=mmConsequenceRows[i];if(!r)return;mmConsequencePendingDelete=r;document.getElementById('mmConsequenceDeleteText').textContent='Permanently delete consequence record '+(r['REFERENCE NO.']||r['RECORD ID'])+' for '+(r['WORKER NAME']||'the selected worker')+'?';document.getElementById('mmConsequenceDeleteConfirm').hidden=false;}
 function mmConsequenceCloseDelete(){document.getElementById('mmConsequenceDeleteConfirm').hidden=true;mmConsequencePendingDelete=null;}
 async function mmConsequenceConfirmDelete(){if(!mmConsequencePendingDelete||!isCurrentUserAdmin())return;const r=mmConsequencePendingDelete,btn=document.getElementById('mmConsequenceDeleteConfirmBtn');btn.disabled=true;showPortalLoading('Deleting consequence record…');try{const out=await mmConsequencePost('mm_consequence_delete',{recordId:r['RECORD ID']});mmConsequenceCloseDelete();document.getElementById('mmConsequenceMessage').textContent=out.message||'Consequence record permanently deleted.';if(mmConsequenceCurrent&&mmConsequenceCurrent['RECORD ID']===r['RECORD ID'])mmConsequenceCloseView();await mmConsequenceLoad(false);}catch(e){document.getElementById('mmConsequenceMessage').textContent=e.message||String(e);}finally{btn.disabled=false;hidePortalLoading();}}
-document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-mm-consequence-cancel]').forEach(x=>x.addEventListener('click',mmConsequenceCloseDelete));const del=document.getElementById('mmConsequenceDeleteConfirmBtn');if(del)del.addEventListener('click',mmConsequenceConfirmDelete);const s=document.getElementById('mmConsequenceSearch');if(s)s.addEventListener('input',()=>{clearTimeout(mmConsequenceTimer);mmConsequenceTimer=setTimeout(()=>{mmConsequencePageNo=1;mmConsequenceLoad(false);},300);});['mmConsequenceCategoryFilter','mmConsequenceCompanyFilter','mmConsequenceStatusFilter'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('change',()=>{mmConsequencePageNo=1;mmConsequenceLoad(false);});});const wi=document.getElementById('mmConsequenceWorkerSearch');if(wi)wi.addEventListener('input',mmConsequenceSuggest);document.addEventListener('click',e=>{const p=document.querySelector('#page-mm-consequence-form .mm-rewards-worker-picker');if(p&&!p.contains(e.target))document.getElementById('mmConsequenceWorkerSuggestions').hidden=true;});});
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-mm-consequence-cancel]').forEach(x=>x.addEventListener('click',mmConsequenceCloseDelete));const del=document.getElementById('mmConsequenceDeleteConfirmBtn');if(del)del.addEventListener('click',mmConsequenceConfirmDelete);const s=document.getElementById('mmConsequenceSearch');if(s)s.addEventListener('input',()=>{mmConsequencePageNo=1;mmConsequenceApplyFilters();});document.addEventListener('click',e=>{if(!e.target.closest('#mmConsequenceFilters .multi-select'))document.querySelectorAll('#mmConsequenceFilters .multi-select.open').forEach(x=>x.classList.remove('open'));});const wi=document.getElementById('mmConsequenceWorkerSearch');if(wi)wi.addEventListener('input',mmConsequenceSuggest);document.addEventListener('click',e=>{const p=document.querySelector('#page-mm-consequence-form .mm-rewards-worker-picker');if(p&&!p.contains(e.target))document.getElementById('mmConsequenceWorkerSuggestions').hidden=true;});});
 </script>
 
 
@@ -9051,6 +9732,12 @@ document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[da
 }
 </style>
 
+
+<style id="dss-inspector-chart-style">
+#page-daily-surveillance .dss-inspector-chart-scroll{width:100%;overflow-x:auto;overflow-y:hidden;padding:4px 0 8px}
+#page-daily-surveillance .dss-inspector-column-svg{display:block;max-width:none;height:350px;font-family:Arial,sans-serif}
+#page-daily-surveillance #dssInspectorChart{min-height:250px}
+</style>
 </body>
 </html>
 
